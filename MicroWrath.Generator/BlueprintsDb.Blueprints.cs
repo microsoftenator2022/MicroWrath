@@ -16,7 +16,10 @@ namespace MicroWrath.Generator
 {
     internal partial class BlueprintsDb
     {
-        private readonly record struct BlueprintInfo(string GuidString, string Name, string TypeName);
+        private readonly record struct BlueprintInfo(string GuidString, string Name, string TypeName)
+        {
+            public INamedTypeSymbol? GetBlueprintType(SemanticModel sm) => sm.Compilation.GetTypeByMetadataName(this.TypeName);
+        }
 
         private static class Blueprints
         {

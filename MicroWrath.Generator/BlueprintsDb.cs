@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using MicroWrath.Util;
-using MicroWrath.Util;
 using MicroWrath.Generator.Common;
 
 namespace MicroWrath.Generator
@@ -81,73 +80,6 @@ namespace MicroWrath.Generator
 
             var config = context.AnalyzerConfigOptionsProvider.Select(static (c, _) => Incremental.GetConfig(c));
 
-            //            var invocations = context.SyntaxProvider.CreateSyntaxProvider(
-            //                static (sn, _) => sn is InvocationExpressionSyntax ies,
-            //                static (sc, _) => (Node: sc.Node as InvocationExpressionSyntax, SemanticModel: sc.SemanticModel))
-            //                .Where(static snsm => snsm.Node is not null)
-            //                .Select(static (snsm, _) => (Node: snsm.Node!, SemanticModel: snsm.SemanticModel))
-            //                .Where(static snsm =>
-            //                {
-            //                    var sm = snsm.SemanticModel;
-            //                    var ass = snsm.SemanticModel.Compilation.Assembly;
-            //                    var symbol = sm.GetSymbolInfo(snsm.Node).Symbol;
-
-            //                    if (symbol is null) return true;
-
-            //                    return ass.Equals(symbol.ContainingAssembly, SymbolEqualityComparer.Default);
-            //                });
-
-            //            var owlcatDbType = invocations
-            //                .Select(static (invocation, _) =>
-            //                {
-            //                    return TryGetOwlcatDbType(invocation.SemanticModel);
-            //                })
-            //                .Collect()
-            //                .SelectMany(static (ts, _) => ts.SelectMany(Option.ToEnumerable))
-            //                .Collect();
-
-            //            var blueprintTypesToLoad = invocations
-            //                .Combine(owlcatDbType)
-            //                .SelectMany(static (invocationsAndOcType, _) =>
-            //                {
-            //                    var (invocation, owlcatDbTypeSeq) = invocationsAndOcType;
-            //                    var owlcatDbType = owlcatDbTypeSeq.FirstOrDefault();
-            //                    if (owlcatDbType is null) return Enumerable.Empty<string>();
-
-            //                    var bpTypeExpr = Option.OfObj((invocation.Node.Expression as MemberAccessExpressionSyntax)?.GetParent());
-
-            //                    return bpTypeExpr
-            //                        .Bind(bpTypeExpr =>
-            //                            TryGetBlueprintTypeNameFromSyntaxNode(bpTypeExpr, owlcatDbType, invocation.SemanticModel))
-            //                        .ToEnumerable();
-            //                });
-
-            //#if DEBUG
-            //            context.RegisterSourceOutput(blueprintTypesToLoad.Collect(), (spc, names) =>
-            //            {
-            //                var sb = new StringBuilder();
-
-            //                foreach (var name in names)
-            //                {
-            //                    sb.AppendLine($"// {name}");
-            //                }
-
-            //                spc.AddSource("invocations", sb.ToString());
-            //            });
-            //#endif
-
-            //            var usedBlueprintTypes = blueprintData
-            //                .Combine(blueprintTypesToLoad.Collect())
-            //                .Select(static (bpdt, _) =>
-            //                {
-            //                    var (bpd, typeNames) = bpdt;
-
-            //                    if (typeNames.Contains(bpd.type.Name))
-            //                        return bpd;
-
-            //                    return (bpd.type, blueprints: Enumerable.Empty<BlueprintInfo>());
-            //                });
-
             var blueprintMemberSyntax = Syntax.GetBlueprintMemberSyntax(context.SyntaxProvider);
 
             var blueprintsAccessorsToGenerate = blueprintData
@@ -203,10 +135,7 @@ namespace MicroWrath.BlueprintsDb
         {{
             internal static partial class {type.Name}
             {{");
-//                    sb.AppendLine($@"
-//                /// <summary>Does nothing at runtime. Forces the source generator to output members for this type.</summary>
-//                internal static void LoadBlueprints() {{ }}
-//");
+
                     foreach (var bp in blueprints)
                     {
                         sb.Append($@"

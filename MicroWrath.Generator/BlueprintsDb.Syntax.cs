@@ -17,7 +17,7 @@ namespace MicroWrath.Generator
             {
                 var memberAccessExprs = syntaxProvider.CreateSyntaxProvider(
                     static (sn, _) => sn is MemberAccessExpressionSyntax,
-                    static (sn, _) => (Node: (MemberAccessExpressionSyntax)sn.Node, sn.SemanticModel));
+                    static (sn, _) => ((MemberAccessExpressionSyntax)sn.Node, sn.SemanticModel));
 
                 return memberAccessExprs
                     .SelectMany(static (sn, _) => TryGetOwlcatDbType(sn.SemanticModel)
