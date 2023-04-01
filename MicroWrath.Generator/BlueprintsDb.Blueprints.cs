@@ -100,13 +100,13 @@ namespace MicroWrath.Generator
                         }
                         else
                         {
-                            var i = 0;
+                            //var i = 0;
                             foreach (var sourceItem in source)
                             {
                                 yield return new BlueprintInfo(
                                     GuidString: sourceItem.GuidString,
                                     TypeName: sourceItem.TypeName,
-                                    Name: sourceItem.Name + $"_blueprint{++i}");
+                                    Name: sourceItem.Name + $"_{sourceItem.GuidString}");
                             }
                         }
                     }
