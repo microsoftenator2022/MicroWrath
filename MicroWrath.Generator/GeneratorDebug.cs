@@ -35,22 +35,22 @@ namespace MicroWrath.Generator
                 spc.AddSource("debug.blueprintTypes", $"//{types.Select(t => t.FullName()).Aggregate((a, b) => $"{a}{Environment.NewLine}//{b}")}");
             });
 
-            context.RegisterSourceOutput(additionalText.Select((t, _) => (path: t.Path, text: t.GetText())).Collect(), (spc, files) =>
-            {
-                IEnumerable<string> commentLines(string input)
-                {
-                    var reader = new StringReader(input);
+            //context.RegisterSourceOutput(additionalText.Select((t, _) => (path: t.Path, text: t.GetText())).Collect(), (spc, files) =>
+            //{
+            //    IEnumerable<string> commentLines(string input)
+            //    {
+            //        var reader = new StringReader(input);
 
-                    while (reader.ReadLine() is string line)
-                    {
-                        yield return $"//{line}";
-                    }
-                }
+            //        while (reader.ReadLine() is string line)
+            //        {
+            //            yield return $"//{line}";
+            //        }
+            //    }
 
-                var lines = files.SelectMany(file => (new[] { $"//File: {file.path}" }).Concat(commentLines(file.text?.ToString() ?? Environment.NewLine)));
+            //    var lines = files.SelectMany(file => (new[] { $"//File: {file.path}" }).Concat(commentLines(file.text?.ToString() ?? Environment.NewLine)));
 
-                spc.AddSource("debug.files", lines.Aggregate((a, b) => $"{a}{Environment.NewLine}{b}"));
-            });
+            //    spc.AddSource("debug.files", lines.Aggregate((a, b) => $"{a}{Environment.NewLine}{b}"));
+            //});
         }
     }
 #endif

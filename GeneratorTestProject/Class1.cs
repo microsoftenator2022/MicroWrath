@@ -27,10 +27,6 @@ namespace GeneratorTestProject
 
         private void P()
         {
-            BlueprintsDb.Owlcat.BlueprintCharacterClass.LoadBlueprints();
-            BlueprintsDb.Owlcat.BlueprintRace.LoadBlueprints();
-            BlueprintsDb.Owlcat.BlueprintWeaponEnchantment.LoadBlueprints();
-
             var alchemist = BlueprintsDb.Owlcat.BlueprintCharacterClass.AlchemistClass;
             var adamantine = BlueprintsDb.Owlcat.BlueprintWeaponEnchantment.AdamantineWeaponEnchantment;
             var halfElf = BlueprintsDb.Owlcat.BlueprintRace.HalfElfRace;
