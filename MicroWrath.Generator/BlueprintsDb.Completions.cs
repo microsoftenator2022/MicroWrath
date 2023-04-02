@@ -29,19 +29,23 @@ namespace MicroWrath.Generator
                 public override async Task ProvideCompletionsAsync(CompletionContext context)
                 {
                     var doc = context.Document;
+                    var text = await doc.GetTextAsync();
+
+                    if (!ShouldTriggerCompletion(text, context.Position, context.Trigger, context.Options)) return;
+
                     var service = doc.Project.Services.GetService<CompletionService>();
                     if (service is null) return;
 
-                    var semanticModel = await doc.GetSemanticModelAsync().ConfigureAwait(false);
+                    var semanticModel = await doc.GetSemanticModelAsync();
                     if (semanticModel is null) return;
 
                     var owlcatDbType = TryGetOwlcatDbType(semanticModel).Value;
                     if (owlcatDbType is null) return;
 
-                    var root = await doc.GetSyntaxRootAsync().ConfigureAwait(false);
+                    var root = await doc.GetSyntaxRootAsync();
                     if (root is null) return;
 
-                    var span = service.GetDefaultCompletionListSpan(await doc.GetTextAsync(), context.Position);
+                    var span = service.GetDefaultCompletionListSpan(text, context.Position);
 
                     var node = root.FindNode(span);
 
@@ -161,7 +165,7 @@ namespace MicroWrath.Generator
 
                 public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
                 {
-                    if (!char.IsLetterOrDigit(trigger.Character) && !(trigger.Character == '.' && trigger.Kind is CompletionTriggerKind.Insertion)) return false;
+                    if (!(trigger.Character == '.' && trigger.Kind is CompletionTriggerKind.Insertion)) return false;
 
                     return true;
                 }
@@ -172,7 +176,7 @@ namespace MicroWrath.Generator
 
                     var span = item.Span;
 
-                    var docText = await document.GetTextAsync().ConfigureAwait(false);
+                    var docText = await document.GetTextAsync();
                     var originalText = docText.ToString(span);
 
                     var textChange = new TextChange(new TextSpan(span.End, 0), originalText += item.DisplayText);

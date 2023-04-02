@@ -19,7 +19,7 @@ namespace MicroWrath.Generator
 {
     internal static class SyntaxExtensions
     {
-        internal static MemberAccessExpressionSyntax? GetParent(this MemberAccessExpressionSyntax ma) =>
+        internal static MemberAccessExpressionSyntax? GetExpression(this MemberAccessExpressionSyntax ma) =>
             ma.Expression as MemberAccessExpressionSyntax;
     }
 
@@ -34,14 +34,12 @@ namespace MicroWrath.Generator
         {
             var blueprintsDbType = sm.Compilation.Assembly.GetTypeByMetadataName(blueprintsDbTypeFullName);
 
-            return Option.OfObj((blueprintsDbType?.GetTypeMembers()
-                is ImmutableArray<INamedTypeSymbol> dbTypeMembers ? dbTypeMembers : default)
-                .FirstOrDefault(static m => m.Name == "Owlcat"));
+            return Option.OfObj(blueprintsDbType?.GetTypeMembers().FirstOrDefault(static m => m.Name == "Owlcat"));
         }
 
         private static Option<string> TryGetBlueprintTypeNameFromSyntaxNode(MemberAccessExpressionSyntax bpTypeExpr, INamedTypeSymbol owlcatDbType, SemanticModel sm)
         {
-            var owlcatDbExpr = Option.OfObj(bpTypeExpr.GetParent());
+            var owlcatDbExpr = Option.OfObj(bpTypeExpr.GetExpression());
 
             return owlcatDbExpr
                 .Bind<MemberAccessExpressionSyntax, string>(maybeOwlcat =>
@@ -100,16 +98,16 @@ namespace MicroWrath.Generator
                 
                 var sb = new StringBuilder();
 
-#if DEBUG
-                sb.AppendLine($"// {bps.Length} blueprint types");
+//#if DEBUG
+//                sb.AppendLine($"// {bps.Length} blueprint types");
 
-                foreach (var (type, blueprints) in bps)
-                {
-                    sb.AppendLine($"// {type}: {blueprints.Count()}");
-                }
+//                foreach (var (type, blueprints) in bps)
+//                {
+//                    sb.AppendLine($"// {type}: {blueprints.Count()}");
+//                }
 
-                spc.AddSource("summary", sb.ToString());
-#endif
+//                spc.AddSource("summary", sb.ToString());
+//#endif
 
                 foreach (var (symbol, blueprints) in bps)
                 {

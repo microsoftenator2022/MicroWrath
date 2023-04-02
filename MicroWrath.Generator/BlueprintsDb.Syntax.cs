@@ -28,7 +28,7 @@ namespace MicroWrath.Generator
                         var ((node, sm), owlcatDbType) = sn;
 
                         var bpTypeName = Option
-                            .OfObj(node.GetParent())
+                            .OfObj(node.GetExpression())
                             .Bind(p => TryGetBlueprintTypeNameFromSyntaxNode(p, owlcatDbType, sm));
 
                         var bpName = bpTypeName
