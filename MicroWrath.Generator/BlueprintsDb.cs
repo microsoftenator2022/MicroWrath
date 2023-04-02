@@ -97,7 +97,7 @@ namespace MicroWrath.Generator
             context.RegisterSourceOutput(blueprintsAccessorsToGenerate.Collect().Combine(config), static (spc, bpsAndConfig) =>
             {
                 var (bps, config) = bpsAndConfig;
-
+                
                 var sb = new StringBuilder();
 
 #if DEBUG
@@ -113,6 +113,8 @@ namespace MicroWrath.Generator
 
                 foreach (var (symbol, blueprints) in bps)
                 {
+                    if (spc.CancellationToken.IsCancellationRequested) break;
+
                     if (symbol is not INamedTypeSymbol type)
                         continue;
 
@@ -138,6 +140,8 @@ namespace MicroWrath.BlueprintsDb
 
                     foreach (var bp in blueprints)
                     {
+                        if (spc.CancellationToken.IsCancellationRequested) break;
+
                         sb.Append($@"
                 internal static {type} {bp.Name} => ResourcesLibrary.TryGetBlueprint<{type}>(""{bp.GuidString}"");");
                     }

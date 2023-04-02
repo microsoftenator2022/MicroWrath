@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.Options;
 using MicroWrath.Util;
 using MicroWrath.Generator.Common;
 using Microsoft.CodeAnalysis.Tags;
+using MicroWrath.Generator.Extensions;
 
 namespace MicroWrath.Generator
 {
@@ -34,23 +35,36 @@ namespace MicroWrath.Generator
                     var semanticModel = await doc.GetSemanticModelAsync().ConfigureAwait(false);
                     if (semanticModel is null) return;
 
-                    var root = await doc.GetSyntaxRootAsync().ConfigureAwait(false);
-                    if (root is null) return;
-
-                    var defaultSpan = service.GetDefaultCompletionListSpan(await doc.GetTextAsync().ConfigureAwait(false), context.Position);
-
-                    var node = root.FindNode(defaultSpan);
-
-                    if (node is not MemberAccessExpressionSyntax thisExpr ||
-                        thisExpr.Expression is not MemberAccessExpressionSyntax memberAccess) return;
-
                     var owlcatDbType = TryGetOwlcatDbType(semanticModel).Value;
                     if (owlcatDbType is null) return;
 
-                    var typeName = TryGetBlueprintTypeNameFromSyntaxNode(memberAccess, owlcatDbType, semanticModel).Value;
-                    if (typeName is null) return;
+                    var root = await doc.GetSyntaxRootAsync().ConfigureAwait(false);
+                    if (root is null) return;
 
-                    var key = Blueprints.BlueprintList.Keys.FirstOrDefault(key => key.Name == typeName);
+                    var span = service.GetDefaultCompletionListSpan(await doc.GetTextAsync(), context.Position);
+
+                    var node = root.FindNode(span);
+
+                    var maybeBp = TryGetBlueprintMemberAccessInChildren(node, context.Position, owlcatDbType, semanticModel);
+
+                    if (maybeBp is null && !node.ChildThatContainsPosition(context.Position).IsNode)
+                    {
+                        maybeBp = TryGetBlueprintMemberAccessInChildren(node, context.Position - 1, owlcatDbType, semanticModel);
+                        var newStart = span.Start;
+                        var newEnd = span.End -1;
+
+                        if (newEnd < newStart) newStart--;
+
+                        span = new TextSpan(newStart, newEnd);
+                    }
+
+                    if (maybeBp is null) return;
+
+                    var (typeName, bpName) = maybeBp.Value;
+
+                    if (typeName is null || bpName is null) return;
+
+                    var key = Blueprints.BlueprintList.Keys.FirstOrDefault(key => key.Name == typeName.Identifier.Text);
                     if (key is null) return;
 
                     var blueprints = Blueprints.BlueprintList[key];
@@ -60,9 +74,45 @@ namespace MicroWrath.Generator
                     context.AddItems(completionItems);
                 }
 
+                private static (SimpleNameSyntax BlueprintType, SimpleNameSyntax? BlueprintName)? TryGetBlueprintMemberAccessInChildren(
+                    SyntaxNode node, int position, INamedTypeSymbol owlcatDbType, SemanticModel sm) =>
+                    SyntaxNodeQuery.TryPickInChildren<MemberAccessExpressionSyntax, (SimpleNameSyntax, SimpleNameSyntax?)?>(
+                        node,
+                        position,
+                        n => TryGetBlueprintMemberAccess(n, owlcatDbType, sm));
+
+                private static (SimpleNameSyntax BlueprintType, SimpleNameSyntax? BlueprintName)? TryGetBlueprintMemberAccess(
+                    SyntaxNode node, INamedTypeSymbol owlcatDbType, SemanticModel sm)
+                {
+                    MemberAccessExpressionSyntax? member;
+                    if (node is MemberAccessExpressionSyntax ma) member = ma;
+                    else member = (node.Parent) as MemberAccessExpressionSyntax;
+
+                    if (member is null) return null;
+
+                    if (member.Expression is not MemberAccessExpressionSyntax leftExpr) return null;
+
+                    if (owlcatDbType.Equals(sm.GetSymbolInfo(leftExpr.Name).Symbol, SymbolEqualityComparer.Default))
+                        //return (expr.Name, null);
+                        return null;
+
+                    if (leftExpr.Expression is not MemberAccessExpressionSyntax grandparent) return null;
+
+                    if (owlcatDbType.Equals(sm.GetSymbolInfo(grandparent.Name).Symbol, SymbolEqualityComparer.Default))
+                        return (leftExpr.Name, member.Name);
+
+                    return null;
+                }
+
                 public override async Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
                 {
+                    //return null;
+
                     var properties = item.Properties;
+
+                    if (!properties.ContainsKey("owlcatDbTypeName") || !properties.ContainsKey("blueprintTypeName"))
+                        return null;
+
                     var owlcatDbTypeName = properties["owlcatDbTypeName"];
                     var blueprintTypeName = properties["blueprintTypeName"];
 
@@ -105,19 +155,21 @@ namespace MicroWrath.Generator
 
                 public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
                 {
-                    if (trigger.Character != '.' || trigger.Kind is not CompletionTriggerKind.Insertion) return false;
+                    if (!char.IsLetterOrDigit(trigger.Character) && !(trigger.Character == '.' && trigger.Kind is CompletionTriggerKind.Insertion)) return false;
 
                     return true;
                 }
 
                 public override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken)
                 {
+                    //return await base.GetChangeAsync(document, item, commitKey, cancellationToken);
+
                     var span = item.Span;
 
                     var docText = await document.GetTextAsync().ConfigureAwait(false);
                     var originalText = docText.ToString(span);
 
-                    var textChange = new TextChange(new TextSpan(span.End, 1), originalText += item.DisplayText);
+                    var textChange = new TextChange(new TextSpan(span.End, 0), originalText += item.DisplayText);
 
                     return CompletionChange.Create(textChange);
                 }

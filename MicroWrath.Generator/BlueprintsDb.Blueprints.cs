@@ -88,11 +88,11 @@ namespace MicroWrath.Generator
                         .GroupBy(bp => types[bp.TypeName]!, SymbolEqualityComparer.Default);
                 })
                 .Where(static g => g.Key is not null && g.Key.DeclaredAccessibility == Accessibility.Public)
-                .Select(static (bpType, _) =>
+                .Select(static (bpType, ct) =>
                 {
                     BlueprintList.Remove(bpType.Key);
 
-                    static IEnumerable<BlueprintInfo> renameDuplicates(IEnumerable<BlueprintInfo> source)
+                    IEnumerable<BlueprintInfo> renameDuplicates(IEnumerable<BlueprintInfo> source)
                     {
                         if (source.Count() == 1)
                         {
@@ -103,6 +103,8 @@ namespace MicroWrath.Generator
                             //var i = 0;
                             foreach (var sourceItem in source)
                             {
+                                if (ct.IsCancellationRequested) break;
+
                                 yield return new BlueprintInfo(
                                     GuidString: sourceItem.GuidString,
                                     TypeName: sourceItem.TypeName,
