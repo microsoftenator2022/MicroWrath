@@ -115,6 +115,7 @@ namespace MicroWrath.Generator
 
                     var owlcatDbTypeName = properties["owlcatDbTypeName"];
                     var blueprintTypeName = properties["blueprintTypeName"];
+                    var guid = properties.ContainsKey("guid") ? properties["guid"] : "<null>";
 
                     var sm = await document.GetSemanticModelAsync();
 
@@ -128,7 +129,10 @@ namespace MicroWrath.Generator
                         new(bpTypeTag, $"{bpTypeNameShort} "),
                         new(TextTags.Class, owlcatDbTypeName),
                         new(bpTypeTag, $".{bpTypeNameShort}"),
-                        new(TextTags.Property, $".{item.DisplayText}")
+                        new(TextTags.Property, $".{item.DisplayText}"),
+                        new(TextTags.LineBreak, Environment.NewLine),
+                        new(TextTags.Label, "Guid: "),
+                        new(TextTags.Text, guid),
                     }.ToImmutableArray();
                     
                     return CompletionDescription.Create(taggedText);
@@ -138,11 +142,13 @@ namespace MicroWrath.Generator
                 {
                     var owlcatDbTypeName = owlcatDbType.ToString();
                     var blueprintTypeName = bp.TypeName;
+                    var guid = bp.GuidString;
                     
                     var properties = new Dictionary<string, string>()
                     {
                         { nameof(owlcatDbTypeName), owlcatDbTypeName },
                         { nameof(blueprintTypeName), blueprintTypeName },
+                        { nameof(guid), guid },
                     }
                     .ToImmutableDictionary();
 
