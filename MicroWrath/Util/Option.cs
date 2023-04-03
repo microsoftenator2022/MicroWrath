@@ -23,21 +23,23 @@ namespace MicroWrath.Util
         public override bool Equals(object obj) => obj.Equals(Value);
         public override int GetHashCode() => -1937169414 + EqualityComparer<T?>.Default.GetHashCode(Value);
 
-        public class None : Option<T>
+        public static NoneType None = new();
+
+        public class NoneType : Option<T>
         {
-            public None() { }
+            internal NoneType() { }
 
             public override bool IsSome => false;
             public override bool IsNone => true;
 
-            public bool Equals(None _) => true;
+            public bool Equals(NoneType _) => true;
 
-            public override bool Equals(Option<T> other) => other is None;
+            public override bool Equals(Option<T> other) => other is NoneType;
             public override bool Equals(T other) => other is null;
 
             public override string ToString() => $"None";
 
-            public static explicit operator T?(None _) => default;
+            public static explicit operator T?(NoneType _) => default;
         }
 
         public class Some : Option<T>
@@ -65,14 +67,14 @@ namespace MicroWrath.Util
             public static implicit operator T(Some some) => some.Value;
         }
 
-        public static explicit operator Option<T>(T? option) => option is null ? new Option<T>.None() : new Some(option);
+        public static explicit operator Option<T>(T? option) => option is null ? new Option<T>.NoneType() : new Some(option);
         public static explicit operator T?(Option<T> option) => option.Value;
     }
 
     public static class Option
     {
         public static Option<T>.Some Some<T>(T value) => new(value);
-        public static Option<T>.None None<T>() => new();
+        public static Option<T>.NoneType None<T>() => Option<T>.None;
 
         public static Option<T> OfObj<T>(T? value) => (Option<T>)value;
 
@@ -87,7 +89,7 @@ namespace MicroWrath.Util
                 None<U>();
 
         public static T Cast<T>(this Option<T>.Some option) => option;
-        public static T? Cast<T>(this Option<T>.None _) => default;
+        public static T? Cast<T>(this Option<T>.NoneType _) => default;
 
         public static IEnumerable<U> Choose<T, U>(this IEnumerable<T> source, Func<T, Option<U>> chooser) =>
             source.Select(chooser).OfType<Option<U>.Some>().Select(some => some.Value);

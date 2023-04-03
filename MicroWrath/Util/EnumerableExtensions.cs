@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MicroWrath.Util.Linq
 {
-    public static class Enumerable
+    public static class EnumerableExtensions
     {
         public static IEnumerable<T> Singleton<T>(T value)
         {
@@ -52,5 +52,7 @@ namespace MicroWrath.Util.Linq
             foreach (var item in source)
                 yield return (index++, item);
         }
+
+        internal static IEnumerable<T> ToEnumerable<T, TEnumerable>(this TEnumerable source) where TEnumerable : IEnumerable<T> => source;
     }
 }
