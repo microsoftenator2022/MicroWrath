@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MicroWrath.Util
 {
-    internal static class Functional
+    public static class Functional
     {
         public static T Identity<T>(T x) => x;
         public static T UpCast<TParam, T>(TParam x) where TParam : T => (T)x;
