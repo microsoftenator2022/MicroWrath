@@ -53,6 +53,18 @@ namespace MicroWrath.Generator.Common
 
     internal static class Analyzers
     {
+        internal static IEnumerable<INamedTypeSymbol> GetBaseTypesAndSelf(this INamedTypeSymbol type)
+        {
+            yield return type;
+
+            var baseType = type.BaseType;
+            if (baseType is not null)
+            { 
+                foreach (var t in GetBaseTypesAndSelf(baseType))
+                    yield return t;
+            }
+        }
+
 
         internal static IEnumerable<INamedTypeSymbol> AllNestedTypesAndSelf(this INamedTypeSymbol type)
         {

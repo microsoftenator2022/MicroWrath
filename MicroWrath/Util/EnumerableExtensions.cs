@@ -59,7 +59,7 @@ namespace MicroWrath.Util.Linq
             source.ToDictionary(kv => kv.key, kv => kv.value);
 
         internal static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>
-            (this IEnumerable<(TKey key, TValue value)> source, EqualityComparer<TKey> keyComparer) =>
+            (this IEnumerable<(TKey key, TValue value)> source, IEqualityComparer<TKey> keyComparer) =>
             source.ToDictionary(kv => kv.key, kv => kv.value, keyComparer);
     }
 }
