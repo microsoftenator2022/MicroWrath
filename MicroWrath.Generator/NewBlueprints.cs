@@ -76,7 +76,10 @@ namespace {ns}
                 .Where(static f => f.Path.ToLower().EndsWith("newblueprints.json"));
 
             var bpText = newBpFiles
-                .SelectMany(static (f, _) => Option.OfObj(f.GetText()?.ToString()).Map(t => (f.Path, t)).ToEnumerable());
+                .SelectMany(static (f, _) =>
+                {
+                    return (f.GetText()?.ToString()).ToOption().Map(t => (f.Path, t)).ToEnumerable();
+                });
 
             var bpStrings = bpText
                 .SelectMany(static (fileText, _) =>
@@ -129,7 +132,7 @@ namespace {ns}
                         })
                         .FirstOrDefault();
 
-                    return Option.OfObj(type).Map(t => (path, bp: new BlueprintInfo(name, assetId, t))).ToEnumerable();
+                    return type.ToOption().Map(t => (path, bp: new BlueprintInfo(name, assetId, t))).ToEnumerable();
                 })
                 .Collect()
                 .SelectMany(static (pathsAndBps, _) =>

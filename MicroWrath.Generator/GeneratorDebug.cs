@@ -23,7 +23,8 @@ namespace MicroWrath.Generator
 
             context.RegisterSourceOutput(analyzerConfig, (spc, config) =>
             {
-                var configEntries = config.GlobalOptions.Keys.Select(k => (k, v: Option.OfObj(config.GlobalOptions.TryGetValue(k, out var v)  ? v : null)));
+                var configEntries = config.GlobalOptions.Keys.Select(k =>
+                    (k, v: config.GlobalOptions.TryGetValue(k, out string? v) ? v.ToOption() : Option<string>.None));
 
                 spc.AddSource("debug.analyzerConfig", $"{configEntries.Select(c => $"//{c.k}: {c.v}").Aggregate((a, b) => $"{a}{Environment.NewLine}{b}")}");
             });

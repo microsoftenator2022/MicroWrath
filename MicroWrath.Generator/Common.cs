@@ -101,7 +101,7 @@ namespace MicroWrath.Generator.Common
             ns.GetTypeMembers().GetAssignableTypes(includeNested);
 
         internal static Option<INamedTypeSymbol> TryGetTypeSymbolByName(this IEnumerable<INamedTypeSymbol> types, string name) =>
-            Option.OfObj(types.FirstOrDefault(t => t.Name == name));
+            types.TryFind(t => t.Name == name);
 
         internal static Option<INamedTypeSymbol> TryGetTypeSymbolByName(string name, IAssemblySymbol assembly) => 
             assembly.GetAllNamespaces()
@@ -160,13 +160,13 @@ namespace MicroWrath.Generator.Common
         private static IEnumerable<INamedTypeSymbol> GetCompilationBlueprintTypes(
             Compilation compilation,
             IEnumerable<INamedTypeSymbol> types) =>
-            Option.OfObj(types.FirstOrDefault(t => t.Name == "SimpleBlueprint")).ToEnumerable()
+            types.TryFind(t => t.Name == "SimpleBlueprint").ToEnumerable()
                 .SelectMany(simpleBlueprint => GetAssignableTo(compilation, types, simpleBlueprint));
 
         private static IEnumerable<INamedTypeSymbol> GetCompilationBlueprintComponentTypes(
             Compilation compilation,
             IEnumerable<INamedTypeSymbol> types) =>
-            Option.OfObj(types.FirstOrDefault(t => t.Name == "BlueprintComponent")).ToEnumerable()
+            types.TryFind(t => t.Name == "BlueprintComponent").ToEnumerable()
                 .SelectMany(blueprintComponent => GetAssignableTo(compilation, types, blueprintComponent));
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValuesProvider<IAssemblySymbol> assemblies) =>
@@ -218,15 +218,13 @@ namespace MicroWrath.Generator.Common
         {
             var options = analyzerConfig.GlobalOptions;
 
-            var projectPath =
-                    options.TryGetValue("build_property.projectdir", out string? ppValue) ?
-                        Option.OfObj(ppValue) :
-                        Option.None<string>();
+            options.TryGetValue("build_property.projectdir", out string? ppValue);
 
-            var rootNamespace =
-                options.TryGetValue("build_property.rootnamespace", out string? gnsValue) ?
-                    Option.OfObj(gnsValue) :
-                    Option.None<string>();
+            var projectPath = ppValue.ToOption();
+
+            options.TryGetValue("build_property.rootnamespace", out string? gnsValue);
+
+            var rootNamespace = gnsValue.ToOption();
 
             return new Config(rootNamespace, projectPath);
         }
