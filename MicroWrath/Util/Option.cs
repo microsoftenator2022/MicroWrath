@@ -78,6 +78,9 @@ namespace MicroWrath.Util
 
         public static Option<T> OfObj<T>(T? value) => (Option<T>)value;
 
+        public static Option<T> ToOption<T>(this T? obj) => (Option<T>)obj;
+        public static Option<T> ToOption<T>(this Option<T> option) => option;
+
         public static Option<U> Map<T, U>(this Option<T> option, Func<T, U> mapper) =>
             option is Option<T>.Some value ?
                 Some(mapper(value)) :
@@ -98,6 +101,9 @@ namespace MicroWrath.Util
         {
             if (option is Option<T>.Some some) yield return some;
         }
+
+        public static Option<T> TryHead<T>(this IEnumerable<T> source) => source.FirstOrDefault().ToOption();
+        public static Option<T> TryFind<T>(this IEnumerable<T> source, Func<T, bool> predicate) => source.FirstOrDefault(predicate).ToOption();
 
         public static T DefaultValue<T>(Option<T> option, T defaultValue) => (T?)option ?? defaultValue;
     }
