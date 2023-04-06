@@ -34,12 +34,12 @@ namespace MicroWrath.Generator
         {
             var blueprintsDbType = sm.Compilation.Assembly.GetTypeByMetadataName(blueprintsDbTypeFullName);
 
-            return Option.OfObj(blueprintsDbType?.GetTypeMembers().FirstOrDefault(static m => m.Name == "Owlcat"));
+            return blueprintsDbType?.GetTypeMembers().FirstOrDefault(static m => m.Name == "Owlcat").TryHead();
         }
 
         private static Option<string> TryGetBlueprintTypeNameFromSyntaxNode(MemberAccessExpressionSyntax bpTypeExpr, INamedTypeSymbol owlcatDbType, SemanticModel sm)
         {
-            var owlcatDbExpr = Option.OfObj(bpTypeExpr.GetExpression());
+            var owlcatDbExpr = bpTypeExpr.GetExpression().ToOption();
 
             return owlcatDbExpr
                 .Bind<MemberAccessExpressionSyntax, string>(maybeOwlcat =>
