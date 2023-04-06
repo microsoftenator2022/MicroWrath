@@ -7,24 +7,9 @@
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
-  <!--<PropertyGroup>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-    <CompilerGeneratedFilesOutputPath>..\Generated</CompilerGeneratedFilesOutputPath>
-  </PropertyGroup>-->
-
-  <ItemGroup>
-    <None Remove="Test.NewBlueprints.json" />
-  </ItemGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="$(WrathPath)\Bundles\cheatdata.json" />
   </ItemGroup>
-  
-  <!--<ItemGroup>
-    <Reference Include="Microsoftenator.Wotr.Common">
-      <HintPath>..\..\Microsoftenator.Wotr.Common\bin\Debug\net472\Microsoftenator.Wotr.Common.dll</HintPath>
-    </Reference>
-  </ItemGroup>-->
 
   <ItemGroup>
     <Reference Include="0Harmony">
