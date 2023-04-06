@@ -34,7 +34,9 @@ namespace MicroWrath.Generator
         {
             var blueprintsDbType = sm.Compilation.Assembly.GetTypeByMetadataName(blueprintsDbTypeFullName);
 
-            return blueprintsDbType?.GetTypeMembers().FirstOrDefault(static m => m.Name == "Owlcat").TryHead();
+            var typeMembers = blueprintsDbType?.GetTypeMembers() ?? default;
+
+            return typeMembers.TryFind(static m => m.Name == "Owlcat");
         }
 
         private static Option<string> TryGetBlueprintTypeNameFromSyntaxNode(MemberAccessExpressionSyntax bpTypeExpr, INamedTypeSymbol owlcatDbType, SemanticModel sm)
@@ -92,40 +94,20 @@ namespace MicroWrath.Generator
                     return (blueprintType, blueprints.Where(bp => memberAccesses.Any(member => member.Name == bp.Name)));
                 });
 
-            // TODO: Remove the Collect(). There's no need to regenerate every file if only one needs changes.
-            // In theory the source generator API should be smart enough to only regenerate files that changed.
-            context.RegisterSourceOutput(blueprintsAccessorsToGenerate.Collect().Combine(config), static (spc, bpsAndConfig) =>
+            context.RegisterSourceOutput(blueprintsAccessorsToGenerate, static (spc, bps) =>
             {
-                var (bps, config) = bpsAndConfig;
-                
+                var (symbol, blueprints) = bps;
+
                 var sb = new StringBuilder();
 
-//#if DEBUG
-//                sb.AppendLine($"// {bps.Length} blueprint types");
+                if (symbol is not INamedTypeSymbol type) return;
 
-//                foreach (var (type, blueprints) in bps)
-//                {
-//                    sb.AppendLine($"// {type}: {blueprints.Count()}");
-//                }
+                var ns = type.ContainingNamespace;
 
-//                spc.AddSource("summary", sb.ToString());
-//#endif
-
-                foreach (var (symbol, blueprints) in bps)
-                {
-                    if (spc.CancellationToken.IsCancellationRequested) break;
-
-                    if (symbol is not INamedTypeSymbol type)
-                        continue;
-
-                    sb.Clear();
+                sb.Append($"using {ns};");
                     
-                    var ns = type.ContainingNamespace;
-
-                    sb.Append($"using {ns};");
-                    
-                    if (ns.ToString() != "Kingmaker.Blueprints")
-                        sb.Append($@"
+                if (ns.ToString() != "Kingmaker.Blueprints")
+                    sb.Append($@"
 using Kingmaker.Blueprints;");
 
                     sb.Append($@"
@@ -152,7 +134,6 @@ namespace MicroWrath.BlueprintsDb
     }}
 }}");
                     spc.AddSource(type.ToDisplayString(), sb.ToString());
-                }
             });
         }
     }
