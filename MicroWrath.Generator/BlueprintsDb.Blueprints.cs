@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 using Microsoft.CodeAnalysis;
@@ -9,8 +10,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using MicroWrath.Util;
-using MicroWrath.Generator.Common;
-using System.Collections.Immutable;
 
 namespace MicroWrath.Generator
 {
@@ -23,8 +22,8 @@ namespace MicroWrath.Generator
 
         private static class Blueprints
         {
-            public static Dictionary<ISymbol, ImmutableArray<BlueprintInfo>> BlueprintList { get; private set; } =
-                new(SymbolEqualityComparer.Default);
+            public static ImmutableDictionary<ISymbol, ImmutableArray<BlueprintInfo>> BlueprintList { get; private set; } =
+                ImmutableDictionary.Create<ISymbol, ImmutableArray<BlueprintInfo>>(SymbolEqualityComparer.Default);
 
             public static IncrementalValuesProvider<(ISymbol type, ImmutableArray<BlueprintInfo> blueprints)>
                 GetBlueprintData(IncrementalValuesProvider<AdditionalText> cheatdataJson, IncrementalValueProvider<Compilation> compilation)
@@ -90,7 +89,7 @@ namespace MicroWrath.Generator
                 .Where(static g => g.Key is not null && g.Key.DeclaredAccessibility == Accessibility.Public)
                 .Select(static (bpType, ct) =>
                 {
-                    BlueprintList.Remove(bpType.Key);
+                    BlueprintList = BlueprintList.Remove(bpType.Key);
 
                     IEnumerable<BlueprintInfo> renameDuplicates(IEnumerable<BlueprintInfo> source)
                     {
@@ -114,7 +113,7 @@ namespace MicroWrath.Generator
                     }
                     var bps = (key: bpType.Key, bps: bpType.GroupBy(static bp => bp.Name).SelectMany(renameDuplicates).ToImmutableArray());
 
-                    BlueprintList[bpType.Key] = bps.bps;
+                    BlueprintList = BlueprintList.SetItem(bpType.Key, bps.bps);
 
                     return bps;
                 });

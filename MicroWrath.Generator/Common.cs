@@ -171,21 +171,21 @@ namespace MicroWrath.Generator.Common
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValuesProvider<IAssemblySymbol> assemblies) =>
             assemblies
-                .SelectMany((a, _) => a.GlobalNamespace.GetAllNamespaces())
-                .SelectMany((ns, _) => ns.GetAssignableTypes());
+                .SelectMany(static (a, _) => a.GlobalNamespace.GetAllNamespaces())
+                .SelectMany(static (ns, _) => ns.GetAssignableTypes());
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetBlueprintTypes(IncrementalValueProvider<Compilation> compilation)
         {
             var assemblies = compilation
-                .SelectMany((c, _) => c.SourceModule.ReferencedAssemblySymbols)
-                .Where(a => a.Name == "Assembly-CSharp");
+                .SelectMany(static (c, _) => c.SourceModule.ReferencedAssemblySymbols)
+                .Where(static a => a.Name == "Assembly-CSharp");
 
             var types = GetAssignableTypes(assemblies);
 
             return types
                 .Collect()
                 .Combine(compilation)
-                .SelectMany((typesAndCompilation, _) =>
+                .SelectMany(static (typesAndCompilation, _) =>
                 {
                     var (types, compilation) = typesAndCompilation;
 
@@ -193,24 +193,24 @@ namespace MicroWrath.Generator.Common
                 });
         }
 
-        internal static IncrementalValuesProvider<INamedTypeSymbol> GetComponentTypes(IncrementalValueProvider<Compilation> compilation)
-        {
-            var assemblies = compilation
-                .SelectMany((c, _) => c.SourceModule.ReferencedAssemblySymbols)
-                .Where(a => a.Name == "Assembly-CSharp");
+        //internal static IncrementalValuesProvider<INamedTypeSymbol> GetComponentTypes(IncrementalValueProvider<Compilation> compilation)
+        //{
+        //    var assemblies = compilation
+        //        .SelectMany(static (c, _) => c.SourceModule.ReferencedAssemblySymbols)
+        //        .Where(static a => a.Name == "Assembly-CSharp");
 
-            var types = GetAssignableTypes(assemblies);
+        //    var types = GetAssignableTypes(assemblies);
 
-            return types
-                .Collect()
-                .Combine(compilation)
-                .SelectMany((typesAndCompilation, _) =>
-                {
-                    var (types, compilation) = typesAndCompilation;
+        //    return types
+        //        .Collect()
+        //        .Combine(compilation)
+        //        .SelectMany(static (typesAndCompilation, _) =>
+        //        {
+        //            var (types, compilation) = typesAndCompilation;
 
-                    return GetCompilationBlueprintComponentTypes(compilation, types);
-                });
-        }
+        //            return GetCompilationBlueprintComponentTypes(compilation, types);
+        //        });
+        //}
 
         internal readonly record struct Config(Option<string> RootNamespace, Option<string> ProjectPath);
 

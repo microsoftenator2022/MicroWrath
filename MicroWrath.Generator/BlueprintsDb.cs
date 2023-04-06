@@ -92,6 +92,8 @@ namespace MicroWrath.Generator
                     return (blueprintType, blueprints.Where(bp => memberAccesses.Any(member => member.Name == bp.Name)));
                 });
 
+            // TODO: Remove the Collect(). There's no need to regenerate every file if only one needs changes.
+            // In theory the source generator API should be smart enough to only regenerate files that changed.
             context.RegisterSourceOutput(blueprintsAccessorsToGenerate.Collect().Combine(config), static (spc, bpsAndConfig) =>
             {
                 var (bps, config) = bpsAndConfig;

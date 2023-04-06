@@ -163,12 +163,10 @@ namespace MicroWrath.Generator
                     return completionItem;
                 }
 
-                public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
-                {
-                    if (!(trigger.Character == '.' && trigger.Kind is CompletionTriggerKind.Insertion)) return false;
-
-                    return true;
-                }
+                public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options) =>
+                    (trigger.Kind is
+                        CompletionTriggerKind.Insertion) &&
+                    (trigger.Character == '.');
 
                 public override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken)
                 {
