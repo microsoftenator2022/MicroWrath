@@ -32,7 +32,7 @@ namespace MicroWrath
     {
         public static Option<TBlueprint> TryGetBlueprint<TBlueprint>(this IBlueprintWrapper<TBlueprint> bpRef)
             where TBlueprint : SimpleBlueprint =>
-            Option.OfObj(bpRef.GetBlueprint());
+            bpRef.GetBlueprint().ToOption();
 
         public static TReference GetReference<TBlueprint, TReference>(this IBlueprintWrapper<TBlueprint> bpRef)
             where TBlueprint : SimpleBlueprint
