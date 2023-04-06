@@ -34,6 +34,7 @@ namespace GeneratorTestProject
 
             Construct.New.Blueprint<SimpleBlueprint>("", "");
             Construct.New.Blueprint<BlueprintFeature>("", "");
+            Construct.New.Blueprint<BlueprintArchetype>("", "");
         }
     }
 }

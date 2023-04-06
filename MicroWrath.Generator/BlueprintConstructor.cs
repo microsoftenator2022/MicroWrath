@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -15,7 +16,7 @@ using MicroWrath.Util.Linq;
 namespace MicroWrath.Generator
 {
     [Generator]
-    internal class BlueprintConstructor : IIncrementalGenerator
+    internal partial class BlueprintConstructor : IIncrementalGenerator
     {
         private const string ConstructorNamespace = "MicroWrath.Constructors";
         private const string ConstructClassName = "Construct";
@@ -37,47 +38,47 @@ namespace MicroWrath.Generator
                 sb.Append($@"
 namespace {ConstructorNamespace}
 {{
-    public static class {ConstructClassName}
+    internal static partial class {ConstructClassName}
     {{
         private interface IBlueprintConstructor<out TBlueprint> where TBlueprint : SimpleBlueprint
         {{
-            TBlueprint New(string guid, string name);
+            TBlueprint New(string assetId, string name);
         }}
 
         private partial class BlueprintConstructor : IBlueprintConstructor<SimpleBlueprint>
         {{
             internal BlueprintConstructor() {{ }}
-            SimpleBlueprint IBlueprintConstructor<SimpleBlueprint>.New(string guid, string name) =>
-                new() {{ AssetGuid = BlueprintGuid.Parse(name), name = name }} ;
 
-            public TBlueprint New<TBlueprint>(string guid, string name) where TBlueprint : SimpleBlueprint =>
-                ((IBlueprintConstructor<TBlueprint>)this).New(guid, name);
+            SimpleBlueprint IBlueprintConstructor<SimpleBlueprint>.New(string assetId, string name) =>
+                new() {{ AssetGuid = BlueprintGuid.Parse(assetId), name = name }};
+
+            public TBlueprint New<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
+                ((IBlueprintConstructor<TBlueprint>)this).New(assetId, name);
         }}
 
-        public static partial class {ConstructNewClassName}
+        public static class {ConstructNewClassName}
         {{
             private static readonly Lazy<BlueprintConstructor> blueprintConstructor = new(() => new());
-            public static TBlueprint {NewBlueprintMethodName}<TBlueprint>(string guid, string name) where TBlueprint : SimpleBlueprint => blueprintConstructor.Value.New<TBlueprint>(guid, name);
+            public static TBlueprint {NewBlueprintMethodName}<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
+                blueprintConstructor.Value.New<TBlueprint>(assetId, name);
         }}
     }}
 }}");
-                pic.AddSource("blueprintConstructors", sb.ToString());
+                pic.AddSource("blueprintConstructorBase", sb.ToString());
             });
 
             var compilation = context.CompilationProvider;
 
-            var simpleBlueprintType = compilation.Select((c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.SimpleBlueprint"));
+            var simpleBlueprintType = compilation.Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.SimpleBlueprint"));
 
             var blueprintConstructorType = compilation
-                .Select(static (c, _) =>
-                    Option.OfObj(c.Assembly
-                        .GetTypeByMetadataName(
-                            // CLR names for nested classes are separated by '+', not '.'
-                            $"{ConstructorClassFullName}+{ConstructNewClassName}")));
+                .Select(static (c, _) => c.Assembly
+                    .GetTypeByMetadataName($"{ConstructorClassFullName}+{ConstructNewClassName}")
+                    .ToOption());
 
             var newBlueprintMethod = blueprintConstructorType
                 .Select(static (t, _) =>
-                    t.Bind(t => Option.OfObj(t.GetMembers(NewBlueprintMethodName).FirstOrDefault())));
+                    t.Bind(static t => t.GetMembers(NewBlueprintMethodName).TryHead()));
 
             var invocations = context.SyntaxProvider.CreateSyntaxProvider(
                 static (sn, _) => sn is InvocationExpressionSyntax,
@@ -112,9 +113,12 @@ namespace {ConstructorNamespace}
                 .SelectMany(static (tsbp, _) =>
                 {
                     var (ts, simpleBlueprint) = tsbp;
-                    return ts.OfType<INamedTypeSymbol>().Where(t => !t.Equals(simpleBlueprint, SymbolEqualityComparer.Default));
+                    return ts
+                        .OfType<INamedTypeSymbol>()
+                        .Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default)
+                        .Where(t => !t.Equals(simpleBlueprint, SymbolEqualityComparer.Default));
                 });
-                
+#if DEBUG
             context.RegisterSourceOutput(invocationTypeArguments.Collect(), static (spc, ts) =>
             {
                 var sb = new StringBuilder();
@@ -124,7 +128,55 @@ namespace {ConstructorNamespace}
                     sb.AppendLine($"// Node: {t}");
                 }
 
-                spc.AddSource("debug", sb.ToString());
+                spc.AddSource("invocationBlueprintTypes", sb.ToString());
+            });
+#endif
+
+            var defaultValuesType = compilation
+                .Select((c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
+
+            var initMembers = GetBpMemberInitialValues(invocationTypeArguments, defaultValuesType, context);
+#if DEBUG
+            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
+            {
+                var (defaults, types) = defaultValues;
+
+                var sb = new StringBuilder();
+
+                sb.AppendLine($"// {defaults}");
+
+                foreach (var (bpType, fields, properties) in types)
+                {
+                    sb.AppendLine($"// {bpType}");
+
+                    if (fields.Length > 0)
+                    {
+                        sb.AppendLine($" // Fields:");
+                        foreach (var f in fields)
+                        {
+                            sb.AppendLine($"  // {f}");
+                        }
+                    }
+
+                    if (properties.Length > 0)
+                    {
+                        sb.AppendLine($" // Properties:");
+                        foreach (var p in properties)
+                        {
+                            sb.AppendLine($"  // {p}");
+                        }
+                    }
+                }
+
+                spc.AddSource("initTypes", sb.ToString());
+            });
+#endif
+
+            context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
+            {
+                var (bpType, fields, properties) = bpInit;
+
+                spc.AddSource(bpType.Name, BlueprintConstructorPart(bpType, fields, properties));
             });
         }
     }
