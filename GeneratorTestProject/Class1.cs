@@ -9,6 +9,7 @@ using Kingmaker.Blueprints.Classes;
 
 using MicroWrath.Localization;
 using MicroWrath.BlueprintsDb;
+using MicroWrath.Constructors;
 
 namespace GeneratorTestProject
 {
@@ -30,6 +31,9 @@ namespace GeneratorTestProject
             var alchemist = BlueprintsDb.Owlcat.BlueprintCharacterClass.AlchemistClass;
             var adamantine = BlueprintsDb.Owlcat.BlueprintWeaponEnchantment.AdamantineWeaponEnchantment;
             var halfElf = BlueprintsDb.Owlcat.BlueprintRace.HalfElfRace;
+
+            Construct.New.Blueprint<SimpleBlueprint>("", "");
+            Construct.New.Blueprint<BlueprintFeature>("", "");
         }
     }
 }

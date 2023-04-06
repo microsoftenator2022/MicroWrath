@@ -20,11 +20,11 @@
     <AdditionalFiles Include="$(WrathPath)\Bundles\cheatdata.json" />
   </ItemGroup>
   
-  <ItemGroup>
+  <!--<ItemGroup>
     <Reference Include="Microsoftenator.Wotr.Common">
       <HintPath>..\..\Microsoftenator.Wotr.Common\bin\Debug\net472\Microsoftenator.Wotr.Common.dll</HintPath>
     </Reference>
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <Reference Include="0Harmony">
