@@ -53,6 +53,13 @@ namespace MicroWrath.Util.Linq
                 yield return (index++, item);
         }
 
-        internal static IEnumerable<T> ToEnumerable<T, TEnumerable>(this TEnumerable source) where TEnumerable : IEnumerable<T> => source;
+        //internal static IEnumerable<T> ToEnumerable<T, TEnumerable>(this TEnumerable source) where TEnumerable : IEnumerable<T> => source;
+
+        internal static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<(TKey key, TValue value)> source) =>
+            source.ToDictionary(kv => kv.key, kv => kv.value);
+
+        internal static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>
+            (this IEnumerable<(TKey key, TValue value)> source, EqualityComparer<TKey> keyComparer) =>
+            source.ToDictionary(kv => kv.key, kv => kv.value, keyComparer);
     }
 }
