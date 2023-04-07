@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Elfie.Model;
 
 using MicroWrath.Generator.Common;
 using MicroWrath.Util;
@@ -80,9 +81,13 @@ namespace {ConstructorNamespace}
                 .Select(static (t, _) =>
                     t.Bind(static t => t.GetMembers(NewBlueprintMethodName).TryHead()));
 
-            var invocations = context.SyntaxProvider.CreateSyntaxProvider(
+            var syntax = context.SyntaxProvider.CreateSyntaxProvider(
                 static (sn, _) => sn is InvocationExpressionSyntax,
-                static (sc, _) =>
+                static (sc, _) => sc);
+
+            var invocations = syntax
+                .Where(static sc => sc.Node is InvocationExpressionSyntax)
+                .Select(static (sc, _) =>
                   ( node: (InvocationExpressionSyntax)sc.Node,
                     symbol: sc.SemanticModel.GetSymbolInfo(sc.Node),
                     sm: sc.SemanticModel ));
@@ -108,69 +113,67 @@ namespace {ConstructorNamespace}
 
             var invocationTypeArguments = newBlueprintMethodInvocations
                 .SelectMany(static (m, _) => m.symbol.TypeArguments)
+                .Combine(syntax.Collect())
+                .SelectMany(static (tai, ct) =>
+                {
+                    var (ta, invocationsSyntax) = tai;
+
+                    if (ta is not ITypeParameterSymbol tps)
+                        return EnumerableExtensions.Singleton(ta);
+
+                    return Analyzers.GetAllGenericInstances(tps, invocationsSyntax, ct);
+                })
                 .Collect()
                 .Combine(simpleBlueprintType)
                 .SelectMany(static (tsbp, _) =>
                 {
                     var (ts, simpleBlueprint) = tsbp;
+
                     return ts
                         .OfType<INamedTypeSymbol>()
                         .Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default)
                         .Where(t => !t.Equals(simpleBlueprint, SymbolEqualityComparer.Default));
                 });
-#if DEBUG
-            context.RegisterSourceOutput(invocationTypeArguments.Collect(), static (spc, ts) =>
-            {
-                var sb = new StringBuilder();
-
-                foreach (var t in ts)
-                {
-                    sb.AppendLine($"// Node: {t}");
-                }
-
-                spc.AddSource("invocationBlueprintTypes", sb.ToString());
-            });
-#endif
 
             var defaultValuesType = compilation
-                .Select((c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
+                .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
 
             var initMembers = GetBpMemberInitialValues(invocationTypeArguments, defaultValuesType, context);
-#if DEBUG
-            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
-            {
-                var (defaults, types) = defaultValues;
+//#if DEBUG
+//            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
+//            {
+//                var (defaults, types) = defaultValues;
 
-                var sb = new StringBuilder();
+//                var sb = new StringBuilder();
 
-                sb.AppendLine($"// {defaults}");
+//                sb.AppendLine($"// {defaults}");
 
-                foreach (var (bpType, fields, properties) in types)
-                {
-                    sb.AppendLine($"// {bpType}");
+//                foreach (var (bpType, fields, properties) in types)
+//                {
+//                    sb.AppendLine($"// {bpType}");
 
-                    if (fields.Length > 0)
-                    {
-                        sb.AppendLine($" // Fields:");
-                        foreach (var f in fields)
-                        {
-                            sb.AppendLine($"  // {f}");
-                        }
-                    }
+//                    if (fields.Length > 0)
+//                    {
+//                        sb.AppendLine($" // Fields:");
+//                        foreach (var f in fields)
+//                        {
+//                            sb.AppendLine($"  // {f}");
+//                        }
+//                    }
 
-                    if (properties.Length > 0)
-                    {
-                        sb.AppendLine($" // Properties:");
-                        foreach (var p in properties)
-                        {
-                            sb.AppendLine($"  // {p}");
-                        }
-                    }
-                }
+//                    if (properties.Length > 0)
+//                    {
+//                        sb.AppendLine($" // Properties:");
+//                        foreach (var p in properties)
+//                        {
+//                            sb.AppendLine($"  // {p}");
+//                        }
+//                    }
+//                }
 
-                spc.AddSource("initTypes", sb.ToString());
-            });
-#endif
+//                spc.AddSource("initTypes", sb.ToString());
+//            });
+//#endif
 
             context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
             {

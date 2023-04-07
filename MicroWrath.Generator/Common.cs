@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Threading;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.FindSymbols;
 
 using MicroWrath.Util;
 
@@ -53,6 +58,45 @@ namespace MicroWrath.Generator.Common
 
     internal static class Analyzers
     {
+        internal static IEnumerable<INamedTypeSymbol> GetAllGenericInstances(ITypeParameterSymbol type, ImmutableArray<GeneratorSyntaxContext> nodes, CancellationToken ct)
+        {
+            var containingSymbol = type.ContainingSymbol;
+
+            var references = Enumerable.Empty<ISymbol>();
+
+            if (type.TypeParameterKind is TypeParameterKind.Method)
+                references = nodes
+                    .Where(sc => sc.Node is InvocationExpressionSyntax)
+                    .Select(sc => sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
+                    .OfType<IMethodSymbol>()
+                    .Where(m => m is not null && containingSymbol.Equals(m.ConstructedFrom, SymbolEqualityComparer.Default))
+                    .SelectMany(m => m.TypeArguments);
+
+            else if (type.TypeParameterKind is TypeParameterKind.Type)
+            {
+                //TODO    
+            }
+
+            foreach (var tpr in references)
+            {
+                if (ct.IsCancellationRequested) yield break;
+
+                if (tpr.Equals(type, SymbolEqualityComparer.Default)) continue;
+
+                if (tpr is INamedTypeSymbol nt)
+                    yield return nt;
+
+                if (tpr is ITypeParameterSymbol tp)
+                    foreach (var t in GetAllGenericInstances(tp, nodes, ct))
+                    {
+                        if (ct.IsCancellationRequested) yield break;
+
+                        yield return t;
+                    }
+            }
+
+        }
+
         internal static IEnumerable<INamedTypeSymbol> GetBaseTypesAndSelf(this INamedTypeSymbol type)
         {
             yield return type;
@@ -64,7 +108,6 @@ namespace MicroWrath.Generator.Common
                     yield return t;
             }
         }
-
 
         internal static IEnumerable<INamedTypeSymbol> AllNestedTypesAndSelf(this INamedTypeSymbol type)
         {
@@ -204,25 +247,6 @@ namespace MicroWrath.Generator.Common
                     return GetCompilationBlueprintTypes(compilation, types);
                 });
         }
-
-        //internal static IncrementalValuesProvider<INamedTypeSymbol> GetComponentTypes(IncrementalValueProvider<Compilation> compilation)
-        //{
-        //    var assemblies = compilation
-        //        .SelectMany(static (c, _) => c.SourceModule.ReferencedAssemblySymbols)
-        //        .Where(static a => a.Name == "Assembly-CSharp");
-
-        //    var types = GetAssignableTypes(assemblies);
-
-        //    return types
-        //        .Collect()
-        //        .Combine(compilation)
-        //        .SelectMany(static (typesAndCompilation, _) =>
-        //        {
-        //            var (types, compilation) = typesAndCompilation;
-
-        //            return GetCompilationBlueprintComponentTypes(compilation, types);
-        //        });
-        //}
 
         internal readonly record struct Config(Option<string> RootNamespace, Option<string> ProjectPath);
 
