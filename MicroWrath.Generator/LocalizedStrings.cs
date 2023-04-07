@@ -74,37 +74,24 @@ namespace MicroWrath.Localization
         {
             GenerateAttribute(context);
 
+            var attributeNodes = context.SyntaxProvider.ForAttributeWithMetadataName(
+                AttributeFullName,
+                (sn, _) => sn is VariableDeclaratorSyntax,
+                (ac, _) => ac);
+
+            var localizedStrings = attributeNodes
+                .Where(ac => ac.TargetSymbol is
+                {
+                    DeclaredAccessibility:
+                            Accessibility.Internal or
+                            Accessibility.ProtectedOrInternal or
+                            Accessibility.Public,
+                    IsStatic: true,
+                })
+                .SelectMany((ac, _) => ac.Attributes.Select(a => CreateLocalizedStringData(ac.TargetSymbol, a)));
+
             var config = Incremental.GetConfig(context.AnalyzerConfigOptionsProvider);
             var rootNamespace = config.Select(static (c, _) => c.RootNamespace as Option<string>.Some ?? "");
-
-            var compilation = context.CompilationProvider;
-
-            var attrType = compilation.Select((c, _) => c.Assembly.GetTypeByMetadataName(AttributeFullName));
-
-            var namespaces = compilation.SelectMany((c, _) => c.Assembly.GetAllNamespaces());
-            var typeMembers = namespaces
-                .SelectMany((ns, _) => ns.GetTypeMembers().GetAllTypes(true))
-                .SelectMany((type, _) => type.GetMembers().Where(m => m is
-                    {
-                        DeclaredAccessibility: Accessibility.Public or Accessibility.Internal or Accessibility.ProtectedOrInternal,
-                        IsStatic: true,
-                        Kind: SymbolKind.Field or SymbolKind.Property
-                    } &&
-                    m.GetAttributes().Length > 0));
-
-            var localizedStrings = typeMembers
-                .Combine(attrType)
-                .SelectMany<(ISymbol, INamedTypeSymbol?), LocalizedStringData>((m, _) =>
-                {
-                    var (member, at) = m;
-
-                    var attr = member.GetAttributes().FirstOrDefault(a =>
-                        a.AttributeClass is INamedTypeSymbol ac && ac.Equals(at, SymbolEqualityComparer.Default));
-
-                    if (attr is null) return Option.None<LocalizedStringData>().ToEnumerable();
-                    
-                    return Option.Some(CreateLocalizedStringData(member, attr)).ToEnumerable();
-                });
                 
             context.RegisterSourceOutput(localizedStrings.Collect().Combine(rootNamespace), static (spc, lsAndConfig) =>
             {
