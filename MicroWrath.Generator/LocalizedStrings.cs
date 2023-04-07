@@ -50,7 +50,7 @@ namespace MicroWrath.Localization
 
         private readonly record struct LocalizedStringData(string Name, string ValueMemberFullName, string Key, Option<string> Locale);
 
-        private static LocalizedStringData CreateLocalizedStringData(ISymbol symbol, AttributeData attribute)
+        private static LocalizedStringData CreateLocalizedStringData(ISymbol symbol, AttributeData attribute, string rootNamespace)
         {
             var dict = new Dictionary<string, TypedConstant>();
 
@@ -58,12 +58,14 @@ namespace MicroWrath.Localization
                 dict.Add(prop.Key, prop.Value);
 
             var fullName = symbol.ToString();
-            var name = symbol.Name;
+            var name = fullName.Replace(".", "_");
+            if (name.StartsWith($"{rootNamespace}_"))
+                name = name.Remove(0, rootNamespace.Length + 1);
 
             if (dict.TryGetValue("Name", out var n) || dict.TryGetValue("Key", out n))
                 name = n.ToCSharpString().Replace("\"", "");
 
-            var key = dict.TryGetValue("Key", out var k) ? k.ToCSharpString() : $"\"{name}\"";
+            var key = dict.TryGetValue("Key", out var k) ? k.ToCSharpString() : $"\"{fullName}\"";
 
             var localeString = dict.TryGetValue("Locale", out var l) ? Option.Some(l.ToCSharpString()) : (Option<string>)Option.None<string>();
 
@@ -76,23 +78,26 @@ namespace MicroWrath.Localization
 
             var attributeNodes = context.SyntaxProvider.ForAttributeWithMetadataName(
                 AttributeFullName,
-                (sn, _) => sn is VariableDeclaratorSyntax,
-                (ac, _) => ac);
+                static (sn, _) => sn is VariableDeclaratorSyntax,
+                static (ac, _) => ac);
 
-            var localizedStrings = attributeNodes
-                .Where(ac => ac.TargetSymbol is
+            var localizedStringInstances = attributeNodes
+                .Where(static ac => ac.TargetSymbol is
                 {
                     DeclaredAccessibility:
                             Accessibility.Internal or
                             Accessibility.ProtectedOrInternal or
                             Accessibility.Public,
                     IsStatic: true,
-                })
-                .SelectMany((ac, _) => ac.Attributes.Select(a => CreateLocalizedStringData(ac.TargetSymbol, a)));
+                });
 
             var config = Incremental.GetConfig(context.AnalyzerConfigOptionsProvider);
             var rootNamespace = config.Select(static (c, _) => c.RootNamespace as Option<string>.Some ?? "");
-                
+
+            var localizedStrings = localizedStringInstances
+                .Combine(rootNamespace)
+                .SelectMany(static (ac, _) => ac.Left.Attributes.Select(a => CreateLocalizedStringData(ac.Left.TargetSymbol, a, ac.Right)));
+
             context.RegisterSourceOutput(localizedStrings.Collect().Combine(rootNamespace), static (spc, lsAndConfig) =>
             {
                 var (localizedStrings, rootNamespace) = lsAndConfig;
@@ -103,11 +108,9 @@ namespace MicroWrath.Localization
 
                 var sb = new StringBuilder();
 
-                sb.Append($@"
-using System;
+                sb.Append($@"using System;
 using System.Collections.Generic;
 using Kingmaker.Localization;
-using MicroWrath.Localization;
 
 namespace {rootNamespace}
 {{
