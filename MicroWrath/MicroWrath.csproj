@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -67,6 +67,9 @@
       <HintPath>$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference> -->
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>$(SolutionDir)lib\Assembly-CSharp_public.dll</HintPath>
       <Private>False</Private>
@@ -80,12 +83,16 @@
     </PackageReference>
   </ItemGroup>
 
-  <Target Name="Publicize" AfterTargets="Clean;Restore">
-    <ItemGroup>
-      <Assemblies Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
-    </ItemGroup>
+  <ItemGroup>
+    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
+  </ItemGroup>
 
-    <PublicizeTask InputAssemblies="@(Assemblies)" OutputDir="$(SolutionDir)lib\" />
+  <Target Name="Publicize" AfterTargets="BeforeBuild;Clean" Inputs="@(Publicize)" Outputs="$(SolutionDir)lib\%(Publicize.Filename)_public.dll">
+    <PublicizeTask InputAssemblies="@(Publicize)" OutputDir="$(SolutionDir)lib\" />
+  </Target>
+
+  <Target Name="PublicizeClean" BeforeTargets="Clean">
+    <Delete Files="$(SolutionDir)lib\%(Publicize.Filename)_public.dll" />
   </Target>
 
 </Project>
