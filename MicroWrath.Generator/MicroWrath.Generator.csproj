@@ -16,6 +16,7 @@
   <ItemGroup>
     <EmbeddedResource Include="..\MicroWrath\DefaultValues.cs" Link="Resources\DefaultValues.cs" />
     <EmbeddedResource Include="Resources\*.*" />
+    <EmbeddedResource Include="IsExternalInit.cs" />
   </ItemGroup>
   
   <ItemGroup>
