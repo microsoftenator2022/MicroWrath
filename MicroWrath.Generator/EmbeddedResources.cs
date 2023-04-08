@@ -12,7 +12,7 @@ using MicroWrath.Util;
 namespace MicroWrath.Generator
 {
     [Generator]
-    internal class FromEmbeddedResources : IIncrementalGenerator
+    internal class EmbeddedResources : IIncrementalGenerator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {

@@ -10,10 +10,12 @@
     <Compile Include="..\MicroWrath\Util\Option.cs" Link="Util\Option.cs" />
     <Compile Include="..\MicroWrath\Util\EnumerableExtensions.cs" Link="Util\EnumerableExtensions.cs" />
     <Compile Include="..\MicroWrath\Util\Functional.cs" Link="Util\Functional.cs" />
+    <Compile Remove="Resources\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="..\MicroWrath\DefaultValues.cs" Link="Resources\DefaultValues.cs" />
+    <EmbeddedResource Include="Resources\*.*" />
   </ItemGroup>
   
   <ItemGroup>

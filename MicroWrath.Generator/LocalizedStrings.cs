@@ -20,31 +20,31 @@ namespace MicroWrath.Generator
     [Generator]
     public class LocalizedStrings : IIncrementalGenerator
     {
-        private void GenerateAttribute(IncrementalGeneratorInitializationContext context)
-        {
-            context.RegisterPostInitializationOutput(static spc =>
-            {
-                spc.AddSource("localizedStringAttribute", """
-using System;
+//        private void GenerateAttribute(IncrementalGeneratorInitializationContext context)
+//        {
+//            context.RegisterPostInitializationOutput(static spc =>
+//            {
+//                spc.AddSource("LocalizedStringAttribute", """
+//using System;
 
-namespace MicroWrath.Localization
-{
+//namespace MicroWrath.Localization
+//{
 
-    [AttributeUsage(validOn: AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-    internal sealed class LocalizedStringAttribute : Attribute
-    {
-        public LocalizedStringAttribute() {}
+//    [AttributeUsage(validOn: AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
+//    internal sealed class LocalizedStringAttribute : Attribute
+//    {
+//        public LocalizedStringAttribute() {}
 
-        public string? Key { get; set; }
+//        public string? Key { get; set; }
 
-        public string? Name { get; set; }
+//        public string? Name { get; set; }
 
-        public Kingmaker.Localization.Shared.Locale Locale { get; set; }
-    }
-}
-""");
-            });
-        }
+//        public Kingmaker.Localization.Shared.Locale Locale { get; set; }
+//    }
+//}
+//""");
+//            });
+//        }
 
         internal const string AttributeFullName = "MicroWrath.Localization.LocalizedStringAttribute";
 
@@ -74,7 +74,7 @@ namespace MicroWrath.Localization
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            GenerateAttribute(context);
+            //GenerateAttribute(context);
 
             var attributeNodes = context.SyntaxProvider.ForAttributeWithMetadataName(
                 AttributeFullName,
@@ -192,7 +192,7 @@ namespace {rootNamespace}
 }}
 ");
 
-                spc.AddSource("localizedStrings", sb.ToString());
+                spc.AddSource("LocalizedStrings", sb.ToString());
             });
         }
     }

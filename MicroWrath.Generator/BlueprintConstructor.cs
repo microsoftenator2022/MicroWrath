@@ -8,7 +8,6 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Elfie.Model;
 
 using MicroWrath.Generator.Common;
 using MicroWrath.Util;
@@ -29,44 +28,44 @@ namespace MicroWrath.Generator
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            context.RegisterPostInitializationOutput(static pic =>
-            {
-                var sb = new StringBuilder();
+//            context.RegisterPostInitializationOutput(static pic =>
+//            {
+//                var sb = new StringBuilder();
 
-                sb.AppendLine("using System;");
-                sb.AppendLine("using MicroWrath;");
-                sb.AppendLine("using Kingmaker.Blueprints;");
-                sb.Append($@"
-namespace {ConstructorNamespace}
-{{
-    internal static partial class {ConstructClassName}
-    {{
-        private interface IBlueprintConstructor<out TBlueprint> where TBlueprint : SimpleBlueprint
-        {{
-            TBlueprint New(string assetId, string name);
-        }}
+//                sb.AppendLine("using System;");
+//                sb.AppendLine("using MicroWrath;");
+//                sb.AppendLine("using Kingmaker.Blueprints;");
+//                sb.Append($@"
+//namespace {ConstructorNamespace}
+//{{
+//    internal static partial class {ConstructClassName}
+//    {{
+//        private interface IBlueprintConstructor<out TBlueprint> where TBlueprint : SimpleBlueprint
+//        {{
+//            TBlueprint New(string assetId, string name);
+//        }}
 
-        private partial class BlueprintConstructor : IBlueprintConstructor<SimpleBlueprint>
-        {{
-            internal BlueprintConstructor() {{ }}
+//        private partial class BlueprintConstructor : IBlueprintConstructor<SimpleBlueprint>
+//        {{
+//            internal BlueprintConstructor() {{ }}
 
-            SimpleBlueprint IBlueprintConstructor<SimpleBlueprint>.New(string assetId, string name) =>
-                new() {{ AssetGuid = BlueprintGuid.Parse(assetId), name = name }};
+//            SimpleBlueprint IBlueprintConstructor<SimpleBlueprint>.New(string assetId, string name) =>
+//                new() {{ AssetGuid = BlueprintGuid.Parse(assetId), name = name }};
 
-            public TBlueprint New<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
-                ((IBlueprintConstructor<TBlueprint>)this).New(assetId, name);
-        }}
+//            public TBlueprint New<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
+//                ((IBlueprintConstructor<TBlueprint>)this).New(assetId, name);
+//        }}
 
-        public static class {ConstructNewClassName}
-        {{
-            private static readonly Lazy<BlueprintConstructor> blueprintConstructor = new(() => new());
-            public static TBlueprint {NewBlueprintMethodName}<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
-                blueprintConstructor.Value.New<TBlueprint>(assetId, name);
-        }}
-    }}
-}}");
-                pic.AddSource("blueprintConstructorBase", sb.ToString());
-            });
+//        public static class {ConstructNewClassName}
+//        {{
+//            private static readonly Lazy<BlueprintConstructor> blueprintConstructor = new(() => new());
+//            public static TBlueprint {NewBlueprintMethodName}<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
+//                blueprintConstructor.Value.New<TBlueprint>(assetId, name);
+//        }}
+//    }}
+//}}");
+//                pic.AddSource("BlueprintConstructorBase", sb.ToString());
+//            });
 
             var compilation = context.CompilationProvider;
 
@@ -139,41 +138,41 @@ namespace {ConstructorNamespace}
                 .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
 
             var initMembers = GetBpMemberInitialValues(invocationTypeArguments, defaultValuesType, context);
-//#if DEBUG
-//            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
-//            {
-//                var (defaults, types) = defaultValues;
+#if DEBUG
+            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
+            {
+                var (defaults, types) = defaultValues;
 
-//                var sb = new StringBuilder();
+                var sb = new StringBuilder();
 
-//                sb.AppendLine($"// {defaults}");
+                sb.AppendLine($"// {defaults}");
 
-//                foreach (var (bpType, fields, properties) in types)
-//                {
-//                    sb.AppendLine($"// {bpType}");
+                foreach (var (bpType, fields, properties) in types)
+                {
+                    sb.AppendLine($"// {bpType}");
 
-//                    if (fields.Length > 0)
-//                    {
-//                        sb.AppendLine($" // Fields:");
-//                        foreach (var f in fields)
-//                        {
-//                            sb.AppendLine($"  // {f}");
-//                        }
-//                    }
+                    if (fields.Length > 0)
+                    {
+                        sb.AppendLine($" // Fields:");
+                        foreach (var f in fields)
+                        {
+                            sb.AppendLine($"  // {f}");
+                        }
+                    }
 
-//                    if (properties.Length > 0)
-//                    {
-//                        sb.AppendLine($" // Properties:");
-//                        foreach (var p in properties)
-//                        {
-//                            sb.AppendLine($"  // {p}");
-//                        }
-//                    }
-//                }
+                    if (properties.Length > 0)
+                    {
+                        sb.AppendLine($" // Properties:");
+                        foreach (var p in properties)
+                        {
+                            sb.AppendLine($"  // {p}");
+                        }
+                    }
+                }
 
-//                spc.AddSource("initTypes", sb.ToString());
-//            });
-//#endif
+                spc.AddSource("initTypes", sb.ToString());
+            });
+#endif
 
             context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
             {
