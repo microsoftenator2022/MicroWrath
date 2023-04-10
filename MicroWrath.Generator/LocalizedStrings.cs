@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using MicroWrath.Util;
 using MicroWrath.Util.Linq;
+using static MicroWrath.Generator.Constants;
 
 namespace MicroWrath.Generator
 {
@@ -46,7 +47,7 @@ namespace MicroWrath.Generator
 //            });
 //        }
 
-        internal const string AttributeFullName = "MicroWrath.Localization.LocalizedStringAttribute";
+        
 
         private readonly record struct LocalizedStringData(string Name, string ValueMemberFullName, string Key, Option<string> Locale);
 

@@ -7,8 +7,6 @@ using System.Text;
 
 using Microsoft.CodeAnalysis;
 
-using MicroWrath.Util;
-
 namespace MicroWrath.Generator
 {
     [Generator]

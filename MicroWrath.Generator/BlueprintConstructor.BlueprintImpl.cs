@@ -5,6 +5,8 @@ using System.Text;
 
 using Microsoft.CodeAnalysis;
 
+using static MicroWrath.Generator.Constants;
+
 namespace MicroWrath.Generator
 {
     internal partial class BlueprintConstructor

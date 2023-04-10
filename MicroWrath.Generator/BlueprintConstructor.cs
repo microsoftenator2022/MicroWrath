@@ -12,64 +12,19 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MicroWrath.Generator.Common;
 using MicroWrath.Util;
 using MicroWrath.Util.Linq;
+using static MicroWrath.Generator.Constants;
 
 namespace MicroWrath.Generator
 {
     [Generator]
     internal partial class BlueprintConstructor : IIncrementalGenerator
     {
-        private const string ConstructorNamespace = "MicroWrath.Constructors";
-        private const string ConstructClassName = "Construct";
-        private const string ConstructNewClassName = "New";
-
-        private static readonly string ConstructorClassFullName = $"{ConstructorNamespace}.{ConstructClassName}";
-
-        private const string NewBlueprintMethodName = "Blueprint";
-
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-//            context.RegisterPostInitializationOutput(static pic =>
-//            {
-//                var sb = new StringBuilder();
-
-//                sb.AppendLine("using System;");
-//                sb.AppendLine("using MicroWrath;");
-//                sb.AppendLine("using Kingmaker.Blueprints;");
-//                sb.Append($@"
-//namespace {ConstructorNamespace}
-//{{
-//    internal static partial class {ConstructClassName}
-//    {{
-//        private interface IBlueprintConstructor<out TBlueprint> where TBlueprint : SimpleBlueprint
-//        {{
-//            TBlueprint New(string assetId, string name);
-//        }}
-
-//        private partial class BlueprintConstructor : IBlueprintConstructor<SimpleBlueprint>
-//        {{
-//            internal BlueprintConstructor() {{ }}
-
-//            SimpleBlueprint IBlueprintConstructor<SimpleBlueprint>.New(string assetId, string name) =>
-//                new() {{ AssetGuid = BlueprintGuid.Parse(assetId), name = name }};
-
-//            public TBlueprint New<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
-//                ((IBlueprintConstructor<TBlueprint>)this).New(assetId, name);
-//        }}
-
-//        public static class {ConstructNewClassName}
-//        {{
-//            private static readonly Lazy<BlueprintConstructor> blueprintConstructor = new(() => new());
-//            public static TBlueprint {NewBlueprintMethodName}<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint =>
-//                blueprintConstructor.Value.New<TBlueprint>(assetId, name);
-//        }}
-//    }}
-//}}");
-//                pic.AddSource("BlueprintConstructorBase", sb.ToString());
-//            });
-
             var compilation = context.CompilationProvider;
 
-            var simpleBlueprintType = compilation.Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.SimpleBlueprint"));
+            var simpleBlueprintType = compilation
+                .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.SimpleBlueprint"));
 
             var blueprintConstructorType = compilation
                 .Select(static (c, _) => c.Assembly
@@ -137,7 +92,7 @@ namespace MicroWrath.Generator
             var defaultValuesType = compilation
                 .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
 
-            var initMembers = GetBpMemberInitialValues(invocationTypeArguments, defaultValuesType, context);
+            var initMembers = GetBpMemberInitialValues(invocationTypeArguments, defaultValuesType);
 #if DEBUG
             context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
             {

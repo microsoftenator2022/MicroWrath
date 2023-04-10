@@ -60,6 +60,7 @@ namespace MicroWrath.Generator.Common
     {
         internal static IEnumerable<INamedTypeSymbol> GetAllGenericInstances(ITypeParameterSymbol type, ImmutableArray<GeneratorSyntaxContext> nodes, CancellationToken ct)
         {
+            // Generic method or type containing this type parameter
             var containingSymbol = type.ContainingSymbol;
 
             var references = Enumerable.Empty<ISymbol>();
@@ -74,7 +75,7 @@ namespace MicroWrath.Generator.Common
 
             else if (type.TypeParameterKind is TypeParameterKind.Type)
             {
-                //TODO    
+                //TODO
             }
 
             foreach (var tpr in references)

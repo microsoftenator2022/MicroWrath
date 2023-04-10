@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 
 using MicroWrath.Util;
 using MicroWrath.Generator.Common;
+using static MicroWrath.Generator.Constants;
 
 namespace MicroWrath.Generator
 {
@@ -26,13 +27,9 @@ namespace MicroWrath.Generator
     [Generator]
     internal sealed partial class BlueprintsDb : IIncrementalGenerator
     {
-        private const string blueprintsDbNamespace = "MicroWrath.BlueprintsDb";
-        private const string blueprintsDbTypeName = "BlueprintsDb";
-        private static readonly string blueprintsDbTypeFullName = $"{blueprintsDbNamespace}.{blueprintsDbTypeName}";
-
         private static Option<INamedTypeSymbol> TryGetOwlcatDbType(SemanticModel sm)
         {
-            var blueprintsDbType = sm.Compilation.Assembly.GetTypeByMetadataName(blueprintsDbTypeFullName);
+            var blueprintsDbType = sm.Compilation.Assembly.GetTypeByMetadataName(BlueprintsDbTypeFullName);
 
             var typeMembers = blueprintsDbType?.GetTypeMembers() ?? default;
 

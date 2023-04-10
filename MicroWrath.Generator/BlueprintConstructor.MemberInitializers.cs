@@ -15,8 +15,7 @@ namespace MicroWrath.Generator
     internal partial class BlueprintConstructor
     {
         internal static IncrementalValuesProvider<(INamedTypeSymbol bp, ImmutableArray<(IFieldSymbol f, IFieldSymbol d)> initFields, ImmutableArray<(IPropertySymbol p, IFieldSymbol d)> initProperties)>
-            GetBpMemberInitialValues(IncrementalValuesProvider<INamedTypeSymbol> bpTypes, IncrementalValueProvider<Option<INamedTypeSymbol>> defaults,
-            IncrementalGeneratorInitializationContext context)
+            GetBpMemberInitialValues(IncrementalValuesProvider<INamedTypeSymbol> bpTypes, IncrementalValueProvider<Option<INamedTypeSymbol>> defaults)
         {
 
             var defaultValues = defaults

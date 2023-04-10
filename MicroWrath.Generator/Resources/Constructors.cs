@@ -22,13 +22,26 @@ namespace MicroWrath.Constructors
                 ((IBlueprintConstructor<TBlueprint>)this).New(assetId, name);
         }
 
+        private interface IComponentConstructor<TComponent> where TComponent : BlueprintComponent, new()
+        {
+            TComponent New();
+        }
+
+        private partial class ComponentConstructor : IComponentConstructor<BlueprintComponent>
+        {
+            internal ComponentConstructor() { }
+
+            BlueprintComponent IComponentConstructor<BlueprintComponent>.New() =>
+                new();
+
+            public TComponent New<TComponent>() where TComponent : BlueprintComponent, new() =>
+                ((IComponentConstructor<TComponent>)this).New();
+        }
+
         public static class New
         {
             private static readonly Lazy<BlueprintConstructor> blueprintConstructor = new(() => new());
             public static TBlueprint Blueprint<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint, new() =>
-                blueprintConstructor.Value.New<TBlueprint>(assetId, name);
-
-            public static TBlueprint Blueprint<TBlueprint> (string assetId, string name) where TBlueprint : SimpleBlueprint =>
                 blueprintConstructor.Value.New<TBlueprint>(assetId, name);
         }
     }
