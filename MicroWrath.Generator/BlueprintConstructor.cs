@@ -93,6 +93,7 @@ namespace MicroWrath.Generator
                 .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
 
             var initMembers = GetBpMemberInitialValues(invocationTypeArguments, defaultValuesType);
+
 #if DEBUG
             context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
             {
@@ -102,13 +103,13 @@ namespace MicroWrath.Generator
 
                 sb.AppendLine($"// {defaults}");
 
-                foreach (var (bpType, fields, properties) in types)
+                foreach (var (bpType, fields, properties, methods) in types)
                 {
                     sb.AppendLine($"// {bpType}");
 
                     if (fields.Length > 0)
                     {
-                        sb.AppendLine($" // Fields:");
+                        sb.AppendLine(" // Fields:");
                         foreach (var f in fields)
                         {
                             sb.AppendLine($"  // {f}");
@@ -117,10 +118,19 @@ namespace MicroWrath.Generator
 
                     if (properties.Length > 0)
                     {
-                        sb.AppendLine($" // Properties:");
+                        sb.AppendLine(" // Properties:");
                         foreach (var p in properties)
                         {
                             sb.AppendLine($"  // {p}");
+                        }
+                    }
+
+                    if (methods.Length > 0)
+                    {
+                        sb.AppendLine(" // Methods:");
+                        foreach (var m in methods)
+                        {
+                            sb.AppendLine($"  // {m}");
                         }
                     }
                 }
@@ -131,9 +141,9 @@ namespace MicroWrath.Generator
 
             context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
             {
-                var (bpType, fields, properties) = bpInit;
+                var (bpType, fields, properties, methods) = bpInit;
 
-                spc.AddSource(bpType.Name, BlueprintConstructorPart(bpType, fields, properties));
+                spc.AddSource(bpType.Name, BlueprintConstructorPart(bpType, fields, properties, methods));
             });
         }
     }

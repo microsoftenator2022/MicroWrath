@@ -1,6 +1,23 @@
+using System;
+
+using Kingmaker.Blueprints.Classes;
+using Kingmaker.UnitLogic.Buffs.Blueprints;
+
 namespace MicroWrath
 {
-    internal static class Default
+    //[AttributeUsage(
+    //    validOn: AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method,
+    //    AllowMultiple = false,
+    //    Inherited = false)]
+    //internal sealed class DefaultValueAttribute : System.Attribute
+    //{
+    //    public System.Type AppliesTo { get; }
+    //    public string? MemberName { get; set; }
+
+    //    public DefaultValueAttribute(Type appliesTo) => AppliesTo = appliesTo;
+    //}
+
+    internal static partial class Default
     {
         public static readonly Kingmaker.ElementsSystem.ActionList ActionLists =
             new Kingmaker.ElementsSystem.ActionList() { Actions = new Kingmaker.ElementsSystem.GameAction[0] };
@@ -18,5 +35,19 @@ namespace MicroWrath
         public static readonly Kingmaker.Localization.LocalizedString LocalizedString = new Kingmaker.Localization.LocalizedString();
         public static readonly Kingmaker.ResourceLinks.PrefabLink PrefabLink = new Kingmaker.ResourceLinks.PrefabLink();
         public static readonly Kingmaker.DialogSystem.Blueprints.ShowCheck ShowCheck = new Kingmaker.DialogSystem.Blueprints.ShowCheck();
+
+        public static BlueprintFeature IsClassFeature(BlueprintFeature feature)
+        {
+            feature.IsClassFeature = true;
+
+            return feature;
+        }
+
+        public static BlueprintBuff IsClassFeature(BlueprintBuff buff)
+        {
+            buff.IsClassFeature = true;
+
+            return buff;
+        }
     }
 }

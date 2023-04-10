@@ -14,8 +14,11 @@ namespace MicroWrath.Generator
 {
     internal partial class BlueprintConstructor
     {
-        internal static IncrementalValuesProvider<(INamedTypeSymbol bp, ImmutableArray<(IFieldSymbol f, IFieldSymbol d)> initFields, ImmutableArray<(IPropertySymbol p, IFieldSymbol d)> initProperties)>
-            GetBpMemberInitialValues(IncrementalValuesProvider<INamedTypeSymbol> bpTypes, IncrementalValueProvider<Option<INamedTypeSymbol>> defaults)
+        internal record class InitMembers(INamedTypeSymbol BlueprintType, ImmutableArray<(IFieldSymbol f, IFieldSymbol d)> InitFields,
+            ImmutableArray<(IPropertySymbol p, IFieldSymbol d)> InitProperties,
+            ImmutableArray<IMethodSymbol> InitMethods);
+
+        internal static IncrementalValuesProvider<InitMembers> GetBpMemberInitialValues(IncrementalValuesProvider<INamedTypeSymbol> bpTypes, IncrementalValueProvider<Option<INamedTypeSymbol>> defaults)
         {
 
             var defaultValues = defaults
@@ -77,13 +80,37 @@ namespace MicroWrath.Generator
                 .Select(static (bppds, _) => bppds
                     .ToDictionary(SymbolEqualityComparer.Default)
                     .ToImmutableDictionary(SymbolEqualityComparer.Default));
+
+            var initMethods = defaults
+                .SelectMany((d, _) => d.ToEnumerable())
+                .SelectMany((d, _) => d.GetMembers()
+                    .OfType<IMethodSymbol>()
+                    .Where(m => m.Parameters.Length == 1 &&
+                        m.ReturnType.Equals(m.Parameters[0].Type, SymbolEqualityComparer.Default)));
+               
+            var withInitMethods = bpTypes
+                .Combine(initMethods.Collect())
+                .Select((bptm, _) =>
+                {
+                    var (bpType, initMethods) =  bptm;
+
+                    return (bpType, initMethods
+                        .Where(m => bpType.GetBaseTypesAndSelf()
+                            .Any(bpType => m.ReturnType.Equals(bpType, SymbolEqualityComparer.Default)))
+                        .ToImmutableArray());
+                })
+                .Collect()
+                .Select(static (bppds, _) => bppds
+                    .ToDictionary(SymbolEqualityComparer.Default)
+                    .ToImmutableDictionary(SymbolEqualityComparer.Default));
             
             return bpTypes
                 .Combine(withFields)
                 .Combine(withProperties)
-                .Select((bpfps, _) =>
+                .Combine(withInitMethods)
+                .Select((bpWithInit, _) =>
                 {
-                    var ((bp, fields), properties) = bpfps;
+                    var (((bp, fields), properties), methods) = bpWithInit;
 
                     var hasInitFields = fields.TryGetValue(bp, out var initFields);
                     if (!hasInitFields) initFields = ImmutableArray.Create<(IFieldSymbol, IFieldSymbol)>();
@@ -91,9 +118,14 @@ namespace MicroWrath.Generator
                     var hasInitProperties = properties.TryGetValue(bp, out var initProperties);
                     if (!hasInitProperties) initProperties = ImmutableArray.Create<(IPropertySymbol, IFieldSymbol)>();
 
-                    return (bp, initFields, initProperties);
+                    var hasInitMethods = methods.TryGetValue(bp, out var initMethods);
+                    if (!hasInitMethods) initMethods = ImmutableArray.Create<IMethodSymbol>();
+
+                    return new InitMembers(bp, initFields, initProperties, initMethods);
                 })
-                .Where(bpfps => bpfps.initFields.Length > 0 || bpfps.initProperties.Length > 0);
+                .Where(bpWithInit => bpWithInit.InitFields.Length > 0 ||
+                    bpWithInit.InitProperties.Length > 0 ||
+                    bpWithInit.InitMethods.Length > 0);
         }
     }
 }
