@@ -21,7 +21,9 @@ namespace MicroWrath.Generator
                     using var sr = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(name));
                     var str = sr.ReadToEnd();
 
-                    pic.AddSource(name, str);
+                    var sourceName = name.Replace($"{nameof(MicroWrath.Generator)}.", "").Replace("Resources.", "");
+
+                    pic.AddSource(sourceName, str);
                 }
             });
         }
