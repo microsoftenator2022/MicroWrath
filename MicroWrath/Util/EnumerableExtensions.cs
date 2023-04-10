@@ -36,17 +36,17 @@ namespace MicroWrath.Util.Linq
         /// </summary>
         public static IEnumerable<T> DistinctBy<T, U>(this IEnumerable<T> seq, Func<T, U> selector) => DistinctBy(seq, selector, EqualityComparer<U>.Default);
 
-        internal static IEnumerable<U> SelectIfNotNull<T, U>(this IEnumerable<T> source, Func<T, U?> selector) where T : class
-        {
-            foreach (var x in source)
-            {
-                var y = selector(x);
-                if (y is not null)
-                    yield return y;
-            }
-        }
+        //internal static IEnumerable<U> SelectIfNotNull<T, U>(this IEnumerable<T> source, Func<T, U?> selector) where T : class
+        //{
+        //    foreach (var x in source)
+        //    {
+        //        var y = selector(x);
+        //        if (y is not null)
+        //            yield return y;
+        //    }
+        //}
 
-        internal static IEnumerable<(int index, T item)> Indexed<T>(this IEnumerable<T> source)
+        public static IEnumerable<(int index, T item)> Indexed<T>(this IEnumerable<T> source)
         {
             var index = 0;
             foreach (var item in source)
@@ -55,11 +55,38 @@ namespace MicroWrath.Util.Linq
 
         //internal static IEnumerable<T> ToEnumerable<T, TEnumerable>(this TEnumerable source) where TEnumerable : IEnumerable<T> => source;
 
-        internal static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<(TKey key, TValue value)> source) =>
+        public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<(TKey key, TValue value)> source) =>
             source.ToDictionary(kv => kv.key, kv => kv.value);
 
-        internal static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>
+        public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>
             (this IEnumerable<(TKey key, TValue value)> source, IEqualityComparer<TKey> keyComparer) =>
             source.ToDictionary(kv => kv.key, kv => kv.value, keyComparer);
+
+        /// <summary>
+        /// Appends a value to an array
+        /// </summary>
+        /// <param name="array">The array to append to</param>
+        /// <param name="value">The value to append</param>
+        /// <returns>A new array containing the values of the original array and the new value</returns>
+        public static T[] Append<T>(this T[] array, T value)
+        {
+            var newArray = new T[array.Length + 1];
+
+            array.CopyTo(newArray.AsSpan());
+
+            newArray[array.Length] = value;
+
+            return newArray;
+        }
+
+        public static T[] Concat<T>(this T[] arrayA, T[] arrayB)
+        {
+            var newArray = new T[arrayA.Length + arrayB.Length];
+
+            arrayA.CopyTo(newArray.AsSpan(0, arrayA.Length));
+            arrayB.CopyTo(newArray.AsSpan(arrayA.Length, arrayB.Length));
+
+            return newArray;
+        }
     }
 }
