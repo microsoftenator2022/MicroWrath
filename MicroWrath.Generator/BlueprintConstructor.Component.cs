@@ -42,18 +42,6 @@ namespace MicroWrath.Generator
 
             var typeParams = Incremental.GetTypeParameters(newComponentMethodInvocations, syntax);
 
-            context.RegisterSourceOutput(typeParams.Collect(), (spc, types) =>
-            {
-                var sb = new StringBuilder();
-
-                foreach (var t in types)
-                {
-                    sb.Append($"// {t}");
-                }
-
-                spc.AddSource("componentTypeParams", sb.ToString());
-            });
-
             var invocationTypeArguments = typeParams
                 .Collect()
                 .Combine(blueprintComponentType)

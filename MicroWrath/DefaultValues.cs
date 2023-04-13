@@ -5,18 +5,6 @@ using Kingmaker.UnitLogic.Buffs.Blueprints;
 
 namespace MicroWrath
 {
-    //[AttributeUsage(
-    //    validOn: AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method,
-    //    AllowMultiple = false,
-    //    Inherited = false)]
-    //internal sealed class DefaultValueAttribute : System.Attribute
-    //{
-    //    public System.Type AppliesTo { get; }
-    //    public string? MemberName { get; set; }
-
-    //    public DefaultValueAttribute(Type appliesTo) => AppliesTo = appliesTo;
-    //}
-
     internal static partial class Default
     {
         public static readonly Kingmaker.ElementsSystem.ActionList ActionLists =

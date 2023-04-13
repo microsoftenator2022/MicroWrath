@@ -14,7 +14,7 @@ using MicroWrath.Generator.Common;
 
 namespace MicroWrath.Generator
 {
-    [Generator]
+    //[Generator]
     public class NewBlueprints : IIncrementalGenerator
     {
         private readonly record struct BlueprintInfo(string Name, string AssetId, INamedTypeSymbol TypeSymbol)
