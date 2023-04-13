@@ -58,15 +58,13 @@ namespace MicroWrath.Generator
 
             var initMembers = GetTypeMemberInitialValues(invocationTypeArguments, defaultValuesType);
 
-            #region DebugOutput
+#region DebugOutput
 #if DEBUG
             context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
             {
                 var (defaults, types) = defaultValues;
 
                 var sb = new StringBuilder();
-
-                sb.AppendLine($"// {defaults}");
 
                 foreach (var (bpType, fields, properties, methods) in types)
                 {
@@ -100,10 +98,10 @@ namespace MicroWrath.Generator
                     }
                 }
 
-                spc.AddSource("initTypes", sb.ToString());
+                spc.AddSource("blueprintInitTypes", sb.ToString());
             });
 #endif
-            #endregion
+#endregion
             context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
             {
                 var (bpType, fields, properties, methods) = bpInit;

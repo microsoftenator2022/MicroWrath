@@ -42,6 +42,18 @@ namespace MicroWrath.Generator
 
             var typeParams = Incremental.GetTypeParameters(newComponentMethodInvocations, syntax);
 
+            context.RegisterSourceOutput(typeParams.Collect(), (spc, types) =>
+            {
+                var sb = new StringBuilder();
+
+                foreach (var t in types)
+                {
+                    sb.Append($"// {t}");
+                }
+
+                spc.AddSource("componentTypeParams", sb.ToString());
+            });
+
             var invocationTypeArguments = typeParams
                 .Collect()
                 .Combine(blueprintComponentType)
@@ -58,9 +70,53 @@ namespace MicroWrath.Generator
             var defaultValuesType = compilation
                 .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
 
-            var initMembers = BlueprintConstructor.GetTypeMemberInitialValues(invocationTypeArguments, defaultValuesType);
+            var initMembers = GetTypeMemberInitialValues(invocationTypeArguments, defaultValuesType);
 
-            context.RegisterSourceOutput(initMembers, (spc, componentInit) =>
+#region DebugOutput
+#if DEBUG
+            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
+            {
+                var (defaults, types) = defaultValues;
+
+                var sb = new StringBuilder();
+
+                foreach (var (type, fields, properties, methods) in types)
+                {
+                    sb.AppendLine($"// {type}");
+
+                    if (fields.Length > 0)
+                    {
+                        sb.AppendLine(" // Fields:");
+                        foreach (var f in fields)
+                        {
+                            sb.AppendLine($"  // {f}");
+                        }
+                    }
+
+                    if (properties.Length > 0)
+                    {
+                        sb.AppendLine(" // Properties:");
+                        foreach (var p in properties)
+                        {
+                            sb.AppendLine($"  // {p}");
+                        }
+                    }
+
+                    if (methods.Length > 0)
+                    {
+                        sb.AppendLine(" // Methods:");
+                        foreach (var m in methods)
+                        {
+                            sb.AppendLine($"  // {m}");
+                        }
+                    }
+                }
+
+                spc.AddSource("componentInitTypes", sb.ToString());
+            });
+#endif
+#endregion
+            context.RegisterImplementationSourceOutput(initMembers, (spc, componentInit) =>
             {
                 var (componentType, fields, properties, methods) = componentInit;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -59,6 +60,8 @@ namespace MicroWrath.Generator.Common
     {
         internal static IEnumerable<INamedTypeSymbol> GetAllGenericInstances(ITypeParameterSymbol type, ImmutableArray<GeneratorSyntaxContext> nodes, CancellationToken ct)
         {
+            //Debugger.Launch();
+
             // Generic method or type containing this type parameter
             var containingSymbol = type.ContainingSymbol;
 
@@ -69,7 +72,16 @@ namespace MicroWrath.Generator.Common
                     .Where(sc => sc.Node is InvocationExpressionSyntax)
                     .Select(sc => sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
                     .OfType<IMethodSymbol>()
-                    .Where(m => m is not null && containingSymbol.Equals(m.ConstructedFrom, SymbolEqualityComparer.Default))
+                    .Where(m =>
+                    {
+                        if (m is null) return false;
+
+                        // Extension methods are not reduced by comparer
+                        if (m.MethodKind == MethodKind.ReducedExtension)
+                            m = m.ReducedFrom!;
+
+                        return containingSymbol.Equals(m.ConstructedFrom, SymbolEqualityComparer.Default);
+                    })
                     .SelectMany(m => m.TypeArguments);
 
             else if (type.TypeParameterKind is TypeParameterKind.Type)

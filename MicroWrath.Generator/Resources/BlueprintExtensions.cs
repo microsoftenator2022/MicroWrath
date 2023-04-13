@@ -13,8 +13,7 @@ namespace MicroWrath
 {
     internal static class BlueprintExtensions
     {
-        public static void AddComponent<TBlueprint, TComponent>(this TBlueprint blueprint, TComponent component)
-            where TBlueprint : BlueprintScriptableObject
+        public static void AddComponent<TComponent>(this BlueprintScriptableObject blueprint, TComponent component)
             where TComponent : BlueprintComponent
         {
             var name =
@@ -30,17 +29,16 @@ namespace MicroWrath
             blueprint.ComponentsArray = blueprint.ComponentsArray.Append(component);
         }
 
-        public static TComponent AddNewComponent<TBlueprint, TComponent>(this TBlueprint blueprint, Func<TComponent, TComponent> init = default)
-            where TBlueprint : BlueprintScriptableObject
+        public static TComponent AddNewComponent<TComponent>(this BlueprintScriptableObject blueprint, Func<TComponent, TComponent>? init = default)
             where TComponent : BlueprintComponent, new()
         {
             if (init == default) init = Functional.Identity;
 
-            var component = Construct.New.Component<TComponent>();
+            var component = init(Construct.New.Component<TComponent>());
 
-            AddComponent<TBlueprint, TComponent>(blueprint, component);
+            AddComponent<TComponent>(blueprint, component);
 
-            return init(component);
+            return component;
         }
     }
 }
