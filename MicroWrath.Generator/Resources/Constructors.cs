@@ -43,6 +43,10 @@ namespace MicroWrath.Constructors
             private static readonly Lazy<BlueprintConstructor> blueprintConstructor = new(() => new());
             public static TBlueprint Blueprint<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint, new() =>
                 blueprintConstructor.Value.New<TBlueprint>(assetId, name);
+
+            private static readonly Lazy<ComponentConstructor> componentConstructor = new(() => new());
+            public static TComponent Component<TComponent>() where TComponent : BlueprintComponent, new() =>
+                componentConstructor.Value.New<TComponent>();
         }
     }
 }

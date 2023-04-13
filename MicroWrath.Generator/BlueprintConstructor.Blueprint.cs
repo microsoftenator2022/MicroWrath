@@ -1,0 +1,115 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+using MicroWrath.Generator.Common;
+using MicroWrath.Util;
+using MicroWrath.Util.Linq;
+
+using static MicroWrath.Generator.Constants;
+
+namespace MicroWrath.Generator
+{
+    internal partial class BlueprintConstructor
+    {
+        internal static void CreateBlueprintConstructors(
+            IncrementalValueProvider<Compilation> compilation,
+            IncrementalValuesProvider<GeneratorSyntaxContext> syntax,
+            IncrementalGeneratorInitializationContext context)
+        {
+            var simpleBlueprintType = compilation
+                .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.SimpleBlueprint"));
+
+            var invocations = syntax
+                .Select(static (sc, _) =>
+                  (node: (InvocationExpressionSyntax)sc.Node,
+                    symbol: (sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol as IMethodSymbol)!,
+                    sm: sc.SemanticModel))
+                .Where(static ns => ns.symbol is not null);
+
+            var newBlueprintMethodInvocations = Incremental.GetMethodInvocations(
+                $"{ConstructorClassFullName}+{ConstructNewClassName}",
+                NewBlueprintMethodName,
+                compilation,
+                invocations);
+
+            var invocationTypeArguments = Incremental.GetTypeParameters(newBlueprintMethodInvocations, syntax)
+                .Collect()
+                .Combine(simpleBlueprintType)
+                .SelectMany(static (tsbp, _) =>
+                {
+                    var (ts, simpleBlueprint) = tsbp;
+
+                    return ts
+                        .OfType<INamedTypeSymbol>()
+                        .Distinct((IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default)
+                        .Where(t => !t.Equals(simpleBlueprint, SymbolEqualityComparer.Default));
+                });
+
+            var defaultValuesType = compilation
+                .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
+
+            var initMembers = GetTypeMemberInitialValues(invocationTypeArguments, defaultValuesType);
+
+            #region DebugOutput
+#if DEBUG
+            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
+            {
+                var (defaults, types) = defaultValues;
+
+                var sb = new StringBuilder();
+
+                sb.AppendLine($"// {defaults}");
+
+                foreach (var (bpType, fields, properties, methods) in types)
+                {
+                    sb.AppendLine($"// {bpType}");
+
+                    if (fields.Length > 0)
+                    {
+                        sb.AppendLine(" // Fields:");
+                        foreach (var f in fields)
+                        {
+                            sb.AppendLine($"  // {f}");
+                        }
+                    }
+
+                    if (properties.Length > 0)
+                    {
+                        sb.AppendLine(" // Properties:");
+                        foreach (var p in properties)
+                        {
+                            sb.AppendLine($"  // {p}");
+                        }
+                    }
+
+                    if (methods.Length > 0)
+                    {
+                        sb.AppendLine(" // Methods:");
+                        foreach (var m in methods)
+                        {
+                            sb.AppendLine($"  // {m}");
+                        }
+                    }
+                }
+
+                spc.AddSource("initTypes", sb.ToString());
+            });
+#endif
+            #endregion
+            context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
+            {
+                var (bpType, fields, properties, methods) = bpInit;
+
+                spc.AddSource(bpType.Name, BlueprintConstructorPart(bpType, fields, properties, methods));
+            });
+        }
+    }
+}

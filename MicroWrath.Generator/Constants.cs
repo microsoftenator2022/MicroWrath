@@ -11,6 +11,7 @@ namespace MicroWrath.Generator
         internal const string ConstructNewClassName = "New";
         internal static readonly string ConstructorClassFullName = $"{ConstructorNamespace}.{ConstructClassName}";
         internal const string NewBlueprintMethodName = "Blueprint";
+        internal const string NewComponentMethodName = "Component";
 
         internal const string BlueprintsDbNamespace = "MicroWrath.BlueprintsDb";
         internal const string BlueprintsDbTypeName = "BlueprintsDb";

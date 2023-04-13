@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Threading;
 
 using Microsoft.CodeAnalysis;
@@ -14,6 +12,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.FindSymbols;
 
 using MicroWrath.Util;
+using MicroWrath.Util.Linq;
 
 namespace MicroWrath.Generator.Common
 {
@@ -207,6 +206,53 @@ namespace MicroWrath.Generator.Common
 
     internal static class Incremental
     {
+        internal static IncrementalValuesProvider<ITypeSymbol> GetTypeParameters(
+            IncrementalValuesProvider<IMethodSymbol> methodSymbols,
+            IncrementalValuesProvider<GeneratorSyntaxContext> syntax) =>
+            methodSymbols
+                .SelectMany(static (m, _) => m.TypeArguments)
+                .Combine(syntax.Collect())
+                .SelectMany(static (tai, ct) =>
+                {
+                    var (ta, invocationsSyntax) = tai;
+
+                    if (ta is not ITypeParameterSymbol tps)
+                        return EnumerableExtensions.Singleton(ta);
+
+                    return Analyzers.GetAllGenericInstances(tps, invocationsSyntax, ct);
+                });
+
+        internal static IncrementalValuesProvider<IMethodSymbol> GetMethodInvocations(
+            string typeName,
+            string methodName,
+            IncrementalValueProvider<Compilation> compilation,
+            IncrementalValuesProvider<(InvocationExpressionSyntax node, IMethodSymbol symbol, SemanticModel sm)> nodesAndSymbols)
+        {
+            var typeSymbol = compilation
+                .Select((c, _) => c.GetTypeByMetadataName(typeName).ToOption());
+
+            var methodSymbol = typeSymbol
+                .Select((t, _) =>
+                    t.Bind(t => t.GetMembers(methodName).TryHead()
+                        .Bind(static m => (m as IMethodSymbol).ToOption())));
+
+            return nodesAndSymbols
+                .Combine(methodSymbol)
+                .SelectMany(static (nssm, _) =>
+                {
+                    var ((node, symbol, sm), method) = nssm;
+
+                    return method
+                        .Bind<IMethodSymbol, IMethodSymbol>(m =>
+                        {
+                            if (m.Equals(symbol.ConstructedFrom, SymbolEqualityComparer.Default)) return Option.Some(symbol);
+
+                            return Option.None<IMethodSymbol>();
+                        })
+                        .ToEnumerable();
+                });
+        }
+
         private static IEnumerable<INamedTypeSymbol> GetAssignableTo(
             Compilation compilation,
             IEnumerable<INamedTypeSymbol> types,

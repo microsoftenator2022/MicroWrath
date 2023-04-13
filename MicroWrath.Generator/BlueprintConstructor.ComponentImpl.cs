@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using MicroWrath.Generator.Common;
+using MicroWrath.Util;
+using MicroWrath.Util.Linq;
 
 using static MicroWrath.Generator.Constants;
 
@@ -13,8 +18,8 @@ namespace MicroWrath.Generator
 {
     internal partial class BlueprintConstructor
     {
-        internal static string BlueprintConstructorPart(
-            INamedTypeSymbol bpType,
+        internal static string ComponentConstructorPart(
+            INamedTypeSymbol componentType,
             ImmutableArray<(IFieldSymbol field, IFieldSymbol init)> initFields,
             ImmutableArray<(IPropertySymbol property, IFieldSymbol init)> initProperties,
             ImmutableArray<IMethodSymbol> initMethods)
@@ -25,7 +30,7 @@ namespace MicroWrath.Generator
             sb.AppendLine("using Kingmaker.Blueprints;");
             sb.AppendLine("using MicroWrath.Util;");
 
-            var ns = bpType.ContainingNamespace;
+            var ns = componentType.ContainingNamespace;
 
             sb.AppendLine($"using {ns};");
 
@@ -34,14 +39,12 @@ namespace {ConstructorNamespace}
 {{
     internal static partial class {ConstructClassName}
     {{
-        private partial class BlueprintConstructor : IBlueprintConstructor<{bpType.Name}>
+        private partial class ComponentConstructor : IComponentConstructor<{componentType.Name}>
         {{
-            {bpType.Name} IBlueprintConstructor<{bpType.Name}>.New(string assetId, string name) =>
-                new {bpType.Name}()
-                {{
-                    AssetGuid = BlueprintGuid.Parse(assetId),
-                    name = name,");
-            
+            {componentType.Name} IComponentConstructor<{componentType.Name}>.New() =>
+                new {componentType.Name}()
+                {{");
+
             foreach (var (f, init) in initFields)
             {
                 sb.Append($@"
@@ -60,7 +63,7 @@ namespace {ConstructorNamespace}
             foreach (var m in initMethods)
             {
                 sb.Append($@"
-                .Apply({m.ContainingType}.{m.Name}).Downcast<{m.ReturnType}, {bpType.Name}>()");
+                .Apply({m.ContainingType}.{m.Name}).Downcast<{m.ReturnType}, {componentType.Name}>()");
             }
 
             sb.Append($@";
@@ -71,4 +74,5 @@ namespace {ConstructorNamespace}
             return sb.ToString();
         }
     }
+
 }
