@@ -1,6 +1,7 @@
 using System;
 
 using Kingmaker.Blueprints.Classes;
+using Kingmaker.ElementsSystem;
 using Kingmaker.UnitLogic.Buffs.Blueprints;
 
 namespace MicroWrath
@@ -36,6 +37,13 @@ namespace MicroWrath
             buff.IsClassFeature = true;
 
             return buff;
+        }
+
+        public static Element Name(Element element)
+        {
+            element.name = $"${element.GetType().Name}${System.Guid.NewGuid():N}$";
+
+            return element;
         }
     }
 }

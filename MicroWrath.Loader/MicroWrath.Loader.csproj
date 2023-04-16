@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="UnityModManager"
+      HintPath="$(WrathPath)\Wrath_Data\Managed\UnityModManager\UnityModManager.dll"
+      Private="False" />
+  </ItemGroup>
+  
+</Project>
