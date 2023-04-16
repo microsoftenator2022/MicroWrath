@@ -14,6 +14,7 @@ using UniRx;
 
 namespace MicroWrath
 {
+    [HarmonyPatch]
     internal static class Triggers
     {
         private static event Action BlueprintsCache_InitEvent = () => { };
