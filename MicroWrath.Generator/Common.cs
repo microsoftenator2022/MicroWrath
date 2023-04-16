@@ -277,11 +277,11 @@ namespace MicroWrath.Generator.Common
             types.TryFind(t => t.Name == "SimpleBlueprint").ToEnumerable()
                 .SelectMany(simpleBlueprint => GetAssignableTo(compilation, types, simpleBlueprint));
 
-        private static IEnumerable<INamedTypeSymbol> GetCompilationBlueprintComponentTypes(
-            Compilation compilation,
-            IEnumerable<INamedTypeSymbol> types) =>
-            types.TryFind(t => t.Name == "BlueprintComponent").ToEnumerable()
-                .SelectMany(blueprintComponent => GetAssignableTo(compilation, types, blueprintComponent));
+        //private static IEnumerable<INamedTypeSymbol> GetCompilationBlueprintComponentTypes(
+        //    Compilation compilation,
+        //    IEnumerable<INamedTypeSymbol> types) =>
+        //    types.TryFind(t => t.Name == "BlueprintComponent").ToEnumerable()
+        //        .SelectMany(blueprintComponent => GetAssignableTo(compilation, types, blueprintComponent));
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValuesProvider<IAssemblySymbol> assemblies) =>
             assemblies
@@ -324,6 +324,7 @@ namespace MicroWrath.Generator.Common
             return new Config(rootNamespace, projectPath);
         }
 
-        internal static IncrementalValueProvider<Config> GetConfig(IncrementalValueProvider<AnalyzerConfigOptionsProvider> analyzerConfig) => analyzerConfig.Select((c, _) => GetConfig(c));
+        internal static IncrementalValueProvider<Config> GetConfig(IncrementalValueProvider<AnalyzerConfigOptionsProvider> analyzerConfig) =>
+            analyzerConfig.Select((c, _) => GetConfig(c));
     }
 }

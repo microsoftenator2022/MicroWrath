@@ -21,34 +21,6 @@ namespace MicroWrath.Generator
     [Generator]
     public class LocalizedStrings : IIncrementalGenerator
     {
-//        private void GenerateAttribute(IncrementalGeneratorInitializationContext context)
-//        {
-//            context.RegisterPostInitializationOutput(static spc =>
-//            {
-//                spc.AddSource("LocalizedStringAttribute", """
-//using System;
-
-//namespace MicroWrath.Localization
-//{
-
-//    [AttributeUsage(validOn: AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-//    internal sealed class LocalizedStringAttribute : Attribute
-//    {
-//        public LocalizedStringAttribute() {}
-
-//        public string? Key { get; set; }
-
-//        public string? Name { get; set; }
-
-//        public Kingmaker.Localization.Shared.Locale Locale { get; set; }
-//    }
-//}
-//""");
-//            });
-//        }
-
-        
-
         private readonly record struct LocalizedStringData(string Name, string ValueMemberFullName, string Key, Option<string> Locale);
 
         private static LocalizedStringData CreateLocalizedStringData(ISymbol symbol, AttributeData attribute, string rootNamespace)
@@ -75,8 +47,6 @@ namespace MicroWrath.Generator
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            //GenerateAttribute(context);
-
             var attributeNodes = context.SyntaxProvider.ForAttributeWithMetadataName(
                 AttributeFullName,
                 static (sn, _) => sn is VariableDeclaratorSyntax,
@@ -86,9 +56,9 @@ namespace MicroWrath.Generator
                 .Where(static ac => ac.TargetSymbol is
                 {
                     DeclaredAccessibility:
-                            Accessibility.Internal or
-                            Accessibility.ProtectedOrInternal or
-                            Accessibility.Public,
+                        Accessibility.Internal or
+                        Accessibility.ProtectedOrInternal or
+                        Accessibility.Public,
                     IsStatic: true,
                 });
 
@@ -99,9 +69,9 @@ namespace MicroWrath.Generator
                 .Combine(rootNamespace)
                 .SelectMany(static (ac, _) => ac.Left.Attributes.Select(a => CreateLocalizedStringData(ac.Left.TargetSymbol, a, ac.Right)));
 
-            context.RegisterSourceOutput(localizedStrings.Collect().Combine(rootNamespace), static (spc, lsAndConfig) =>
+            context.RegisterSourceOutput(rootNamespace.Combine(localizedStrings.Collect()), static (spc, lsAndConfig) =>
             {
-                var (localizedStrings, rootNamespace) = lsAndConfig;
+                var (rootNamespace, localizedStrings) = lsAndConfig;
 
                 var locales = localizedStrings.GroupBy(ls => ls.Locale);
 
@@ -111,7 +81,12 @@ namespace MicroWrath.Generator
 
                 sb.Append($@"using System;
 using System.Collections.Generic;
+
+using UniRx;
+
 using Kingmaker.Localization;
+
+using MicroWrath;
 
 namespace {rootNamespace}
 {{
@@ -178,6 +153,9 @@ namespace {rootNamespace}
 
             return pack;
         }}
+
+        private static readonly IDisposable LocaleChangedHandler =
+            Triggers.LocaleChanged.Subscribe(locale => LocalizationManager.CurrentPack.AddStrings(GetLocalizationPack(locale)));
 ");
                 
 
