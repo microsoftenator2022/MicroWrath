@@ -60,12 +60,12 @@ namespace MicroWrath
                     modEntry.Logger.Log($"Loading MicroWrath from {filePath}");
 
 #if DEBUG
-                    modEntry.Logger.Log($"File Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(filePath)}");
+                    modEntry.Logger.Log($"MicroWrath File Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(filePath)}");
 #endif
 
                     var vi = FileVersionInfo.GetVersionInfo(filePath);
 
-                    modEntry.Logger.Log($"Version: {vi.ProductVersion}");
+                    modEntry.Logger.Log($"MicroWrath Version: {vi.ProductVersion}");
 
                     MicroWrathAssembly = Assembly.LoadFrom(filePath);
                     return true;
@@ -96,7 +96,7 @@ namespace MicroWrath
                 modEntry.Logger.Log($"Loading mod from {assPath}");
 
 #if DEBUG
-                modEntry.Logger.Log($"Mod Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(assPath)}");
+                modEntry.Logger.Log($"Mod File Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(assPath)}");
 #endif
 
                 var ModAssembly = Assembly.LoadFrom(assPath);
