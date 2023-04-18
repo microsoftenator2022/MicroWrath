@@ -79,6 +79,14 @@ namespace MicroWrath.Util.Linq
             return newArray;
         }
 
+        public static IEnumerable<T> AppendValue<T>(this IEnumerable<T> source, T value)
+        {
+            foreach (var item in source)
+                yield return item;
+
+            yield return value;
+        }
+
         public static T[] Concat<T>(this T[] arrayA, T[] arrayB)
         {
             var newArray = new T[arrayA.Length + arrayB.Length];

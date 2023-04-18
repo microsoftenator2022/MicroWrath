@@ -23,6 +23,8 @@ namespace MicroWrath.Generator
     {
         private readonly record struct LocalizedStringData(string Name, string ValueMemberFullName, string Key, Option<string> Locale);
 
+        private static readonly LocalizedStringData Placeholder = new("", "", "", Option.None<string>());
+
         private static LocalizedStringData CreateLocalizedStringData(ISymbol symbol, AttributeData attribute, string rootNamespace)
         {
             var dict = new Dictionary<string, TypedConstant>();
@@ -67,19 +69,32 @@ namespace MicroWrath.Generator
 
             var localizedStrings = localizedStringInstances
                 .Combine(rootNamespace)
-                .SelectMany(static (ac, _) => ac.Left.Attributes.Select(a => CreateLocalizedStringData(ac.Left.TargetSymbol, a, ac.Right)));
+                .SelectMany(static (ac, _) => ac.Left.Attributes
+                    .Select(a => CreateLocalizedStringData(ac.Left.TargetSymbol, a, ac.Right)));
 
             context.RegisterSourceOutput(rootNamespace.Combine(localizedStrings.Collect()), static (spc, lsAndConfig) =>
             {
                 var (rootNamespace, localizedStrings) = lsAndConfig;
 
+                localizedStrings = localizedStrings.Remove(Placeholder);
+
                 var locales = localizedStrings.GroupBy(ls => ls.Locale);
 
                 var uniqueStrings = localizedStrings.DistinctBy(s => s.Name);
 
-                var sb = new StringBuilder();
+                spc.AddSource("LocalizedStrings",
+                    CreateLocalizedStringsOutputString(rootNamespace, locales, uniqueStrings));
+            });
+        }
 
-                sb.Append($@"using System;
+        private static string CreateLocalizedStringsOutputString(
+            string rootNamespace,
+            IEnumerable<IGrouping<Option<string>, LocalizedStringData>> locales,
+            IEnumerable<LocalizedStringData> uniqueStrings)
+        {
+            var sb = new StringBuilder();
+
+            sb.Append($@"using System;
 using System.Collections.Generic;
 
 using UniRx;
@@ -90,56 +105,56 @@ using MicroWrath;
 
 namespace {rootNamespace}
 {{
-    internal static class LocalizedStrings
+    internal static partial class LocalizedStrings
     {{
         public static readonly Dictionary<Kingmaker.Localization.Shared.Locale, Dictionary<string, string>> LocalizedStringEntries =
             new Dictionary<Kingmaker.Localization.Shared.Locale, Dictionary<string, string>>
         {{
 ");
-                foreach (var group in locales)
-                {
-                    if (group.Key.IsNone) continue;
+            foreach (var group in locales)
+            {
+                if (group.Key.IsNone) continue;
 
-                    var locale = group.Key.Value!;
+                var locale = group.Key.Value!;
 
-                    sb.Append($@"
+                sb.Append($@"
             {{ {locale}, new Dictionary<string, string>
                 {{
 ");
-                    foreach (var ls in group)
-                    {
-                        sb.Append($@"
-                    {{ {ls.Key}, {ls.ValueMemberFullName} }},");
-                    }
-
+                foreach (var ls in group)
+                {
                     sb.Append($@"
+                    {{ {ls.Key}, {ls.ValueMemberFullName} }},");
+                }
+
+                sb.Append($@"
                 }}
             }},
 ");
-                }
+            }
 
-                sb.Append($@"
+            sb.Append($@"
         }};
 ");
 
-                sb.Append($@"
+            sb.Append($@"
         public static readonly Dictionary<string, string> DefaultStringEntries = new Dictionary<string, string>
         {{
 ");
-
-                if (locales.FirstOrDefault(g => g.Key.IsNone) is var defaultStrings)
+            var defaultStrings = locales.FirstOrDefault(g => g.Key.IsNone);
+            if (defaultStrings is not null)
+            {
+                foreach (var ls in defaultStrings)
                 {
-                    foreach (var ls in defaultStrings)
-                    {
-                        sb.Append($@"
+                    sb.Append($@"
             {{ {ls.Key}, {ls.ValueMemberFullName} }},");
-                    }
                 }
+            }
 
-                sb.Append($@"
+            sb.Append($@"
         }};
 ");
-                sb.Append($@"
+            sb.Append($@"
         public static LocalizationPack GetLocalizationPack(Kingmaker.Localization.Shared.Locale locale)
         {{
             var pack = new LocalizationPack();
@@ -157,22 +172,20 @@ namespace {rootNamespace}
         private static readonly IDisposable LocaleChangedHandler =
             Triggers.LocaleChanged.Subscribe(locale => LocalizationManager.CurrentPack.AddStrings(GetLocalizationPack(locale)));
 ");
-                
 
-                foreach (var ls in uniqueStrings)
-                {
-                    if (string.IsNullOrEmpty(ls.Name)) continue;
 
-                    sb.AppendLine($"        public static LocalizedString {ls.Name} => new LocalizedString {{ Key = {ls.Key} }};");
-                }
+            foreach (var ls in uniqueStrings)
+            {
+                if (string.IsNullOrEmpty(ls.Name)) continue;
 
-                sb.Append($@"
+                sb.AppendLine($"        public static LocalizedString {ls.Name} => new LocalizedString {{ Key = {ls.Key} }};");
+            }
+
+            sb.Append($@"
     }}
 }}
 ");
-
-                spc.AddSource("LocalizedStrings", sb.ToString());
-            });
+            return sb.ToString();
         }
     }
 }
