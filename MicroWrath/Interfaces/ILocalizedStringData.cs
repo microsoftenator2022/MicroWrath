@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MicroWrath.Interfaces
+namespace MicroWrath
 {
     public interface ILocalizedStringData
     {

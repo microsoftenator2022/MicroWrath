@@ -4,7 +4,7 @@ using Kingmaker.Blueprints;
 
 using MicroWrath.Util;
 
-namespace MicroWrath.Interfaces
+namespace MicroWrath
 {
     public interface IMicroBlueprint<out TBlueprint> where TBlueprint : SimpleBlueprint
     {

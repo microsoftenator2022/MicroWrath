@@ -1,6 +1,6 @@
 ﻿using System;
 
-using MicroWrath.Interfaces;
+using MicroWrath;
 
 namespace MicroWrath.Localization
 {

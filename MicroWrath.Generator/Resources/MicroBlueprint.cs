@@ -3,7 +3,7 @@
 using Kingmaker.Blueprints;
 
 using MicroWrath.Util;
-using MicroWrath.Interfaces;
+using MicroWrath;
 
 namespace MicroWrath
 {
