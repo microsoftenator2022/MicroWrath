@@ -112,13 +112,7 @@ namespace MicroWrath
                     return false;
                 }
 
-                if (modType.GetConstructors().FirstOrDefault() is not ConstructorInfo constructor)
-                {
-                    modEntry.Logger.Critical($"Could not get constructor for {modType.FullName}");
-                    return false;
-                }
-
-                if (constructor.Invoke(new object[0]) is not IMicroMod modMain)
+                if (Activator.CreateInstance(modType, true) is not IMicroMod modMain)
                 {
                     modEntry.Logger.Critical($"Failed to initialize object of type {modType.FullName} from {assPath}");
                     return false;
