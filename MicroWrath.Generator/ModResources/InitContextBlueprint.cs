@@ -17,6 +17,7 @@ namespace MicroWrath
         {
             string Name { get; }
             BlueprintGuid BlueprintGuid { get; }
+            SimpleBlueprint CreateNew();
         }
 
         private readonly struct InitContextBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint>, IInitContextBlueprint
@@ -29,6 +30,7 @@ namespace MicroWrath
 
             string IInitContextBlueprint.Name => Name;
             public TBlueprint CreateNew() => Construct.New.Blueprint<TBlueprint>(AssetId, Name);
+            SimpleBlueprint IInitContextBlueprint.CreateNew() => this.CreateNew();
 
             internal InitContextBlueprint(string assetId, string name)
             {

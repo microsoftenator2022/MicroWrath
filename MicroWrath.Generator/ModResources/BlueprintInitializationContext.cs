@@ -26,46 +26,46 @@ namespace MicroWrath
         IBlueprintInitializationContext<TResult> Select<TResult>(Func<T, TResult> selector);
     }
 
-    internal partial class BlueprintInitializationContext : IObserver<Unit>
+    internal partial class BlueprintInitializationContext
     {
-        private bool registered = false;
-        public bool IsRegistered => registered;
+        private readonly List<IInitContextBlueprint> Blueprints = new();
+        private readonly List<Action> Initializers = new();
 
-        private readonly IInitContextBlueprint Blueprint;
-        private Action? BlueprintInitializer;
+        private readonly IObservable<Unit> Trigger;
 
         private IDisposable? done;
-        void IObserver<Unit>.OnNext(Unit value)
-        {
-            BlueprintInitializer?.Invoke();
-            done?.Dispose();
-        }
-
-        void IObserver<Unit>.OnError(Exception error) { }
-        void IObserver<Unit>.OnCompleted() => done?.Dispose();
-
+        private void Complete() => done?.Dispose();
+        
         private void Register(IBlueprintInit bpContext)
         {
-            BlueprintInitializer = bpContext.Execute;
+            Initializers.Add(bpContext.Execute);
             
-            if (registered) done?.Dispose();
+            Complete();
 
-            done = Triggers.BlueprintsCache_Init.Subscribe(this);
-            registered = true;
+            done = Trigger.Subscribe(Observer.Create<Unit>(
+                onNext: _ =>
+                {
+                    foreach (var bp in Blueprints) bp.CreateNew();
+                    foreach (var initAction in Initializers) initAction();
+
+                    Complete();
+                    Blueprints.Clear();
+                    Initializers.Clear();
+                },
+                onError: _ => { },
+                onCompleted: Complete));
         }
 
-        private BlueprintInitializationContext(IInitContextBlueprint blueprint)
-        {
-            Blueprint = blueprint;
-        }
+        internal BlueprintInitializationContext(IObservable<Unit> trigger) { Trigger = trigger; }
 
-        public static IBlueprintInitializationContext<TBlueprint> AddBlueprint<TBlueprint>(string assetId, string name)
+        public IBlueprintInitializationContext<IMicroBlueprint<TBlueprint>> AddBlueprint<TBlueprint>(string assetId, string name)
             where TBlueprint : SimpleBlueprint, new()
         {
-            var blueprint = new InitContextBlueprint<TBlueprint>(assetId, name);
-            var context = new BlueprintInitializationContext(blueprint);
+            var microBlueprint = new InitContextBlueprint<TBlueprint>(assetId, name);
 
-            return new BlueprintInit<TBlueprint>(context, blueprint.CreateNew);
+            Blueprints.Add(microBlueprint);
+
+            return new BlueprintInit<IMicroBlueprint<TBlueprint>>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint);
         }
 
         private interface IBlueprintInit { void Execute(); }
@@ -73,15 +73,25 @@ namespace MicroWrath
         private class BlueprintInit<T> : IBlueprintInitializationContext<T>, IBlueprintInit
         {
             private readonly BlueprintInitializationContext InitContext;
-            private readonly Func<T> GetValue;
-            internal bool Executed { get; private set; } = false;
+            internal readonly IInitContextBlueprint[] Blueprints;
+
+            private readonly Func<T> InitFunc;
+            internal bool HasValue { get; private set; } = false;
+
+            private T GetValue()
+            {
+                value = InitFunc();
+                HasValue = true;
+
+                return value;
+            }
+
             private T? value;
             internal T Value
             {
                 get
                 {
-                    if (!Executed)
-                        value = GetValue();
+                    if (!HasValue) return GetValue();
 
                     return value!;
                 }
@@ -89,44 +99,45 @@ namespace MicroWrath
 
             void IBlueprintInit.Execute() => GetValue();
 
-            internal BlueprintInit(BlueprintInitializationContext initContext, Func<T> getValue)
+            internal BlueprintInit(BlueprintInitializationContext initContext, IInitContextBlueprint[] blueprints, Func<T> initFunc)
             {
                 InitContext = initContext;
-                GetValue = getValue;
+                InitFunc = initFunc;
+                Blueprints = new IInitContextBlueprint[blueprints.Length];
+                blueprints.CopyTo((Span<IInitContextBlueprint>)Blueprints);
             }
 
+            internal BlueprintInit(BlueprintInitializationContext initContext, IEnumerable<IInitContextBlueprint> blueprints, Func<T> getValue)
+                : this(initContext, blueprints.ToArray(), getValue) { }
+
+            private BlueprintInit<TResult> With<TResult>(Func<TResult> getValue) => new(InitContext, Blueprints, getValue);
+
             IBlueprintInitializationContext<TResult> IBlueprintInitializationContext<T>.Select<TResult>(Func<T, TResult> selector) =>
-                new BlueprintInit<TResult>(InitContext, () =>
-                {
-                    return selector(Value);
-                });
+                With(() => selector(Value));
 
             IBlueprintInitializationContext<TResult> IBlueprintInitializationContext.Select<TResult>(Func<TResult> selector) =>
-                new BlueprintInit<TResult>(InitContext, () =>
+                With(() =>
                 { 
-                    var _ = Value;
+                    GetValue();
                     return selector();
                 });
 
             IBlueprintInitializationContext IBlueprintInitializationContext<T>.Select(Action<T> action) =>
-                new BlueprintInit<object>(InitContext, () =>
+                With<object>(() =>
                 {
                     action(Value);
                     return new();
                 });
 
             IBlueprintInitializationContext IBlueprintInitializationContext.Select(Action action) =>
-                new BlueprintInit<object>(InitContext, () =>
+                With<object>(() =>
                 {
-                    var _ = Value;
+                    GetValue();
                     action();
                     return new();
                 });
 
-            public void Register()
-            {
-                InitContext.Register(this);
-            }
+            public void Register() => InitContext.Register(this);
         }
     }
 }
