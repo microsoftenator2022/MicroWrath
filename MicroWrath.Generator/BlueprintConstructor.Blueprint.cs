@@ -28,6 +28,7 @@ namespace MicroWrath.Generator
                 .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.SimpleBlueprint"));
 
             var invocations = syntax
+                .Where(static sc => sc.Node is InvocationExpressionSyntax)
                 .Select(static (sc, _) =>
                   (node: (InvocationExpressionSyntax)sc.Node,
                     symbol: (sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol as IMethodSymbol)!,
@@ -60,9 +61,9 @@ namespace MicroWrath.Generator
 
 #region DebugOutput
 #if DEBUG
-            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
+            context.RegisterSourceOutput(initMembers.Collect(), (spc, initMemberTypes) =>
             {
-                var (defaults, types) = defaultValues;
+                var types = initMemberTypes;
 
                 var sb = new StringBuilder();
 

@@ -68,10 +68,12 @@ namespace MicroWrath.Generator.Common
             var references = Enumerable.Empty<ISymbol>();
 
             if (type.TypeParameterKind is TypeParameterKind.Method)
+                // Get all method invocation symbols
                 references = nodes
-                    .Where(sc => sc.Node is InvocationExpressionSyntax)
-                    .Select(sc => sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
+                    .Where(static sc => sc.Node is InvocationExpressionSyntax)
+                    .Select(static sc => sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
                     .OfType<IMethodSymbol>()
+                    // Where the method's unbound generic symbol is the same as the containing method
                     .Where(m =>
                     {
                         if (m is null) return false;
@@ -82,12 +84,24 @@ namespace MicroWrath.Generator.Common
 
                         return containingSymbol.Equals(m.ConstructedFrom, SymbolEqualityComparer.Default);
                     })
-                    .SelectMany(m => m.TypeArguments);
+                    // Return the type parameters
+                    .SelectMany(static m => m.TypeArguments);
 
             else if (type.TypeParameterKind is TypeParameterKind.Type)
-            {
-                //TODO
-            }
+                // Find all type declaration and generic type name symbols
+                references = nodes
+                    .Where(static sc => sc.Node is TypeDeclarationSyntax or GenericNameSyntax)
+                    .Select(static sc => sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
+                    .OfType<INamedTypeSymbol>()
+                    // Where the type's unbound generic symbol is the same as the containing type
+                    .Where(t =>
+                    {
+                        if (t is null) return false;
+
+                        return containingSymbol.Equals(t.ConstructedFrom, SymbolEqualityComparer.Default);
+                    })
+                    // Return the type parameters
+                    .SelectMany(static t => t.TypeArguments);
 
             foreach (var tpr in references)
             {
@@ -96,7 +110,27 @@ namespace MicroWrath.Generator.Common
                 if (tpr.Equals(type, SymbolEqualityComparer.Default)) continue;
 
                 if (tpr is INamedTypeSymbol nt)
-                    yield return nt;
+                {
+                    if (nt.IsGenericType)
+                    {
+                        foreach (var ta in  nt.TypeArguments)
+                        {
+                            if (ct.IsCancellationRequested) yield break;
+
+                            if (ta is ITypeParameterSymbol ttp)
+                            {
+                                foreach (var t in GetAllGenericInstances(ttp, nodes, ct))
+                                {
+                                    if (ct.IsCancellationRequested) yield break;
+
+                                    yield return t;
+                                }
+                            }
+                            else yield return nt;
+                        }
+                    }
+                    else yield return nt;
+                }
 
                 if (tpr is ITypeParameterSymbol tp)
                     foreach (var t in GetAllGenericInstances(tp, nodes, ct))

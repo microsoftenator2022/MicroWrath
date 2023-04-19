@@ -28,6 +28,7 @@ namespace MicroWrath.Generator
                 .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.BlueprintComponent"));
 
             var invocations = syntax
+                .Where(static sc => sc.Node is InvocationExpressionSyntax)
                 .Select(static (sc, _) =>
                    (node: (InvocationExpressionSyntax)sc.Node,
                     symbol: (sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol as IMethodSymbol)!,

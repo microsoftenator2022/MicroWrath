@@ -13,8 +13,6 @@ using MicroWrath.Generator.Common;
 using MicroWrath.Util;
 using MicroWrath.Util.Linq;
 
-using static MicroWrath.Generator.Constants;
-
 namespace MicroWrath.Generator
 {
     [Generator]
@@ -24,8 +22,10 @@ namespace MicroWrath.Generator
         {
             var compilation = context.CompilationProvider;
 
+            var sp = context.SyntaxProvider;
+
             var syntax = context.SyntaxProvider.CreateSyntaxProvider(
-                static (sn, _) => sn is InvocationExpressionSyntax,
+                static (sn, _) => sn is InvocationExpressionSyntax or GenericNameSyntax or TypeDeclarationSyntax,
                 static (sc, _) => sc);
 
             CreateBlueprintConstructors(compilation, syntax, context);
