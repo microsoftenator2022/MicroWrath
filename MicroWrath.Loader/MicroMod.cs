@@ -117,9 +117,9 @@ namespace MicroWrath
                     modEntry.Logger.Critical($"Failed to initialize object of type {modType.FullName} from {assPath}");
                     return false;
                 }
-                
+#if DEBUG
                 modEntry.Logger.Log($"Mod entry point: {modMain.GetType().FullName}.Load");
-
+#endif
                 return modMain.Load(modEntry);
             }
             catch (Exception ex)

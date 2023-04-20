@@ -105,6 +105,6 @@ namespace MicroWrath.Util
         public static Option<T> TryHead<T>(this IEnumerable<T> source) => source.FirstOrDefault().ToOption();
         public static Option<T> TryFind<T>(this IEnumerable<T> source, Func<T, bool> predicate) => source.FirstOrDefault(predicate).ToOption();
 
-        public static T DefaultValue<T>(Option<T> option, T defaultValue) => (T?)option ?? defaultValue;
+        public static T DefaultValue<T>(this Option<T> option, T defaultValue) => (T?)option ?? defaultValue;
     }
 }

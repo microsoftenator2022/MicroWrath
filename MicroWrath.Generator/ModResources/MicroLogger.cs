@@ -19,7 +19,7 @@ namespace MicroWrath
             Critical = 3
         }
 
-        internal readonly record struct Entry(string Message, Severity Severity = Severity.Info, Exception? Exception = null);
+        internal readonly record struct Entry(Func<string> Message, Severity Severity = Severity.Info, Exception? Exception = null);
 
         private static readonly List<Entry> EntryList = new();
         public static IEnumerable<Entry> Entries = EntryList.ToArray();
@@ -32,7 +32,9 @@ namespace MicroWrath
 #endif
         public static void SetUmmLogLevel(Severity severity)
         {
-            AddEntry(new($"Setting UMM log severity to {severity}"));
+            if (UmmLogLevel == severity) return;
+
+            AddEntry(new(() => $"Setting UMM log severity to {severity}"));
             UmmLogLevel = severity;
         }
 
@@ -60,19 +62,19 @@ namespace MicroWrath
             switch (entry.Severity)
             {
                 case Severity.Debug:
-                    logger.Log($"[DEBUG] entry.Message");
+                    logger.Log($"[DEBUG] {entry.Message()}");
                     break;
                 case Severity.Info:
-                    logger.Log(entry.Message);
+                    logger.Log(entry.Message());
                     break;
                 case Severity.Warning:
-                    logger.Warning(entry.Message);
+                    logger.Warning(entry.Message());
                     break;
                 case Severity.Error:
-                    logger.Error(entry.Message);
+                    logger.Error(entry.Message());
                     break;
                 case Severity.Critical:
-                    logger.Critical(entry.Message);
+                    logger.Critical(entry.Message());
                     break;
             }
 
@@ -91,31 +93,28 @@ namespace MicroWrath
         {
             if (ModEntry is null)
             {
-                AddEntry(new Entry("Attempted to replay log, but ModEntry is null"));
+                AddEntry(new Entry(() => "Attempted to replay log, but ModEntry is null", Severity.Warning));
                 return;
             }
 
-            foreach (var entry in Entries)
-            {
-                UmmLog(new("REPLAY LOG BEGIN"));
+            UmmLog(new(() => "REPLAY LOG BEGIN"));
 
-                UmmLog(new($"REPLAY {entry}", entry.Severity, entry.Exception));
+            foreach (var entry in Entries) UmmLog(entry);
 
-                UmmLog(new("REPLAY LOG END"));
-            }
+            UmmLog(new(() => "REPLAY LOG END"));
         }
 
         public static void Clear()
         {
             EntryList.Clear();
 
-            AddEntry(new("Log cleared"));
+            AddEntry(new(() => "Log cleared"));
         }
 
-        public static void Debug(string message, Exception? exception = null) => AddEntry(new(message, Severity.Debug, exception));
-        public static void Log(string message, Exception? exception = null) => AddEntry(new(message, Severity.Info, exception));
-        public static void Warning(string messasge, Exception? exception = null) => AddEntry(new(messasge, Severity.Warning, exception));
-        public static void Error(string message, Exception? exception = null) => AddEntry(new(message, Severity.Error, exception));
-        public static void Critical(string message, Exception? exception = null) => AddEntry(new(message, Severity.Critical, exception));
+        public static void Debug(Func<string> message, Exception? exception = null) => AddEntry(new(message, Severity.Debug, exception));
+        public static void Log(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Info, exception));
+        public static void Warning(string messasge, Exception? exception = null) => AddEntry(new(() => messasge, Severity.Warning, exception));
+        public static void Error(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Error, exception));
+        public static void Critical(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Critical, exception));
     }
 }
