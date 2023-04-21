@@ -97,6 +97,8 @@ namespace MicroWrath
                 return;
             }
 
+            if (Entries.Count() == 0) return;
+
             UmmLog(new(() => "REPLAY LOG BEGIN"));
 
             foreach (var entry in Entries) UmmLog(entry);

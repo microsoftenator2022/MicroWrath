@@ -43,6 +43,31 @@ namespace MicroWrath.Generator
 
             var typeParams = Incremental.GetTypeParameters(newComponentMethodInvocations, syntax);
 
+            context.RegisterSourceOutput(newComponentMethodInvocations.Collect().Combine(typeParams.Collect()), (spc, xs) =>
+            {
+                var (ncmis, tps) = xs;
+
+                var sb = new StringBuilder();
+
+                foreach (var ncmi in ncmis)
+                {
+                    sb.AppendLine($"// method: {ncmi}");
+                    sb.AppendLine($" // {ncmi.TypeArguments.Length} type args");
+                    foreach (var tp in ncmi.TypeArguments)
+                    {
+                        sb.AppendLine($"  // {tp}");
+                        sb.AppendLine($"   // {tp.ContainingSymbol}");
+                    }
+                }
+
+                foreach (var tp in tps)
+                {
+                    sb.AppendLine($"// typeParam: {tp}");
+                }
+
+                spc.AddSource("typeParams", sb.ToString());
+            });
+
             var invocationTypeArguments = typeParams
                 .Collect()
                 .Combine(blueprintComponentType)

@@ -68,6 +68,7 @@ namespace MicroWrath.Generator.Common
             var references = Enumerable.Empty<ISymbol>();
 
             if (type.TypeParameterKind is TypeParameterKind.Method)
+            {
                 // Get all method invocation symbols
                 references = nodes
                     .Where(static sc => sc.Node is InvocationExpressionSyntax)
@@ -80,14 +81,20 @@ namespace MicroWrath.Generator.Common
 
                         // Extension methods are not reduced by comparer
                         if (m.MethodKind == MethodKind.ReducedExtension)
-                            m = m.ReducedFrom!;
+                        { 
+                            if (containingSymbol.Equals(m.ReducedFrom?.ConstructedFrom, SymbolEqualityComparer.Default))
+                                return true;
+                            
+                            //m = m.ReducedFrom!;
+                        }
 
                         return containingSymbol.Equals(m.ConstructedFrom, SymbolEqualityComparer.Default);
                     })
                     // Return the type parameters
                     .SelectMany(static m => m.TypeArguments);
-
+            }
             else if (type.TypeParameterKind is TypeParameterKind.Type)
+            { 
                 // Find all type declaration and generic type name symbols
                 references = nodes
                     .Where(static sc => sc.Node is TypeDeclarationSyntax or GenericNameSyntax)
@@ -102,7 +109,7 @@ namespace MicroWrath.Generator.Common
                     })
                     // Return the type parameters
                     .SelectMany(static t => t.TypeArguments);
-
+            }
             foreach (var tpr in references)
             {
                 if (ct.IsCancellationRequested) yield break;
@@ -248,6 +255,17 @@ namespace MicroWrath.Generator.Common
 
         internal static string GenericConstraintsPart(this INamedTypeSymbol symbol) =>
             GenericParametersPart(symbol).Remove(0, GenericParametersPartNoConstraints(symbol).Length);
+
+        internal static IEnumerable<INamedTypeSymbol> GetContainingTypes(this INamedTypeSymbol symbol)
+        {
+            if (symbol.ContainingType == null) yield break;
+
+            yield return symbol.ContainingType;
+
+            foreach (var ancestor in symbol.ContainingType.GetContainingTypes())
+                yield return ancestor;
+        }
+
     }
 
     internal static class Incremental

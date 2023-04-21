@@ -40,5 +40,15 @@ namespace MicroWrath
 
             return component;
         }
+
+        public static IEnumerable<TComponent> GetComponents<TComponent>(this BlueprintScriptableObject blueprint)
+            where TComponent : BlueprintComponent =>
+            blueprint.Components.OfType<TComponent>();
+
+        public static void RemoveComponents(this BlueprintScriptableObject blueprint, Func<BlueprintComponent, bool> predicate) =>
+            blueprint.ComponentsArray = blueprint.ComponentsArray.Where(predicate).ToArray();
+
+        public static void RemoveComponent(this BlueprintScriptableObject blueprint, BlueprintComponent component) =>
+            blueprint.RemoveComponents(c => c != component);
     }
 }

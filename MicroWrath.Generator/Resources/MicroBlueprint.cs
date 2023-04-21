@@ -11,23 +11,10 @@ namespace MicroWrath
     {
         public TReference ToReference<TReference>() where TReference : BlueprintReference<TBlueprint>, new() =>
             this.ToReference<TBlueprint, TReference>();
-        public BlueprintReference<TBlueprint> ToReference() => ToReference<BlueprintReference<TBlueprint>>();
 
-        public string Name => ToReference().NameSafe();
+        public string Name => ToReference<BlueprintReference<TBlueprint>>().NameSafe();
 
         public BlueprintGuid BlueprintGuid { get; } = BlueprintGuid.Parse(AssetId);
-        TBlueprint? IMicroBlueprint<TBlueprint>.GetBlueprint() => ToReference<BlueprintReference<TBlueprint>>().Get();
-    }
-
-    internal static class MicroBlueprintExtensions
-    {
-        public static Option<TBlueprint> TryGetBlueprint<TBlueprint>(this IMicroBlueprint<TBlueprint> bpRef)
-            where TBlueprint : SimpleBlueprint =>
-            bpRef.GetBlueprint().ToOption();
-
-        public static TReference ToReference<TBlueprint, TReference>(this IMicroBlueprint<TBlueprint> bpRef)
-            where TBlueprint : SimpleBlueprint
-            where TReference : BlueprintReference<TBlueprint>, new() =>
-            new() { deserializedGuid = bpRef.BlueprintGuid };
+        public TBlueprint? GetBlueprint() => ToReference<BlueprintReference<TBlueprint>>().Get();
     }
 }

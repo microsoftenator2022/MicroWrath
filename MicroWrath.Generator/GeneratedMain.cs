@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-
 using MicroWrath.Generator;
 using MicroWrath.Generator.Common;
 using MicroWrath.Util;
@@ -95,11 +94,13 @@ namespace MicroWrath.Generator
             {
                 var (maybeTypeAndNs, shouldGen) = microModMainThings;
 
-                if (!shouldGen || maybeTypeAndNs.IsNone) return;
+                if (maybeTypeAndNs.IsNone) return;
 
                 var (ns, maybeType) = maybeTypeAndNs.Value;
 
                 var name = maybeType.Value?.Name ?? "Main";
+
+                if (!shouldGen) return;
 
                 var props = maybeType.Map(t => new
                 {
@@ -123,21 +124,26 @@ namespace {ns}
         private {name}() {{ }}");
 
                 sb.Append($@"
-        private static UnityModManager.ModEntry? modEntry;
-        internal static UnityModManager.ModEntry ModEntry => modEntry!;
+        private static {name}? instance;
+        internal static {name} Instance => instance!;
 
-        private static Harmony? harmony;
-        internal static Harmony Harmony => harmony!;
+        private UnityModManager.ModEntry? modEntry;
+        internal UnityModManager.ModEntry ModEntry => modEntry!;
 
-        internal static event Action<UnityModManager.ModEntry> Loaded = Functional.Ignore;
+        private Harmony? harmony;
+        internal Harmony Harmony => harmony!;
+
+        public event Action<UnityModManager.ModEntry> Loaded = Functional.Ignore;
 
         public bool Load(UnityModManager.ModEntry modEntry)
         {{
-            {name}.modEntry = modEntry;
+            this.modEntry = modEntry;
             MicroLogger.ModEntry = modEntry;
 
             harmony = new Harmony(modEntry.Info.Id);
             harmony.PatchAll();
+
+            instance = this;
 
             Loaded(modEntry);
 

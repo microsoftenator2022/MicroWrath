@@ -32,6 +32,15 @@ namespace MicroWrath.Generator
 
             var ns = componentType.ContainingNamespace;
 
+            var name = componentType.Name;
+
+            if (componentType.ContainingType != null)
+            {
+                name = componentType.GetContainingTypes().Reverse()
+                    .Select(t => t.Name)
+                    .Aggregate((acc, next) => $"{acc}.{next}") + "." + name;
+            }
+
             sb.AppendLine($"using {ns};");
 
             sb.Append($@"
@@ -39,10 +48,10 @@ namespace {ConstructorNamespace}
 {{
     internal static partial class {ConstructClassName}
     {{
-        private partial class ComponentConstructor : IComponentConstructor<{componentType.Name}>
+        private partial class ComponentConstructor : IComponentConstructor<{name}>
         {{
-            {componentType.Name} IComponentConstructor<{componentType.Name}>.New() =>
-                new {componentType.Name}()
+            {name} IComponentConstructor<{name}>.New() =>
+                new {name}()
                 {{");
 
             foreach (var (f, init) in initFields)
@@ -63,7 +72,7 @@ namespace {ConstructorNamespace}
             foreach (var m in initMethods)
             {
                 sb.Append($@"
-                .Apply({m.ContainingType}.{m.Name}).Downcast<{m.ReturnType}, {componentType.Name}>()");
+                .Apply({m.ContainingType}.{m.Name}).Downcast<{m.ReturnType}, {name}>()");
             }
 
             sb.Append($@";
