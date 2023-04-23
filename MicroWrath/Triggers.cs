@@ -15,13 +15,23 @@ using UniRx;
 namespace MicroWrath
 {
     [HarmonyPatch]
-    internal static class Triggers
+    internal static partial class Triggers
     {
+        private static event Action BlueprintsCache_InitEvent_Early = () => { };
         private static event Action BlueprintsCache_InitEvent = () => { };
-
+        
         [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Init))]
         [HarmonyPostfix]
-        private static void BlueprintsCache_Init_Patch() => BlueprintsCache_InitEvent();
+        private static void BlueprintsCache_Init_Patch()
+        {
+            BlueprintsCache_InitEvent_Early();
+            BlueprintsCache_InitEvent();
+        }
+
+        public static readonly IObservable<Unit> BlueprintsCache_Init_Early =
+            Observable.FromEvent(
+                addHandler: handler => BlueprintsCache_InitEvent_Early += handler,
+                removeHandler: handler => BlueprintsCache_InitEvent_Early -= handler);
 
         public static readonly IObservable<Unit> BlueprintsCache_Init =
             Observable.FromEvent(
