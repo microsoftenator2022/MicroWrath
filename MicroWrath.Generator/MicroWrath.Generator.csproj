@@ -16,8 +16,20 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\*.*" />
+    <EmbeddedResource Include="..\MicroWrath\BlueprintExtensions.cs" Link="Resources\BlueprintExtensions.cs" />
+    <EmbeddedResource Include="..\MicroWrath\BlueprintsDb\BlueprintsDb.cs" Link="Resources\BlueprintsDb.cs" />
+    <EmbeddedResource Include="..\MicroWrath\DefaultValues.cs" Link="Resources\DefaultValues.cs" />
+    <EmbeddedResource Include="..\MicroWrath\MicroBlueprint.cs" Link="Resources\MicroBlueprint.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Constructors\Constructors.cs" Link="Resources\Constructors.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Constructors\ReflectionInitializer.cs" Link="Resources\ReflectionInitializer.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Localization\LocalizedStringAttribute.cs" Link="Resources\LocalizedStringAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="ModResources\*.*" />
     <EmbeddedResource Include="IsExternalInit.cs" Link="ModResources\IsExternalInit.cs" />
+    <EmbeddedResource Include="..\MicroWrath\MicroLogger.cs" Link="ModResources\MicroLogger.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Triggers.cs" Link="ModResources\Triggers.cs" />
   </ItemGroup>
   
   <ItemGroup>
