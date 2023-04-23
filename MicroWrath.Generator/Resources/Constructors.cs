@@ -1,12 +1,14 @@
 ﻿using System;
 using MicroWrath;
 using Kingmaker.Blueprints;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MicroWrath.Constructors
 {
     internal static partial class Construct
     {
-        private interface IBlueprintConstructor<TBlueprint> where TBlueprint : SimpleBlueprint, new()
+        internal interface IBlueprintConstructor<TBlueprint> where TBlueprint : SimpleBlueprint, new()
         {
             TBlueprint New(string assetId, string name);
         }
@@ -18,11 +20,24 @@ namespace MicroWrath.Constructors
             SimpleBlueprint IBlueprintConstructor<SimpleBlueprint>.New(string assetId, string name) =>
                 new() { AssetGuid = BlueprintGuid.Parse(assetId), name = name };
 
-            public TBlueprint New<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint, new() =>
-                ((IBlueprintConstructor<TBlueprint>)this).New(assetId, name);
+            public TBlueprint New<TBlueprint>(string assetId, string name) where TBlueprint : SimpleBlueprint, new()
+            {
+                if (this is IBlueprintConstructor<TBlueprint> blueprintConstructor)
+                {
+                    return blueprintConstructor.New(assetId, name);
+                }
+
+                // Reflection-based fallback
+                if (!initializers.ContainsKey(typeof(TBlueprint)))
+                    initializers.Add(typeof(TBlueprint), new BlueprintReflectionInitializer<TBlueprint>(typeof(Default)));
+
+                return ((BlueprintReflectionInitializer<TBlueprint>)initializers[typeof(TBlueprint)]).New(assetId, name);
+            }
+
+            private static readonly Dictionary<Type, IReflectionInitializer> initializers = new();
         }
 
-        private interface IComponentConstructor<TComponent> where TComponent : BlueprintComponent, new()
+        internal interface IComponentConstructor<TComponent> where TComponent : BlueprintComponent, new()
         {
             TComponent New();
         }
@@ -34,8 +49,21 @@ namespace MicroWrath.Constructors
             BlueprintComponent IComponentConstructor<BlueprintComponent>.New() =>
                 new();
 
-            public TComponent New<TComponent>() where TComponent : BlueprintComponent, new() =>
-                ((IComponentConstructor<TComponent>)this).New();
+            public TComponent New<TComponent>() where TComponent : BlueprintComponent, new()
+            {
+                if (this is IComponentConstructor<TComponent> componentConstructor)
+                {
+                    return componentConstructor.New();
+                }
+
+                // Reflection-based fallback
+                if (!initializers.ContainsKey(typeof(TComponent)))
+                    initializers.Add(typeof(TComponent), new ComponentReflectionInitializer<TComponent>(typeof(Default)));
+
+                return ((ComponentReflectionInitializer<TComponent>)initializers[typeof(TComponent)]).New();
+            }
+
+            private static readonly Dictionary<Type, IReflectionInitializer> initializers = new();
         }
 
         public static class New

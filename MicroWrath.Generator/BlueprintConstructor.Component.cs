@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using MicroWrath.Generator.Common;
@@ -43,30 +44,95 @@ namespace MicroWrath.Generator
 
             var typeParams = Incremental.GetTypeParameters(newComponentMethodInvocations, syntax);
 
-            context.RegisterSourceOutput(newComponentMethodInvocations.Collect().Combine(typeParams.Collect()), (spc, xs) =>
-            {
-                var (ncmis, tps) = xs;
+            //context.RegisterSourceOutput(
+            //    newComponentMethodInvocations
+            //        .Collect()
+            //        .Combine(typeParams.Collect())
+            //        .Combine(syntax.Collect())
+            //        .Combine(compilation),
+            //    (spc, xs) =>
+            //{
+            //    var (((ncmis, tps), syntax), compilation) = xs;
 
-                var sb = new StringBuilder();
+            //    var sb = new StringBuilder();
 
-                foreach (var ncmi in ncmis)
-                {
-                    sb.AppendLine($"// method: {ncmi}");
-                    sb.AppendLine($" // {ncmi.TypeArguments.Length} type args");
-                    foreach (var tp in ncmi.TypeArguments)
-                    {
-                        sb.AppendLine($"  // {tp}");
-                        sb.AppendLine($"   // {tp.ContainingSymbol}");
-                    }
-                }
+            //    var methodInvocations = syntax
+            //        .Where(sc => sc.Node is GenericNameSyntax &&
+            //            sc.Node.GetText().ToString().Contains("AddNewComponent"));
 
-                foreach (var tp in tps)
-                {
-                    sb.AppendLine($"// typeParam: {tp}");
-                }
+            //    foreach (var mi in methodInvocations)
+            //    {
+            //        sb.AppendLine("// Text:");
+            //        foreach (var line in mi.Node.GetText().Lines)
+            //        {
+            //            sb.AppendLine($" // {line}");
+            //        }
 
-                spc.AddSource("typeParams", sb.ToString());
-            });
+            //        var node = mi.Node as GenericNameSyntax;
+
+            //        var id = node?.Identifier;
+
+            //        var symbol = node is not null ? mi.SemanticModel.GetSymbolInfo(node!).Symbol : null;
+
+            //        sb.AppendLine($"// Symbol: {symbol?.ToString() ?? "<null>" }");
+
+            //        var ancestors = mi.Node.Ancestors(true);
+
+            //        var treeSemanticModel = compilation.GetSemanticModel(ancestors.Last().SyntaxTree, true);
+
+            //        sb.AppendLine($" // Ancestors:");
+
+            //        foreach (var ancestor in ancestors)
+            //        {
+            //            foreach (var line in ancestor.GetText().Lines)
+            //            {
+            //                sb.AppendLine($"   // {line}");
+            //            }
+
+            //            var ancestorSymbol = treeSemanticModel.GetSymbolInfo(ancestor).Symbol ?? treeSemanticModel.GetDeclaredSymbol(ancestor);
+            //            if (ancestorSymbol is not null)
+            //            {
+            //                sb.AppendLine($"  // Non-null symbol: {ancestorSymbol}");
+
+            //                if (ancestorSymbol is not IMethodSymbol ms)
+            //                    continue;
+
+            //                var returnType = ms.ReturnType;
+
+            //                sb.AppendLine($"   // Method return type: {returnType?.ToString() ?? "<null>"}");
+
+            //                if (ancestor is SimpleLambdaExpressionSyntax sles)
+            //                {
+            //                    var paramTypeSymbol = treeSemanticModel.GetSymbolInfo(sles.Parameter).Symbol ?? treeSemanticModel.GetDeclaredSymbol(sles.Parameter);
+
+            //                    sb.AppendLine($"    //! {treeSemanticModel.GetSymbolInfo(sles.Parameter).CandidateReason}");
+
+            //                    sb.AppendLine($"  // param type: {paramTypeSymbol?.ToString() ?? "<null>"}");
+
+            //                    sb.AppendLine($"  // As parenthesized");
+
+            //                    //var parameter = sles.Parameter.WithType();
+
+            //                    var list = SyntaxFactory.SeparatedList(EnumerableExtensions.Singleton(sles.Parameter));
+            //                    var parameterList = SyntaxFactory.ParameterList(list);
+            //                    var parenthesized = SyntaxFactory.ParenthesizedLambdaExpression(
+            //                        parameterList, sles.Body);
+
+            //                    foreach (var line in parenthesized.GetText().Lines)
+            //                    {
+            //                        sb.AppendLine($"   // {line}");
+            //                    }
+            //                }
+            //            }
+
+            //            sb.AppendLine();
+            //        }
+
+            //        sb.AppendLine();
+            //    }
+
+            //    spc.AddSource("typeParams", sb.ToString());
+            //});
 
             var invocationTypeArguments = typeParams
                 .Collect()
