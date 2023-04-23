@@ -27,6 +27,8 @@ namespace MicroWrath.Constructors
                     return blueprintConstructor.New(assetId, name);
                 }
 
+                MicroLogger.Warning($"Initializer for {typeof(TBlueprint)} not found. Using fallback initializer");
+
                 // Reflection-based fallback
                 if (!initializers.ContainsKey(typeof(TBlueprint)))
                     initializers.Add(typeof(TBlueprint), new BlueprintReflectionInitializer<TBlueprint>(typeof(Default)));
@@ -55,6 +57,8 @@ namespace MicroWrath.Constructors
                 {
                     return componentConstructor.New();
                 }
+
+                MicroLogger.Warning($"Initializer for {typeof(TComponent)} not found. Using fallback initializer");
 
                 // Reflection-based fallback
                 if (!initializers.ContainsKey(typeof(TComponent)))
