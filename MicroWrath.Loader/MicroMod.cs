@@ -15,7 +15,6 @@ namespace MicroWrath
     public interface IMicroMod
     {
         bool Load(ModEntry modEntry);
-        event Action<ModEntry> Loaded;
     }
 
     internal static class MicroMod
