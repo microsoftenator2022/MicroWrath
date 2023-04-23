@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroWrath", "MicroWrath\Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroWrath.Generator", "MicroWrath.Generator\MicroWrath.Generator.csproj", "{3B6C0EEC-9FE3-4A35-B547-88C3632645EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneratorTestProject", "GeneratorTestProject\GeneratorTestProject.csproj", "{C5BE5921-7BAE-4523-9599-E3AC04B6DA5C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroWrath.Loader", "MicroWrath.Loader\MicroWrath.Loader.csproj", "{910E46E0-248D-484C-80FC-DE7AE2F765A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroWrath.Loader", "MicroWrath.Loader\MicroWrath.Loader.csproj", "{910E46E0-248D-484C-80FC-DE7AE2F765A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{3B6C0EEC-9FE3-4A35-B547-88C3632645EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B6C0EEC-9FE3-4A35-B547-88C3632645EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B6C0EEC-9FE3-4A35-B547-88C3632645EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C5BE5921-7BAE-4523-9599-E3AC04B6DA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5BE5921-7BAE-4523-9599-E3AC04B6DA5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5BE5921-7BAE-4523-9599-E3AC04B6DA5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5BE5921-7BAE-4523-9599-E3AC04B6DA5C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{910E46E0-248D-484C-80FC-DE7AE2F765A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{910E46E0-248D-484C-80FC-DE7AE2F765A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{910E46E0-248D-484C-80FC-DE7AE2F765A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
