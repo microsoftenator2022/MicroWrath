@@ -58,10 +58,11 @@ namespace MicroWrath.Generator.Common
 
     internal static class Analyzers
     {
-        internal static IEnumerable<INamedTypeSymbol> GetAllGenericInstances(ITypeParameterSymbol type, ImmutableArray<GeneratorSyntaxContext> nodes, CancellationToken ct)
+        internal static IEnumerable<INamedTypeSymbol> GetAllGenericInstances(
+            ITypeParameterSymbol type,
+            ImmutableArray<GeneratorSyntaxContext> nodes,
+            CancellationToken ct)
         {
-            //Debugger.Launch();
-
             // Generic method or type containing this type parameter
             var containingSymbol = type.ContainingSymbol;
 
@@ -71,8 +72,8 @@ namespace MicroWrath.Generator.Common
             {
                 // Get all method invocation symbols
                 references = nodes
-                    .Where(static sc => sc.Node is InvocationExpressionSyntax)
-                    .Select(static sc => sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
+                    .Where(static sc => sc.Node is InvocationExpressionSyntax or MethodDeclarationSyntax)
+                    .Select(static sc => sc.SemanticModel.GetDeclaredSymbol(sc.Node) ?? sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
                     .OfType<IMethodSymbol>()
                     // Where the method's unbound generic symbol is the same as the containing method
                     .Where(m =>
@@ -81,14 +82,13 @@ namespace MicroWrath.Generator.Common
 
                         // Extension methods are not reduced by comparer
                         if (m.MethodKind == MethodKind.ReducedExtension)
-                        { 
-                            if (containingSymbol.Equals(m.ReducedFrom?.ConstructedFrom, SymbolEqualityComparer.Default))
-                                return true;
-                            
-                            //m = m.ReducedFrom!;
+                        {
+                            var reducedFrom = m.ReducedFrom;
+                            if (reducedFrom is not null)
+                                return reducedFrom.ConstructedFrom.TypeParameters.Contains(type, SymbolEqualityComparer.Default);
                         }
 
-                        return containingSymbol.Equals(m.ConstructedFrom, SymbolEqualityComparer.Default);
+                        return m.ConstructedFrom.TypeParameters.Contains(type, SymbolEqualityComparer.Default);
                     })
                     // Return the type parameters
                     .SelectMany(static m => m.TypeArguments);
@@ -98,7 +98,7 @@ namespace MicroWrath.Generator.Common
                 // Find all type declaration and generic type name symbols
                 references = nodes
                     .Where(static sc => sc.Node is TypeDeclarationSyntax or GenericNameSyntax)
-                    .Select(static sc => sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
+                    .Select(static sc => sc.SemanticModel.GetDeclaredSymbol(sc.Node) ?? sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
                     .OfType<INamedTypeSymbol>()
                     // Where the type's unbound generic symbol is the same as the containing type
                     .Where(t =>
@@ -110,6 +110,7 @@ namespace MicroWrath.Generator.Common
                     // Return the type parameters
                     .SelectMany(static t => t.TypeArguments);
             }
+
             foreach (var tpr in references)
             {
                 if (ct.IsCancellationRequested) yield break;
@@ -140,12 +141,14 @@ namespace MicroWrath.Generator.Common
                 }
 
                 if (tpr is ITypeParameterSymbol tp)
+                {
                     foreach (var t in GetAllGenericInstances(tp, nodes, ct))
                     {
                         if (ct.IsCancellationRequested) yield break;
 
                         yield return t;
                     }
+                }
             }
 
         }
@@ -273,18 +276,18 @@ namespace MicroWrath.Generator.Common
         internal static IncrementalValuesProvider<ITypeSymbol> GetTypeParameters(
             IncrementalValuesProvider<IMethodSymbol> methodSymbols,
             IncrementalValuesProvider<GeneratorSyntaxContext> syntax) =>
-            methodSymbols
-                .SelectMany(static (m, _) => m.TypeArguments)
-                .Combine(syntax.Collect())
-                .SelectMany(static (tai, ct) =>
-                {
-                    var (ta, invocationsSyntax) = tai;
+                methodSymbols
+                    .SelectMany(static (m, _) => m.TypeArguments)
+                    .Combine(syntax.Collect())
+                    .SelectMany(static (tai, ct) =>
+                    {
+                        var (ta, invocationsSyntax) = tai;
 
-                    if (ta is not ITypeParameterSymbol tps)
-                        return EnumerableExtensions.Singleton(ta);
+                        if (ta is not ITypeParameterSymbol tps)
+                            return EnumerableExtensions.Singleton(ta);
 
-                    return Analyzers.GetAllGenericInstances(tps, invocationsSyntax, ct);
-                });
+                        return Analyzers.GetAllGenericInstances(tps, invocationsSyntax, ct);
+                    });
 
         internal static IncrementalValuesProvider<IMethodSymbol> GetMethodInvocations(
             string typeName,

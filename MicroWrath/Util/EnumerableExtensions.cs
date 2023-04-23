@@ -96,5 +96,26 @@ namespace MicroWrath.Util.Linq
 
             return newArray;
         }
+
+        public static IEnumerable<IEnumerable<T>> ChunkBySize<T>(this IEnumerable<T> source, int chunkSize)
+        {
+            var chunk = new T[chunkSize];
+            var i = 0;
+
+            foreach (var element in source)
+            {
+                chunk[i] = element;
+
+                i++;
+                if (i == chunkSize)
+                {
+                    yield return chunk;
+                    chunk = new T[chunkSize];
+                    i = 0;
+                }
+            }
+
+            if (i < chunkSize) yield return chunk.Take(i);
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace MicroWrath.Generator
             var sp = context.SyntaxProvider;
 
             var syntax = context.SyntaxProvider.CreateSyntaxProvider(
-                static (sn, _) => sn is InvocationExpressionSyntax or GenericNameSyntax or TypeDeclarationSyntax,
+                static (sn, _) => sn is InvocationExpressionSyntax or GenericNameSyntax or TypeDeclarationSyntax or MethodDeclarationSyntax,
                 static (sc, _) => sc);
 
             CreateBlueprintConstructors(compilation, syntax, context);
