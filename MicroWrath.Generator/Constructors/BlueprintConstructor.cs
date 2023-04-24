@@ -28,8 +28,18 @@ namespace MicroWrath.Generator
                 static (sn, _) => sn is InvocationExpressionSyntax or GenericNameSyntax or TypeDeclarationSyntax or MethodDeclarationSyntax,
                 static (sc, _) => sc);
 
+            var allowedComponents = GetAllowedComponents(compilation);
+
             CreateBlueprintConstructors(compilation, syntax, context);
-            CreateComponentConstructors(compilation, syntax, context);
+
+            CreateComponentConstructors(compilation, syntax, context, 
+                allowedComponents
+                    .Collect()
+                    .SelectMany((bpts, _) => bpts
+                        .SelectMany(bpt => bpt.componentTypes)
+                        .Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
+
+            GenerateAllowedComponentsConstructors(context, allowedComponents);
         }
     }
 }

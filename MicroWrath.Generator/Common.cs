@@ -10,52 +10,12 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.FindSymbols;
 
 using MicroWrath.Util;
 using MicroWrath.Util.Linq;
 
 namespace MicroWrath.Generator.Common
 {
-    internal static class GeneratorUtil
-    {
-        internal static string ParentDir(string path, int count = 1)
-        {
-            if (path.EndsWith(Path.DirectorySeparatorChar.ToString()))
-                path = path[..^1];
-
-            while (count > 0)
-            {
-                path = path[0..(path.LastIndexOf(Path.DirectorySeparatorChar))];
-                count--;
-            }
-                
-            return path + Path.DirectorySeparatorChar;
-        }
-
-        internal static IEnumerable<string> PathToNamespaceParts(string path, string projectPath, int depth = 0)
-        {
-            if (File.Exists(path))
-                path = path.Replace(Path.GetFileName(path), "");
-
-            var currentDepth = depth < 0 ? depth : 0;
-
-            path = path.Replace(ParentDir(projectPath, 1 - currentDepth), "");
-
-            var parts = path.Split(new[] { Path.DirectorySeparatorChar })
-                .Select(s => s.Trim())
-                .Where(s => s.Length > 0);
-
-            if (depth > 0 && parts.Count() > depth)
-                parts = parts.Skip(depth);
-
-            return parts;
-        }
-
-        internal static string PathToNamespace(string path, string projectPath, int depth = 0) =>
-            PathToNamespaceParts(path, projectPath, depth).Aggregate((a, b) => $"{a}.{b}");
-    }
-
     internal static class Analyzers
     {
         internal static IEnumerable<INamedTypeSymbol> GetAllGenericInstances(
@@ -227,14 +187,13 @@ namespace MicroWrath.Generator.Common
             tp.ConstraintTypes.Any();
 
         internal static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
-            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces, genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters);
+            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters);
         internal static string FullName(this ITypeSymbol symbol) => symbol.ToDisplayString(FullNameTypeDisplayFormat);
 
         internal static readonly SymbolDisplayFormat ShortNameNoGenericsDisplayFormat =
             new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
                 genericsOptions: SymbolDisplayGenericsOptions.None);
-        internal static string ShortNameNoGenerics(this ISymbol t) =>
-            t.ToDisplayString(ShortNameNoGenericsDisplayFormat);
 
         internal static readonly SymbolDisplayFormat FullNameNoGenericsDisplayFormat =
             new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
@@ -244,8 +203,6 @@ namespace MicroWrath.Generator.Common
 
         internal static string EscapedTypeName(this INamedTypeSymbol symbol) => symbol.DisplayStringNoGenerics().Replace('.', '_');
 
-        //internal static readonly SymbolDisplayFormat FullGenericsDisplayFormat =
-        //    new(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints | SymbolDisplayGenericsOptions.IncludeTypeParameters);
         internal static string GenericParametersPart(this INamedTypeSymbol symbol) =>
             symbol.ToDisplayString(new SymbolDisplayFormat(
                 genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints |
@@ -332,22 +289,23 @@ namespace MicroWrath.Generator.Common
             types.TryFind(t => t.Name == "SimpleBlueprint").ToEnumerable()
                 .SelectMany(simpleBlueprint => GetAssignableTo(compilation, types, simpleBlueprint));
 
-        //private static IEnumerable<INamedTypeSymbol> GetCompilationBlueprintComponentTypes(
-        //    Compilation compilation,
-        //    IEnumerable<INamedTypeSymbol> types) =>
-        //    types.TryFind(t => t.Name == "BlueprintComponent").ToEnumerable()
-        //        .SelectMany(blueprintComponent => GetAssignableTo(compilation, types, blueprintComponent));
+        private static IEnumerable<INamedTypeSymbol> GetCompilationComponentTypes(
+            Compilation compilation,
+            IEnumerable<INamedTypeSymbol> types) =>
+            types.TryFind(t => t.Name == "BlueprintComponent").ToEnumerable()
+                .SelectMany(blueprintComponent => GetAssignableTo(compilation, types, blueprintComponent));
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValuesProvider<IAssemblySymbol> assemblies) =>
             assemblies
                 .SelectMany(static (a, _) => a.GlobalNamespace.GetAllNamespaces())
                 .SelectMany(static (ns, _) => ns.GetAssignableTypes());
 
-        internal static IncrementalValuesProvider<INamedTypeSymbol> GetBlueprintTypes(IncrementalValueProvider<Compilation> compilation)
+        internal static IncrementalValuesProvider<INamedTypeSymbol> GetBlueprintTypes(
+            IncrementalValueProvider<Compilation> compilation, string? assemblyName = null)
         {
             var assemblies = compilation
                 .SelectMany(static (c, _) => c.SourceModule.ReferencedAssemblySymbols)
-                .Where(static a => a.Name == "Assembly-CSharp");
+                .Where(a => assemblyName is null || a.Name == assemblyName);
 
             var types = GetAssignableTypes(assemblies);
 
@@ -359,6 +317,26 @@ namespace MicroWrath.Generator.Common
                     var (types, compilation) = typesAndCompilation;
 
                     return GetCompilationBlueprintTypes(compilation, types);
+                });
+        }
+
+        internal static IncrementalValuesProvider<INamedTypeSymbol> GetComponentTypes(
+            IncrementalValueProvider<Compilation> compilation, string? assemblyName = null)
+        {
+            var assemblies = compilation
+                .SelectMany(static (c, _) => c.SourceModule.ReferencedAssemblySymbols)
+                .Where(a => assemblyName is null || a.Name == assemblyName);
+
+            var types = GetAssignableTypes(assemblies);
+
+            return types
+                .Collect()
+                .Combine(compilation)
+                .SelectMany(static (typesAndCompilation, _) =>
+                {
+                    var (types, compilation) = typesAndCompilation;
+
+                    return GetCompilationComponentTypes(compilation, types);
                 });
         }
 

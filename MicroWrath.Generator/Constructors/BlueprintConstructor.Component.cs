@@ -23,7 +23,8 @@ namespace MicroWrath.Generator
         internal static void CreateComponentConstructors(
             IncrementalValueProvider<Compilation> compilation,
             IncrementalValuesProvider<GeneratorSyntaxContext> syntax,
-            IncrementalGeneratorInitializationContext context)
+            IncrementalGeneratorInitializationContext context,
+            IncrementalValuesProvider<INamedTypeSymbol> generatedComponentReferences)
         {
             var blueprintComponentType = compilation
                 .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.BlueprintComponent"));
@@ -137,13 +138,15 @@ namespace MicroWrath.Generator
             var invocationTypeArguments = typeParams
                 .Collect()
                 .Combine(blueprintComponentType)
+                .Combine(generatedComponentReferences.Collect())
                 .SelectMany(static (tsbp, _) =>
                 {
-                    var (ts, blueprintComponent) = tsbp;
+                    var ((ts, blueprintComponent), generatedRefs) = tsbp;
 
                     return ts
                         .OfType<INamedTypeSymbol>()
-                        .Distinct((IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default)
+                        .Concat(generatedRefs)
+                        .Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default)
                         .Where(t => !t.Equals(blueprintComponent, SymbolEqualityComparer.Default));
                 });
 

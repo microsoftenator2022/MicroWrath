@@ -30,12 +30,12 @@ namespace MicroWrath.Generator
                 spc.AddSource("debug.analyzerConfig", $"{configEntries.Select(c => $"//{c.k}: {c.v}").Aggregate((a, b) => $"{a}{Environment.NewLine}{b}")}");
             });
 
-            var blueprintTypes = Incremental.GetBlueprintTypes(compilation).Collect();
+            //var blueprintTypes = Incremental.GetBlueprintTypes(compilation).Collect();
 
-            context.RegisterSourceOutput(blueprintTypes, (spc, types) =>
-            {
-                spc.AddSource("debug.blueprintTypes", $"//{types.Select(t => t.FullName()).Aggregate((a, b) => $"{a}{Environment.NewLine}//{b}")}");
-            });
+            //context.RegisterSourceOutput(blueprintTypes, (spc, types) =>
+            //{
+            //    spc.AddSource("debug.blueprintTypes", $"//{types.Select(t => t.FullName()).Aggregate((a, b) => $"{a}{Environment.NewLine}//{b}")}");
+            //});
 
             //context.RegisterSourceOutput(additionalText.Select((t, _) => (path: t.Path, text: t.GetText())).Collect(), (spc, files) =>
             //{
