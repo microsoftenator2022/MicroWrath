@@ -9,7 +9,7 @@ using MicroWrath.Util.Linq;
 
 using MicroWrath.Constructors;
 
-namespace MicroWrath
+namespace MicroWrath.Extensions
 {
     internal static class BlueprintExtensions
     {
@@ -29,7 +29,7 @@ namespace MicroWrath
             blueprint.ComponentsArray = blueprint.ComponentsArray.Append(component);
         }
 
-        public static TComponent AddNewComponent<TComponent>(this BlueprintScriptableObject blueprint, Func<TComponent, TComponent>? init = default)
+        public static TComponent AddComponent<TComponent>(this BlueprintScriptableObject blueprint, Func<TComponent, TComponent>? init = default)
             where TComponent : BlueprintComponent, new()
         {
             if (init == default) init = Functional.Identity;
