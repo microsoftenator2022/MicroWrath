@@ -24,12 +24,9 @@
     <EmbeddedResource Include="..\MicroWrath\Constructors\Constructors.cs" Link="Resources\Constructors.cs" />
     <EmbeddedResource Include="..\MicroWrath\Constructors\ReflectionInitializer.cs" Link="Resources\ReflectionInitializer.cs" />
     <EmbeddedResource Include="..\MicroWrath\Localization\LocalizedStringAttribute.cs" Link="Resources\LocalizedStringAttribute.cs" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\BlueprintInitializationContext.cs"
-                      Link="Resources\BlueprintInitializationContext.cs" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\BlueprintInitializationContext.Initializer.cs"
-                      Link="Resources\BlueprintInitializationContext.Initializer.cs" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\InitContextBlueprint.cs"
-                      Link="Resources\InitContextBlueprint.cs" />
+    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\BlueprintInitializationContext.cs" Link="Resources\BlueprintInitializationContext.cs" />
+    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\BlueprintInitializationContext.Initializer.cs" Link="Resources\BlueprintInitializationContext.Initializer.cs" />
+    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\InitContextBlueprint.cs" Link="Resources\InitContextBlueprint.cs" />
   </ItemGroup>
 
   <ItemGroup>
