@@ -16,24 +16,24 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\*.*" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintExtensions.cs" Link="Resources\BlueprintExtensions.cs" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintsDb\BlueprintsDb.cs" Link="Resources\BlueprintsDb.cs" />
-    <EmbeddedResource Include="..\MicroWrath\MicroLogger.cs" Link="Resources\MicroLogger.cs" />
-    <EmbeddedResource Include="..\MicroWrath\DefaultValues.cs" Link="Resources\DefaultValues.cs" />
-    <EmbeddedResource Include="..\MicroWrath\MicroBlueprint.cs" Link="Resources\MicroBlueprint.cs" />
-    <EmbeddedResource Include="..\MicroWrath\Constructors\Constructors.cs" Link="Resources\Constructors.cs" />
-    <EmbeddedResource Include="..\MicroWrath\Constructors\ReflectionInitializer.cs" Link="Resources\ReflectionInitializer.cs" />
-    <EmbeddedResource Include="..\MicroWrath\Localization\LocalizedStringAttribute.cs" Link="Resources\LocalizedStringAttribute.cs" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\BlueprintInitializationContext.cs" Link="Resources\BlueprintInitializationContext.cs" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\BlueprintInitializationContext.Initializer.cs" Link="Resources\BlueprintInitializationContext.Initializer.cs" />
-    <EmbeddedResource Include="..\MicroWrath\BlueprintInitializationContext\InitContextBlueprint.cs" Link="Resources\InitContextBlueprint.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintExtensions.cs" Link="Resources\BlueprintExtensions.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintsDb\BlueprintsDb.cs" Link="Resources\BlueprintsDb.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\MicroLogger.cs" Link="Resources\MicroLogger.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\DefaultValues.cs" Link="Resources\DefaultValues.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\MicroBlueprint.cs" Link="Resources\MicroBlueprint.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\Constructors\Constructors.cs" Link="Resources\Constructors.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\Constructors\ReflectionInitializer.cs" Link="Resources\ReflectionInitializer.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\Localization\LocalizedStringAttribute.cs" Link="Resources\LocalizedStringAttribute.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintInitializationContext\BlueprintInitializationContext.cs" Link="Resources\BlueprintInitializationContext.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintInitializationContext\BlueprintInitializationContext.Initializer.cs" Link="Resources\BlueprintInitializationContext.Initializer.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintInitializationContext\InitContextBlueprint.cs" Link="Resources\InitContextBlueprint.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="ModResources\*.*" />
     <EmbeddedResource Include="IsExternalInit.cs" Link="ModResources\IsExternalInit.cs" />
-    <EmbeddedResource Include="..\MicroWrath\Triggers.cs" Link="ModResources\Triggers.cs" />
-    <EmbeddedResource Include="..\MicroWrath\InitAttribute.cs" Link="ModResources\InitAttribute.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\Triggers.cs" Link="ModResources\Triggers.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\InitAttribute.cs" Link="ModResources\InitAttribute.cs" />
   </ItemGroup>
   
   <ItemGroup>
