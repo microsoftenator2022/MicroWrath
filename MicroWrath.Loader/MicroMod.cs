@@ -102,7 +102,7 @@ namespace MicroWrath
                 var ModAssembly = Assembly.LoadFrom(assPath);
             
                 Type? modType = ModAssembly?.DefinedTypes
-                    .Where(t => typeof(IMicroMod).IsAssignableFrom(t))
+                    .Where(t => typeof(IMicroMod).IsAssignableFrom(t) && !t.IsAbstract)
                     .Select(t => t.UnderlyingSystemType)
                     .FirstOrDefault();
 

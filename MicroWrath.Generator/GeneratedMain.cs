@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -20,6 +21,11 @@ namespace MicroWrath.Generator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
+            context.RegisterPostInitializationOutput(pic =>
+            {
+
+            });
+
             var rootNamespace = context.AnalyzerConfigOptionsProvider.Select(static (c, _) => Incremental.GetConfig(c).RootNamespace);
 
             var compilation = context.CompilationProvider;
@@ -32,23 +38,23 @@ namespace MicroWrath.Generator
                 .Combine(microModInterface)
                 .SelectMany(static (scmi, _) =>
                 {
-                    var (sc, mi) = scmi;
+                    var (sc, mmi) = scmi;
 
                     var typeSymbol = sc.SemanticModel.GetDeclaredSymbol((TypeDeclarationSyntax)sc.Node);
 
-                    if (mi is null || typeSymbol is null ||
-                        !typeSymbol.AllInterfaces.Any(i => i.Equals(mi, SymbolEqualityComparer.Default)))
+                    if (mmi is null || typeSymbol is null || typeSymbol.IsAbstract ||
+                        !typeSymbol.AllInterfaces.Any(i => i.Equals(mmi, SymbolEqualityComparer.Default)))
                         return Enumerable.Empty<(GeneratorSyntaxContext sc, INamedTypeSymbol mi, INamedTypeSymbol type)>();
 
-                    return EnumerableExtensions.Singleton((sc, mi, type: typeSymbol));
+                    return EnumerableExtensions.Singleton((sc, mmi, type: typeSymbol));
                 });
 
             var partialAndNonImplementing = typeSymbols
                 .SelectMany(static (sct, _) =>
                 {
-                    var (sc, mi, typeSymbol) = sct;
+                    var (sc, mmi, typeSymbol) = sct;
 
-                    var interfaceMembers = mi.GetMembers();
+                    var interfaceMembers = mmi.GetMembers();
 
                     if (interfaceMembers.Any(m => typeSymbol.FindImplementationForInterfaceMember(m) is not null))
                         return Enumerable.Empty<(GeneratorSyntaxContext sc, INamedTypeSymbol type)>();
@@ -98,47 +104,65 @@ namespace MicroWrath.Generator
 
                 var (ns, maybeType) = maybeTypeAndNs.Value;
 
-                var name = maybeType.Value?.Name ?? "Main";
-
-                if (!shouldGen) return;
-
-                var props = maybeType.Map(t => new
-                {
-                    HasParameterlessConstructor = t.Constructors.Any(c => c.Parameters.Length == 0),
-                });
-
                 var sb = new StringBuilder();
 
                 sb.AppendLine($@"using System;
+using System.Linq;
+using System.Reflection;
+
 using HarmonyLib;
+
 using UnityModManagerNet;
+
 using MicroWrath;
 using MicroWrath.Util;
 
 namespace {ns}
 {{
-    public partial class {name} : IMicroMod
-    {{");
-                if(!(props.Value?.HasParameterlessConstructor ?? false))
-                sb.Append($@"
-        private {name}() {{ }}");
-
-                sb.Append($@"
-        private static {name}? instance;
-        internal static {name} Instance => instance!;
+    internal abstract class ModMain : IMicroMod
+    {{
+        private static ModMain? instance;
+        protected internal static ModMain Instance
+        {{
+            get => instance!;
+            protected set => instance = value;
+        }}
 
         private UnityModManager.ModEntry? modEntry;
-        internal UnityModManager.ModEntry ModEntry => modEntry!;
+        protected internal UnityModManager.ModEntry ModEntry
+        {{
+            get => modEntry!;
+            protected set => modEntry = value;
+        }}
 
         private Harmony? harmony;
-        internal Harmony Harmony => harmony!;
+        protected internal Harmony Harmony
+        {{
+            get => harmony!;
+            protected set => harmony = value;
+        }}
 
         public event Action<UnityModManager.ModEntry> Loaded = Functional.Ignore;
 
-        public bool Load(UnityModManager.ModEntry modEntry)
+        protected virtual void DoInit()
+        {{
+            var initMethods = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
+                .Where(m => m.GetParameters().Length == 0 && m.GetCustomAttribute<InitAttribute>() is not null);
+
+            foreach (var method in initMethods)
+            {{
+                method.Invoke(null, null);
+            }}
+        }}
+
+        public virtual bool Load(UnityModManager.ModEntry modEntry)
         {{
             this.modEntry = modEntry;
             MicroLogger.ModEntry = modEntry;
+
+            DoInit();
 
             harmony = new Harmony(modEntry.Info.Id);
             harmony.PatchAll();
@@ -149,6 +173,42 @@ namespace {ns}
 
             return true;
         }}
+    }}
+}}");
+
+                spc.AddSource("MicroMod.Main", sb.ToString());
+                
+                sb.Clear();
+
+                var name = maybeType.Value?.Name ?? "Main";
+
+                if (!shouldGen) return;
+
+                var props = maybeType.Map(t => new
+                {
+                    HasParameterlessConstructor = t.Constructors.Any(c => c.Parameters.Length == 0),
+                });
+
+                sb.AppendLine($@"using System;
+using System.Linq;
+using System.Reflection;
+
+using HarmonyLib;
+
+using UnityModManagerNet;
+
+using MicroWrath;
+using MicroWrath.Util;
+
+namespace {ns}
+{{
+    internal partial class {name} : ModMain
+    {{");
+                if(!(props.Value?.HasParameterlessConstructor ?? false))
+                sb.Append($@"
+        private {name}() {{ }}");
+
+                sb.Append($@"
     }}
 }}
 ");

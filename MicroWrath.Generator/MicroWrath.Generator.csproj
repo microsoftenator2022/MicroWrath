@@ -36,6 +36,7 @@
     <EmbeddedResource Include="ModResources\*.*" />
     <EmbeddedResource Include="IsExternalInit.cs" Link="ModResources\IsExternalInit.cs" />
     <EmbeddedResource Include="..\MicroWrath\Triggers.cs" Link="ModResources\Triggers.cs" />
+    <EmbeddedResource Include="..\MicroWrath\InitAttribute.cs" Link="ModResources\InitAttribute.cs" />
   </ItemGroup>
   
   <ItemGroup>
