@@ -115,7 +115,7 @@ namespace MicroWrath.Util.Linq
                 }
             }
 
-            if (i < chunkSize) yield return chunk.Take(i);
+            if (i > 0 && i < chunkSize) yield return chunk.Take(i);
         }
     }
 }
