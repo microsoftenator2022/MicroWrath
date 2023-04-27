@@ -128,7 +128,7 @@ namespace MicroWrath.Generator
                 }
 
                 sb.Append($@"
-namespace MicroWrath.Extensions.{bpt.blueprintType.Name}
+namespace MicroWrath.Extensions.Components
 {{
     internal static class {bpt.blueprintType.Name}Components
     {{

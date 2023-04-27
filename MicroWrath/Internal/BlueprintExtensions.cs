@@ -41,6 +41,9 @@ namespace MicroWrath.Extensions
             return component;
         }
 
+        public static TComponent AddComponent<TComponent>(this BlueprintScriptableObject blueprint, Action<TComponent> init)
+            where TComponent : BlueprintComponent, new() => AddComponent<TComponent>(blueprint, c => { init(c); return c; });
+
         public static IEnumerable<TComponent> GetComponents<TComponent>(this BlueprintScriptableObject blueprint)
             where TComponent : BlueprintComponent =>
             blueprint.Components.OfType<TComponent>();
