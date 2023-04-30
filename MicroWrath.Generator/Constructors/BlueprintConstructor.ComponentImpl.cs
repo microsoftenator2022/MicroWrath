@@ -41,7 +41,8 @@ namespace MicroWrath.Generator
                     .Aggregate((acc, next) => $"{acc}.{next}") + "." + name;
             }
 
-            sb.AppendLine($"using {ns};");
+            if (ns.ToString() != "Kingmaker.Blueprints")
+                sb.AppendLine($"using {ns};");
 
             sb.Append($@"
 namespace {ConstructorNamespace}
