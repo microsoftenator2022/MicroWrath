@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Xml.Linq;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -202,6 +203,25 @@ namespace MicroWrath.Generator.Common
             t.ToDisplayString(FullNameNoGenericsDisplayFormat);
 
         internal static string EscapedTypeName(this INamedTypeSymbol symbol) => symbol.DisplayStringNoGenerics().Replace('.', '_');
+
+        internal static string EscapeIdentifierString(string identifier)
+        {
+            List<char> nameChars = new();
+            string escapedName = identifier;
+
+            if (!SyntaxFacts.IsValidIdentifier(identifier))
+            {
+                nameChars = identifier.Select(static c =>
+                    SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_').ToList();
+
+                if (!SyntaxFacts.IsIdentifierStartCharacter(identifier[0]))
+                    nameChars.Insert(0, '_');
+
+                escapedName = new string(nameChars.ToArray());
+            }
+
+            return escapedName;
+        }
 
         internal static string GenericParametersPart(this INamedTypeSymbol symbol) =>
             symbol.ToDisplayString(new SymbolDisplayFormat(

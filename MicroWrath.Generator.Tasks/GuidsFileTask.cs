@@ -133,7 +133,7 @@ namespace MicroWrath.Generator
 
             var json = JsonConvert.SerializeObject(guids);
 
-            using var writer = new StreamWriter(File.OpenWrite(GuidsFile));
+            using var writer = new StreamWriter(new FileStream(GuidsFile, FileMode.Create));
 
             writer.Write(json);
 

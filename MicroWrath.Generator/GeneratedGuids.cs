@@ -89,7 +89,7 @@ namespace MicroWrath.Generator
                         guids = guids.Add(key, Guid.NewGuid());
 
                 var sb = new StringBuilder();
-
+                
                 sb.Append($@"using System;
 using System.Collections.Generic;
 using Kingmaker.Blueprints;
@@ -112,7 +112,7 @@ namespace MicroWrath
                 foreach (var entry in guids)
                 {
                     sb.Append($@"
-        public static BlueprintGuid {entry.Key} => new BlueprintGuid(guids[""{entry.Key}""]);");
+        public static GeneratedGuid {Analyzers.EscapeIdentifierString(entry.Key)} => new(""{entry.Key}"", new BlueprintGuid(guids[""{entry.Key}""]));");
                 }
 
                 sb.Append($@"
