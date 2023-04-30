@@ -20,6 +20,7 @@
     <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintsDb\BlueprintsDb.cs" Link="Resources\BlueprintsDb.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\MicroLogger.cs" Link="Resources\MicroLogger.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\DefaultValues.cs" Link="Resources\DefaultValues.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\GeneratedGuid.cs" Link="Resources\GeneratedGuid.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\MicroBlueprint.cs" Link="Resources\MicroBlueprint.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\Constructors\Constructors.cs" Link="Resources\Constructors.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\Constructors\ReflectionInitializer.cs" Link="Resources\ReflectionInitializer.cs" />
@@ -40,7 +41,12 @@
     <PackageReference Include="IndexRange" Version="1.0.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" GeneratePathProperty="true" PrivateAssets="all" />
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="$(PkgNewtonsoft_Json)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
 
   <PropertyGroup>

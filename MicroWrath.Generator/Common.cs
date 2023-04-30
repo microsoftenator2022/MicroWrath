@@ -226,6 +226,7 @@ namespace MicroWrath.Generator.Common
                 yield return ancestor;
         }
 
+        internal static Option<T> ToOption<T>(this Optional<T?> optional) => optional.HasValue ? Option.Some(optional.Value!) : Option.None<T>();
     }
 
     internal static class Incremental

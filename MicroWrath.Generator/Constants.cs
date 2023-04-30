@@ -18,5 +18,8 @@ namespace MicroWrath.Generator
         internal static readonly string BlueprintsDbTypeFullName = $"{BlueprintsDbNamespace}.{BlueprintsDbTypeName}";
 
         internal const string AttributeFullName = "MicroWrath.Localization.LocalizedStringAttribute";
+
+        internal const string GeneratedGuidClassName = "GeneratedGuid";
+        internal const string GeneratedGuidFullName = $"MicroWrath.{GeneratedGuidClassName}";
     }
 }
