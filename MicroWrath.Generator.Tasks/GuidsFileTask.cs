@@ -131,7 +131,7 @@ namespace MicroWrath.Generator
 
             Log.LogMessage(MessageImportance.High, $"Writing guids to file {GuidsFile}");
 
-            var json = JsonConvert.SerializeObject(guids);
+            var json = JsonConvert.SerializeObject(guids, Formatting.Indented);
 
             using var writer = new StreamWriter(new FileStream(GuidsFile, FileMode.Create));
 
