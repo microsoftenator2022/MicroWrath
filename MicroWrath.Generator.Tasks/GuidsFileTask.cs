@@ -15,10 +15,10 @@ namespace MicroWrath.Generator
     public class GenerateGuidsFile : AppDomainIsolatedTask
     {
         [Required]
-        public string WrathAssembliesPath { get; set; }
+        public string WrathPath { get; set; }
 
         [Required]
-        public string AssemblyPath { get; set; }
+        public string Assembly { get; set; }
 
         [Required]
         public string GuidsFile { get; set; }
@@ -27,8 +27,8 @@ namespace MicroWrath.Generator
         {
             Log.LogMessage(MessageImportance.High, "Generating guids file");
 
-            Log.LogMessage($"WrathAssembliesPath: {WrathAssembliesPath}");
-            Log.LogMessage($"AssemblyPath: {AssemblyPath}");
+            Log.LogMessage($"WrathPath: {WrathPath}");
+            Log.LogMessage($"AssemblyPath: {Assembly}");
             Log.LogMessage($"GuidsFile: {GuidsFile}");
 
             var guids = new Dictionary<string, Guid>();
@@ -37,20 +37,20 @@ namespace MicroWrath.Generator
             {
                 Log.LogMessage(MessageImportance.High, $"Loading guids from file {GuidsFile}");
 
-                using var file = File.OpenText(GuidsFile);
-
-                guids = JsonConvert.DeserializeObject<Dictionary<string, Guid>>(file.ReadToEnd());
+                guids = JsonConvert.DeserializeObject<Dictionary<string, Guid>>(File.ReadAllText(GuidsFile));
             }
 
-            if (!File.Exists(AssemblyPath))
+            if (!File.Exists(Assembly))
             {
                 Log.LogError("Assembly file does not exist");
                 return false;
             }
 
-            AssemblyPath = Path.GetFullPath(AssemblyPath);
+            var modDirectory = Path.Combine(WrathPath, "Mods", Path.GetFileNameWithoutExtension(Assembly));
+            
+            Assembly = Path.GetFullPath(Assembly);
 
-            Log.LogMessage(MessageImportance.High, $"Loading assembly {AssemblyPath}");
+            Log.LogMessage(MessageImportance.High, $"Loading assembly {Assembly}");
             
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
@@ -60,21 +60,21 @@ namespace MicroWrath.Generator
 
                 if (!File.Exists(assemblyPath))
                 {
-                    foreach (var f in Directory.EnumerateFiles(Path.GetDirectoryName(AssemblyPath), "*.dll", SearchOption.AllDirectories))
+                    foreach (var f in Directory.EnumerateFiles(Path.GetDirectoryName(Assembly), "*.dll", SearchOption.AllDirectories))
                     {
                         if (Path.GetFileNameWithoutExtension(f) == name.Name)
                         {
                             Log.LogMessage($"Loading {args.Name} from {f}");
-                            return Assembly.LoadFrom(f);
+                            return System.Reflection.Assembly.LoadFrom(f);
                         }
                     }
 
-                    foreach (var f in Directory.EnumerateFiles(WrathAssembliesPath, "*.dll", SearchOption.AllDirectories))
+                    foreach (var f in Directory.EnumerateFiles(Path.Combine(WrathPath, "Wrath_Data", "Managed"), "*.dll", SearchOption.AllDirectories))
                     {
                         if (Path.GetFileNameWithoutExtension(f) == name.Name)
                         {
                             Log.LogMessage($"Loading {args.Name} from {f}");
-                            return Assembly.LoadFrom(f);
+                            return System.Reflection.Assembly.LoadFrom(f);
                         }
                     }
 
@@ -84,7 +84,7 @@ namespace MicroWrath.Generator
                 return null;
             };
 
-            var ass = Assembly.LoadFrom(AssemblyPath);
+            var ass = System.Reflection.Assembly.LoadFrom(Assembly);
 
             Type guidsType = null;
 
@@ -125,6 +125,27 @@ namespace MicroWrath.Generator
                 throw;
             }
 
+            var runtimeGuidsFilePath = Path.Combine(modDirectory, "runtimeGuids.json");
+            if (File.Exists(runtimeGuidsFilePath))
+            {
+                Log.LogMessage(MessageImportance.High, $"Found runtimeGuids.json in {modDirectory}");
+
+                foreach (var entry in JsonConvert.DeserializeObject<Dictionary<string, Guid>>(File.ReadAllText(runtimeGuidsFilePath)))
+                {
+                    Log.LogMessage(MessageImportance.High, $"{entry.Key}: {entry.Value}");
+
+                    if (guids.ContainsKey(entry.Key))
+                    {
+                        if (entry.Value != guids[entry.Key])
+                            Log.LogWarning("Runtime guid for key {entry.Key} does not match existing entry {guids[entry]}. Ignored");
+
+                        continue;
+                    }
+
+                    guids.Add(entry.Key, entry.Value);
+                }
+            }
+
             Log.LogMessage(MessageImportance.High, $"{guids.Count} total entries");
 
             if (guids is null || guids.Count == 0) return true;
@@ -133,9 +154,7 @@ namespace MicroWrath.Generator
 
             var json = JsonConvert.SerializeObject(guids, Formatting.Indented);
 
-            using var writer = new StreamWriter(new FileStream(GuidsFile, FileMode.Create));
-
-            writer.Write(json);
+            File.WriteAllText(GuidsFile, json);
 
             return true;
         }
