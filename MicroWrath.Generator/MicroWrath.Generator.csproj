@@ -17,6 +17,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\*.*" />
     <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintExtensions.cs" Link="Resources\BlueprintExtensions.cs" />
+    <EmbeddedResource Include="..\MicroWrath\Internal\ComponentExtensions.cs" Link="Resources\ComponentExtensions.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\BlueprintsDb\BlueprintsDb.cs" Link="Resources\BlueprintsDb.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\MicroLogger.cs" Link="Resources\MicroLogger.cs" />
     <EmbeddedResource Include="..\MicroWrath\Internal\DefaultValues.cs" Link="Resources\DefaultValues.cs" />

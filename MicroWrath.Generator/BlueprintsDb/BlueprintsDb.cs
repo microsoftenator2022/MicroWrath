@@ -51,24 +51,8 @@ namespace MicroWrath.Generator
                 });
         }
 
-//        private void DefineBlueprintsDbClass(IncrementalGeneratorInitializationContext context)
-//        {
-//            context.RegisterPostInitializationOutput(pic =>
-//            {
-//                pic.AddSource("BlueprintsDb", $@"namespace {blueprintsDbNamespace}
-//{{
-//    internal static partial class {blueprintsDbTypeName}
-//    {{
-//        internal static partial class Owlcat {{ }}
-//    }}
-//}}");
-//            });
-//        }
-
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            //DefineBlueprintsDbClass(context);
-
             var compilation = context.CompilationProvider;
             
             var cheatdata = context.AdditionalTextsProvider.Where(static at => Path.GetFileName(at.Path).ToLower() == "cheatdata.json");

@@ -116,7 +116,7 @@ namespace MicroWrath.Generator
                     var ns = c.ContainingNamespace.ToString();
                     if (!namespaces.Contains(ns)) namespaces.Add(ns);
 
-                    methods.Add($"internal static {c} Add{c.Name}(this {bpt.blueprintType} blueprint) => blueprint.AddComponent<{c}>();");
+                    methods.Add($"internal static {c} Add{c.Name}(this {bpt.blueprintType} blueprint, Action<{c}>? init = null) => blueprint.AddComponent<{c}>(init);");
                 }
 
                 if (methods.Count == 0) return;
