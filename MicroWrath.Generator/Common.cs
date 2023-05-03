@@ -267,7 +267,7 @@ namespace MicroWrath.Generator.Common
                         return Analyzers.GetAllGenericInstances(tps, invocationsSyntax, ct);
                     });
 
-        internal static IncrementalValuesProvider<IMethodSymbol> GetMethodInvocations(
+        internal static IncrementalValuesProvider<(IMethodSymbol symbol, InvocationExpressionSyntax node)> GetMethodInvocations(
             string typeName,
             string methodName,
             IncrementalValueProvider<Compilation> compilation,
@@ -288,11 +288,11 @@ namespace MicroWrath.Generator.Common
                     var ((node, symbol, sm), method) = nssm;
 
                     return method
-                        .Bind<IMethodSymbol, IMethodSymbol>(m =>
+                        .Bind<IMethodSymbol, (IMethodSymbol, InvocationExpressionSyntax)>(m =>
                         {
-                            if (m.Equals(symbol.ConstructedFrom, SymbolEqualityComparer.Default)) return Option.Some(symbol);
+                            if (m.Equals(symbol.ConstructedFrom, SymbolEqualityComparer.Default)) return Option.Some((symbol, node));
 
-                            return Option.None<IMethodSymbol>();
+                            return Option.None<(IMethodSymbol, InvocationExpressionSyntax)>();
                         })
                         .ToEnumerable();
                 });

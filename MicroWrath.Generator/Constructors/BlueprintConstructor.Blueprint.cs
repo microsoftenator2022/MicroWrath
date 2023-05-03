@@ -41,7 +41,7 @@ namespace MicroWrath.Generator
                 compilation,
                 invocations);
 
-            var invocationTypeArguments = Incremental.GetTypeParameters(newBlueprintMethodInvocations, syntax)
+            var invocationTypeArguments = Incremental.GetTypeParameters(newBlueprintMethodInvocations.Select((m, _) => m.symbol), syntax)
                 .Collect()
                 .Combine(simpleBlueprintType)
                 .SelectMany(static (tsbp, _) =>

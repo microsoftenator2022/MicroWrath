@@ -29,7 +29,7 @@ namespace MicroWrath
 
         internal static IEnumerable<string> Keys => guids.Keys;
 
-        internal static string ModDirectory => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static string ModDirectory => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         private static readonly Dictionary<string, Guid> runtimeGuids = new();
 
@@ -77,7 +77,7 @@ namespace MicroWrath
                     runtimeGuids[key] = System.Guid.NewGuid();
                     MicroLogger.Debug(() => $"No guid found for {key}. Generated new guid {runtimeGuids[key]}.");
 
-                    if (!TrySaveRuntimeGuids()) MicroLogger.Warning("Could not save runtime guids. Saves may not load after game restart");
+                    if (!TrySaveRuntimeGuids()) MicroLogger.Warning("Could not save runtime guids. New saves may not load after game restart");
                 }
 
                 guids[key] = runtimeGuids[key];

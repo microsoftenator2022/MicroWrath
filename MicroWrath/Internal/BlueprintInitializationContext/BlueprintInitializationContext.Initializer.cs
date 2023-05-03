@@ -14,13 +14,13 @@ namespace MicroWrath.BlueprintInitializationContext
         internal static BlueprintInitializationContext.ContextInitializer<TOther> Combine<TOther>(
             this BlueprintInitializationContext.ContextInitializer obj,
             BlueprintInitializationContext.ContextInitializer<TOther> other) =>
-            obj.Map(() => new object()).Combine(other).Map(x => x.Item2);
+            obj.Map(() => new object()).Combine(other).Map(x => x.Right);
 
         internal static BlueprintInitializationContext.ContextInitializer<TBlueprint> GetBlueprint<TBlueprint>(
             this BlueprintInitializationContext.ContextInitializer obj,
             IMicroBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            obj.Map(() => new object()).GetBlueprint(blueprint).Map(x => x.Item2);
+            obj.Map(() => new object()).GetBlueprint(blueprint).Map(x => x.Right);
 
         internal static BlueprintInitializationContext.ContextInitializer<IEnumerable<TBlueprint>> Combine<TBlueprint>(
             this IEnumerable<BlueprintInitializationContext.ContextInitializer<TBlueprint>> bpcs)
@@ -31,7 +31,7 @@ namespace MicroWrath.BlueprintInitializationContext
 
             return tail.Aggregate(
                 head.Map(EnumerableExtensions.Singleton),
-                (acc, next) => acc.Combine(next).Map(x => x.Item1.Append(x.Item2)));
+                (acc, next) => acc.Combine(next).Map(x => x.Left.Append(x.Right)));
         }
     }
 
@@ -49,9 +49,9 @@ namespace MicroWrath.BlueprintInitializationContext
         {
             public abstract ContextInitializer Map(Action<T> action);
             public abstract ContextInitializer<TResult> Map<TResult>(Func<T, TResult> selector);
-            public abstract ContextInitializer<(T, TOther)> Combine<TOther>(ContextInitializer<TOther> other);
+            public abstract ContextInitializer<(T Left, TOther Right)> Combine<TOther>(ContextInitializer<TOther> other);
 
-            public virtual ContextInitializer<(T, TBlueprint)> GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
+            public virtual ContextInitializer<(T Left, TBlueprint Right)> GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
                 where TBlueprint : SimpleBlueprint =>
                 this.Combine(InitContext.GetBlueprint(blueprint));
         }
