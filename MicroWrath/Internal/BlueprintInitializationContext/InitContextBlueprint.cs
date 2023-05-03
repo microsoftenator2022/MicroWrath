@@ -39,6 +39,13 @@ namespace MicroWrath.BlueprintInitializationContext
                 BlueprintGuid = BlueprintGuid.Parse(assetId);
             }
 
+            internal InitContextBlueprint(BlueprintGuid guid, string name)
+            {
+                Name = name;
+                BlueprintGuid = guid;
+                AssetId = guid.ToString();
+            }
+
             BlueprintGuid IMicroBlueprint<TBlueprint>.BlueprintGuid => BlueprintGuid;
 
             TBlueprint? IMicroBlueprint<TBlueprint>.GetBlueprint() => this.TryGetBlueprint().Value;

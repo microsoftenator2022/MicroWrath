@@ -89,6 +89,6 @@ namespace MicroWrath
         public override string ToString() => this.Guid.ToString();
 
         public static implicit operator BlueprintGuid(GeneratedGuid guid) => guid.Guid;
-        public static implicit operator string(GeneratedGuid guid) => guid.Guid.ToString();
+        //public static implicit operator string(GeneratedGuid guid) => guid.Guid.ToString();
     }
 }

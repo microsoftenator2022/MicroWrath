@@ -24,6 +24,8 @@ namespace MicroWrath.Generator
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
+            var config = Incremental.GetConfig(context.AnalyzerConfigOptionsProvider);
+
             var compilation = context.CompilationProvider;
 
             var generatedGuidsType = compilation
@@ -72,9 +74,9 @@ namespace MicroWrath.Generator
                 .SelectMany(static (ats, _) => ats.Reverse().TryHead().ToEnumerable())
                 .Select(static (at, _) => (at.Path, at.GetText()?.ToString() ?? ""));
 
-            context.RegisterSourceOutput(guidsFile.Collect().Combine(constantKeys.Collect()), (spc, fileAndKeys) =>
+            context.RegisterSourceOutput(config.Combine(guidsFile.Collect()).Combine(constantKeys.Collect()), (spc, fileAndKeys) =>
             {
-                var (filePaths, keys) = fileAndKeys;
+                var ((config, filePaths), keys) = fileAndKeys;
 
                 var (filePath, fileText) = filePaths.FirstOrDefault();
 
@@ -94,6 +96,8 @@ namespace MicroWrath.Generator
 using System.Collections.Generic;
 using Kingmaker.Blueprints;
 
+using {config.RootNamespace.Value};
+
 namespace MicroWrath
 {{
     internal partial class {Constants.GeneratedGuidClassName}
@@ -112,7 +116,7 @@ namespace MicroWrath
                 foreach (var entry in guids)
                 {
                     sb.Append($@"
-        public static GeneratedGuid {Analyzers.EscapeIdentifierString(entry.Key)} => new(""{entry.Key}"", new BlueprintGuid(guids[""{entry.Key}""]));");
+        public static GeneratedGuid {Analyzers.EscapeIdentifierString(entry.Key)} => new(""{entry.Key}"", BlueprintGuid.Parse(guids[""{entry.Key}""].ToString()));");
                 }
 
                 sb.Append($@"

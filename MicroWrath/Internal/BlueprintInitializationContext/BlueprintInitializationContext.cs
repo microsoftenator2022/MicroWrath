@@ -37,14 +37,18 @@ namespace MicroWrath.BlueprintInitializationContext
             done = Trigger.Subscribe(Observer.Create<Unit>(
                 onNext: _ =>
                 {
-                    foreach (var (guid, bp) in Blueprints.Select(kvp => (kvp.Key, kvp.Value.CreateNew())))
+                    foreach (var (guid, mbp) in Blueprints.Select(kvp => (kvp.Key, kvp.Value)))
                     {
+                        var bp = mbp.CreateNew();
+
                         MicroLogger.Debug(() => $"Adding blueprint {guid} {bp.name}");
 
                         if (ResourcesLibrary.BlueprintsCache.m_LoadedBlueprints.ContainsKey(guid))
                             MicroLogger.Warning($"BlueprintsCache already contains guid '{guid}'");
 
                         ResourcesLibrary.BlueprintsCache.AddCachedBlueprint(guid, bp);
+
+                        MicroLogger.Debug(() => $"Added {ResourcesLibrary.TryGetBlueprint(guid).NameSafe()}");
                     }
 
                     foreach (var initAction in Initializers) initAction();
@@ -74,6 +78,14 @@ namespace MicroWrath.BlueprintInitializationContext
             where TBlueprint : SimpleBlueprint, new()
         {
             var microBlueprint = new InitContextBlueprint<TBlueprint>(assetId, name);
+
+            return new BlueprintInit<TBlueprint>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint.ToReference());
+        }
+
+        public ContextInitializer<TBlueprint> NewBlueprint<TBlueprint>(BlueprintGuid guid, string name)
+            where TBlueprint : SimpleBlueprint, new()
+        {
+            var microBlueprint = new InitContextBlueprint<TBlueprint>(guid, name);
 
             return new BlueprintInit<TBlueprint>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint.ToReference());
         }

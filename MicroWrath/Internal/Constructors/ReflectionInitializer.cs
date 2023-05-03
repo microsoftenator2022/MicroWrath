@@ -96,6 +96,9 @@ namespace MicroWrath.Constructors
         {
             TBlueprint bp = new();
 
+            bp.AssetGuid = BlueprintGuid.Parse(assetId);
+            bp.name = name;
+
             foreach (var f in FieldInitializers) f(bp);
             foreach (var p in PropertyInitializers) p(bp);
             TypeInitializer(bp);

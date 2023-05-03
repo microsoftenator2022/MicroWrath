@@ -37,7 +37,7 @@ namespace MicroWrath.Generator
             {
                 Log.LogMessage(MessageImportance.High, $"Loading guids from file {GuidsFile}");
 
-                guids = JsonConvert.DeserializeObject<Dictionary<string, Guid>>(File.ReadAllText(GuidsFile));
+                guids = JsonConvert.DeserializeObject<Dictionary<string, Guid>>(File.ReadAllText(GuidsFile)) ?? guids;
             }
 
             if (!File.Exists(Assembly))
