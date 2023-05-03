@@ -21,6 +21,8 @@ namespace MicroWrath.Extensions
             IMicroBlueprint<BlueprintFeature> feature,
             params IMicroBlueprint<BlueprintFeature>[] features)
         {
+            MicroLogger.Debug(() => $"Adding {feature.BlueprintGuid} to selection {selection.AssetGuid} ({selection.name})");
+
             var featuresList = selection.m_Features.ToList();
             var allFeaturesList = selection.m_AllFeatures.ToList();
 
@@ -48,6 +50,8 @@ namespace MicroWrath.Extensions
             bool hideInUI = false,
             bool removeOnApply = false)
         {
+            MicroLogger.Debug(() => $"Adding {prerequisiteFeature.BlueprintGuid} as prerequisite for {feature.AssetGuid} ({feature.name})");
+
             var prerequisite = feature.AddComponent<PrerequisiteFeature>();
             prerequisite.HideInUI = hideInUI;
             prerequisite.m_Feature = prerequisiteFeature.ToReference<BlueprintFeature, BlueprintFeatureReference>();

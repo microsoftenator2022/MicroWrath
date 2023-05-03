@@ -24,10 +24,11 @@ namespace MicroWrath.Constructors
             {
                 if (this is IBlueprintConstructor<TBlueprint> blueprintConstructor)
                 {
+                    MicroLogger.Debug(() => $"New blueprint {assetId} - {name}");
                     return blueprintConstructor.New(assetId, name);
                 }
 
-                MicroLogger.Warning($"Missing initializer for {typeof(TBlueprint)}. Using fallback");
+                MicroLogger.Debug(() => $"Missing initializer for {typeof(TBlueprint)}. Using reflection fallback.");
 
                 // Reflection-based fallback
                 if (!initializers.ContainsKey(typeof(TBlueprint)))

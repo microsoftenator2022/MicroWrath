@@ -12,6 +12,8 @@ using Kingmaker.Localization.Shared;
 
 using UniRx;
 
+using MicroWrath;
+
 namespace MicroWrath
 {
     [HarmonyPatch]
@@ -24,7 +26,10 @@ namespace MicroWrath
         [HarmonyPostfix]
         private static void BlueprintsCache_Init_Patch()
         {
+            MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache_Init_Early)}");
             BlueprintsCache_InitEvent_Early();
+
+            MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache_Init)}");
             BlueprintsCache_InitEvent();
         }
 
@@ -42,8 +47,11 @@ namespace MicroWrath
 
         [HarmonyPatch(typeof(LocalizationManager), nameof(LocalizationManager.OnLocaleChanged))]
         [HarmonyPrefix]
-        private static void SwitchLanguage_Patch() => 
+        private static void SwitchLanguage_Patch()
+        {
+            MicroLogger.Debug(() => $"Trigger {nameof(LocaleChanged)}");
             LocalizationManager_OnLocaleChangedEvent(LocalizationManager.CurrentLocale);
+        }
 
         public static readonly IObservable<Locale> LocaleChanged =
             Observable.FromEvent<Locale>(
