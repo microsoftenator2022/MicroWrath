@@ -124,7 +124,7 @@ namespace MicroWrath
 }}
 ");
 
-                spc.AddSource("gg", sb.ToString());
+                spc.AddSource("Guids", sb.ToString());
             });
         }
     }
