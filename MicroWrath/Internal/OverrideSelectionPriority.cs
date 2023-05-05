@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using HarmonyLib;
+
+using Kingmaker.Blueprints;
+using Kingmaker.Blueprints.Classes.Selection;
+using Kingmaker.UI.MVVM._VM.CharGen.Phases;
+using Kingmaker.UI.MVVM._VM.CharGen.Phases.FeatureSelector;
+using Kingmaker.UnitLogic.Class.LevelUp;
+
+namespace MicroWrath
+{
+    [AllowedOn(typeof(BlueprintFeatureSelection))]
+    [AllowedOn(typeof(BlueprintParametrizedFeature))]
+    internal class OverrideSelectionPriority : BlueprintComponent
+    {
+        public CharGenPhaseBaseVM.ChargenPhasePriority Priority;
+    }
+
+    [HarmonyPatch(typeof(CharGenFeatureSelectorPhaseVM), nameof(CharGenFeatureSelectorPhaseVM.GetFeaturePriority))]
+    internal static class CharGenFeatureSelectorPhaseVM_GetFeaturePriority_Patch
+    {
+        public static CharGenPhaseBaseVM.ChargenPhasePriority Postfix(CharGenPhaseBaseVM.ChargenPhasePriority __result,
+            FeatureSelectionState featureSelectionState)
+        {
+            if (featureSelectionState.Selection is BlueprintScriptableObject blueprint &&
+                blueprint.Components.OfType<OverrideSelectionPriority>().FirstOrDefault() is OverrideSelectionPriority osp)
+                return osp.Priority;
+
+            return __result;
+        }
+    }
+}
