@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using UnityEngine;
 using Kingmaker.Blueprints;
-
-using MicroWrath.Util;
-using MicroWrath.Util.Linq;
+using Kingmaker.Blueprints.Facts;
 
 using MicroWrath.Constructors;
+using MicroWrath.Util;
+using MicroWrath.Util.Linq;
 
 namespace MicroWrath.Extensions
 {
     internal static class BlueprintExtensions
     {
+        public static void SetIcon(this BlueprintUnitFact fact, Sprite sprite) => fact.m_Icon = sprite;
+
+        public static void SetIcon(this BlueprintUnitFact fact, string assetID, long fileID)
+            => fact.SetIcon(AssetUtils.Direct.GetSprite(assetID, fileID));
+
         public static void AddComponent<TComponent>(this BlueprintScriptableObject blueprint, TComponent component)
             where TComponent : BlueprintComponent
         {
