@@ -22,8 +22,12 @@ namespace MicroWrath.Generator.Common
         internal static IEnumerable<INamedTypeSymbol> GetAllGenericInstances(
             ITypeParameterSymbol type,
             ImmutableArray<GeneratorSyntaxContext> nodes,
-            CancellationToken ct)
+            CancellationToken ct,
+            int depth = 0)
         {
+            // Prevent stack overflow
+            if (depth > 64) yield break;
+
             // Generic method or type containing this type parameter
             var containingSymbol = type.ContainingSymbol;
 
@@ -104,7 +108,7 @@ namespace MicroWrath.Generator.Common
 
                             if (ta is ITypeParameterSymbol ttp)
                             {
-                                foreach (var t in GetAllGenericInstances(ttp, nodes, ct))
+                                foreach (var t in GetAllGenericInstances(ttp, nodes, ct, depth + 1))
                                 {
                                     if (ct.IsCancellationRequested) yield break;
 
@@ -119,7 +123,7 @@ namespace MicroWrath.Generator.Common
 
                 if (tpr is ITypeParameterSymbol tp)
                 {
-                    foreach (var t in GetAllGenericInstances(tp, nodes, ct))
+                    foreach (var t in GetAllGenericInstances(tp, nodes, ct, depth + 1))
                     {
                         if (ct.IsCancellationRequested) yield break;
 
