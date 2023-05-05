@@ -44,14 +44,17 @@ namespace MicroWrath.Generator
             var invocationTypeArguments = Incremental.GetTypeParameters(newBlueprintMethodInvocations.Select((m, _) => m.symbol), syntax)
                 .Collect()
                 .Combine(simpleBlueprintType)
+                .Combine(compilation)
                 .SelectMany(static (tsbp, _) =>
                 {
-                    var (ts, simpleBlueprint) = tsbp;
+                    var ((ts, simpleBlueprint), compilation) = tsbp;
 
                     return ts
                         .OfType<INamedTypeSymbol>()
                         .Distinct((IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default)
-                        .Where(t => !t.Equals(simpleBlueprint, SymbolEqualityComparer.Default));
+                        .Where(t => simpleBlueprint is not null &&
+                            compilation.ClassifyConversion(t, simpleBlueprint).Exists &&
+                            !t.Equals(simpleBlueprint, SymbolEqualityComparer.Default));
                 });
 
             var defaultValuesType = compilation

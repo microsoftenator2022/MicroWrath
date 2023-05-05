@@ -139,15 +139,18 @@ namespace MicroWrath.Generator
                 .Collect()
                 .Combine(blueprintComponentType)
                 .Combine(generatedComponentReferences.Collect())
+                .Combine(compilation)
                 .SelectMany(static (tsbp, _) =>
                 {
-                    var ((ts, blueprintComponent), generatedRefs) = tsbp;
+                    var (((ts, blueprintComponent), generatedRefs), compilation) = tsbp;
 
                     return ts
                         .OfType<INamedTypeSymbol>()
                         .Concat(generatedRefs)
                         .Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default)
-                        .Where(t => !t.Equals(blueprintComponent, SymbolEqualityComparer.Default));
+                        .Where(t => blueprintComponent is not null &&
+                            compilation.ClassifyConversion(t, blueprintComponent).Exists &&
+                            !t.Equals(blueprintComponent, SymbolEqualityComparer.Default));
                 });
 
             var defaultValuesType = compilation
