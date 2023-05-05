@@ -9,6 +9,8 @@ using Kingmaker.Blueprints.Facts;
 using MicroWrath.Constructors;
 using MicroWrath.Util;
 using MicroWrath.Util.Linq;
+using Kingmaker.Blueprints.Classes.Selection;
+using Kingmaker.Blueprints.Classes;
 
 namespace MicroWrath.Extensions
 {
@@ -61,5 +63,45 @@ namespace MicroWrath.Extensions
 
         public static void RemoveComponent(this BlueprintScriptableObject blueprint, BlueprintComponent component) =>
             blueprint.RemoveComponents(c => c != component);
+
+        public static void AddFeatures(
+            this BlueprintFeatureSelection selection,
+            bool allowDuplicates,
+            IEnumerable<IMicroBlueprint<BlueprintFeature>> features)
+        {
+            var featuresList = selection.m_Features.ToList();
+            var allFeaturesList = selection.m_AllFeatures.ToList();
+
+            foreach (var f in features)
+            {
+                MicroLogger.Debug(() => $"Adding {f.BlueprintGuid} to selection {selection.AssetGuid} ({selection.name})");
+
+                if (!featuresList.Contains(f.ToReference()) || allowDuplicates)
+                    featuresList.Add(f.ToReference<BlueprintFeature, BlueprintFeatureReference>());
+
+                if (!allFeaturesList.Contains(f.ToReference()) || allowDuplicates)
+                    allFeaturesList.Add(f.ToReference<BlueprintFeature, BlueprintFeatureReference>());
+            }
+
+            selection.m_Features = featuresList.ToArray();
+            selection.m_AllFeatures = allFeaturesList.ToArray();
+        }
+
+        public static void AddFeatures(
+            this BlueprintFeatureSelection selection,
+            IEnumerable<IMicroBlueprint<BlueprintFeature>> features) =>
+            AddFeatures(selection, false, features);
+
+        public static void AddFeatures(
+            this BlueprintFeatureSelection selection,
+            bool allowDuplicates,
+            IMicroBlueprint<BlueprintFeature> feature,
+            params IMicroBlueprint<BlueprintFeature>[] features) =>
+            AddFeatures(selection, allowDuplicates, new[] { feature }.Concat(features));
+
+        public static void AddFeatures(this BlueprintFeatureSelection selection,
+            IMicroBlueprint<BlueprintFeature> feature,
+            params IMicroBlueprint<BlueprintFeature>[] features) =>
+            AddFeatures(selection, false, feature, features);
     }
 }

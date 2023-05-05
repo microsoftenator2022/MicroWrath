@@ -15,35 +15,6 @@ namespace MicroWrath.Extensions
 {
     internal static class ComponentExtensions
     {
-        public static void AddFeatures(
-            this BlueprintFeatureSelection selection,
-            bool allowDuplicates,
-            IMicroBlueprint<BlueprintFeature> feature,
-            params IMicroBlueprint<BlueprintFeature>[] features)
-        {
-            MicroLogger.Debug(() => $"Adding {feature.BlueprintGuid} to selection {selection.AssetGuid} ({selection.name})");
-
-            var featuresList = selection.m_Features.ToList();
-            var allFeaturesList = selection.m_AllFeatures.ToList();
-
-            foreach (var f in features.Append(feature))
-            {
-                if (!featuresList.Contains(f.ToReference()) || allowDuplicates)
-                    featuresList.Add(f.ToReference<BlueprintFeature, BlueprintFeatureReference>());
-
-                if (!allFeaturesList.Contains(f.ToReference()) || allowDuplicates)
-                    allFeaturesList.Add(f.ToReference<BlueprintFeature, BlueprintFeatureReference>());
-            }
-
-            selection.m_Features = featuresList.ToArray();
-            selection.m_AllFeatures = allFeaturesList.ToArray();
-        }
-
-        public static void AddFeatures(this BlueprintFeatureSelection selection,
-            IMicroBlueprint<BlueprintFeature> feature,
-            params IMicroBlueprint<BlueprintFeature>[] features) =>
-            AddFeatures(selection, false, feature, features);
-
         public static PrerequisiteFeature AddPrerequisiteFeature(
             this BlueprintFeature feature,
             IMicroBlueprint<BlueprintFeature> prerequisiteFeature,
