@@ -22,9 +22,8 @@ namespace MicroWrath.BlueprintInitializationContext
             where TBlueprint : SimpleBlueprint =>
             obj.Map(() => new object()).GetBlueprint(blueprint).Map(x => x.Right);
 
-        internal static BlueprintInitializationContext.ContextInitializer<IEnumerable<TBlueprint>> Combine<TBlueprint>(
-            this IEnumerable<BlueprintInitializationContext.ContextInitializer<TBlueprint>> bpcs)
-            where TBlueprint : SimpleBlueprint
+        internal static BlueprintInitializationContext.ContextInitializer<IEnumerable<T>> Combine<T>(
+            this IEnumerable<BlueprintInitializationContext.ContextInitializer<T>> bpcs)
         {
             var head = bpcs.First();
             var tail = bpcs.Skip(1);

@@ -11,6 +11,7 @@ using MicroWrath;
 using MicroWrath.Constructors;
 using MicroWrath.Util;
 using Kingmaker.Utility;
+using AK.Wwise;
 
 namespace MicroWrath.BlueprintInitializationContext
 {
@@ -116,12 +117,9 @@ namespace MicroWrath.BlueprintInitializationContext
                 return bp;
             });
 
-        public ContextInitializer<IEnumerable<TBlueprint>> NewBlueprints<TBlueprint>(IEnumerable<(string assetId, string name)> ids)
+        public ContextInitializer<IEnumerable<(TBlueprint, TState)>> NewBlueprints<TBlueprint, TState>(
+            IEnumerable<(BlueprintGuid guid, string name, TState state)> values)
             where TBlueprint : SimpleBlueprint, new() =>
-            ids.Select(bp => NewBlueprint<TBlueprint>(bp.assetId, bp.name)).Combine();
-
-        public ContextInitializer<IEnumerable<TBlueprint>> NewBlueprints<TBlueprint>(IEnumerable<Func<TBlueprint>> initFuncs)
-            where TBlueprint : SimpleBlueprint, new() =>
-            initFuncs.Select(f => NewBlueprint(f)).Combine();
+            values.Select(value => NewBlueprint<TBlueprint>(value.guid, value.name).Map(bp => (bp, value.state))).Combine();
     }
 }
