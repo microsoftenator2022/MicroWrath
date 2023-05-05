@@ -34,8 +34,24 @@ namespace MicroWrath.Generator.Common
                 // Get all method invocation symbols
                 references = nodes
                     .Where(static sc => sc.Node is InvocationExpressionSyntax or MethodDeclarationSyntax)
-                    .Select(static sc => sc.SemanticModel.GetDeclaredSymbol(sc.Node) ?? sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
-                    .OfType<IMethodSymbol>()
+                    .SelectMany(static sc =>
+                    {
+                        if (sc.SemanticModel.GetDeclaredSymbol(sc.Node) is IMethodSymbol declaredSymbol)
+                            return EnumerableExtensions.Singleton(declaredSymbol);
+
+                        var symbolInfo = sc.SemanticModel.GetSymbolInfo(sc.Node);
+
+                        if (symbolInfo.Symbol is IMethodSymbol simpleMethodSymbol)
+                            return EnumerableExtensions.Singleton(simpleMethodSymbol);
+
+                        if (symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure)
+                        {
+                            return symbolInfo.CandidateSymbols.OfType<IMethodSymbol>();
+                        }
+
+                        return Enumerable.Empty<IMethodSymbol>();
+                    })
+                    //.OfType<IMethodSymbol>()
                     // Where the method's unbound generic symbol is the same as the containing method
                     .Where(m =>
                     {
@@ -356,6 +372,8 @@ namespace MicroWrath.Generator.Common
                 .SelectMany(static (typesAndCompilation, _) =>
                 {
                     var (types, compilation) = typesAndCompilation;
+
+                    types.Concat(compilation.GlobalNamespace.GetAssignableTypes());
 
                     return GetCompilationComponentTypes(compilation, types);
                 });

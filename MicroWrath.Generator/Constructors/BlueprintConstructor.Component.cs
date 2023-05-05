@@ -157,24 +157,6 @@ namespace MicroWrath.Generator
 
             #region DebugOutput
 #if DEBUG
-            context.RegisterSourceOutput(newComponentMethodInvocations.Collect(), (spc, invocations) =>
-            {
-                var sb = new StringBuilder();
-
-                foreach (var (symbol, node) in invocations)
-                {
-                    foreach (var line in node.GetText().Lines)
-                    {
-                        sb.AppendLine($"//{line}");
-                    }
-
-                    sb.AppendLine($" // -> {symbol}");
-                }
-
-                spc.AddSource("0DEBUG_invocations", sb.ToString());
-
-            });
-
             context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
             {
                 var (defaults, types) = defaultValues;

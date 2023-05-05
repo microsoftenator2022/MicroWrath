@@ -99,7 +99,7 @@ namespace MicroWrath.Generator
                     }
                 }
 
-                spc.AddSource("blueprintInitTypes", sb.ToString());
+                spc.AddSource("0DEBUG_blueprintInitTypes", sb.ToString());
             });
 #endif
 #endregion
