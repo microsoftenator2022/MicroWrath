@@ -75,26 +75,11 @@ namespace MicroWrath.BlueprintInitializationContext
 
             Func<T> IBlueprintInit<T>.InitFunc => InitFunc;
 
-            internal bool HasValue { get; private set; } = false;
+            private Lazy<T>? lazyValue;
 
-            private T GetValue()
-            {
-                value = InitFunc();
-                HasValue = true;
+            private T GetValue() => Value;
 
-                return value;
-            }
-
-            private T? value;
-            internal T Value
-            {
-                get
-                {
-                    if (!HasValue) return GetValue();
-
-                    return value!;
-                }
-            }
+            internal T Value => (lazyValue ??= new(InitFunc)).Value;
 
             void IBlueprintInit.Execute() => GetValue();
 

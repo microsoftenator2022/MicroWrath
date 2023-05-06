@@ -18,9 +18,10 @@ namespace MicroWrath.BlueprintInitializationContext
             string Name { get; }
             BlueprintGuid BlueprintGuid { get; }
             SimpleBlueprint CreateNew();
+            SimpleBlueprint? Blueprint { get; }
         }
 
-        private readonly struct InitContextBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint>, IInitContextBlueprint
+        private class InitContextBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint>, IInitContextBlueprint
             where TBlueprint : SimpleBlueprint, new()
         {
             public readonly string AssetId;
@@ -28,8 +29,20 @@ namespace MicroWrath.BlueprintInitializationContext
 
             public BlueprintGuid BlueprintGuid { get; }
 
+            TBlueprint? blueprint = null;
+
+            SimpleBlueprint? IInitContextBlueprint.Blueprint => blueprint;
+
             string IInitContextBlueprint.Name => Name;
-            public TBlueprint CreateNew() => Construct.New.Blueprint<TBlueprint>(AssetId, Name);
+            public TBlueprint CreateNew()
+            {
+                MicroLogger.Debug(() => $"Create new {typeof(TBlueprint)} {AssetId} {Name}");
+
+                blueprint ??= Construct.New.Blueprint<TBlueprint>(AssetId, Name);
+
+                return blueprint;
+            }
+
             SimpleBlueprint IInitContextBlueprint.CreateNew() => this.CreateNew();
 
             internal InitContextBlueprint(string assetId, string name)

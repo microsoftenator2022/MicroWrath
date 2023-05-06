@@ -38,21 +38,19 @@ namespace MicroWrath.BlueprintInitializationContext
             done = Trigger.Subscribe(Observer.Create<Unit>(
                 onNext: _ =>
                 {
+                    foreach (var initAction in Initializers) initAction();
+
                     foreach (var (guid, mbp) in Blueprints.Select(kvp => (kvp.Key, kvp.Value)))
                     {
-                        var bp = mbp.CreateNew();
-
-                        MicroLogger.Debug(() => $"Adding blueprint {guid} {bp.name}");
+                        MicroLogger.Debug(() => $"Adding blueprint {guid} {mbp.Name}");
 
                         if (ResourcesLibrary.BlueprintsCache.m_LoadedBlueprints.ContainsKey(guid))
                             MicroLogger.Warning($"BlueprintsCache already contains guid '{guid}'");
 
-                        ResourcesLibrary.BlueprintsCache.AddCachedBlueprint(guid, bp);
+                        ResourcesLibrary.BlueprintsCache.AddCachedBlueprint(guid, mbp.Blueprint);
 
                         MicroLogger.Debug(() => $"Added {ResourcesLibrary.TryGetBlueprint(guid).NameSafe()}");
                     }
-
-                    foreach (var initAction in Initializers) initAction();
 
                     Complete();
                     Blueprints.Clear();
@@ -80,7 +78,7 @@ namespace MicroWrath.BlueprintInitializationContext
         {
             var microBlueprint = new InitContextBlueprint<TBlueprint>(assetId, name);
 
-            return new BlueprintInit<TBlueprint>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint.ToReference());
+            return new BlueprintInit<TBlueprint>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint.CreateNew());
         }
 
         public ContextInitializer<TBlueprint> NewBlueprint<TBlueprint>(BlueprintGuid guid, string name)
@@ -88,7 +86,7 @@ namespace MicroWrath.BlueprintInitializationContext
         {
             var microBlueprint = new InitContextBlueprint<TBlueprint>(guid, name);
 
-            return new BlueprintInit<TBlueprint>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint.ToReference());
+            return new BlueprintInit<TBlueprint>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint.CreateNew());
         }
 
         /// <summary>
