@@ -34,7 +34,7 @@ namespace MicroWrath.Extensions
             for (var i = 2; blueprint.ComponentsArray.Select(c => c.name).Contains(component.name); i++)
                 component.name = $"{name}${i}";
 
-            MicroLogger.Debug(() => $"Adding {typeof(TComponent)} {component.name} to {blueprint.AssetGuid} ({blueprint.name})");
+            MicroLogger.Debug(() => $"Adding {typeof(TComponent)} to {blueprint.AssetGuid} ({blueprint.name})");
 
             blueprint.ComponentsArray = blueprint.ComponentsArray.Append(component);
         }
