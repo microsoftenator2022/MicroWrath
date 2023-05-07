@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace MicroWrath.Util
@@ -25,31 +22,178 @@ namespace MicroWrath.Util
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static U Downcast<T, U>(this T obj) where U : T => (U)obj!;
 
-        //private static Expression<Func<A, B>> Lift<A, B>(Func<A, B> f) => x => f(x);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C) Flatten<A, B, C>(this ((A, B), C) tuple)
+        {
+            var ((a, b), c) = tuple;
 
-        //private static Expression<Func<B>> Apply<A, B>(Expression<Func<A, B>> ef, Expression<Func<A>> ex) =>
-        //    (Expression<Func<B>>)Expression.Lambda(Expression.Invoke(ef, Expression.Invoke(ex)));
+            return (a, b, c);
+        }
 
-        //private static Expression<Func<B>> Map<A, B>(Func<A, B> f, Expression<Func<A>> ex)
-        //{
-        //    var lifted = Lift(f);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C) Flatten<A, B, C>(this (A, (B, C)) tuple)
+        {
+            var (a, (b, c)) = tuple;
 
-        //    return Apply(lifted, ex);
-        //}
+            return (a, b, c);
+        }
 
-        //private static Expression<Func<A>> Return<A>(A x)
-        //{
-        //    Expression<Func<A>> expr = () => x;
-        //    return expr;
-        //}
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D) Flatten<A, B, C, D>(this ((A, B), C, D) tuple)
+        {
+            var ((a, b), c, d) = tuple;
 
-        //private static Expression<Func<A>> Return<A>(Func<A> fa) => Return(fa());
+            return (a, b, c, d);
+        }
 
-        //private static Expression<Func<B>> Bind<A, B>(Func<A, Expression<Func<B>>> f, Expression<Func<A>> ex)
-        //{
-        //    var lifted = Lift(f);
-        //    var expr = Apply(lifted, ex);
-        //    return expr.Compile()();
-        //}
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D) Flatten<A, B, C, D>(this (A, (B, C), D) tuple)
+        {
+            var (a, (b, c), d) = tuple;
+
+            return (a, b, c, d);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D) Flatten<A, B, C, D>(this (((A, B), C), D) tuple)
+        {
+            var (x, d) = tuple;
+
+            var (a, b, c) = x.Flatten();
+
+            return (a, b, c, d);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D) Flatten<A, B, C, D>(this (A, B, (C, D)) tuple)
+        {
+            var (a, b, (c, d)) = tuple;
+
+            return (a, b, c, d);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D) Flatten<A, B, C, D>(this (A, (B, (C, D))) tuple)
+        {
+            var (a, x) = tuple;
+
+            var (b, c, d) = x.Flatten();
+
+            return (a, b, c, d);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (A, B, C, (D, E)) tuple)
+        {
+            var (a, b, c, (d, e)) = tuple;
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (A, B, (C, (D, E))) tuple)
+        {
+            var (a, b, x) = tuple;
+
+            var (c, d, e) = x.Flatten();
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (A, (B, (C, (D, E)))) tuple)
+        {
+            var (a, x) = tuple;
+
+            var (b, c, d, e) = x.Flatten();
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this ((A, B), C, D, E) tuple)
+        {
+            var ((a, b), c, d, e) = tuple;
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (A, (B, C), D, E) tuple)
+        {
+            var (a, (b, c), d, e) = tuple;
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (A, B, (C, D), E) tuple)
+        {
+            var (a, b, (c, d), e) = tuple;
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (((A, B), C), D, E) tuple)
+        {
+            var (x, d, e) = tuple;
+
+            var (a, b, c) = x.Flatten();
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this ((((A, B), C), D), E) tuple)
+        {
+            var (x, e) = tuple;
+
+            var (a, b, c, d) = x.Flatten();
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this ((A, B), (C, D), E) tuple)
+        {
+            var ((a, b), (c, d), e) = tuple;
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (A, (B, C), (D, E)) tuple)
+        {
+            var (a, (b, c), (d, e)) = tuple;
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this ((A, B), C, (D, E)) tuple)
+        {
+            var ((a, b), c, (d, e)) = tuple;
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this (((A, B), C), (D, E)) tuple)
+        {
+            var (x, (d, e)) = tuple;
+            var (a, b, c) = x.Flatten();
+
+            return (a, b, c, d, e);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (A, B, C, D, E) Flatten<A, B, C, D, E>(this ((A, B), (C, (D, E))) tuple)
+        {
+            var ((a, b), x) = tuple;
+            var (c, d, e) = x.Flatten();
+
+            return (a, b, c, d, e);
+        }
     }
 }
