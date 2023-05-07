@@ -71,24 +71,21 @@ namespace MicroWrath.BlueprintInitializationContext
             protected override BlueprintInitializationContext InitContext => initContext;
             internal readonly IInitContextBlueprint[] Blueprints;
 
-            private readonly Func<T> InitFunc;
+            private Lazy<T> lazyValue;
 
-            Func<T> IBlueprintInit<T>.InitFunc => InitFunc;
+            private T GetValue() => lazyValue.Value;
 
-            private Lazy<T>? lazyValue;
-
-            private T GetValue() => Value;
-
-            internal T Value => (lazyValue ??= new(InitFunc)).Value;
+            public Func<T> InitFunc => GetValue;
 
             void IBlueprintInit.Execute() => GetValue();
 
             internal BlueprintInit(BlueprintInitializationContext initContext, IInitContextBlueprint[] blueprints, Func<T> initFunc)
             {
                 this.initContext = initContext;
-                this.InitFunc = initFunc;
+                lazyValue = new(initFunc);
                 Blueprints = new IInitContextBlueprint[blueprints.Length];
                 blueprints.CopyTo((Span<IInitContextBlueprint>)Blueprints);
+
             }
 
             internal BlueprintInit(BlueprintInitializationContext initContext, IEnumerable<IInitContextBlueprint> blueprints, Func<T> getValue)
@@ -97,7 +94,7 @@ namespace MicroWrath.BlueprintInitializationContext
             private BlueprintInit<TResult> With<TResult>(Func<TResult> getValue) => new(initContext, Blueprints, getValue);
 
             public override ContextInitializer<TResult> Map<TResult>(Func<T, TResult> selector) =>
-                With(() => selector(Value));
+                With(() => selector(GetValue()));
 
             public override ContextInitializer<TResult> Map<TResult>(Func<TResult> selector) =>
                 With(() =>
@@ -109,7 +106,7 @@ namespace MicroWrath.BlueprintInitializationContext
             public override ContextInitializer Map(Action<T> action) =>
                 With<object>(() =>
                 {
-                    action(Value);
+                    action(GetValue());
                     return new();
                 });
 
