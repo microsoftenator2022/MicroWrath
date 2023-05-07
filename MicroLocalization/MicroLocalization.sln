@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33626.354
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLocalization", "MicroLocalization.csproj", "{ED80F7E0-2662-4D13-B5C8-7A240C5D0AB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED80F7E0-2662-4D13-B5C8-7A240C5D0AB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED80F7E0-2662-4D13-B5C8-7A240C5D0AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED80F7E0-2662-4D13-B5C8-7A240C5D0AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED80F7E0-2662-4D13-B5C8-7A240C5D0AB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FEC5EE30-0128-4914-82D9-F7E7D9FA8407}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+﻿{
+  "Id": "MicroLocalization",
+  "Version": "0.0.1.0",
+  "AssemblyName": "MicroLocalization.dll",
+  "EntryMethod": "MicroLocalization.Main.Load",
+
+  "DisplayName": "MicroLocalization",
+
+  "Author": "microsoftenator",
+
+  "GameVersion": "2.1.3"
+
+}
