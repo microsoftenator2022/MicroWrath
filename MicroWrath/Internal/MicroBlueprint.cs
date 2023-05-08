@@ -16,19 +16,33 @@ namespace MicroWrath
             where TBlueprint : SimpleBlueprint => (MicroBlueprint<TBlueprint>)reference;
     }
 
-    internal readonly record struct MicroBlueprint<TBlueprint>(string AssetId) : IMicroBlueprint<TBlueprint> where TBlueprint : SimpleBlueprint
+    internal readonly record struct MicroBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint> where TBlueprint : SimpleBlueprint
     {
+        public MicroBlueprint(string assetId)
+        {
+            AssetId = assetId;
+            BlueprintGuid = BlueprintGuid.Parse(AssetId);
+        }
+
+        public MicroBlueprint(BlueprintGuid guid)
+        {
+            BlueprintGuid = guid;
+            AssetId = guid.ToString();
+        }
+
+        public readonly string AssetId;
+
         public TReference ToReference<TReference>() where TReference : BlueprintReference<TBlueprint>, new() =>
             this.ToReference<TBlueprint, TReference>();
 
         public string Name => ToReference<BlueprintReference<TBlueprint>>().NameSafe();
 
-        public BlueprintGuid BlueprintGuid { get; } = BlueprintGuid.Parse(AssetId);
+        public BlueprintGuid BlueprintGuid { get; }
         public TBlueprint? GetBlueprint() => ToReference<BlueprintReference<TBlueprint>>().Get();
 
         public static implicit operator MicroBlueprint<TBlueprint>(TBlueprint blueprint) =>
-            new(blueprint.AssetGuid.ToString());
+            new(blueprint.AssetGuid);
         public static implicit operator MicroBlueprint<TBlueprint>(BlueprintReference<TBlueprint> blueprintReference) =>
-            new(blueprintReference.Guid.ToString());
+            new(blueprintReference.Guid);
     }
 }

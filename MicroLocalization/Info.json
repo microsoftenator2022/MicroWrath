@@ -1,6 +1,6 @@
 ﻿{
   "Id": "MicroLocalization",
-  "Version": "0.0.1.0",
+  "Version": "1.0.0",
   "AssemblyName": "MicroLocalization.dll",
   "EntryMethod": "MicroLocalization.Main.Load",
 
