@@ -6,30 +6,43 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+using Kingmaker.Modding;
+
 using UnityModManagerNet;
 
-using static UnityModManagerNet.UnityModManager;
+using MicroWrath.Loader;
 
 namespace MicroWrath
 {
-    public interface IMicroMod
-    {
-        bool Load(ModEntry modEntry);
-    }
-
-    internal static class MicroMod
+    internal static partial class MicroMod
     {
         internal static Assembly? MicroWrathAssembly;
 
-        private static bool EnsureMicroWrath(string modsDirectory, ModEntry modEntry)
+        internal static string OwlcatModsDirectory => OwlcatModificationsManager.DefaultModificationsDirectory;
+
+        private static IEnumerable<string> GetModDirectories(UnityModManager.ModEntry? modEntry = null)
+        {
+            yield return OwlcatModsDirectory;
+
+            if (modEntry is null) yield break;
+
+            var modsDir = Path.GetDirectoryName(Path.GetDirectoryName(modEntry.Path));
+
+            modEntry.Logger.Log($"UMM mods directory: {modsDir}");
+
+            yield return modsDir;
+        }
+
+        private static bool EnsureMicroWrath(IEnumerable<string> modsDirectories, INanoLogger logger)
         {
             if (MicroWrathAssembly != null)
             {
-                modEntry.Logger.Log("MicroWrath already loaded");
+                logger.Log("MicroWrath already loaded");
                 return true;
             }
 
-            var candidates = Directory.EnumerateFiles(modsDirectory, "*.dll", SearchOption.AllDirectories)
+            var candidates = modsDirectories
+                .SelectMany(d => Directory.EnumerateFiles(d, "*.dll", SearchOption.AllDirectories))
                 .Where(f => Path.GetFileName(f) == "MicroWrath.dll")
                 .Select(f =>
                 {
@@ -42,13 +55,13 @@ namespace MicroWrath
                 .ToArray();
 
             if (candidates.Length > 1 && candidates.Select(f => f.version).Distinct().Count() > 1)
-                modEntry.Logger.Warning($"Multiple MicroWrath versions found");
+                logger.Warn($"Multiple MicroWrath versions found");
 #if DEBUG
-            modEntry.Logger.Log("MicroWrath assemblies:");
+            logger.Log("MicroWrath assemblies:");
 
             foreach (var (v, f) in candidates)
             {
-                modEntry.Logger.Log($"Version {v} : {f}");
+                logger.Log($"Version {v} : {f}");
             }
 #endif
             var microWrath = candidates.Select(f => f.f).FirstOrDefault();
@@ -57,91 +70,28 @@ namespace MicroWrath
             {
                 try
                 {
-                    modEntry.Logger.Log($"Loading MicroWrath from {filePath}");
+                    logger.Log($"Loading MicroWrath from {filePath}");
 
 #if DEBUG
-                    modEntry.Logger.Log($"MicroWrath File Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(filePath)}");
+                    logger.Log($"MicroWrath File Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(filePath)}");
 #endif
 
                     var vi = FileVersionInfo.GetVersionInfo(filePath);
 
-                    modEntry.Logger.Log($"MicroWrath Version: {vi.ProductVersion}");
+                    logger.Log($"MicroWrath Version: {vi.ProductVersion}");
 
                     MicroWrathAssembly = Assembly.LoadFrom(filePath);
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    modEntry.Logger.Critical($"Exception occured while loading {filePath}");
-                    modEntry.Logger.LogException(ex);
+                    logger.Error($"Exception occured while loading {filePath}");
+                    logger.Exception(ex);
                 }
             }
 
-            modEntry.Logger.Critical("Loading MicroWrath.dll failed");
+            logger.Error("Loading MicroWrath.dll failed");
             return false;
-        }
-
-        private static bool LoadMod(ModEntry modEntry)
-        {
-            var assPath = Path.Combine(modEntry.Path, $"{modEntry.Info.Id}.dll");
-
-            if (!File.Exists(assPath))
-            {
-                modEntry.Logger.Critical($"{assPath} does not exist");
-                return false;
-            }
-
-            try
-            {
-                modEntry.Logger.Log($"Loading mod from {assPath}");
-
-#if DEBUG
-                modEntry.Logger.Log($"Mod File Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(assPath)}");
-#endif
-
-                var ModAssembly = Assembly.LoadFrom(assPath);
-            
-                Type? modType = ModAssembly?.DefinedTypes
-                    .Where(t => typeof(IMicroMod).IsAssignableFrom(t) && !t.IsAbstract)
-                    .Select(t => t.UnderlyingSystemType)
-                    .FirstOrDefault();
-
-                if (modType is null)
-                {
-                    modEntry.Logger.Critical($"No type implementing {nameof(IMicroMod)} found in {assPath}");
-                    return false;
-                }
-
-                if (Activator.CreateInstance(modType, true) is not IMicroMod modMain)
-                {
-                    modEntry.Logger.Critical($"Failed to initialize object of type {modType.FullName} from {assPath}");
-                    return false;
-                }
-#if DEBUG
-                modEntry.Logger.Log($"Mod entry point: {modMain.GetType().FullName}.Load");
-#endif
-                return modMain.Load(modEntry);
-            }
-            catch (Exception ex)
-            {
-                modEntry.Logger.Critical($"Exception occured while loading {assPath}");
-                modEntry.Logger.LogException(ex);
-            }
-
-            return false;
-        }
-
-        public static bool Load(ModEntry modEntry)
-        {
-            modEntry.Logger.Log($"MicroMod loader v{Assembly.GetExecutingAssembly().GetName().Version}");
-
-            var assemblyPath = Assembly.GetExecutingAssembly().Location;
-
-            var directory = Path.GetDirectoryName(assemblyPath);
-
-            var modsDirectory = Path.GetDirectoryName(directory);
-
-            return EnsureMicroWrath(modsDirectory, modEntry) && LoadMod(modEntry);
         }
     }
 }
