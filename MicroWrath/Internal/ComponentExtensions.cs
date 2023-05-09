@@ -18,8 +18,8 @@ namespace MicroWrath.Extensions
         public static PrerequisiteFeature AddPrerequisiteFeature(
             this BlueprintFeature feature,
             IMicroBlueprint<BlueprintFeature> prerequisiteFeature,
-            bool hideInUI = false,
-            bool removeOnApply = false)
+            bool removeOnApply = false,
+            bool hideInUI = false)
         {
             MicroLogger.Debug(() => $"Adding {prerequisiteFeature.BlueprintGuid} as prerequisite for {feature.AssetGuid} ({feature.name})");
 
