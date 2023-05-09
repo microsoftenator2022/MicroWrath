@@ -117,5 +117,52 @@ namespace MicroWrath.Util.Linq
 
             if (i > 0 && i < chunkSize) yield return chunk.Take(i);
         }
+
+        //public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, IEnumerable<Func<T, bool>> predicateSequence)
+        //{
+        //    var sEnumerator = source.GetEnumerator();
+        //    var fsEnumerator = predicateSequence.GetEnumerator();
+
+        //    var i = 0;
+        //    while (fsEnumerator.MoveNext())
+        //    {
+        //        if (!sEnumerator.MoveNext()) return Enumerable.Empty<T>();
+
+        //        if (fsEnumerator.Current(sEnumerator.Current))
+        //            return source.Skip(1).FindSequence(predicateSequence);
+
+        //        i++;
+        //    }
+
+        //    return source.Take(i);
+        //}
+
+        public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, int length, IEnumerable<Func<T, bool>> predicateSequence)
+        {
+            var i = 0;
+            foreach (var result in predicateSequence.Zip(source, (f, x) => f(x)))
+            {
+                if (!result) return source.Skip(1).FindSequence(length, predicateSequence);
+
+                i++;
+
+                if (i >= length) return source.Take(i);
+            }
+
+            return Enumerable.Empty<T>();
+        }
+
+        public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, IEnumerable<Func<T, bool>> predicateSequence) =>
+            source.FindSequence(predicateSequence.Count(), predicateSequence);
+
+        public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, int length, Func<IEnumerable<T>, bool> predicate)
+        {
+            var subSeq = source.Take(length);
+            if (subSeq.Count() < length) return Enumerable.Empty<T>();
+
+            if (predicate(subSeq)) return subSeq;
+
+            return source.Skip(1).FindSequence(length, predicate);
+        }
     }
 }
