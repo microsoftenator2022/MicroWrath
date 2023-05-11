@@ -21,7 +21,8 @@ namespace MicroWrath.Extensions
             bool removeOnApply = false,
             bool hideInUI = false)
         {
-            MicroLogger.Debug(() => $"Adding {prerequisiteFeature.BlueprintGuid} as prerequisite for {feature.AssetGuid} ({feature.name})");
+            MicroLogger.Debug(() => $"Adding {prerequisiteFeature} as prerequisite for {feature.AssetGuid} ({feature.name})",
+                feature.ToMicroBlueprint());
 
             var prerequisite = feature.AddComponent<PrerequisiteFeature>();
             prerequisite.HideInUI = hideInUI;

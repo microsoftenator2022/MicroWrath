@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Kingmaker.Blueprints;
+
 using UnityModManagerNet;
 
 namespace MicroWrath
@@ -19,7 +21,10 @@ namespace MicroWrath
             Critical = 3
         }
 
-        internal readonly record struct Entry(Func<string> Message, Severity Severity = Severity.Info, Exception? Exception = null);
+        internal readonly record struct Entry(Func<string> Message, Severity Severity = Severity.Info, Exception? Exception = null)
+        {
+            internal IMicroBlueprint<SimpleBlueprint>? Blueprint { get; init; }
+        }
 
         private static readonly List<Entry> EntryList = new();
         public static IEnumerable<Entry> Entries = EntryList.ToArray();
@@ -62,7 +67,10 @@ namespace MicroWrath
             switch (entry.Severity)
             {
                 case Severity.Debug:
-                    logger.Log($"[DEBUG] {entry.Message()}");
+                    if (entry.Blueprint is null)
+                        logger.Log($"[DEBUG] {entry.Message()}");
+                    else
+                        logger.Log($"[DEBUG][BLUEPRINT {entry.Blueprint.BlueprintGuid}] {entry.Message()}");
                     break;
                 case Severity.Info:
                     logger.Log(entry.Message());
@@ -113,6 +121,8 @@ namespace MicroWrath
             AddEntry(new(() => "Log cleared"));
         }
 
+        public static void Debug(Func<string> message, IMicroBlueprint<SimpleBlueprint>? blueprint, Exception? exception = null) =>
+            AddEntry(new(message, Severity.Debug, exception) { Blueprint = blueprint });
         public static void Debug(Func<string> message, Exception? exception = null) => AddEntry(new(message, Severity.Debug, exception));
         public static void Log(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Info, exception));
         public static void Warning(string messasge, Exception? exception = null) => AddEntry(new(() => messasge, Severity.Warning, exception));

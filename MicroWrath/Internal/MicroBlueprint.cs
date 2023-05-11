@@ -35,13 +35,24 @@ namespace MicroWrath
         public TReference ToReference<TReference>() where TReference : BlueprintReference<TBlueprint>, new() =>
             this.ToReference<TBlueprint, TReference>();
 
-        public string Name => ToReference<BlueprintReference<TBlueprint>>().NameSafe();
+        private readonly TBlueprint? MaybeBlueprint { get; init; } = null;
+
+        public string Name => MaybeBlueprint?.name ?? ToReference<BlueprintReference<TBlueprint>>().NameSafe();
 
         public BlueprintGuid BlueprintGuid { get; }
         public TBlueprint? GetBlueprint() => ToReference<BlueprintReference<TBlueprint>>().Get();
 
+        public override string ToString()
+        {
+            if (MaybeBlueprint is not null)
+                return $"{typeof(TBlueprint)} {BlueprintGuid} ({Name})";
+
+            return $"{typeof(TBlueprint)} {BlueprintGuid}";
+        }
+
         public static implicit operator MicroBlueprint<TBlueprint>(TBlueprint blueprint) =>
-            new(blueprint.AssetGuid);
+            new(blueprint.AssetGuid) { MaybeBlueprint = blueprint };
+
         public static implicit operator MicroBlueprint<TBlueprint>(BlueprintReference<TBlueprint> blueprintReference) =>
             new(blueprintReference.Guid);
     }

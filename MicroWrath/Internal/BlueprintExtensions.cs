@@ -34,7 +34,7 @@ namespace MicroWrath.Extensions
             for (var i = 2; blueprint.ComponentsArray.Select(c => c.name).Contains(component.name); i++)
                 component.name = $"{name}${i}";
 
-            MicroLogger.Debug(() => $"Adding {typeof(TComponent)} to {blueprint.AssetGuid} ({blueprint.name})");
+            MicroLogger.Debug(() => $"Adding {typeof(TComponent)} to {blueprint.name}", blueprint.ToMicroBlueprint());
 
             blueprint.ComponentsArray = blueprint.ComponentsArray.Append(component);
         }
@@ -74,7 +74,7 @@ namespace MicroWrath.Extensions
 
             foreach (var f in features)
             {
-                MicroLogger.Debug(() => $"Adding {f.BlueprintGuid} to selection {selection.AssetGuid} ({selection.name})");
+                MicroLogger.Debug(() => $"Adding {f} to selection {selection.name}", selection.ToMicroBlueprint());
 
                 if (!featuresList.Contains(f.ToReference()) || allowDuplicates)
                     featuresList.Add(f.ToReference<BlueprintFeature, BlueprintFeatureReference>());
