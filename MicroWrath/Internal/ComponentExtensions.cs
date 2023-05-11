@@ -13,7 +13,7 @@ using Kingmaker.Designers.Mechanics.Facts;
 
 namespace MicroWrath.Extensions
 {
-    internal static class ComponentExtensions
+    internal static partial class ComponentExtensions
     {
         public static PrerequisiteFeature AddPrerequisiteFeature(
             this BlueprintFeature feature,

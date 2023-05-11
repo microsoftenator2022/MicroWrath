@@ -142,6 +142,11 @@ namespace {ns}
             protected set => harmony = value;
         }}
 
+        protected virtual void ApplyHarmonyPatches()
+        {{
+            Harmony.PatchAll();
+        }}
+
         public event Action<UnityModManager.ModEntry> Loaded = Functional.Ignore;
 
         protected virtual void DoInit()
@@ -165,7 +170,7 @@ namespace {ns}
             DoInit();
 
             harmony = new Harmony(modEntry.Info.Id);
-            harmony.PatchAll();
+            ApplyHarmonyPatches();
 
             instance = this;
 

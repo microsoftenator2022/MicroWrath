@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using HarmonyLib;
 
 using Kingmaker.Blueprints;
+using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Selection;
+using Kingmaker.UI.Common;
 using Kingmaker.UI.MVVM._VM.CharGen.Phases;
 using Kingmaker.UI.MVVM._VM.CharGen.Phases.FeatureSelector;
 using Kingmaker.UnitLogic.Class.LevelUp;
@@ -25,11 +27,13 @@ namespace MicroWrath
     internal static class CharGenFeatureSelectorPhaseVM_GetFeaturePriority_Patch
     {
         public static CharGenPhaseBaseVM.ChargenPhasePriority Postfix(CharGenPhaseBaseVM.ChargenPhasePriority __result,
-            FeatureSelectionState featureSelectionState)
+            FeatureSelectionState featureSelectionState, CharGenFeatureSelectorPhaseVM __instance)
         {
             if (featureSelectionState.Selection is BlueprintScriptableObject blueprint &&
                 blueprint.Components.OfType<OverrideSelectionPriority>().FirstOrDefault() is OverrideSelectionPriority osp)
+            {
                 return osp.Priority;
+            }
 
             return __result;
         }

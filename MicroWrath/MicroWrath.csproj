@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>0.5.0.0</VersionPrefix>
+    <VersionPrefix>0.6.1.0</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -20,7 +20,6 @@
     <Reference Include="0Harmony" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityModManager\0Harmony.dll" Private="False" />
     <Reference Include="Assembly-CSharp-firstpass" HintPath="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp-firstpass.dll" Private="False" />
     <Reference Include="Newtonsoft.Json" HintPath="$(WrathPath)\Wrath_Data\Managed\Newtonsoft.Json.dll" Private="False" />
-    <Reference Include="Owlcat.Runtime.Core" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll" Private="False" />
     <Reference Include="Owlcat.Runtime.Visual" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Visual.dll" Private="False" />
     <Reference Include="Owlcat.Runtime.Validation" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Validation.dll" Private="False" />
     <Reference Include="Owlcat.SharedTypes" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.SharedTypes.dll" Private="False" />
@@ -31,6 +30,7 @@
     <Reference Include="UnityEngine.UI" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.UI.dll" Private="False" />
     <Reference Include="UniRx" HintPath="$(WrathPath)\Wrath_Data\Managed\UniRx.dll" Private="False" />
     <Reference Include="UnityModManager" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityModManager\UnityModManager.dll" Private="False" />
+    <!--<Reference Include="Owlcat.Runtime.Core" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll" Private="False" />-->
     <!--<Reference Include="Owlcat.Runtime.UI" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.UI.dll" Private="False" />-->
     <!--<Reference Include="Assembly-CSharp" HintPath="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" Private="False" />-->
   </ItemGroup>
@@ -38,10 +38,11 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp" HintPath="$(SolutionDir)lib\Assembly-CSharp_public.dll" Private="False" />
     <Reference Include="Owlcat.Runtime.UI" HintPath="$(SolutionDir)lib\Owlcat.Runtime.UI_public.dll" Private="False" />
+    <Reference Include="Owlcat.Runtime.Core" HintPath="$(SolutionDir)lib\Owlcat.Runtime.Core_public.dll" Private="False" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AssemblyPublicizer" Version="1.0.1">
+    <PackageReference Include="AssemblyPublicizer" Version="1.0.2">
       <PrivateAssets>none</PrivateAssets>
       <IncludeAssets>build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -51,6 +52,7 @@
   <ItemGroup>
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.UI.dll" />
+    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll" />
   </ItemGroup>
 
   <Target Name="Publicize" AfterTargets="BeforeBuild;Clean" Inputs="@(Publicize)" Outputs="$(SolutionDir)lib\%(Publicize.Filename)_public.dll">
@@ -59,5 +61,6 @@
 
   <Target Name="PublicizeClean" BeforeTargets="Clean">
     <Delete Files="$(SolutionDir)lib\%(Publicize.Filename)_public.dll" />
+    <Delete Files="$(SolutionDir)lib\%(Publicize.Filename)_public.hash" />
   </Target>
 </Project>

@@ -14,7 +14,7 @@ using Kingmaker.Blueprints.Classes;
 
 namespace MicroWrath.Extensions
 {
-    internal static class BlueprintExtensions
+    internal static partial class BlueprintExtensions
     {
         public static void SetIcon(this BlueprintUnitFact fact, Sprite sprite) => fact.m_Icon = sprite;
 

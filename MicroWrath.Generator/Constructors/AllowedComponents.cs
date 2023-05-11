@@ -18,7 +18,7 @@ namespace MicroWrath.Generator
             var allowedOnAttribute = compilation
                 .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.AllowedOnAttribute"));
 
-            var componentTypes = Incremental.GetComponentTypes(compilation, "Assembly-CSharp")
+            var componentTypes = Incremental.GetComponentTypes(compilation)
                 .Where(static c => !c.IsAbstract)
                 .Combine(allowedOnAttribute)
                 .Select(static (ct, _) => (
