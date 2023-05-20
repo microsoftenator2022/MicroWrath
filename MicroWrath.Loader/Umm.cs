@@ -80,7 +80,7 @@ namespace MicroWrath
 
             var logger = new UmmLogger(modEntry);
 
-            return EnsureMicroWrath(GetModDirectories(modEntry), logger) && LoadUmmMod(modEntry, logger);
+            return EnsureMicroWrath(GetModDirectories(logger, modEntry), logger) && LoadUmmMod(modEntry, logger);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace MicroWrath
 
         internal static string OwlcatModsDirectory => OwlcatModificationsManager.DefaultModificationsDirectory;
 
-        private static IEnumerable<string> GetModDirectories(UnityModManager.ModEntry? modEntry = null)
+        private static IEnumerable<string> GetModDirectories(INanoLogger logger, UnityModManager.ModEntry? modEntry = null)
         {
             yield return OwlcatModsDirectory;
 
@@ -28,7 +28,7 @@ namespace MicroWrath
 
             var modsDir = Path.GetDirectoryName(Path.GetDirectoryName(modEntry.Path));
 
-            modEntry.Logger.Log($"UMM mods directory: {modsDir}");
+            logger.Log($"UMM mods directory: {modsDir}");
 
             yield return modsDir;
         }

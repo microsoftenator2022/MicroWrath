@@ -10,6 +10,13 @@ using UnityModManagerNet;
 
 namespace MicroWrath.Loader
 {
+    using static MicroWrath.Loader.LoggerCommon;
+
+    internal static class LoggerCommon
+    {
+        internal static string FormatMessage(string message) => $"[Loader] {message}";
+    }
+
     internal interface INanoLogger
     {
         void Log(string message);
@@ -27,10 +34,10 @@ namespace MicroWrath.Loader
             logger = modEntry.Logger;
         }
 
-        public void Error(string message) => logger.Error(message);
+        public void Error(string message) => logger.Error(FormatMessage(message));
         public void Exception(Exception exception) => logger.LogException(exception);
-        public void Log(string message) => logger.Log(message);
-        public void Warn(string message) => logger.Warning(message);
+        public void Log(string message) => logger.Log(FormatMessage(message));
+        public void Warn(string message) => logger.Warning(FormatMessage(message));
     }
 
     internal class OwlLogger : INanoLogger
@@ -42,9 +49,9 @@ namespace MicroWrath.Loader
             this.logger = logger;
         }
 
-        public void Error(string message) => logger.Error(message);
+        public void Error(string message) => logger.Error(FormatMessage(message));
         public void Exception(Exception exception) => logger.Exception(exception);
-        public void Log(string message) => logger.Log(message);
-        public void Warn(string message) => logger.Warning(message);
+        public void Log(string message) => logger.Log(FormatMessage(message));
+        public void Warn(string message) => logger.Warning(FormatMessage(message));
     }
 }
