@@ -72,8 +72,6 @@ namespace MicroWrath
 
         public static bool Load(ModEntry modEntry)
         {
-            modEntry.Logger.Log($"MicroMod loader v{Assembly.GetExecutingAssembly().GetName().Version}");
-
             //var assemblyPath = Assembly.GetExecutingAssembly().Location;
 
             //var directory = Path.GetDirectoryName(assemblyPath);

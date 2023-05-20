@@ -41,6 +41,15 @@ namespace MicroWrath
                 return true;
             }
 
+            logger.Log($"MicroMod loader v{Assembly.GetExecutingAssembly().GetName().Version}");
+
+            var monoRuntimeVersion = Type.GetType("Mono.Runtime")
+                ?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static)
+                ?.Invoke(null, null)
+                ?.ToString();
+
+            logger.Log($"Mono runtime version: {monoRuntimeVersion ?? "<null>"}");
+
             var candidates = modsDirectories
                 .SelectMany(d => Directory.EnumerateFiles(d, "*.dll", SearchOption.AllDirectories))
                 .Where(f => Path.GetFileName(f) == "MicroWrath.dll")
