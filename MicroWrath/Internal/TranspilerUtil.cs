@@ -41,8 +41,6 @@ namespace MicroWrath
                     sb.AppendLine(i.ToString());
                 }
 
-                var g = (new string[100]).GroupBy(x => x.Length, x => (x, String.IsNullOrEmpty(x)));
-
                 return sb.ToString();
             });
 
