@@ -44,7 +44,6 @@ namespace MicroWrath
                 return sb.ToString();
             });
 
-
             var matchIndexed = match.Select<CodeInstruction, Func<(int, CodeInstruction), bool>>(m =>
                 ((int, CodeInstruction) ici) =>
                     m.opcode == ici.Item2.opcode &&

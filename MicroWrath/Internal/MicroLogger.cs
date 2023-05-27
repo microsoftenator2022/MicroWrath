@@ -33,7 +33,7 @@ namespace MicroWrath
 #if DEBUG
             Severity.Debug;
 #else
-                Severity.Info;
+            Severity.Info;
 #endif
         public static void SetUmmLogLevel(Severity severity)
         {
