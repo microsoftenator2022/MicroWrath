@@ -21,7 +21,7 @@ namespace MicroWrath.Util
         public static bool operator !=(Option<T> a, T other) => !a.Equals(other);
 
         public override bool Equals(object obj) => obj.Equals(Value);
-        public override int GetHashCode() => -1937169414 + EqualityComparer<T?>.Default.GetHashCode(Value);
+        public override int GetHashCode() => EqualityComparer<T?>.Default.GetHashCode(Value);
 
         public static NoneType None = new();
 

@@ -207,22 +207,22 @@ namespace MicroWrath.Generator.Common
             tp.HasValueTypeConstraint ||
             tp.ConstraintTypes.Any();
 
-        internal static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
-            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters);
-        internal static string FullName(this ITypeSymbol symbol) => symbol.ToDisplayString(FullNameTypeDisplayFormat);
+        //internal static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
+        //    new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+        //        genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters);
+        //internal static string FullName(this ITypeSymbol symbol) => symbol.ToDisplayString(FullNameTypeDisplayFormat);
 
-        internal static readonly SymbolDisplayFormat ShortNameNoGenericsDisplayFormat =
-            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.None);
+        //internal static readonly SymbolDisplayFormat ShortNameNoGenericsDisplayFormat =
+        //    new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+        //        genericsOptions: SymbolDisplayGenericsOptions.None);
 
-        internal static readonly SymbolDisplayFormat FullNameNoGenericsDisplayFormat =
-            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.None);
-        internal static string DisplayStringNoGenerics(this ITypeSymbol t) =>
-            t.ToDisplayString(FullNameNoGenericsDisplayFormat);
+        //internal static readonly SymbolDisplayFormat FullNameNoGenericsDisplayFormat =
+        //    new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+        //        genericsOptions: SymbolDisplayGenericsOptions.None);
+        //internal static string DisplayStringNoGenerics(this ITypeSymbol t) =>
+        //    t.ToDisplayString(FullNameNoGenericsDisplayFormat);
 
-        internal static string EscapedTypeName(this INamedTypeSymbol symbol) => symbol.DisplayStringNoGenerics().Replace('.', '_');
+        //internal static string EscapedTypeName(this INamedTypeSymbol symbol) => symbol.DisplayStringNoGenerics().Replace('.', '_');
 
         internal static string EscapeIdentifierString(string identifier)
         {
@@ -243,18 +243,18 @@ namespace MicroWrath.Generator.Common
             return escapedName;
         }
 
-        internal static string GenericParametersPart(this INamedTypeSymbol symbol) =>
-            symbol.ToDisplayString(new SymbolDisplayFormat(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints |
-                SymbolDisplayGenericsOptions.IncludeTypeParameters))
-                .Remove(0, symbol.ToDisplayString(ShortNameNoGenericsDisplayFormat).Length);
+        //internal static string GenericParametersPart(this INamedTypeSymbol symbol) =>
+        //    symbol.ToDisplayString(new SymbolDisplayFormat(
+        //        genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints |
+        //        SymbolDisplayGenericsOptions.IncludeTypeParameters))
+        //        .Remove(0, symbol.ToDisplayString(ShortNameNoGenericsDisplayFormat).Length);
 
-        internal static string GenericParametersPartNoConstraints(this INamedTypeSymbol symbol) =>
-            symbol.ToDisplayString(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters))
-                .Remove(0, symbol.ToDisplayString(ShortNameNoGenericsDisplayFormat).Length);
+        //internal static string GenericParametersPartNoConstraints(this INamedTypeSymbol symbol) =>
+        //    symbol.ToDisplayString(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters))
+        //        .Remove(0, symbol.ToDisplayString(ShortNameNoGenericsDisplayFormat).Length);
 
-        internal static string GenericConstraintsPart(this INamedTypeSymbol symbol) =>
-            GenericParametersPart(symbol).Remove(0, GenericParametersPartNoConstraints(symbol).Length);
+        //internal static string GenericConstraintsPart(this INamedTypeSymbol symbol) =>
+        //    GenericParametersPart(symbol).Remove(0, GenericParametersPartNoConstraints(symbol).Length);
 
         internal static IEnumerable<INamedTypeSymbol> GetContainingTypes(this INamedTypeSymbol symbol)
         {
@@ -323,7 +323,7 @@ namespace MicroWrath.Generator.Common
             IEnumerable<INamedTypeSymbol> types,
             INamedTypeSymbol destination) =>
             types.Where(t => compilation.ClassifyConversion(t, destination).Exists);
-        
+
         private static IEnumerable<INamedTypeSymbol> GetCompilationBlueprintTypes(
             Compilation compilation,
             IEnumerable<INamedTypeSymbol> types) =>
@@ -340,6 +340,10 @@ namespace MicroWrath.Generator.Common
             assemblies
                 .SelectMany(static (a, _) => a.GlobalNamespace.GetAllNamespaces())
                 .SelectMany(static (ns, _) => ns.GetAssignableTypes());
+
+        internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValueProvider<Compilation> compilation) =>
+            GetAssignableTypes(
+                compilation.SelectMany((c, _) => c.SourceModule.ReferencedAssemblySymbols.AppendValue(c.Assembly)));
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetBlueprintTypes(
             IncrementalValueProvider<Compilation> compilation, string? assemblyName = null)
