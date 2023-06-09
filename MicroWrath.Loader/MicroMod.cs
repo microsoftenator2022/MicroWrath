@@ -22,7 +22,7 @@ namespace MicroWrath
 
         private static IEnumerable<string> GetModDirectories(INanoLogger logger, UnityModManager.ModEntry? modEntry = null)
         {
-            yield return OwlcatModsDirectory;
+            if (Directory.Exists(OwlcatModsDirectory)) yield return OwlcatModsDirectory;
 
             if (modEntry is null) yield break;
 
