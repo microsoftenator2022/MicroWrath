@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using HarmonyLib;
+
 using Kingmaker.Blueprints;
 
 using MicroWrath.Util;
@@ -20,6 +22,22 @@ namespace MicroWrath.Constructors
         internal ReflectionInitializer(Type defaultInitializersType)
         {
             defaults = defaultInitializersType;
+
+            MicroLogger.Debug(() =>
+            {
+                var sb = new StringBuilder();
+
+                sb.AppendLine($"Properties from {defaultInitializersType.FullName}:");
+
+                sb.AppendLine($"{defaultInitializersType.GetProperties(BindingFlags.Public | BindingFlags.Static).Length} properties");
+
+                foreach (var p in defaultInitializersType.GetMembers(AccessTools.all).OfType<PropertyInfo>())
+                {
+                    sb.AppendLine($"  {p.PropertyType} {p.Name}");
+                }
+
+                return sb.ToString();
+            });
 
             FieldInitializers = GetFieldInitializers().ToArray();
             PropertyInitializers = GetPropertyInitializers().ToArray();
@@ -46,7 +64,7 @@ namespace MicroWrath.Constructors
             //}
 
             var property = defaults
-                .GetProperties(BindingFlags.Static)
+                .GetProperties(BindingFlags.Public | BindingFlags.Static)
                 .Where(pi => pi.PropertyType == memberType && pi.CanRead)
                 .FirstOrDefault();
 
@@ -99,7 +117,7 @@ namespace MicroWrath.Constructors
         protected Func<T, T> GetTypeInitializerMethods()
         {
             var methods = defaults
-                .GetMethods(BindingFlags.Static)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
                 .Where(mi =>
                     mi.ReturnType == typeof(T) &&
                     mi.GetParameters().Length == 1 &&
