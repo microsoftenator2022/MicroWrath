@@ -14,15 +14,19 @@ namespace MicroWrath.Generator
 {
     internal partial class BlueprintConstructor
     {
-        internal record class InitMembers(INamedTypeSymbol Type, ImmutableArray<(IFieldSymbol f, IFieldSymbol d)> InitFields,
-            ImmutableArray<(IPropertySymbol p, IFieldSymbol d)> InitProperties,
+        internal record class InitMembers(INamedTypeSymbol Type, ImmutableArray<(IFieldSymbol f, IPropertySymbol d)> InitFields,
+            ImmutableArray<(IPropertySymbol p, IPropertySymbol d)> InitProperties,
             ImmutableArray<IMethodSymbol> InitMethods);
 
         internal static IncrementalValuesProvider<InitMembers> GetTypeMemberInitialValues(IncrementalValuesProvider<INamedTypeSymbol> types, IncrementalValueProvider<Option<INamedTypeSymbol>> defaults)
         {
 
-            var defaultValues = defaults
-                .SelectMany(static (defaults, _) => defaults.ToEnumerable().SelectMany(t => t.GetMembers().OfType<IFieldSymbol>()))
+            //var defaultValueFields = defaults
+            //    .SelectMany(static (defaults, _) => defaults.ToEnumerable().SelectMany(t => t.GetMembers().OfType<IFieldSymbol>()))
+            //    .Collect();
+
+            var defaultValueProperties = defaults
+                .SelectMany(static (defaults, _) => defaults.ToEnumerable().SelectMany(t => t.GetMembers().OfType<IPropertySymbol>()))
                 .Collect();
 
             var withMembers = types.Select(static (t, _) => (t, t.GetBaseTypesAndSelf().SelectMany(t => t.GetMembers())));
@@ -36,10 +40,10 @@ namespace MicroWrath.Generator
                 });
 
             var withFields = allFields
-                .Combine(defaultValues)
+                .Combine(defaultValueProperties)
                 .Select(static (fds, _) =>
                 {
-                    var ((t, fields), defaults) = fds;
+                    var (t, fields, defaults) = fds.Flatten();
 
                     return (t, fields: fields
                         .SelectMany(f => defaults
@@ -63,10 +67,10 @@ namespace MicroWrath.Generator
                 });
 
             var withProperties = allProperties
-                .Combine(defaultValues)
+                .Combine(defaultValueProperties)
                 .Select(static (pds, _) =>
                 {
-                    var ((t, properties), defaults) = pds;
+                    var (t, properties, defaults) = pds.Flatten();
 
                     return (t, properties: properties
                         .SelectMany(p => defaults
@@ -113,10 +117,10 @@ namespace MicroWrath.Generator
                     var (((t, fields), properties), methods) = bpWithInit;
 
                     var hasInitFields = fields.TryGetValue(t, out var initFields);
-                    if (!hasInitFields) initFields = ImmutableArray.Create<(IFieldSymbol, IFieldSymbol)>();
+                    if (!hasInitFields) initFields = ImmutableArray.Create<(IFieldSymbol, IPropertySymbol)>();
 
                     var hasInitProperties = properties.TryGetValue(t, out var initProperties);
-                    if (!hasInitProperties) initProperties = ImmutableArray.Create<(IPropertySymbol, IFieldSymbol)>();
+                    if (!hasInitProperties) initProperties = ImmutableArray.Create<(IPropertySymbol, IPropertySymbol)>();
 
                     var hasInitMethods = methods.TryGetValue(t, out var initMethods);
                     if (!hasInitMethods) initMethods = ImmutableArray.Create<IMethodSymbol>();

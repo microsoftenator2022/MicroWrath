@@ -20,8 +20,8 @@ namespace MicroWrath.Generator
     {
         internal static string ComponentConstructorPart(
             INamedTypeSymbol componentType,
-            ImmutableArray<(IFieldSymbol field, IFieldSymbol init)> initFields,
-            ImmutableArray<(IPropertySymbol property, IFieldSymbol init)> initProperties,
+            ImmutableArray<(IFieldSymbol field, IPropertySymbol init)> initFields,
+            ImmutableArray<(IPropertySymbol property, IPropertySymbol init)> initProperties,
             ImmutableArray<IMethodSymbol> initMethods)
         {
             var sb = new StringBuilder();

@@ -29,9 +29,9 @@ namespace MicroWrath.Generator
                 GetBlueprintData(IncrementalValuesProvider<AdditionalText> cheatdataJson, IncrementalValueProvider<Compilation> compilation)
             {
                 var blueprints = cheatdataJson
-                .SelectMany(static (at, _) =>
+                .SelectMany(static (at, ct) =>
                 {
-                    if (at.GetText()?.ToString() is not string text)
+                    if (at.GetText(ct)?.ToString() is not string text)
                         return Enumerable.Empty<BlueprintInfo>();
 
                     var entries = JValue.Parse(text)["Entries"].ToArray();
@@ -65,7 +65,7 @@ namespace MicroWrath.Generator
                 })
                 .Collect()
                 .Combine(compilation)
-                .SelectMany(static (bpsc, _) =>
+                .SelectMany(static (bpsc, ct) =>
                 {
                     var (bps, compilation) = bpsc;
 
@@ -73,6 +73,8 @@ namespace MicroWrath.Generator
 
                     foreach (var typeName in bps.Select(static bp => bp.TypeName).Distinct())
                     {
+                        if (ct.IsCancellationRequested) break;
+
                         types[typeName] = compilation.GetTypeByMetadataName(typeName);
                     }
 

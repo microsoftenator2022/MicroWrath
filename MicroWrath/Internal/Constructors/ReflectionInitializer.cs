@@ -13,33 +13,59 @@ namespace MicroWrath.Constructors
 {
     internal interface IReflectionInitializer { public Type ForType { get; } }
 
-    internal abstract class ReflectionInitializer<T> : IReflectionInitializer
+    internal class ReflectionInitializer<T> : IReflectionInitializer
     {
         public Type ForType => typeof(T);
 
         internal ReflectionInitializer(Type defaultInitializersType)
         {
             defaults = defaultInitializersType;
+
             FieldInitializers = GetFieldInitializers().ToArray();
             PropertyInitializers = GetPropertyInitializers().ToArray();
-            TypeInitializer = GetTypeInitializers();
+            TypeInitializerMethod = GetTypeInitializerMethods();
         }
 
         protected readonly Type defaults;
         protected Option<object> GetDefaultMemberValue(Type memberType)
         {
-            var field = defaults
-                .GetFields(BindingFlags.Static)
-                .Where(fi => fi.FieldType == memberType)
+            MicroLogger.Debug(() => $"Looking for {memberType} initializer for type {typeof(T)}");
+
+            //var field = defaults
+            //    .GetFields(BindingFlags.Static)
+            //    .Where(fi => fi.FieldType == memberType)
+            //    .FirstOrDefault();
+
+            //var fieldValue = (field?.GetValue(null)).ToOption();
+
+            //if (fieldValue.IsSome)
+            //{
+            //    MicroLogger.Debug(() => $"  Found default value in field: {field!.Name}");
+
+            //    return fieldValue;
+            //}
+
+            var property = defaults
+                .GetProperties(BindingFlags.Static)
+                .Where(pi => pi.PropertyType == memberType && pi.CanRead)
                 .FirstOrDefault();
 
-            return (field?.GetValue(null)).ToOption();
+            var propertyValue = (property?.GetValue(null)).ToOption();
+
+            if (propertyValue.IsSome) MicroLogger.Debug(() => $"  Found default value in property: {property!.Name}");
+            else MicroLogger.Debug(() => "  Default value not found");
+
+            return propertyValue;
         }
 
         protected IEnumerable<Action<T>> GetFieldInitializers()
         {
             var fieldDefaults = typeof(T).GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .Select(fi => GetDefaultMemberValue(fi.FieldType).Map(v => (fi, v)))
+                .Select(fi =>
+                {
+                    MicroLogger.Debug(() => $"Looking for default value for field {fi.FieldType} {fi.Name}");
+                    return GetDefaultMemberValue(fi.FieldType).Map(v => (fi, v));
+                })
                 .Where(v => v.IsSome)
                 .Select(v => v.Value!);
 
@@ -54,7 +80,11 @@ namespace MicroWrath.Constructors
         protected IEnumerable<Action<T>> GetPropertyInitializers()
         {
             var propertyDefaults = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .Select(pi => GetDefaultMemberValue(pi.PropertyType).Map(v => (pi, v)))
+                .Select(pi =>
+                {
+                    MicroLogger.Debug(() => $"Looking for default value for property {pi.PropertyType} {pi.Name}");
+                    return GetDefaultMemberValue(pi.PropertyType).Map(v => (pi, v));
+                })
                 .Where(v => v.IsSome)
                 .Select(v => v.Value!);
 
@@ -66,7 +96,7 @@ namespace MicroWrath.Constructors
 
         protected readonly Action<T>[] PropertyInitializers;
 
-        protected Func<T, T> GetTypeInitializers()
+        protected Func<T, T> GetTypeInitializerMethods()
         {
             var methods = defaults
                 .GetMethods(BindingFlags.Static)
@@ -83,7 +113,15 @@ namespace MicroWrath.Constructors
                 .Aggregate((acc, f) => (T x) => f(acc(x)));
         }
 
-        protected readonly Func<T, T> TypeInitializer;
+        protected readonly Func<T, T> TypeInitializerMethod;
+
+        public virtual T Initialize(T obj)
+        {
+            foreach (var f in FieldInitializers) f(obj);
+            foreach (var p in PropertyInitializers) p(obj);
+
+            return TypeInitializerMethod(obj);
+        }
     }
 
     internal class BlueprintReflectionInitializer<TBlueprint> : ReflectionInitializer<TBlueprint>,
@@ -99,11 +137,11 @@ namespace MicroWrath.Constructors
             bp.AssetGuid = BlueprintGuid.Parse(assetId);
             bp.name = name;
 
-            foreach (var f in FieldInitializers) f(bp);
-            foreach (var p in PropertyInitializers) p(bp);
-            TypeInitializer(bp);
+            //foreach (var f in FieldInitializers) f(bp);
+            //foreach (var p in PropertyInitializers) p(bp);
+            //TypeInitializerMethod(bp);
 
-            return bp;
+            return Initialize(bp);
         }
     }
 
@@ -117,11 +155,11 @@ namespace MicroWrath.Constructors
         {
             TComponent component = new();
 
-            foreach (var f in FieldInitializers) f(component);
-            foreach (var p in PropertyInitializers) p(component);
-            TypeInitializer(component);
+            //foreach (var f in FieldInitializers) f(component);
+            //foreach (var p in PropertyInitializers) p(component);
+            //TypeInitializerMethod(component);
 
-            return component;
+            return Initialize(component);
         }
     }
 }
