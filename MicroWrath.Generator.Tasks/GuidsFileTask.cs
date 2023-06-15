@@ -9,6 +9,7 @@ using Microsoft.Build.Utilities;
 
 using Newtonsoft.Json;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace MicroWrath.Generator
 {
@@ -23,13 +24,31 @@ namespace MicroWrath.Generator
         [Required]
         public string GuidsFile { get; set; }
 
+        public ITaskItem[] References { get; set; }
         public override bool Execute()
         {
+            References ??= new ITaskItem[0];
+
             Log.LogMessage(MessageImportance.High, "Generating guids file");
 
             Log.LogMessage($"WrathPath: {WrathPath}");
             Log.LogMessage($"AssemblyPath: {Assembly}");
             Log.LogMessage($"GuidsFile: {GuidsFile}");
+
+            var sb = new StringBuilder();
+            sb.Append("References:");
+
+            if (!References.Any())
+                sb.Append(" []");
+
+            sb.AppendLine();
+
+            foreach (var ti in References)
+            {
+                sb.AppendLine($"  {ti.ItemSpec}");
+            }
+
+            Log.LogMessage(sb.ToString());
 
             var guids = new Dictionary<string, Guid>();
 
@@ -60,16 +79,16 @@ namespace MicroWrath.Generator
 
                 if (!File.Exists(assemblyPath))
                 {
-                    foreach (var f in Directory.EnumerateFiles(Path.GetDirectoryName(Assembly), "*.dll", SearchOption.AllDirectories))
-                    {
-                        if (Path.GetFileNameWithoutExtension(f) == name.Name)
-                        {
-                            Log.LogMessage($"Loading {args.Name} from {f}");
-                            return System.Reflection.Assembly.LoadFrom(f);
-                        }
-                    }
-
-                    foreach (var f in Directory.EnumerateFiles(Path.Combine(WrathPath, "Wrath_Data", "Managed"), "*.dll", SearchOption.AllDirectories))
+                    foreach (var f in
+                        References.Select(r => r.ItemSpec)
+                        .Concat(Directory.EnumerateFiles(
+                            Path.GetDirectoryName(Assembly),
+                            "*.dll",
+                            SearchOption.AllDirectories))
+                        .Concat(Directory.EnumerateFiles(
+                            Path.Combine(WrathPath, "Wrath_Data", "Managed"),
+                            "*.dll",
+                            SearchOption.AllDirectories)))
                     {
                         if (Path.GetFileNameWithoutExtension(f) == name.Name)
                         {
