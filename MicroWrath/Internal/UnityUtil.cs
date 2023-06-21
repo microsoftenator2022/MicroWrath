@@ -10,6 +10,35 @@ namespace MicroWrath.Util.Unity
 {
     internal static class UnityUtil
     {
+        public static bool SupportsSetPixel(this TextureFormat tFormat)
+        {
+            return tFormat switch
+            {
+                TextureFormat.Alpha8 => true,
+                TextureFormat.ARGB32 => true,
+                TextureFormat.ARGB4444 => true,
+                TextureFormat.BGRA32 => true,
+                TextureFormat.R16 => true,
+                TextureFormat.R8 => true,
+                TextureFormat.RFloat => true,
+                TextureFormat.RG16 => true,
+                TextureFormat.RG32 => true,
+                TextureFormat.RGB24 => true,
+                TextureFormat.RGB48 => true,
+                TextureFormat.RGB565 => true,
+                TextureFormat.RGB9e5Float => true,
+                TextureFormat.RGBA32 => true,
+                TextureFormat.RGBA4444 => true,
+                TextureFormat.RGBA64 => true,
+                TextureFormat.RGBAFloat => true,
+                TextureFormat.RGBAHalf => true,
+                TextureFormat.RGFloat => true,
+                TextureFormat.RGHalf => true,
+                TextureFormat.RHalf => true,
+                _ => false
+            };
+        }
+
         public static Color RotateColorHue(Color color, double degrees)
         {
             if (color.r == color.g && color.g == color.b)
