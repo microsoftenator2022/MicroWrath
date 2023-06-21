@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace MicroWrath.Util.Unity
 {
-    public static class UnityUtil
+    internal static class UnityUtil
     {
         public static Color RotateColorHue(Color color, double degrees)
         {
@@ -35,7 +35,7 @@ namespace MicroWrath.Util.Unity
 
             color = Color.HSVToRGB(h, s, v);
 
-            MicroLogger.Debug(() => $"{oldH}\u00b0 -> {oldH}\u00b0");
+            MicroLogger.Debug(() => $"{(oldH * 360)}\u00b0 -> {(h * 360)}\u00b0");
             MicroLogger.Debug(() => $"{oldColor} -> {color}");
 
             return color;
