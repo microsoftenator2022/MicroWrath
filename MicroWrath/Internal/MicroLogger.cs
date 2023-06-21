@@ -32,7 +32,7 @@ namespace MicroWrath
         private static readonly List<Entry> EntryList = new();
         public static IEnumerable<Entry> Entries = EntryList.ToArray();
 
-        private static Severity LogLevel =
+        private static Severity logLevel =
 #if DEBUG
             Severity.Debug;
 #else
@@ -40,10 +40,16 @@ namespace MicroWrath
 #endif
         public static void SetLogLevel(Severity severity)
         {
-            if (LogLevel == severity) return;
+            if (logLevel == severity) return;
 
             AddEntry(new(() => $"Setting UMM log severity to {severity}"));
-            LogLevel = severity;
+            logLevel = severity;
+        }
+
+        public static Severity LogLevel
+        {
+            get => logLevel;
+            set => SetLogLevel(value);
         }
 
         private static UnityModManager.ModEntry? modEntry;
@@ -61,7 +67,7 @@ namespace MicroWrath
 
         private static void UmmLog(Entry entry)
         {
-            if (entry.Severity < LogLevel) return;
+            if (entry.Severity < logLevel) return;
 
             if (ModEntry is null) return;
 
@@ -109,7 +115,7 @@ namespace MicroWrath
 
         private static void OwlLog(Entry entry)
         {
-            if (entry.Severity < LogLevel) return;
+            if (entry.Severity < logLevel) return;
 
             if (OwlcatModification is null) return;
 
