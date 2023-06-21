@@ -71,7 +71,7 @@ namespace MicroWrath.Constructors
             var propertyValue = (property?.GetValue(null)).ToOption();
 
             if (propertyValue.IsSome) MicroLogger.Debug(() => $"  Found default value in property: {property!.Name}");
-            else MicroLogger.Debug(() => "  Default value not found");
+            else MicroLogger.Debug(() => "  No default value found");
 
             return propertyValue;
         }

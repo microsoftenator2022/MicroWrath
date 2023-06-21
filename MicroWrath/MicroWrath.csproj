@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>0.6.4.0</VersionPrefix>
+    <VersionPrefix>0.6.5.1</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -25,8 +25,10 @@
     <Reference Include="Owlcat.SharedTypes" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.SharedTypes.dll" Private="False" />
     <Reference Include="Unity.TextMeshPro" HintPath="$(WrathPath)\Wrath_Data\Managed\Unity.TextMeshPro.dll" Private="False" />
     <Reference Include="UnityEngine" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.dll" Private="False" />
+    <Reference Include="UnityEngine.AssetBundleModule" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.AssetBundleModule.dll" Private="False" />
     <Reference Include="UnityEngine.CoreModule" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.CoreModule.dll" Private="False" />
     <Reference Include="UnityEngine.IMGUIModule" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.IMGUIModule.dll" Private="False" />
+    <Reference Include="UnityEngine.ParticleSystemModule" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.ParticleSystemModule.dll" Private="False" />
     <Reference Include="UnityEngine.UI" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.UI.dll" Private="False" />
     <Reference Include="UniRx" HintPath="$(WrathPath)\Wrath_Data\Managed\UniRx.dll" Private="False" />
     <Reference Include="UnityModManager" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityModManager\UnityModManager.dll" Private="False" />

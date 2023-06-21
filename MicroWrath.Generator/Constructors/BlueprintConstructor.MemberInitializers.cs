@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -14,9 +15,40 @@ namespace MicroWrath.Generator
 {
     internal partial class BlueprintConstructor
     {
-        internal record class InitMembers(INamedTypeSymbol Type, ImmutableArray<(IFieldSymbol f, IPropertySymbol d)> InitFields,
+        internal record class InitMembers(INamedTypeSymbol ContainingType, ImmutableArray<(IFieldSymbol f, IPropertySymbol d)> InitFields,
             ImmutableArray<(IPropertySymbol p, IPropertySymbol d)> InitProperties,
             ImmutableArray<IMethodSymbol> InitMethods);
+
+        internal static string GetInitializerExpression(InitMembers initMembers)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($@"new {initMembers.ContainingType}()
+                {{");
+
+            foreach (var (f, init) in initMembers.InitFields)
+            {
+                sb.Append($@"
+                    {f.Name} = {init},");
+            }
+
+            foreach (var (p, init) in initMembers.InitProperties)
+            {
+                sb.Append($@"
+                    {p.Name} = {init},");
+            }
+
+            sb.Append($@"
+                }}");
+
+            foreach (var m in initMembers.InitMethods)
+            {
+                sb.Append($@"
+                .Apply({m.ContainingType}.{m.Name}).Downcast<{m.ReturnType}, {initMembers.ContainingType}>()");
+            }
+
+            return sb.ToString();
+        }
 
         internal static IncrementalValuesProvider<InitMembers> GetTypeMemberInitialValues(IncrementalValuesProvider<INamedTypeSymbol> types, IncrementalValueProvider<Option<INamedTypeSymbol>> defaults)
         {
@@ -112,9 +144,9 @@ namespace MicroWrath.Generator
                 .Combine(withFields)
                 .Combine(withProperties)
                 .Combine(withInitMethods)
-                .Select((bpWithInit, _) =>
+                .Select((typeAndInit, _) =>
                 {
-                    var (((t, fields), properties), methods) = bpWithInit;
+                    var (t, fields, properties, methods) = typeAndInit.Flatten();
 
                     var hasInitFields = fields.TryGetValue(t, out var initFields);
                     if (!hasInitFields) initFields = ImmutableArray.Create<(IFieldSymbol, IPropertySymbol)>();

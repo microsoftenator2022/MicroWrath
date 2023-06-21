@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kingmaker.Blueprints;
+using Kingmaker.Modding;
+
+using Owlcat.Runtime.Core.Logging;
 
 using UnityModManagerNet;
 
@@ -29,18 +32,18 @@ namespace MicroWrath
         private static readonly List<Entry> EntryList = new();
         public static IEnumerable<Entry> Entries = EntryList.ToArray();
 
-        private static Severity UmmLogLevel =
+        private static Severity LogLevel =
 #if DEBUG
             Severity.Debug;
 #else
             Severity.Info;
 #endif
-        public static void SetUmmLogLevel(Severity severity)
+        public static void SetLogLevel(Severity severity)
         {
-            if (UmmLogLevel == severity) return;
+            if (LogLevel == severity) return;
 
             AddEntry(new(() => $"Setting UMM log severity to {severity}"));
-            UmmLogLevel = severity;
+            LogLevel = severity;
         }
 
         private static UnityModManager.ModEntry? modEntry;
@@ -52,13 +55,13 @@ namespace MicroWrath
                 var oldModEntry = modEntry;
                 modEntry = value;
 
-                if (oldModEntry == null) ReplayLog();
+                if (oldModEntry == null) ReplayLogUmm();
             }
         }
 
         private static void UmmLog(Entry entry)
         {
-            if (entry.Severity < UmmLogLevel) return;
+            if (entry.Severity < LogLevel) return;
 
             if (ModEntry is null) return;
 
@@ -89,19 +92,66 @@ namespace MicroWrath
             if (entry.Exception is not null)
                 logger.LogException(entry.Exception);
         }
+        
+        private static OwlcatModification? owlcatModification;
+        public static OwlcatModification? OwlcatModification
+        {
+            get => owlcatModification;
+            set
+            {
+                var oldMod = owlcatModification;
+                owlcatModification = value;
+
+                if (oldMod is not null)
+                    ReplayLogOwlcat();
+            }
+        }
+
+        private static void OwlLog(Entry entry)
+        {
+            if (entry.Severity < LogLevel) return;
+
+            if (OwlcatModification is null) return;
+
+            var logger = OwlcatModification.Logger;
+
+            switch (entry.Severity)
+            {
+                case Severity.Debug:
+                    if (entry.Blueprint is null)
+                        logger.Log($"[DEBUG] {entry.Message()}");
+                    else
+                        logger.Log($"[DEBUG][BLUEPRINT {entry.Blueprint.BlueprintGuid}] {entry.Message()}");
+                    break;
+                case Severity.Info:
+                    logger.Log(entry.Message());
+                    break;
+                case Severity.Warning:
+                    logger.Warning(entry.Message());
+                    break;
+                case Severity.Error:
+                case Severity.Critical:
+                    logger.Error(entry.Message());
+                    break;
+            }
+
+            if (entry.Exception is not null)
+                logger.Exception(entry.Exception);
+        }
 
         public static void AddEntry(Entry entry)
         {
             EntryList.Add(entry);
 
             UmmLog(entry);
+            OwlLog(entry);
         }
 
-        public static void ReplayLog()
+        public static void ReplayLogUmm()
         {
             if (ModEntry is null)
             {
-                AddEntry(new Entry(() => "Attempted to replay log, but ModEntry is null", Severity.Warning));
+                AddEntry(new Entry(() => $"Attempted to replay log, but {nameof(ModEntry)} is null", Severity.Warning));
                 return;
             }
 
@@ -110,6 +160,23 @@ namespace MicroWrath
             UmmLog(new(() => "REPLAY LOG BEGIN"));
 
             foreach (var entry in Entries) UmmLog(entry);
+
+            UmmLog(new(() => "REPLAY LOG END"));
+        }
+
+        public static void ReplayLogOwlcat()
+        {
+            if (OwlcatModification is null)
+            {
+                AddEntry(new Entry(() => $"Attempted to replay log, but {nameof(OwlcatModification)} is null", Severity.Warning));
+                return;
+            }
+
+            if (Entries.Count() == 0) return;
+
+            UmmLog(new(() => "REPLAY LOG BEGIN"));
+
+            foreach (var entry in Entries) OwlLog(entry);
 
             UmmLog(new(() => "REPLAY LOG END"));
         }

@@ -42,40 +42,48 @@ namespace MicroWrath.Generator
                 })
                 .Select((tuple, _) => tuple.Flatten().Item1);
 
-            context.RegisterSourceOutput(gameActionTypes.Collect().Combine(gameActionType).Combine(compilation), (spc, types) =>
+            var defaultValuesType = compilation
+                .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
+
+            var initializers = BlueprintConstructor.GetTypeMemberInitialValues(gameActionTypes, defaultValuesType);
+
+            context.RegisterSourceOutput(initializers.Collect().Combine(compilation), (spc, types) =>
             {
-                var (gaTypes, type, compilation) = types.Flatten();
+                var (initializers, compilation) = types;
 
                 var sb = new StringBuilder();
 
-                sb.AppendLine($"// {type}");
+                //sb.AppendLine($"// {type}");
 
                 sb.AppendLine($@"using System;
 using Kingmaker.ElementsSystem;
+using MicroWrath.Util;
 
 namespace MicroWrath.GameActions
 {{
     internal static class GameActions
-    {{
-        public static T New<T>(Action<T>? init = null) where T : GameAction, new()
+    {{");
+
+                foreach (var i in initializers)
+                {
+                    var t = i.ContainingType;
+
+                    sb.AppendLine(@$"
+        public static {t} {t.Name}(Action<{t}>? init = null)
         {{
-            var gameAction = new T();
-            
+            var gameAction = {BlueprintConstructor.GetInitializerExpression(i)};
+
             init?.Invoke(gameAction);
 
             return gameAction;
         }}");
-
-                foreach (var t in gaTypes)
-                {
-                    sb.AppendLine($"public static {t} {t.Name}(Action<{t}>? init = null) => New<{t}>(init);");
                 }
 
                 sb.AppendLine($@"
     }}
 }}");
 
-                spc.AddSource("gameActions", sb.ToString());
+                spc.AddSource("GameActions", sb.ToString());
             });
         }
     }

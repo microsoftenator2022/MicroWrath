@@ -13,69 +13,45 @@ namespace MicroWrath
 {
     internal static class TranspilerUtil
     {
-        internal static IEnumerable<CodeInstruction> ReplaceInstructions(
+        public static IEnumerable<(int index, CodeInstruction instruction)> FindInstructionsIndexed(
+            this IEnumerable<CodeInstruction> instructions,
+            IEnumerable<Func<CodeInstruction, bool>> matchFuncs)
+        {
+            var matched = instructions
+                .Indexed()
+                .FindSequence(matchFuncs
+                    .Select<Func<CodeInstruction, bool>, Func<(int index, CodeInstruction item), bool>>(f =>
+                        i => f(i.item)));
+
+            if (!matched.Any()) return Enumerable.Empty<(int, CodeInstruction)>();
+
+            return matched;
+        }
+
+        public static IEnumerable<CodeInstruction> ReplaceInstructions(
             IEnumerable<CodeInstruction> source,
             IEnumerable<CodeInstruction> match,
             IEnumerable<CodeInstruction> replaceWith)
         {
-            MicroLogger.Debug(() =>
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("Original:");
-                foreach (var i in source)
-                {
-                    sb.AppendLine(i.ToString());
-                }
-
-                return sb.ToString();
-            });
-
-            MicroLogger.Debug(() =>
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("Looking for:");
-                foreach (var i in match)
-                {
-                    sb.AppendLine(i.ToString());
-                }
-
-                return sb.ToString();
-            });
-
             var matchIndexed = match.Select<CodeInstruction, Func<(int, CodeInstruction), bool>>(m =>
-                ((int, CodeInstruction) ici) =>
-                    m.opcode == ici.Item2.opcode &&
-                    (m.operand is null || m.operand == ici.Item2.operand));
+                ((int, CodeInstruction instruction) ici) =>
+                    m.opcode == ici.instruction.opcode &&
+                    (m.operand is null || m.operand == ici.instruction.operand));
 
             (int index, CodeInstruction i)[] matchedInstructions = source.Indexed().FindSequence(matchIndexed).ToArray();
 
             if (!matchedInstructions.Any())
             {
-                MicroLogger.Error("Match not found");
+                return Enumerable.Empty<CodeInstruction>();
             }
 
             var index = matchedInstructions.First().index;
-            MicroLogger.Debug(() => $"Match index: {index}");
 
             var iList = source.ToList();
 
             iList.RemoveRange(index, matchedInstructions.Length);
             iList.InsertRange(index, replaceWith);
 
-            MicroLogger.Debug(() =>
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("Transpiled:");
-                foreach (var i in iList)
-                {
-                    sb.AppendLine(i.ToString());
-                }
-
-                return sb.ToString();
-            });
 
             return iList;
         }

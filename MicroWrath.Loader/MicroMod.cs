@@ -6,27 +6,39 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+using Kingmaker;
 using Kingmaker.Modding;
 
 using UnityModManagerNet;
 
 using MicroWrath.Loader;
+using static UnityModManagerNet.UnityModManager;
 
 namespace MicroWrath
 {
+    public interface IMicroMod
+    {
+        bool Load(ModEntry modEntry);
+        bool Load(OwlcatModification owlMod);
+    }
+
     internal static partial class MicroMod
     {
         internal static Assembly? MicroWrathAssembly;
 
         internal static string OwlcatModsDirectory => OwlcatModificationsManager.DefaultModificationsDirectory;
 
-        private static IEnumerable<string> GetModDirectories(INanoLogger logger, UnityModManager.ModEntry? modEntry = null)
+        private static IEnumerable<string> GetModDirectories(INanoLogger logger)
         {
             if (Directory.Exists(OwlcatModsDirectory)) yield return OwlcatModsDirectory;
 
-            if (modEntry is null) yield break;
+            //if (modEntry is null) 
+            //{
+            //    yield break;
+            //}
 
-            var modsDir = Path.GetDirectoryName(Path.GetDirectoryName(modEntry.Path));
+            //var modsDir = Path.GetDirectoryName(Path.GetDirectoryName(modEntry.Path));
+            var modsDir = GameInfo.Load().ModsDirectory;
 
             logger.Log($"UMM mods directory: {modsDir}");
 
@@ -65,13 +77,18 @@ namespace MicroWrath
 
             if (candidates.Length > 1 && candidates.Select(f => f.version).Distinct().Count() > 1)
                 logger.Warn($"Multiple MicroWrath versions found");
+
 #if DEBUG
-            logger.Log("MicroWrath assemblies:");
+            var sb = new StringBuilder();
+
+            sb.AppendLine("MicroWrath assemblies:");
 
             foreach (var (v, f) in candidates)
             {
-                logger.Log($"Version {v} : {f}");
+                sb.AppendLine($"  Version {v} : {f}");
             }
+
+            logger.Log(sb.ToString());
 #endif
             var microWrath = candidates.Select(f => f.f).FirstOrDefault();
 
@@ -101,6 +118,54 @@ namespace MicroWrath
 
             logger.Error("Loading MicroWrath.dll failed");
             return false;
+        }
+
+        private static (bool, IMicroMod?) LoadMod(string assPath, INanoLogger logger)
+        {
+            if (!File.Exists(assPath))
+            {
+                logger.Error($"{assPath} does not exist");
+                return (false, null);
+            }
+
+            try
+            {
+                logger.Log($"Loading mod from {assPath}");
+
+#if DEBUG
+                logger.Log($"Mod File Info:{Environment.NewLine}{FileVersionInfo.GetVersionInfo(assPath)}");
+#endif
+
+                var ModAssembly = Assembly.LoadFrom(assPath);
+
+                Type? modType = ModAssembly?.DefinedTypes
+                    .Where(t => typeof(IMicroMod).IsAssignableFrom(t) && !t.IsAbstract)
+                    .Select(t => t.UnderlyingSystemType)
+                    .FirstOrDefault();
+
+                if (modType is null)
+                {
+                    logger.Error($"No type implementing {nameof(IMicroMod)} found in {assPath}");
+                    return (false, null);
+                }
+
+                if (Activator.CreateInstance(modType, true) is not IMicroMod modMain)
+                {
+                    logger.Error($"Failed to initialize object of type {modType.FullName} from {assPath}");
+                    return (false, null);
+                }
+#if DEBUG
+                logger.Log($"Mod entry point: {modMain.GetType().FullName}.Load");
+#endif
+                return (true, modMain);
+            }
+            catch (Exception ex)
+            {
+                logger.Error($"Exception occured while loading {assPath}");
+                logger.Exception(ex);
+            }
+
+            return (false, null);
         }
     }
 }

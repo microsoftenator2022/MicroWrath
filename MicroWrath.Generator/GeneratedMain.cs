@@ -129,9 +129,9 @@ namespace {ns}
         }}
 
         private UnityModManager.ModEntry? modEntry;
-        protected internal UnityModManager.ModEntry ModEntry
+        protected internal UnityModManager.ModEntry? ModEntry
         {{
-            get => modEntry!;
+            get => modEntry;
             protected set => modEntry = value;
         }}
 
@@ -147,7 +147,7 @@ namespace {ns}
             Harmony.PatchAll();
         }}
 
-        public event Action<UnityModManager.ModEntry> Loaded = Functional.Ignore;
+        //public event Action<UnityModManager.ModEntry> Loaded = Functional.Ignore;
 
         protected virtual void DoInit()
         {{
@@ -174,10 +174,12 @@ namespace {ns}
 
             instance = this;
 
-            Loaded(modEntry);
+            //Loaded(modEntry);
 
             return true;
         }}
+
+        public virtual bool Load(Kingmaker.Modding.OwlcatModification mod) => throw new NotImplementedException();
     }}
 }}");
 

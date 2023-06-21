@@ -1,0 +1,234 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+
+using HarmonyLib;
+
+using Kingmaker.Blueprints;
+using Kingmaker.Blueprints.JsonSystem;
+using Kingmaker.BundlesLoading;
+using Kingmaker.Controllers.Projectiles;
+using Kingmaker.ResourceLinks;
+using Kingmaker.UI.Loot;
+using Kingmaker.View;
+using Kingmaker.Visual.Particles;
+
+using MicroWrath.Util;
+using MicroWrath.Util.Linq;
+
+using UnityEngine;
+
+
+namespace MicroWrath.Assets
+{
+    internal static class AssetTool
+    {
+        private interface IDynamicAssetLink
+        {
+            WeakResourceLink Link { get; }
+            Action<UnityEngine.Object> Init { get; }
+            UnityEngine.Object CreateObject();
+            Type AssetType { get; }
+            Type LinkType { get; }
+        }
+
+        private abstract class DynamicAssetLink<T, TLink> : IDynamicAssetLink
+            where T : UnityEngine.Object
+            where TLink : WeakResourceLink<T>, new()
+        {
+            public virtual Type AssetType => typeof(T);
+            public virtual Type LinkType => typeof(TLink);
+
+            public virtual TLink Link { get; }
+            
+            WeakResourceLink IDynamicAssetLink.Link => Link;
+            public virtual Action<T> Init { get; }
+            Action<UnityEngine.Object> IDynamicAssetLink.Init => obj =>
+            {
+                if (obj is not T t)
+                    throw new InvalidCastException();
+
+                    Init(t);
+            };
+
+            public DynamicAssetLink(TLink assetLink, Action<T> init)
+            {
+                Init = init;
+                Link = assetLink;
+            }
+
+            protected abstract T CloneObject(T obj);
+
+            public virtual UnityEngine.Object CreateObject()
+            {
+                if (Link.LoadObject() is not T obj)
+                    throw new Exception($"Failed to instantiate asset from {Link.AssetId}");
+
+                var copy = CloneObject(obj);
+                Init(copy);
+
+                return copy;
+            }
+        }
+
+        private class DynamicGameObjectLink<TLink> : DynamicAssetLink<GameObject, TLink>
+            where TLink : WeakResourceLink<GameObject>, new()
+        {
+            protected override GameObject CloneObject(GameObject obj)
+            {
+                var copy = GameObject.Instantiate(obj);
+
+                UnityEngine.Object.DontDestroyOnLoad(copy);
+
+                return copy;
+            }
+
+            public DynamicGameObjectLink(TLink link, Action<GameObject> init) : base(link, init) { }
+        }
+
+        private class DynamicMonobehaviourLink<T, TLink> : DynamicAssetLink<T, TLink>
+            where T : MonoBehaviour
+            where TLink : WeakResourceLink<T>, new()
+        {
+            protected override T CloneObject(T obj)
+            {
+                MicroLogger.Debug(() => $"Trying to clone {obj.gameObject}");
+
+                Debugger.Break();
+
+                var copy = GameObject.Instantiate(obj.gameObject);
+                copy.SetActive(false);
+
+                UnityEngine.Object.DontDestroyOnLoad(copy);
+
+                var component = copy.GetComponent<T>();
+
+                MicroLogger.Debug(() => $"GetComponent |{typeof(T)}| = {component?.ToString() ?? "<null>"}");
+
+                return component;
+            }
+
+            public DynamicMonobehaviourLink(TLink link, Action<T> init) : base(link, init) { }
+        }
+
+        private static readonly Dictionary<string, IDynamicAssetLink> DynamicAssetLinks = new();
+
+        private static TLink CreateDynamicAssetLinkProxy<TLink>(IDynamicAssetLink proxy, string? assetId = null)
+            where TLink : WeakResourceLink, new()
+        {
+            if (string.IsNullOrEmpty(assetId))
+                assetId = null;
+
+            assetId ??= Guid.NewGuid().ToString("N").ToLowerInvariant();
+
+            DynamicAssetLinks.Add(assetId, proxy);
+
+            return new() { AssetId = assetId };
+        }
+
+        public static TLink CreateDynamicProxy<TLink>(this TLink link, Action<GameObject> init, string? assetId = null)
+            where TLink : WeakResourceLink<GameObject>, new() =>
+            CreateDynamicAssetLinkProxy<TLink>(new DynamicGameObjectLink<TLink>(link, init), assetId);
+
+        public static TLink CreateDynamicMonobehaviourProxy<T, TLink>(this TLink link, Action<T> init, string? assetId = null)
+            where T : MonoBehaviour
+            where TLink : WeakResourceLink<T>, new() =>
+            CreateDynamicAssetLinkProxy<TLink>(new DynamicMonobehaviourLink<T, TLink>(link, init), assetId);
+
+        //private static readonly Dictionary<BlueprintGuid, Action<ProjectileView>> ProjectileViewMods = new();
+
+        //public static void RegisterProjectileViewMod(this BlueprintProjectile proj, Action<ProjectileView> mod)
+        //{
+        //    ProjectileViewMods.Add(proj.AssetGuid, mod);
+        //}
+
+        [HarmonyPatch]
+        static class Patches
+        {
+            //[HarmonyPatch(typeof(Projectile), nameof(Projectile.View), MethodType.Setter)]
+            //[HarmonyPostfix]
+            //static void Projectile_set_View_Postfix(Projectile __instance)
+            //{
+            //    if (!ProjectileViewMods.ContainsKey(__instance.Blueprint.AssetGuid))
+            //        return;
+
+            //    if(!__instance.View.activeSelf) return;
+
+            //    MicroLogger.Debug(() => $"{nameof(Projectile_set_View_Postfix)} {__instance.Blueprint}");
+
+            //    __instance.View.SetActive(false);
+            //    __instance.View = GameObject.Instantiate(__instance.View);
+
+            //    ProjectileViewMods[__instance.Blueprint.AssetGuid](__instance.View.GetComponentInChildren<ProjectileView>());
+            //    __instance.View.SetActive(true);
+            //}
+
+            [HarmonyPatch(typeof(AssetBundle), nameof(AssetBundle.LoadAsset), typeof(string), typeof(Type))]
+            [HarmonyPrefix]
+            static bool LoadAsset_Prefix(string name, ref UnityEngine.Object __result)
+            {
+                try
+                {
+                    if (DynamicAssetLinks.ContainsKey(name))
+                    {
+                        var assetProxy = DynamicAssetLinks[name];
+                        MicroLogger.Log($"Creating dynamic asset: {name} -> {assetProxy.Link.AssetId}");
+                        
+                        var copy = assetProxy.CreateObject();
+                        
+                        if (copy is MonoBehaviour mb)
+                            __result = mb.gameObject;
+                        else
+                            __result = copy;
+
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MicroLogger.Error($"Failed to load asset: {name}", e);
+                }
+
+                return true;
+            }
+
+            [HarmonyPatch(typeof(BundlesLoadService), nameof(BundlesLoadService.GetBundleNameForAsset))]
+            [HarmonyPrefix]
+            static bool GetBundleNameForAsset_Prefix(string assetId, ref string __result, BundlesLoadService __instance)
+            {
+                try
+                {
+                    if (DynamicAssetLinks.ContainsKey(assetId))
+                    {
+                        var assetProxy = DynamicAssetLinks[assetId];
+
+                        MicroLogger.Log($"Getting bundle for dynamic asset {assetId} -> {assetProxy.Link.AssetId}");
+
+                        __result = __instance.GetBundleNameForAsset(assetProxy.Link.AssetId);
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MicroLogger.Error($"Failed to fetch bundle name for {assetId}.", e);
+                }
+                return true;
+            }
+#if DEBUG
+            [HarmonyPatch(typeof(RayView), nameof(RayView.Update))]
+            [HarmonyPrefix]
+            static void RayView_Update_Prefix(RayView __instance)
+            {
+                if (!(__instance.m_Trajectory.guid == "ca2112faeea95e64fb3821ac2141caa9")) return;
+                MicroLogger.Debug(() => nameof(RayView_Update_Prefix));
+                MicroLogger.Debug(() => $"{__instance.gameObject.transform.parent.gameObject.name}");
+            }
+#endif
+        }
+    }
+}

@@ -10,7 +10,14 @@ namespace MicroWrath.Extensions
 {
     internal static class ProgressionExtensions
     {
-        public static void AddEntry(this BlueprintProgression progression, int level, params BlueprintFeatureBase[] features)
+        public static LevelEntry AddFeatures(this LevelEntry levelEntry, params BlueprintFeatureBase[] features)
+        {
+            levelEntry.SetFeatures(levelEntry.Features.Concat(features));
+
+            return levelEntry;
+        }
+
+        public static void AddFeatures(this BlueprintProgression progression, int level, params BlueprintFeatureBase[] features)
         {
             var entry = progression.LevelEntries.FirstOrDefault(e => e.Level == level);
 
@@ -20,7 +27,7 @@ namespace MicroWrath.Extensions
                 progression.LevelEntries = progression.LevelEntries.Append(entry).ToArray();
             }
 
-            entry.SetFeatures(features);
+            entry.AddFeatures(features);
         }
     }
 }

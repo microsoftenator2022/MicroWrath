@@ -14,7 +14,7 @@ namespace MicroWrath
     {
         public static ActionList Add(this ActionList aList, params GameAction[] actions)
         {
-            aList.Actions = actions.Concat(actions);
+            aList.Actions = aList.Actions.Concat(actions);
 
             return aList;
         }
