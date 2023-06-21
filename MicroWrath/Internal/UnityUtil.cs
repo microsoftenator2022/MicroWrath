@@ -10,7 +10,6 @@ namespace MicroWrath.Util.Unity
 {
     public static class UnityUtil
     {
-
         public static Color RotateColorHue(Color color, double degrees)
         {
             if (color.r == color.g && color.g == color.b)
