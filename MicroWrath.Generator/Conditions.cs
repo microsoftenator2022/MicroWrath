@@ -42,40 +42,54 @@ namespace MicroWrath.Generator
                 })
                 .Select((tuple, _) => tuple.Flatten().Item1);
 
-            context.RegisterSourceOutput(conditionTypes.Collect().Combine(conditionType).Combine(compilation), (spc, types) =>
+            var defaultValuesType = compilation
+                .Select(static (c, _) => c.Assembly.GetTypeByMetadataName("MicroWrath.Default").ToOption());
+
+            var initializers = BlueprintConstructor.GetTypeMemberInitialValues(conditionTypes, defaultValuesType);
+
+            context.RegisterSourceOutput(initializers.Collect().Combine(compilation), (spc, types) =>
             {
-                var (gaTypes, type, compilation) = types.Flatten();
+                var (initializers, compilation) = types;
 
                 var sb = new StringBuilder();
 
-                sb.AppendLine($"// {type}");
-
                 sb.AppendLine($@"using System;
 using Kingmaker.ElementsSystem;
+using MicroWrath.Util;
 
 namespace MicroWrath.Conditions
 {{
     internal static class Conditions
-    {{
-        public static T New<T>(Action<T>? init = null) where T : Condition, new()
-        {{
-            var gameAction = new T();
+    {{");
+        //public static T New<T>(Action<T>? init = null) where T : Condition, new()
+        //{{
+        //    var condition = new T();
             
-            init?.Invoke(gameAction);
+        //    init?.Invoke(condition);
 
-            return gameAction;
-        }}");
+        //    return condition;
+        //}}");
 
-                foreach (var t in gaTypes)
+                foreach (var i in initializers)
                 {
-                    sb.AppendLine($"public static {t} {t.Name}(Action<{t}>? init = null) => New<{t}>(init);");
+                    var t = i.ContainingType;
+
+                    sb.AppendLine(@$"
+        public static {t} {t.Name}(Action<{t}>? init = null)
+        {{
+            var condition = {BlueprintConstructor.GetInitializerExpression(i)};
+
+            init?.Invoke(condition);
+
+            return condition;
+        }}");
                 }
 
                 sb.AppendLine($@"
     }}
 }}");
 
-                spc.AddSource("conditions", sb.ToString());
+                spc.AddSource("Conditions", sb.ToString());
             });
         }
     }
