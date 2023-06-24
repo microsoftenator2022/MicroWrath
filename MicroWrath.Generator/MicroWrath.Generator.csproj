@@ -10,6 +10,7 @@
     <Compile Include="..\MicroWrath\Util\Option.cs" Link="Util\Option.cs" />
     <Compile Include="..\MicroWrath\Util\EnumerableExtensions.cs" Link="Util\EnumerableExtensions.cs" />
     <Compile Include="..\MicroWrath\Util\Functional.cs" Link="Util\Functional.cs" />
+    <Compile Include="..\MicroWrath\Util\Tuples.cs" Link="Util\Tuples.cs" />
     <Compile Remove="Resources\*.cs" />
     <Compile Remove="ModResources\*.cs" />
   </ItemGroup>
