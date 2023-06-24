@@ -24,9 +24,9 @@ using MicroWrath.Util.Linq;
 using UnityEngine;
 
 
-namespace MicroWrath.Assets
+namespace MicroWrath.Util.Assets
 {
-    internal static class AssetTool
+    internal static class Dynamic
     {
         private interface IDynamicAssetLink
         {
@@ -140,34 +140,9 @@ namespace MicroWrath.Assets
             where TLink : WeakResourceLink<T>, new() =>
             CreateDynamicAssetLinkProxy<TLink>(new DynamicMonobehaviourLink<T, TLink>(link, init), assetId);
 
-        //private static readonly Dictionary<BlueprintGuid, Action<ProjectileView>> ProjectileViewMods = new();
-
-        //public static void RegisterProjectileViewMod(this BlueprintProjectile proj, Action<ProjectileView> mod)
-        //{
-        //    ProjectileViewMods.Add(proj.AssetGuid, mod);
-        //}
-
         [HarmonyPatch]
         static class Patches
         {
-            //[HarmonyPatch(typeof(Projectile), nameof(Projectile.View), MethodType.Setter)]
-            //[HarmonyPostfix]
-            //static void Projectile_set_View_Postfix(Projectile __instance)
-            //{
-            //    if (!ProjectileViewMods.ContainsKey(__instance.Blueprint.AssetGuid))
-            //        return;
-
-            //    if(!__instance.View.activeSelf) return;
-
-            //    MicroLogger.Debug(() => $"{nameof(Projectile_set_View_Postfix)} {__instance.Blueprint}");
-
-            //    __instance.View.SetActive(false);
-            //    __instance.View = GameObject.Instantiate(__instance.View);
-
-            //    ProjectileViewMods[__instance.Blueprint.AssetGuid](__instance.View.GetComponentInChildren<ProjectileView>());
-            //    __instance.View.SetActive(true);
-            //}
-
             [HarmonyPatch(typeof(AssetBundle), nameof(AssetBundle.LoadAsset), typeof(string), typeof(Type))]
             [HarmonyPrefix]
             static bool LoadAsset_Prefix(string name, ref UnityEngine.Object __result)
@@ -219,16 +194,6 @@ namespace MicroWrath.Assets
                 }
                 return true;
             }
-#if DEBUG
-            [HarmonyPatch(typeof(RayView), nameof(RayView.Update))]
-            [HarmonyPrefix]
-            static void RayView_Update_Prefix(RayView __instance)
-            {
-                if (!(__instance.m_Trajectory.guid == "ca2112faeea95e64fb3821ac2141caa9")) return;
-                MicroLogger.Debug(() => nameof(RayView_Update_Prefix));
-                MicroLogger.Debug(() => $"{__instance.gameObject.transform.parent.gameObject.name}");
-            }
-#endif
         }
     }
 }
