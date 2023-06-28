@@ -27,7 +27,8 @@ namespace MicroWrath.Generator
 
             var ns = bpType.ContainingNamespace;
 
-            sb.AppendLine($"using {ns};");
+            if (ns.ToString() != "Kingmaker.Blueprints")
+                sb.AppendLine($"using {ns};");
 
             sb.Append($@"
 namespace {ConstructorNamespace}

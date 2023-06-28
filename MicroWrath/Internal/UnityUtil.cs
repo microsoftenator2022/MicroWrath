@@ -112,6 +112,43 @@ namespace MicroWrath.Util.Unity
                 _ => mmg,
             };
 
+        
+        public static Color AlphaBlend(Color c1, Color c2)
+        {
+            var output = (c1 * (1 - c2.a)) + c2;
+            
+            return output;
+        }
+
+        public static Color AlphaBlend(Color c, params Color[] cs) =>
+            cs.Aggregate(c, AlphaBlend);
+
+        public static Texture2D AlphaBlend(Texture2D t1, Texture2D t2, int x = 0, int y = 0)
+        {
+            var output = new Texture2D(t1.width, t1.height);
+
+            for (var i = 0; i < t1.width; i++)
+            {
+                var i2 = i - x;
+
+                for (var j = 0; j < t1.height; j++)
+                {
+                    var j2 = j - y;
+
+                    var p = t1.GetPixel(i, j);
+                    
+                    if (i2 >= 0 && i2 < t2.width &&
+                        j2 >= 0 && j2 < t2.height)
+                        p = AlphaBlend(p, t2.GetPixel(i2, j2));
+
+                    output.SetPixel(i, j, p);
+                }
+            }
+            output.Apply();
+
+            return output;
+        }
+
         public static class Debug
         {
             public static string DumpGameObject(GameObject gameObject)

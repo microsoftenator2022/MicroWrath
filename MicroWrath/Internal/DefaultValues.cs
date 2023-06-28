@@ -17,6 +17,7 @@ namespace MicroWrath
             DiceCountValue = 0,
             BonusValue = 0
         };
+        public static Kingmaker.UnitLogic.Mechanics.ContextValue ContextValue => new();
         public static Kingmaker.DialogSystem.CueSelection CueSelection => new();
         public static Kingmaker.DialogSystem.DialogSpeaker DialogSpeaker => new() { NoSpeaker = true };
         public static Kingmaker.Localization.LocalizedString LocalizedString => new();

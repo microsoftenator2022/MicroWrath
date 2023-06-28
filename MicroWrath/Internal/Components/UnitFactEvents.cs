@@ -9,7 +9,7 @@ using Kingmaker.Blueprints.Facts;
 
 using UniRx;
 
-namespace MicroWrath
+namespace MicroWrath.Components
 {
     internal abstract class UnitFactEvent : Kingmaker.UnitLogic.UnitFactComponentDelegate
     {

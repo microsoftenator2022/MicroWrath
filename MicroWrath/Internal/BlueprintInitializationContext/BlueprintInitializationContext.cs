@@ -122,10 +122,10 @@ namespace MicroWrath.BlueprintInitializationContext
 
         public ContextInitializer<TBlueprint> CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint, BlueprintGuid guid, string name)
             where TBlueprint : SimpleBlueprint, new() =>
-            NewBlueprint(() => AssetUtils.CloneBlueprint(blueprint.GetBlueprint()!, guid, name));
+            NewBlueprint(() => AssetUtils.CloneBlueprint(blueprint.GetBlueprint()!, guid, name, false));
 
         public ContextInitializer<TBlueprint> CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint, string assetId, string name)
             where TBlueprint : SimpleBlueprint, new() =>
-            NewBlueprint(() => AssetUtils.CloneBlueprint(blueprint.GetBlueprint()!, BlueprintGuid.Parse(assetId), name));
+            NewBlueprint(() => AssetUtils.CloneBlueprint(blueprint.GetBlueprint()!, BlueprintGuid.Parse(assetId), name, false));
     }
 }
