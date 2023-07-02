@@ -10,6 +10,8 @@ using Kingmaker.Blueprints.Classes.Prerequisites;
 using Kingmaker.Blueprints.Classes.Selection;
 using Kingmaker.Blueprints.Facts;
 using Kingmaker.Designers.Mechanics.Facts;
+using Kingmaker.ElementsSystem;
+using Kingmaker.UnitLogic.Abilities.Components;
 
 namespace MicroWrath.Extensions
 {
@@ -35,6 +37,14 @@ namespace MicroWrath.Extensions
             }
 
             return prerequisite;
+        }
+
+        public static AbilityEffectRunAction AddActions(
+            this AbilityEffectRunAction component,
+            params GameAction[] actions)
+        {
+            component.Actions.Add(actions);
+            return component;
         }
     }
 }

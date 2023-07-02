@@ -1,25 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 using HarmonyLib;
 
-using Kingmaker.Blueprints;
-using Kingmaker.Blueprints.JsonSystem;
 using Kingmaker.BundlesLoading;
-using Kingmaker.Controllers.Projectiles;
 using Kingmaker.ResourceLinks;
-using Kingmaker.UI.Loot;
-using Kingmaker.View;
-using Kingmaker.Visual.Particles;
-
-using MicroWrath.Util;
-using MicroWrath.Util.Linq;
 
 using UnityEngine;
 

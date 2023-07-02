@@ -62,6 +62,15 @@ namespace MicroWrath.Extensions
         //    where TComponent : BlueprintComponent =>
         //    blueprint.Components.OfType<TComponent>();
 
+        public static TComponent EnsureComponent<TComponent>(this BlueprintScriptableObject blueprint)
+            where TComponent : BlueprintComponent, new()
+        {
+            if (blueprint.Components.OfType<TComponent>().FirstOrDefault() is not { } component)
+                component = blueprint.AddComponent<TComponent>(Functional.Identity);
+
+            return component;
+        }
+
         public static void RemoveComponents(this BlueprintScriptableObject blueprint, Func<BlueprintComponent, bool> predicate) =>
             blueprint.ComponentsArray = blueprint.ComponentsArray.Where(predicate).ToArray();
 
