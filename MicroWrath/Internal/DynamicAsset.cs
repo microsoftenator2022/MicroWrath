@@ -99,8 +99,6 @@ namespace MicroWrath.Util.Assets
             {
                 MicroLogger.Debug(() => $"Trying to clone {obj.gameObject}");
 
-                Debugger.Break();
-
                 var copy = GameObject.Instantiate(obj.gameObject);
                 copy.SetActive(false);
 
