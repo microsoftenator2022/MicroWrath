@@ -114,10 +114,44 @@ namespace MicroWrath.Util.Assets
             return new() { AssetId = assetId };
         }
 
+        /// <summary>
+        /// Creates a dynamic proxy for a WeakResourceLink&lt;GameObject&gt; (eg. PrefabLink)
+        /// </summary>
+        /// <param name="link">A <typeparamref name="TLink"/> link.</param>
+        /// <param name="init">Initialization function to be executed on asset load.</param>
+        /// <param name="assetId">Asset ID for the new link. Will be set to a new guid if absent or null.</param>
+        /// <returns></returns>
         public static TLink CreateDynamicProxy<TLink>(this TLink link, Action<GameObject> init, string? assetId = null)
             where TLink : WeakResourceLink<GameObject>, new() =>
             CreateDynamicAssetLinkProxy<TLink>(new DynamicGameObjectLink<TLink>(link, init), assetId);
 
+        /// <summary>
+        /// Creates a dynamic proxy for a MonoBehaviour WeakResourceLink.
+        /// This is for assets that are components rather than GameObjects.
+        /// <list>
+        ///     <item>
+        ///         <term>FamiliarLink</term>
+        ///         <description><typeparamref name="T"/> = Familiar</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>Link</term>
+        ///         <description><typeparamref name="T"/> = TacticalMapObstacle</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>ProjectileLink</term>
+        ///         <description><typeparamref name="T"/> = ProjectileView</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>UnitViewLink</term>
+        ///         <description><typeparamref name="T"/> = UnitEntityView</description>
+        ///     </item>
+        /// </list>
+        /// </summary>
+        /// <typeparam name="T">Asset Type.</typeparam>
+        /// <param name="link">A <typeparamref name="TLink"/> link.</param>
+        /// <param name="init">Initialization function to be executed on asset load.</param>
+        /// <param name="assetId">Asset ID for the new link. Will be set to a new guid if absent or null.</param>
+        /// <returns></returns>
         public static TLink CreateDynamicMonobehaviourProxy<T, TLink>(this TLink link, Action<T> init, string? assetId = null)
             where T : MonoBehaviour
             where TLink : WeakResourceLink<T>, new() =>

@@ -117,6 +117,29 @@ namespace MicroWrath.Extensions
             params IMicroBlueprint<BlueprintFeature>[] features) =>
             AddFeatures(selection, false, feature, features);
 
+        public static void AddFeatures(this BlueprintFeatureSelection selection,
+            bool allowDuplicates,
+            BlueprintFeature feature,
+            params BlueprintFeature[] features) =>
+            AddFeatures(selection, allowDuplicates, new[] { feature }.Concat(features).Select(f => f.ToMicroBlueprint()));
+
+        public static void AddFeatures(this BlueprintFeatureSelection selection,
+            BlueprintFeature feature,
+            params BlueprintFeature[] features) =>
+            AddFeatures(selection, false, new[] { feature }.Concat(features).Select(f => f.ToMicroBlueprint()));
+
+        public static void AddFeatures<TBlueprint>(this BlueprintFeatureSelection selection,
+            bool allowDuplicates,
+            BlueprintReference<TBlueprint> feature,
+            params BlueprintReference<TBlueprint>[] features) where TBlueprint : BlueprintFeature =>
+            AddFeatures(selection, allowDuplicates, new[] { feature }.Concat(features).Select(f => f.ToMicroBlueprint()));
+
+        public static void AddFeatures<TBlueprint>(this BlueprintFeatureSelection selection,
+            BlueprintReference<TBlueprint> feature,
+            params BlueprintReference<TBlueprint>[] features) where TBlueprint : BlueprintFeature =>
+            AddFeatures(selection, false, new[] { feature }.Concat(features).Select(f => f.ToMicroBlueprint()));
+
+
         public static void AddToSpellList(this BlueprintAbility spell, BlueprintSpellList spellList, int level)
         {
             var slc = spell.Components.OfType<SpellListComponent>().FirstOrDefault();
