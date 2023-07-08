@@ -65,7 +65,7 @@ namespace MicroWrath.Extensions
         public static TComponent EnsureComponent<TComponent>(this BlueprintScriptableObject blueprint)
             where TComponent : BlueprintComponent, new()
         {
-            if (blueprint.Components.OfType<TComponent>().FirstOrDefault() is not { } component)
+            if (blueprint.ComponentsArray.OfType<TComponent>().FirstOrDefault() is not { } component)
                 component = blueprint.AddComponent<TComponent>(Functional.Identity);
 
             return component;
@@ -138,7 +138,6 @@ namespace MicroWrath.Extensions
             BlueprintReference<TBlueprint> feature,
             params BlueprintReference<TBlueprint>[] features) where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, false, new[] { feature }.Concat(features).Select(f => f.ToMicroBlueprint()));
-
 
         public static void AddToSpellList(this BlueprintAbility spell, BlueprintSpellList spellList, int level)
         {
