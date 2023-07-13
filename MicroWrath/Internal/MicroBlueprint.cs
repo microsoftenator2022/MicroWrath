@@ -10,10 +10,10 @@ namespace MicroWrath
     internal static class MicroBlueprint
     {
         public static IMicroBlueprint<TBlueprint> ToMicroBlueprint<TBlueprint>(this TBlueprint blueprint)
-            where TBlueprint : SimpleBlueprint => (MicroBlueprint<TBlueprint>)blueprint;
+            where TBlueprint : SimpleBlueprint => new MicroBlueprint<TBlueprint>(blueprint.AssetGuid);
 
         public static IMicroBlueprint<TBlueprint> ToMicroBlueprint<TBlueprint>(this BlueprintReference<TBlueprint> reference)
-            where TBlueprint : SimpleBlueprint => (MicroBlueprint<TBlueprint>)reference;
+            where TBlueprint : SimpleBlueprint => new MicroBlueprint<TBlueprint>(reference.guid);
     }
 
     internal readonly record struct MicroBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint> where TBlueprint : SimpleBlueprint
@@ -50,8 +50,8 @@ namespace MicroWrath
             return $"{typeof(TBlueprint)} {BlueprintGuid}";
         }
 
-        public static implicit operator MicroBlueprint<TBlueprint>(TBlueprint blueprint) =>
-            new(blueprint.AssetGuid) { MaybeBlueprint = blueprint };
+        //public static implicit operator MicroBlueprint<TBlueprint>(TBlueprint blueprint) =>
+        //    new(blueprint.AssetGuid) { MaybeBlueprint = blueprint };
 
         public static implicit operator MicroBlueprint<TBlueprint>(BlueprintReference<TBlueprint> blueprintReference) =>
             new(blueprintReference.Guid);

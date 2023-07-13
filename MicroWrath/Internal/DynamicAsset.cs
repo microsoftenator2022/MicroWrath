@@ -16,7 +16,7 @@ namespace MicroWrath.Util.Assets
         private interface IDynamicAssetLink
         {
             WeakResourceLink Link { get; }
-            Action<UnityEngine.Object> Init { get; }
+            Func<UnityEngine.Object, UnityEngine.Object> Init { get; }
             UnityEngine.Object CreateObject();
             Type AssetType { get; }
             Type LinkType { get; }
@@ -32,16 +32,16 @@ namespace MicroWrath.Util.Assets
             public virtual TLink Link { get; }
             
             WeakResourceLink IDynamicAssetLink.Link => Link;
-            public virtual Action<T> Init { get; }
-            Action<UnityEngine.Object> IDynamicAssetLink.Init => obj =>
+            public virtual Func<T, T> Init { get; }
+            Func<UnityEngine.Object, UnityEngine.Object> IDynamicAssetLink.Init => obj =>
             {
                 if (obj is not T t)
                     throw new InvalidCastException();
 
-                    Init(t);
+                    return Init(t);
             };
 
-            public DynamicAssetLink(TLink assetLink, Action<T> init)
+            public DynamicAssetLink(TLink assetLink, Func<T, T> init)
             {
                 Init = init;
                 Link = assetLink;
@@ -55,9 +55,7 @@ namespace MicroWrath.Util.Assets
                     throw new Exception($"Failed to instantiate asset from {Link.AssetId}");
 
                 var copy = CloneObject(obj);
-                Init(copy);
-
-                return copy;
+                return Init(copy);
             }
         }
 
@@ -73,7 +71,7 @@ namespace MicroWrath.Util.Assets
                 return copy;
             }
 
-            public DynamicGameObjectLink(TLink link, Action<GameObject> init) : base(link, init) { }
+            public DynamicGameObjectLink(TLink link, Func<GameObject, GameObject> init) : base(link, init) { }
         }
 
         private class DynamicMonobehaviourLink<T, TLink> : DynamicAssetLink<T, TLink>
@@ -96,7 +94,7 @@ namespace MicroWrath.Util.Assets
                 return component;
             }
 
-            public DynamicMonobehaviourLink(TLink link, Action<T> init) : base(link, init) { }
+            public DynamicMonobehaviourLink(TLink link, Func<T, T> init) : base(link, init) { }
         }
 
         private static readonly Dictionary<string, IDynamicAssetLink> DynamicAssetLinks = new();
@@ -121,9 +119,13 @@ namespace MicroWrath.Util.Assets
         /// <param name="init">Initialization function to be executed on asset load.</param>
         /// <param name="assetId">Asset ID for the new link. Will be set to a new guid if absent or null.</param>
         /// <returns></returns>
-        public static TLink CreateDynamicProxy<TLink>(this TLink link, Action<GameObject> init, string? assetId = null)
+        public static TLink CreateDynamicProxy<TLink>(this TLink link, Func<GameObject, GameObject> init, string? assetId = null)
             where TLink : WeakResourceLink<GameObject>, new() =>
             CreateDynamicAssetLinkProxy<TLink>(new DynamicGameObjectLink<TLink>(link, init), assetId);
+
+        public static TLink CreateDynamicProxy<TLink>(this TLink link, Action<GameObject> init, string? assetId = null)
+            where TLink : WeakResourceLink<GameObject>, new() =>
+            CreateDynamicAssetLinkProxy<TLink>(new DynamicGameObjectLink<TLink>(link, go => { init(go); return go; }), assetId);
 
         /// <summary>
         /// Creates a dynamic proxy for a MonoBehaviour WeakResourceLink.
@@ -152,10 +154,15 @@ namespace MicroWrath.Util.Assets
         /// <param name="init">Initialization function to be executed on asset load.</param>
         /// <param name="assetId">Asset ID for the new link. Will be set to a new guid if absent or null.</param>
         /// <returns></returns>
-        public static TLink CreateDynamicMonobehaviourProxy<T, TLink>(this TLink link, Action<T> init, string? assetId = null)
+        public static TLink CreateDynamicMonobehaviourProxy<T, TLink>(this TLink link, Func<T, T> init, string? assetId = null)
             where T : MonoBehaviour
             where TLink : WeakResourceLink<T>, new() =>
             CreateDynamicAssetLinkProxy<TLink>(new DynamicMonobehaviourLink<T, TLink>(link, init), assetId);
+
+        public static TLink CreateDynamicMonobehaviourProxy<T, TLink>(this TLink link, Action<T> init, string? assetId = null)
+            where T : MonoBehaviour
+            where TLink : WeakResourceLink<T>, new() =>
+            CreateDynamicAssetLinkProxy<TLink>(new DynamicMonobehaviourLink<T, TLink>(link, mb => { init(mb); return mb; }), assetId);
 
         [HarmonyPatch]
         static class Patches

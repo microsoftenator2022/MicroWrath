@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace MicroWrath.Util.Unity
 {
@@ -12,31 +13,90 @@ namespace MicroWrath.Util.Unity
     {
         public static bool SupportsSetPixel(this TextureFormat tFormat)
         {
-            return tFormat switch
-            {
-                TextureFormat.Alpha8 => true,
-                TextureFormat.ARGB32 => true,
-                TextureFormat.ARGB4444 => true,
-                TextureFormat.BGRA32 => true,
-                TextureFormat.R16 => true,
-                TextureFormat.R8 => true,
-                TextureFormat.RFloat => true,
-                TextureFormat.RG16 => true,
-                TextureFormat.RG32 => true,
-                TextureFormat.RGB24 => true,
-                TextureFormat.RGB48 => true,
-                TextureFormat.RGB565 => true,
-                TextureFormat.RGB9e5Float => true,
-                TextureFormat.RGBA32 => true,
-                TextureFormat.RGBA4444 => true,
-                TextureFormat.RGBA64 => true,
-                TextureFormat.RGBAFloat => true,
-                TextureFormat.RGBAHalf => true,
-                TextureFormat.RGFloat => true,
-                TextureFormat.RGHalf => true,
-                TextureFormat.RHalf => true,
-                _ => false
-            };
+            return tFormat is
+                TextureFormat.Alpha8 or
+                TextureFormat.ARGB32 or
+                TextureFormat.ARGB4444 or
+                TextureFormat.BGRA32 or
+                TextureFormat.R16 or
+                TextureFormat.R8 or
+                TextureFormat.RFloat or
+                TextureFormat.RG16 or
+                TextureFormat.RG32 or
+                TextureFormat.RGB24 or
+                TextureFormat.RGB48 or
+                TextureFormat.RGB565 or
+                TextureFormat.RGB9e5Float or
+                TextureFormat.RGBA32 or
+                TextureFormat.RGBA4444 or
+                TextureFormat.RGBA64 or
+                TextureFormat.RGBAFloat or
+                TextureFormat.RGBAHalf or
+                TextureFormat.RGFloat or
+                TextureFormat.RGHalf or
+                TextureFormat.RHalf;
+
+            //return tFormat switch
+            //{
+            //    TextureFormat.Alpha8 => true,
+            //    TextureFormat.ARGB32 => true,
+            //    TextureFormat.ARGB4444 => true,
+            //    TextureFormat.BGRA32 => true,
+            //    TextureFormat.R16 => true,
+            //    TextureFormat.R8 => true,
+            //    TextureFormat.RFloat => true,
+            //    TextureFormat.RG16 => true,
+            //    TextureFormat.RG32 => true,
+            //    TextureFormat.RGB24 => true,
+            //    TextureFormat.RGB48 => true,
+            //    TextureFormat.RGB565 => true,
+            //    TextureFormat.RGB9e5Float => true,
+            //    TextureFormat.RGBA32 => true,
+            //    TextureFormat.RGBA4444 => true,
+            //    TextureFormat.RGBA64 => true,
+            //    TextureFormat.RGBAFloat => true,
+            //    TextureFormat.RGBAHalf => true,
+            //    TextureFormat.RGFloat => true,
+            //    TextureFormat.RGHalf => true,
+            //    TextureFormat.RHalf => true,
+            //    _ => false
+            //};
+        }
+
+        public readonly record struct ColorHSV(double h, double s, double v);
+
+        public static Color ModifyHSV(this Color c, Func<ColorHSV, ColorHSV> f)
+        {
+            var a = c.a;
+
+            Color.RGBToHSV(c, out var h, out var s, out var v);
+            var hsv = f(new ColorHSV(h, s, v));
+            
+            c = Color.HSVToRGB((float)hsv.h, (float)hsv.s, (float)hsv.v);
+            c.a = a;
+
+            return c;
+        }
+
+        /// <summary>
+        /// Rotate Hue (as float) buy a an angle in degrees. Result is normalized to be
+        /// in the range [0..1]
+        /// </summary>
+        /// <param name="hue">Hue as float - degrees/380 or radians/pi</param>
+        /// <param name="degrees">Angle in degrees</param>
+        public static float RotateHueN(float hue, double degrees)
+        {
+            var h = (double)hue;
+
+            h += degrees / 360.0;
+
+            // x.y -> (x.y - x.0) = 0.y
+            if (h > 1) h -= ((int)h);
+
+            // -x.y -> (-x.y + (-(-x.0) + 1) = (-x.y + (x.0 + 1)) = -0.y + 1 = (1 - 0.y)
+            if (h < 0) h += (-(int)h) + 1;
+
+            return (float)h;
         }
 
         public static Color RotateColorHue(Color color, double degrees)
@@ -46,25 +106,49 @@ namespace MicroWrath.Util.Unity
 
             var oldColor = color;
 
-            Color.RGBToHSV(color, out var h, out var s, out var v);
+            //Color.RGBToHSV(color, out var h, out var s, out var v);
 
-            var oldH = h;
+            //var oldH = h;
 
-            var hF64 = (double)h;
+            //var hF64 = (double)h;
 
-            hF64 += degrees / 360.0;
+            //hF64 += degrees / 360.0;
 
-            // x.y -> (x.y - x.0) = 0.y
-            if (hF64 > 1) hF64 -= ((int)hF64);
+            //// x.y -> (x.y - x.0) = 0.y
+            //if (hF64 > 1) hF64 -= ((int)hF64);
 
-            // -x.y -> (-x.y + (-(-x.0) + 1) = (-x.y + (x.0 + 1)) = -0.y + 1 = (1 - 0.y)
-            if (hF64 < 0) hF64 += (-(int)hF64) + 1;
+            //// -x.y -> (-x.y + (-(-x.0) + 1) = (-x.y + (x.0 + 1)) = -0.y + 1 = (1 - 0.y)
+            //if (hF64 < 0) hF64 += (-(int)hF64) + 1;
 
-            h = (float)hF64;
+            //h = (float)hF64;
 
-            color = Color.HSVToRGB(h, s, v);
+            //color = Color.HSVToRGB(h, s, v);
 
-            MicroLogger.Debug(() => $"{(oldH * 360)}\u00b0 -> {(h * 360)}\u00b0");
+            //MicroLogger.Debug(() => $"{(oldH * 360)}\u00b0 -> {(h * 360)}\u00b0");
+
+            color = color.ModifyHSV(hsv =>
+            {
+                var oldH = hsv.h;
+
+                //var hue = hsv.h;
+
+                //hue += degrees / 360.0;
+
+                //// x.y -> (x.y - x.0) = 0.y
+                //if (hue > 1) hue -= ((int)hue);
+
+                //// -x.y -> (-x.y + (-(-x.0) + 1) = (-x.y + (x.0 + 1)) = -0.y + 1 = (1 - 0.y)
+                //if (hue < 0) hue += (-(int)hue) + 1;
+
+                //hsv = hsv with { h = hue };
+
+                hsv = hsv with { h = RotateHueN((float)hsv.h, degrees) };
+
+                MicroLogger.Debug(() => $"{(oldH * 360)}\u00b0 -> {(hsv.h * 360)}\u00b0");
+
+                return hsv;
+            });
+
             MicroLogger.Debug(() => $"{oldColor} -> {color}");
 
             return color;
@@ -112,11 +196,12 @@ namespace MicroWrath.Util.Unity
                 _ => mmg,
             };
 
-        
         public static Color AlphaBlend(Color c1, Color c2)
         {
-            var output = (c1 * (1 - c2.a)) + c2;
-            
+            var output = Color.Lerp(c1, c2, 1f - (c1.a - c2.a));
+
+            output.a = c1.a;
+
             return output;
         }
 
@@ -147,6 +232,28 @@ namespace MicroWrath.Util.Unity
             output.Apply();
 
             return output;
+        }
+
+        public static Texture2D CopyReadable(Texture2D texture, TextureFormat format = TextureFormat.RGBA32)
+        {
+            var copy = new Texture2D(texture.width, texture.height, format, false);
+
+            Graphics.ConvertTexture(texture, copy);
+
+            var request = AsyncGPUReadback.Request(copy, 0, format);
+
+            request.WaitForCompletion();
+
+            var data = request.GetData<Color32>(0);
+
+            var newTexture = new Texture2D(texture.width, texture.height, format, false);
+
+            newTexture.LoadRawTextureData(data);
+            newTexture.Apply();
+
+            UnityEngine.Object.Destroy(copy);
+
+            return newTexture;
         }
 
         public static class Debug

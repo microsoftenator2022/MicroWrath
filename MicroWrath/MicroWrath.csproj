@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>0.6.5.6</VersionPrefix>
+    <VersionPrefix>0.6.5.8</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -22,7 +22,7 @@
     <Reference Include="Newtonsoft.Json" HintPath="$(WrathPath)\Wrath_Data\Managed\Newtonsoft.Json.dll" Private="False" />
     <Reference Include="Owlcat.Runtime.Visual" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Visual.dll" Private="False" />
     <Reference Include="Owlcat.Runtime.Validation" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Validation.dll" Private="False" />
-    <Reference Include="Owlcat.SharedTypes" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.SharedTypes.dll" Private="False" />
+    <!--<Reference Include="Owlcat.SharedTypes" HintPath="$(WrathPath)\Wrath_Data\Managed\Owlcat.SharedTypes.dll" Private="False" />-->
     <Reference Include="Unity.TextMeshPro" HintPath="$(WrathPath)\Wrath_Data\Managed\Unity.TextMeshPro.dll" Private="False" />
     <Reference Include="UnityEngine" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.dll" Private="False" />
     <Reference Include="UnityEngine.AssetBundleModule" HintPath="$(WrathPath)\Wrath_Data\Managed\UnityEngine.AssetBundleModule.dll" Private="False" />
@@ -42,6 +42,7 @@
     <Reference Include="Assembly-CSharp" HintPath="$(SolutionDir)lib\Assembly-CSharp_public.dll" Private="False" />
     <Reference Include="Owlcat.Runtime.UI" HintPath="$(SolutionDir)lib\Owlcat.Runtime.UI_public.dll" Private="False" />
     <Reference Include="Owlcat.Runtime.Core" HintPath="$(SolutionDir)lib\Owlcat.Runtime.Core_public.dll" Private="False" />
+    <Reference Include="Owlcat.SharedTypes" HintPath="$(SolutionDir)lib\Owlcat.SharedTypes_public.dll" Private="False" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,13 +57,14 @@
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.UI.dll" />
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll" />
+    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.SharedTypes.dll" />
   </ItemGroup>
 
-  <Target Name="Publicize" AfterTargets="BeforeBuild;Clean" Inputs="@(Publicize)" Outputs="$(SolutionDir)lib\%(Publicize.Filename)_public.dll">
+  <Target Name="Publicize" AfterTargets="BeforeBuild;PublicizeClean" Inputs="@(Publicize)" Outputs="$(SolutionDir)lib\%(Publicize.Filename)_public.dll">
     <PublicizeTask InputAssemblies="@(Publicize)" OutputDir="$(SolutionDir)lib\" />
   </Target>
 
-  <Target Name="PublicizeClean" BeforeTargets="Clean">
+  <Target Name="PublicizeClean" AfterTargets="Clean">
     <Delete Files="$(SolutionDir)lib\%(Publicize.Filename)_public.dll" />
     <Delete Files="$(SolutionDir)lib\%(Publicize.Filename)_public.hash" />
   </Target>
