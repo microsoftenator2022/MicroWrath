@@ -9,7 +9,7 @@ using HarmonyLib;
 
 using MicroWrath.Util.Linq;
 
-namespace MicroWrath
+namespace MicroWrath.Util
 {
     internal static class TranspilerUtil
     {

@@ -8,7 +8,7 @@ using Kingmaker.ElementsSystem;
 
 using MicroWrath.Util.Linq;
 
-namespace MicroWrath
+namespace MicroWrath.Extensions
 {
     internal static partial class ActionExtensions
     {

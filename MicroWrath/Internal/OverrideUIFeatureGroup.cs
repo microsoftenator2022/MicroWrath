@@ -13,7 +13,7 @@ using Kingmaker.UI.Common;
 using Kingmaker.UI.ServiceWindow.CharacterScreen;
 using Kingmaker.UnitLogic;
 
-namespace MicroWrath
+namespace MicroWrath.Components
 {
     [AllowedOn(typeof(BlueprintFeature))]
     [AllowedOn(typeof(BlueprintFeatureSelection))]

@@ -57,7 +57,7 @@ namespace MicroWrath.Generator
 using Kingmaker.ElementsSystem;
 using MicroWrath.Util;
 
-namespace MicroWrath.Conditions
+namespace MicroWrath
 {{
     internal static class Conditions
     {{");

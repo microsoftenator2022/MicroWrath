@@ -14,7 +14,7 @@ using Kingmaker.UI.MVVM._VM.CharGen.Phases;
 using Kingmaker.UI.MVVM._VM.CharGen.Phases.FeatureSelector;
 using Kingmaker.UnitLogic.Class.LevelUp;
 
-namespace MicroWrath
+namespace MicroWrath.Components
 {
     [AllowedOn(typeof(BlueprintFeatureSelection))]
     [AllowedOn(typeof(BlueprintParametrizedFeature))]

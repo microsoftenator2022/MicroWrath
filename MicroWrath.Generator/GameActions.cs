@@ -59,7 +59,7 @@ namespace MicroWrath.Generator
 using Kingmaker.ElementsSystem;
 using MicroWrath.Util;
 
-namespace MicroWrath.GameActions
+namespace MicroWrath
 {{
     internal static class GameActions
     {{");
