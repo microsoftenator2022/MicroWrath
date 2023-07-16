@@ -195,6 +195,17 @@ namespace MicroWrath
         public static void Debug(Func<string> message, IMicroBlueprint<SimpleBlueprint>? blueprint, Exception? exception = null) =>
             AddEntry(new(message, Severity.Debug, exception) { Blueprint = blueprint });
         public static void Debug(Func<string> message, Exception? exception = null) => AddEntry(new(message, Severity.Debug, exception));
+        public static void Debug(Action<StringBuilder> messageBuilder, Exception? exception = null)
+        {
+            AddEntry(new(() =>
+            {
+                var sb = new StringBuilder();
+                messageBuilder(sb);
+
+                return sb.ToString();
+            }, Severity.Debug, exception));
+        }
+
         public static void Log(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Info, exception));
         public static void Warning(string messasge, Exception? exception = null) => AddEntry(new(() => messasge, Severity.Warning, exception));
         public static void Error(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Error, exception));
