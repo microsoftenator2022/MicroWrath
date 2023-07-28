@@ -16,6 +16,7 @@ using MicroWrath.Util;
 using MicroWrath.Generator.Common;
 using Microsoft.CodeAnalysis.Tags;
 using MicroWrath.Generator.Extensions;
+using System.Text.RegularExpressions;
 
 namespace MicroWrath.Generator
 {
@@ -163,10 +164,22 @@ namespace MicroWrath.Generator
                     return completionItem;
                 }
 
-                public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options) =>
-                    (trigger.Kind is
-                        CompletionTriggerKind.Insertion) &&
-                    (trigger.Character == '.');
+                private const string OwlcatDbTypeName = "Owlcat";
+
+                private static readonly Regex OwlcatDbAccess =
+                    new($@"\b{Constants.BlueprintsDbTypeName}\s*\.\s*{OwlcatDbTypeName}\s*\.\s*[A-Z][A-Za-z0-9_]+\s*\.\z",
+                        RegexOptions.Compiled |
+                        RegexOptions.RightToLeft |
+                        RegexOptions.Multiline |
+                        RegexOptions.CultureInvariant);
+
+                public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
+                {
+                    if (trigger.Kind is not CompletionTriggerKind.Insertion || (trigger.Character != '.')) return false;
+
+                    var prefixSpan = text.GetSubText(TextSpan.FromBounds(0, caretPosition));
+                    return OwlcatDbAccess.IsMatch(prefixSpan.ToString());
+                }
 
                 public override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken)
                 {
