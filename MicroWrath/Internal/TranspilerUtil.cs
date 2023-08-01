@@ -15,10 +15,12 @@ namespace MicroWrath.Util
     {
         public static IEnumerable<(int index, CodeInstruction instruction)> FindInstructionsIndexed(
             this IEnumerable<CodeInstruction> instructions,
-            IEnumerable<Func<CodeInstruction, bool>> matchFuncs)
+            IEnumerable<Func<CodeInstruction, bool>> matchFuncs,
+            int start = 0)
         {
             var matched = instructions
                 .Indexed()
+                .Skip(start)
                 .FindSequence(matchFuncs
                     .Select<Func<CodeInstruction, bool>, Func<(int index, CodeInstruction item), bool>>(f =>
                         i => f(i.item)));
