@@ -25,7 +25,7 @@ namespace MicroWrath.Util
                 (Sprite)UnityObjectConverter.AssetList.Get(assetId, fileId);
         }
 
-        public static Texture2D? GetTextureAssemblyResource(Assembly ass, string name, TextureFormat format = TextureFormat.RGBA32)
+        public static Texture2D? GetTextureAssemblyResource(Assembly ass, string name, TextureFormat format = TextureFormat.RGBA32, bool mipChain = false)
         {
             name = name.Replace('\\', '.');
 
@@ -36,7 +36,7 @@ namespace MicroWrath.Util
 
             var imageData = bs.ReadBytes((int)s.Length);
 
-            var t = new Texture2D(2, 2, format, false);
+            var t = new Texture2D(2, 2, format, mipChain);
             t.LoadImage(imageData);
             t.Apply();
 

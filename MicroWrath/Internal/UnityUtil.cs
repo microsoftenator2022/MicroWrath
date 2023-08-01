@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Owlcat.Runtime.Core.Utils;
+
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -35,32 +37,6 @@ namespace MicroWrath.Util.Unity
                 TextureFormat.RGFloat or
                 TextureFormat.RGHalf or
                 TextureFormat.RHalf;
-
-            //return tFormat switch
-            //{
-            //    TextureFormat.Alpha8 => true,
-            //    TextureFormat.ARGB32 => true,
-            //    TextureFormat.ARGB4444 => true,
-            //    TextureFormat.BGRA32 => true,
-            //    TextureFormat.R16 => true,
-            //    TextureFormat.R8 => true,
-            //    TextureFormat.RFloat => true,
-            //    TextureFormat.RG16 => true,
-            //    TextureFormat.RG32 => true,
-            //    TextureFormat.RGB24 => true,
-            //    TextureFormat.RGB48 => true,
-            //    TextureFormat.RGB565 => true,
-            //    TextureFormat.RGB9e5Float => true,
-            //    TextureFormat.RGBA32 => true,
-            //    TextureFormat.RGBA4444 => true,
-            //    TextureFormat.RGBA64 => true,
-            //    TextureFormat.RGBAFloat => true,
-            //    TextureFormat.RGBAHalf => true,
-            //    TextureFormat.RGFloat => true,
-            //    TextureFormat.RGHalf => true,
-            //    TextureFormat.RHalf => true,
-            //    _ => false
-            //};
         }
 
         public readonly record struct ColorHSV(double h, double s, double v);
@@ -234,7 +210,8 @@ namespace MicroWrath.Util.Unity
             return output;
         }
 
-        public static Texture2D CopyReadable(Texture2D texture, TextureFormat format = TextureFormat.RGBA32)
+        public static Texture2D CopyReadable<TData>(Texture2D texture, TextureFormat format = TextureFormat.RGBA32)
+            where TData : struct
         {
             var copy = new Texture2D(texture.width, texture.height, format, false);
 
@@ -244,7 +221,7 @@ namespace MicroWrath.Util.Unity
 
             request.WaitForCompletion();
 
-            var data = request.GetData<Color32>(0);
+            var data = request.GetData<TData>(0);
 
             var newTexture = new Texture2D(texture.width, texture.height, format, false);
 
@@ -255,6 +232,9 @@ namespace MicroWrath.Util.Unity
 
             return newTexture;
         }
+
+        public static Texture2D CopyReadable(Texture2D texture, TextureFormat format = TextureFormat.RGBA32) =>
+            CopyReadable<Color32>(texture, format);
 
         public static class Debug
         {
