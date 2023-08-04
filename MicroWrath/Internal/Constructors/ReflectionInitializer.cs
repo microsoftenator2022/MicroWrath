@@ -45,36 +45,51 @@ namespace MicroWrath.Constructors
         }
 
         protected readonly Type defaults;
-        protected Option<object> GetDefaultMemberValue(Type memberType)
+
+        protected Option<Func<object>> GetDefaultMemberValueGetter(Type memberType)
         {
-            //MicroLogger.Debug(() => $"Looking for {memberType} initializer for type {typeof(T)}");
-
-            //var field = defaults
-            //    .GetFields(BindingFlags.Static)
-            //    .Where(fi => fi.FieldType == memberType)
-            //    .FirstOrDefault();
-
-            //var fieldValue = (field?.GetValue(null)).ToOption();
-
-            //if (fieldValue.IsSome)
-            //{
-            //    MicroLogger.Debug(() => $"  Found default value in field: {field!.Name}");
-
-            //    return fieldValue;
-            //}
-
             var property = defaults
                 .GetProperties(BindingFlags.Public | BindingFlags.Static)
                 .Where(pi => pi.PropertyType == memberType && pi.CanRead)
                 .FirstOrDefault();
 
-            var propertyValue = (property?.GetValue(null)).ToOption();
+            var getValue = (property?.GetGetMethod()).ToOption().Map<MethodInfo, Func<object>>(mi => () => mi.Invoke(null, null));
 
-            if (propertyValue.IsSome) MicroLogger.Debug(() => $"{typeof(T)}: Initializing {memberType} members from: {property!.Name}");
-            //else MicroLogger.Debug(() => "  No default value found");
+            if (property is not null) MicroLogger.Debug(() => $"{typeof(T)}: Initializing {memberType} members from: {property!.Name}");
 
-            return propertyValue;
+            return getValue;
         }
+
+        //protected Option<object> GetDefaultMemberValue(Type memberType)
+        //{
+        //    //MicroLogger.Debug(() => $"Looking for {memberType} initializer for type {typeof(T)}");
+
+        //    //var field = defaults
+        //    //    .GetFields(BindingFlags.Static)
+        //    //    .Where(fi => fi.FieldType == memberType)
+        //    //    .FirstOrDefault();
+
+        //    //var fieldValue = (field?.GetValue(null)).ToOption();
+
+        //    //if (fieldValue.IsSome)
+        //    //{
+        //    //    MicroLogger.Debug(() => $"  Found default value in field: {field!.Name}");
+
+        //    //    return fieldValue;
+        //    //}
+
+        //    var property = defaults
+        //        .GetProperties(BindingFlags.Public | BindingFlags.Static)
+        //        .Where(pi => pi.PropertyType == memberType && pi.CanRead)
+        //        .FirstOrDefault();
+
+        //    var propertyValue = (property?.GetValue(null)).ToOption();
+
+        //    if (propertyValue.IsSome) MicroLogger.Debug(() => $"{typeof(T)}: Initializing {memberType} members from: {property!.Name}");
+        //    //else MicroLogger.Debug(() => "  No default value found");
+
+        //    return propertyValue;
+        //}
 
         protected IEnumerable<Action<T>> GetFieldInitializers()
         {
@@ -82,14 +97,14 @@ namespace MicroWrath.Constructors
                 .Select(fi =>
                 {
                     //MicroLogger.Debug(() => $"Looking for default value for field {fi.FieldType} {fi.Name}");
-                    return GetDefaultMemberValue(fi.FieldType).Map(v => (fi, v));
+                    return GetDefaultMemberValueGetter(fi.FieldType).Map(v => (fi, v));
                 })
                 .Where(v => v.IsSome)
                 .Select(v => v.Value!);
 
-            foreach (var (fi, value) in fieldDefaults)
+            foreach (var (fi, getValue) in fieldDefaults)
             {
-                yield return obj => fi.SetValue(obj, value);
+                yield return obj => fi.SetValue(obj, getValue());
             }
         }
 
@@ -101,14 +116,14 @@ namespace MicroWrath.Constructors
                 .Select(pi =>
                 {
                     //MicroLogger.Debug(() => $"Looking for default value for property {pi.PropertyType} {pi.Name}");
-                    return GetDefaultMemberValue(pi.PropertyType).Map(v => (pi, v));
+                    return GetDefaultMemberValueGetter(pi.PropertyType).Map(v => (pi, v));
                 })
                 .Where(v => v.IsSome)
                 .Select(v => v.Value!);
 
-            foreach (var (pi, value) in propertyDefaults)
+            foreach (var (pi, getValue) in propertyDefaults)
             {
-                yield return obj => pi.SetValue(obj, value);
+                yield return obj => pi.SetValue(obj, getValue());
             }
         }
 

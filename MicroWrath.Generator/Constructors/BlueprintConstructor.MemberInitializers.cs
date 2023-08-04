@@ -68,7 +68,7 @@ namespace MicroWrath.Generator
                 {
                     var (t, ms) = tms;
 
-                    return (t, ms.OfType<IFieldSymbol>());
+                    return (t, ms.OfType<IFieldSymbol>().Where(fs => fs.AssociatedSymbol is null));
                 });
 
             var withFields = allFields
