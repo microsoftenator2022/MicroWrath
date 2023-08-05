@@ -23,7 +23,7 @@ namespace MicroWrath.Util
         public override bool Equals(object obj) => obj.Equals(Value);
         public override int GetHashCode() => EqualityComparer<T?>.Default.GetHashCode(Value);
 
-        public static NoneType None = new();
+        public static readonly NoneType None = new();
 
         public class NoneType : Option<T>
         {
@@ -75,6 +75,9 @@ namespace MicroWrath.Util
     {
         public static Option<T>.Some Some<T>(T value) => new(value);
         public static Option<T>.NoneType None<T>() => Option<T>.None;
+
+        public static bool IsSome<T>(this Option<T> option) => option.IsSome;
+        public static bool IsNone<T>(this Option<T> option) => option.IsNone;
 
         public static Option<T> OfObj<T>(T? value) => (Option<T>)value;
 

@@ -164,5 +164,16 @@ namespace MicroWrath.Util.Linq
 
             return source.Skip(1).FindSequence(length, predicate);
         }
+
+        public static IEnumerable<T> EmptyIfNull<T>(this T? item) where T : class
+        {
+            if (item == null)
+                yield break;
+            
+            yield return item;
+        }
+
+        public static IEnumerable<T> SkipIfNull<T>(this IEnumerable<T?> source) where T : class =>
+            source.SelectMany(EmptyIfNull);
     }
 }
