@@ -62,9 +62,9 @@ namespace MicroWrath.Generator
 
             var initMembers = GetTypeMemberInitialValues(invocationTypeArguments, defaultValuesType);
 
-#region DebugOutput
+            #region DebugOutput
 #if DEBUG
-            context.RegisterSourceOutput(initMembers.Collect(), (spc, initMemberTypes) =>
+            context.RegisterImplementationSourceOutput(initMembers.Collect(), (spc, initMemberTypes) =>
             {
                 var types = initMemberTypes;
 
@@ -105,7 +105,7 @@ namespace MicroWrath.Generator
                 spc.AddSource("0DEBUG_blueprintInitTypes", sb.ToString());
             });
 #endif
-#endregion
+            #endregion
             context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
             {
                 var (bpType, fields, properties, methods) = bpInit;

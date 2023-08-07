@@ -30,6 +30,15 @@ namespace MicroWrath.Generator
                 spc.AddSource("debug.analyzerConfig", $"{configEntries.Select(c => $"//{c.k}: {c.v}").Aggregate((a, b) => $"{a}{Environment.NewLine}{b}")}");
             });
 
+            var ats = context.CompilationProvider
+                .SelectMany(static (compilation, _) => compilation.Assembly.TypeNames)
+                .Collect();
+
+            context.RegisterSourceOutput(compilation, (spc, config) =>
+            {
+                spc.AddSource("cacheDebug", $"// Cache invalidations: {BlueprintsDb.CacheInvalidations}");
+            });
+
             //var blueprintTypes = Incremental.GetBlueprintTypes(compilation).Collect();
 
             //context.RegisterSourceOutput(blueprintTypes, (spc, types) =>

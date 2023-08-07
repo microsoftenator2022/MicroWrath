@@ -273,18 +273,19 @@ namespace MicroWrath.Generator.Common
     {
         internal static IncrementalValuesProvider<ITypeSymbol> GetTypeParameters(
             IncrementalValuesProvider<IMethodSymbol> methodSymbols,
-            IncrementalValuesProvider<GeneratorSyntaxContext> syntax) =>
+            IncrementalValuesProvider<GeneratorSyntaxContext> syntax,
+            int recursionLimit = 15) =>
                 methodSymbols
                     .SelectMany(static (m, _) => m.TypeArguments)
                     .Combine(syntax.Collect())
-                    .SelectMany(static (tai, ct) =>
+                    .SelectMany((tai, ct) =>
                     {
                         var (ta, invocationsSyntax) = tai;
 
                         if (ta is not ITypeParameterSymbol tps)
                             return EnumerableExtensions.Singleton(ta);
 
-                        return Analyzers.GetAllGenericInstances(tps, invocationsSyntax, ct);
+                        return Analyzers.GetAllGenericInstances(tps, invocationsSyntax, ct, recursionLimit);
                     });
 
         internal static IncrementalValuesProvider<(IMethodSymbol symbol, InvocationExpressionSyntax node)> GetMethodInvocations(

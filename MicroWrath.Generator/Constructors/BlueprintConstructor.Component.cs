@@ -160,7 +160,7 @@ namespace MicroWrath.Generator
 
             #region DebugOutput
 #if DEBUG
-            context.RegisterSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
+            context.RegisterImplementationSourceOutput(defaultValuesType.Combine(initMembers.Collect()), (spc, defaultValues) =>
             {
                 var (defaults, types) = defaultValues;
 
@@ -201,7 +201,7 @@ namespace MicroWrath.Generator
                 spc.AddSource("0DEBUG_componentInitTypes", sb.ToString());
             });
 #endif
-#endregion
+            #endregion
             context.RegisterImplementationSourceOutput(initMembers, (spc, componentInit) =>
             {
                 var (componentType, fields, properties, methods) = componentInit;

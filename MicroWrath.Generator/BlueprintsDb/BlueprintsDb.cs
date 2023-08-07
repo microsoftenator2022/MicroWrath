@@ -75,6 +75,14 @@ namespace MicroWrath.Generator
                     return (blueprintType, blueprints.Where(bp => memberAccesses.Any(member => member.Name == bp.Name)));
                 });
 
+            //var blueprintsAccessorsToGenerate = blueprintData
+            //    .Select(static (bps, _) =>
+            //    {
+            //        var (blueprintType, blueprints) = bps;
+
+            //        return (blueprintType, blueprints.Select(Functional.Identity));
+            //    });
+
             context.RegisterSourceOutput(blueprintsAccessorsToGenerate, static (spc, bps) =>
             {
                 var (symbol, blueprints) = bps;

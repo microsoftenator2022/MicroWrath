@@ -20,6 +20,10 @@ namespace MicroWrath.Generator
             public INamedTypeSymbol? GetBlueprintType(SemanticModel sm) => sm.Compilation.GetTypeByMetadataName(this.TypeName);
         }
 
+#if DEBUG
+        internal static int CacheInvalidations = 0;
+#endif
+
         private static class Blueprints
         {
             public static ImmutableDictionary<ISymbol, ImmutableArray<BlueprintInfo>> BlueprintList { get; private set; } =
@@ -29,6 +33,16 @@ namespace MicroWrath.Generator
                 GetBlueprintData(IncrementalValuesProvider<AdditionalText> cheatdataJson, IncrementalValueProvider<Compilation> compilation)
             {
                 var blueprints = cheatdataJson
+#if DEBUG
+                .Select(static (at, ct) =>
+                {
+                    BlueprintList = BlueprintList.Clear();
+
+                    CacheInvalidations++;
+
+                    return at;
+                })
+#endif
                 .SelectMany(static (at, ct) =>
                 {
                     if (at.GetText(ct)?.ToString() is not string text)
@@ -91,7 +105,14 @@ namespace MicroWrath.Generator
                 .Where(static g => g.Key is not null && g.Key.DeclaredAccessibility == Accessibility.Public)
                 .Select(static (bpType, ct) =>
                 {
+                    if (BlueprintList.ContainsKey(bpType.Key) && BlueprintList[bpType.Key].Length > 0)
+                        return (bpType.Key, BlueprintList[bpType.Key]);
+
                     BlueprintList = BlueprintList.Remove(bpType.Key);
+
+#if DEBUG
+                    CacheInvalidations++;
+#endif
 
                     IEnumerable<BlueprintInfo> renameDuplicates(IEnumerable<BlueprintInfo> source)
                     {
@@ -114,8 +135,9 @@ namespace MicroWrath.Generator
                         }
                     }
                     var bps = (key: bpType.Key, bps: bpType.GroupBy(static bp => bp.Name).SelectMany(renameDuplicates).ToImmutableArray());
-
-                    BlueprintList = BlueprintList.SetItem(bpType.Key, bps.bps);
+                    
+                    if (bps.bps.Length > 0)
+                        BlueprintList = BlueprintList.SetItem(bpType.Key, bps.bps);
 
                     return bps;
                 });
