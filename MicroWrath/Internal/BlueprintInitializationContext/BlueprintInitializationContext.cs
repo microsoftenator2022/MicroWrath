@@ -89,6 +89,10 @@ namespace MicroWrath.BlueprintInitializationContext
             return new BlueprintInit<TBlueprint>(this, new IInitContextBlueprint[] { microBlueprint }, () => microBlueprint.CreateNew());
         }
 
+        public ContextInitializer<TBlueprint> NewBlueprint<TBlueprint>(GeneratedGuid generatedGuid)
+            where TBlueprint : SimpleBlueprint, new() =>
+            NewBlueprint<TBlueprint>(generatedGuid.Guid, generatedGuid.Key);
+ 
         /// <summary>
         /// Adds a new initializer to the context for an existing blueprint
         /// </summary>
@@ -127,5 +131,9 @@ namespace MicroWrath.BlueprintInitializationContext
         public ContextInitializer<TBlueprint> CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint, string assetId, string name)
             where TBlueprint : SimpleBlueprint, new() =>
             NewBlueprint(() => AssetUtils.CloneBlueprint(blueprint.GetBlueprint()!, BlueprintGuid.Parse(assetId), name, false));
+
+        public ContextInitializer<TBlueprint> CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint, GeneratedGuid generatedGuid)
+            where TBlueprint : SimpleBlueprint, new() =>
+            CloneBlueprint(blueprint, generatedGuid.Guid, generatedGuid.Key);
     }
 }
