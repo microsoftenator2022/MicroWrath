@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.ElementsSystem;
@@ -24,6 +25,12 @@ namespace MicroWrath
         public static Kingmaker.ResourceLinks.PrefabLink PrefabLink => new();
         public static Kingmaker.DialogSystem.Blueprints.ShowCheck ShowCheck => new();
         public static Kingmaker.RuleSystem.Rules.Damage.DamageTypeDescription DamageTypeDescription => new();
+        public static Kingmaker.RuleSystem.Rules.Damage.DamageDescription DamageDescription => new()
+        {
+            Dice = new() { m_Dice = Kingmaker.RuleSystem.DiceType.Zero },
+            m_DiceModifiers = new(Kingmaker.RuleSystem.DiceFormula.Zero),
+            TypeDescription = DamageTypeDescription
+        };
         public static Kingmaker.UnitLogic.Mechanics.ContextDurationValue ContextDurationValue => new()
         {
             DiceCountValue = new(),
