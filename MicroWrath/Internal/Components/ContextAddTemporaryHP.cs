@@ -11,6 +11,8 @@ using Kingmaker.UnitLogic.Buffs.Blueprints;
 using Kingmaker.UnitLogic.Buffs.Components;
 using Kingmaker.UnitLogic.Mechanics;
 
+using Newtonsoft.Json;
+
 namespace MicroWrath.Internal.Components
 {
     [AllowedOn(typeof(BlueprintBuff))]
@@ -40,6 +42,7 @@ namespace MicroWrath.Internal.Components
 
         public class ComponentData
         {
+            [JsonProperty]
             public ModifiableValue.Modifier? Modifier;
         }
     }
