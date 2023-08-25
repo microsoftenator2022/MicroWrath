@@ -23,22 +23,6 @@ namespace MicroWrath.Constructors
         {
             defaults = defaultInitializersType;
 
-            //MicroLogger.Debug(() =>
-            //{
-            //    var sb = new StringBuilder();
-
-            //    sb.AppendLine($"Properties from {defaultInitializersType.FullName}:");
-
-            //    sb.AppendLine($"{defaultInitializersType.GetProperties(BindingFlags.Public | BindingFlags.Static).Length} properties");
-
-            //    foreach (var p in defaultInitializersType.GetMembers(AccessTools.all).OfType<PropertyInfo>())
-            //    {
-            //        sb.AppendLine($"  {p.PropertyType} {p.Name}");
-            //    }
-
-            //    return sb.ToString();
-            //});
-
             FieldInitializers = GetFieldInitializers().ToArray();
             PropertyInitializers = GetPropertyInitializers().ToArray();
             TypeInitializerMethod = GetTypeInitializerMethods();
@@ -59,37 +43,6 @@ namespace MicroWrath.Constructors
 
             return getValue;
         }
-
-        //protected Option<object> GetDefaultMemberValue(Type memberType)
-        //{
-        //    //MicroLogger.Debug(() => $"Looking for {memberType} initializer for type {typeof(T)}");
-
-        //    //var field = defaults
-        //    //    .GetFields(BindingFlags.Static)
-        //    //    .Where(fi => fi.FieldType == memberType)
-        //    //    .FirstOrDefault();
-
-        //    //var fieldValue = (field?.GetValue(null)).ToOption();
-
-        //    //if (fieldValue.IsSome)
-        //    //{
-        //    //    MicroLogger.Debug(() => $"  Found default value in field: {field!.Name}");
-
-        //    //    return fieldValue;
-        //    //}
-
-        //    var property = defaults
-        //        .GetProperties(BindingFlags.Public | BindingFlags.Static)
-        //        .Where(pi => pi.PropertyType == memberType && pi.CanRead)
-        //        .FirstOrDefault();
-
-        //    var propertyValue = (property?.GetValue(null)).ToOption();
-
-        //    if (propertyValue.IsSome) MicroLogger.Debug(() => $"{typeof(T)}: Initializing {memberType} members from: {property!.Name}");
-        //    //else MicroLogger.Debug(() => "  No default value found");
-
-        //    return propertyValue;
-        //}
 
         protected IEnumerable<Action<T>> GetFieldInitializers()
         {
@@ -171,10 +124,6 @@ namespace MicroWrath.Constructors
             bp.AssetGuid = BlueprintGuid.Parse(assetId);
             bp.name = name;
 
-            //foreach (var f in FieldInitializers) f(bp);
-            //foreach (var p in PropertyInitializers) p(bp);
-            //TypeInitializerMethod(bp);
-
             return Initialize(bp);
         }
     }
@@ -188,10 +137,6 @@ namespace MicroWrath.Constructors
         public TComponent New()
         {
             TComponent component = new();
-
-            //foreach (var f in FieldInitializers) f(component);
-            //foreach (var p in PropertyInitializers) p(component);
-            //TypeInitializerMethod(component);
 
             return Initialize(component);
         }

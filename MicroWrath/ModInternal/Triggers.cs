@@ -11,8 +11,6 @@ using Kingmaker.Blueprints.JsonSystem;
 using Kingmaker.Localization;
 using Kingmaker.Localization.Shared;
 
-using MicroWrath;
-
 using UniRx;
 
 namespace MicroWrath
@@ -20,12 +18,13 @@ namespace MicroWrath
     [HarmonyPatch]
     internal static partial class Triggers
     {
+        private static event Action BlueprintsCache_Init_PrefixEvent = () => { };
         private static event Action BlueprintsCache_InitEvent_Early = () => { };
         private static event Action BlueprintsCache_InitEvent = () => { };
         
         [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Init))]
         [HarmonyPostfix]
-        private static void BlueprintsCache_Init_Patch()
+        private static void BlueprintsCache_Init_Postfix_Patch()
         {
             var timer = new Stopwatch();
 
@@ -46,6 +45,24 @@ namespace MicroWrath
             timer.Stop();
         }
 
+        [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Init))]
+        [HarmonyPrefix]
+        private static void BlueprintsCache_Init_Prefix_Patch()
+        {
+            var timer = new Stopwatch();
+            MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache_Init_Prefix)}");
+
+            BlueprintsCache_Init_PrefixEvent();
+            
+            timer.Stop();
+            MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache_Init_Prefix)} completed in {timer.ElapsedMilliseconds}ms");
+        }
+
+        public static readonly IObservable<Unit> BlueprintsCache_Init_Prefix =
+            Observable.FromEvent(
+                addHandler: handler => BlueprintsCache_Init_PrefixEvent += handler,
+                removeHandler: handler => BlueprintsCache_Init_PrefixEvent -= handler);
+
         public static readonly IObservable<Unit> BlueprintsCache_Init_Early =
             Observable.FromEvent(
                 addHandler: handler => BlueprintsCache_InitEvent_Early += handler,
@@ -57,6 +74,11 @@ namespace MicroWrath
                 removeHandler: handler => BlueprintsCache_InitEvent -= handler);
 
         private static event Action<Locale> LocalizationManager_OnLocaleChangedEvent = _ => { };
+
+        public static readonly IObservable<Locale> LocaleChanged =
+            Observable.FromEvent<Locale>(
+                addHandler: handler => LocalizationManager_OnLocaleChangedEvent += handler,
+                removeHandler: handler => LocalizationManager_OnLocaleChangedEvent -= handler);
 
         [HarmonyPatch(typeof(LocalizationManager), nameof(LocalizationManager.OnLocaleChanged))]
         [HarmonyPrefix]
@@ -71,10 +93,5 @@ namespace MicroWrath
             timer.Stop();
             MicroLogger.Debug(() => $"Trigger {nameof(LocaleChanged)} completed in {timer.ElapsedMilliseconds}ms");
         }
-
-        public static readonly IObservable<Locale> LocaleChanged =
-            Observable.FromEvent<Locale>(
-                addHandler: handler => LocalizationManager_OnLocaleChangedEvent += handler,
-                removeHandler: handler => LocalizationManager_OnLocaleChangedEvent -= handler);
     }
 }

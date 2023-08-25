@@ -175,5 +175,20 @@ namespace MicroWrath.Util.Linq
 
         public static IEnumerable<T> SkipIfNull<T>(this IEnumerable<T?> source) where T : class =>
             source.SelectMany(EmptyIfNull);
+
+        public static IEnumerable<T> Generate<TSource, T>(this TSource state, Func<TSource, Option<(T, TSource)>> generator)
+        {
+            var next = generator(state);
+
+            if (next.IsNone)
+                yield break;
+
+            (var value, state) = next.Value!;
+
+            yield return value;
+
+            foreach (var item in Generate(state, generator))
+                yield return item;
+        }
     }
 }

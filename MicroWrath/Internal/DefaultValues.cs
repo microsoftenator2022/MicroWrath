@@ -36,6 +36,35 @@ namespace MicroWrath
             DiceCountValue = new(),
             BonusValue = new()
         };
+        public static Kingmaker.UnitLogic.Buffs.Polymorph.VisualTransitionSettings VisualTransitionSettings => new()
+        {
+            OldScaleCurve = new()
+            {
+                keys = new UnityEngine.Keyframe[]
+                {
+                    new() { outTangent = 1.0f },
+                    new()
+                    {
+                        time = 1.0f,
+                        value = 1.0f,
+                        inTangent = 1.0f
+                    }
+                } 
+            },
+            NewScaleCurve = new()
+            {
+                keys = new UnityEngine.Keyframe[]
+                {
+                    new() { outTangent = 1.0f },
+                    new()
+                    {
+                        time = 1.0f,
+                        value = 1.0f,
+                        inTangent = 1.0f
+                    }
+                }
+            }
+        };
 
         public static BlueprintFeature IsClassFeature(BlueprintFeature feature)
         {

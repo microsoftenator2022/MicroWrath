@@ -117,6 +117,8 @@ using UnityModManagerNet;
 using MicroWrath;
 using MicroWrath.Util;
 
+using UniRx;
+
 namespace {ns}
 {{
     internal abstract class ModMain : IMicroMod
@@ -167,7 +169,9 @@ namespace {ns}
             this.modEntry = modEntry;
             MicroLogger.ModEntry = modEntry;
 
-            DoInit();
+            //DoInit();
+
+            Triggers.BlueprintsCache_Init_Prefix.Subscribe(_ => DoInit());
 
             harmony = new Harmony(modEntry.Info.Id);
             ApplyHarmonyPatches();

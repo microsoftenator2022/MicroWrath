@@ -30,6 +30,8 @@ namespace MicroWrath.Generator
 
             var allowedComponents = GetAllowedComponents(compilation);
 
+            GenerateAllowedComponentsConstructors(context, allowedComponents);
+
             CreateBlueprintConstructors(compilation, syntax, context);
 
             CreateComponentConstructors(compilation, syntax, context, 
@@ -38,8 +40,6 @@ namespace MicroWrath.Generator
                     .SelectMany((bpts, _) => bpts
                         .SelectMany(bpt => bpt.componentTypes)
                         .Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
-
-            GenerateAllowedComponentsConstructors(context, allowedComponents);
         }
     }
 }
