@@ -113,6 +113,7 @@ namespace MicroWrath.Constructors
         protected IEnumerable<Action<T>> GetPropertyInitializers()
         {
             var propertyDefaults = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .Where(pi => pi.CanWrite)
                 .Select(pi =>
                 {
                     //MicroLogger.Debug(() => $"Looking for default value for property {pi.PropertyType} {pi.Name}");

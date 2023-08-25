@@ -10,8 +10,6 @@ using Kingmaker.Blueprints;
 using MicroWrath;
 using MicroWrath.Constructors;
 using MicroWrath.Util;
-using Kingmaker.Utility;
-using AK.Wwise;
 
 namespace MicroWrath.BlueprintInitializationContext
 {
