@@ -63,48 +63,48 @@ namespace MicroWrath.Generator
             var initMembers = GetTypeMemberInitialValues(invocationTypeArguments, defaultValuesType);
 
             #region DebugOutput
-#if DEBUG
-            context.RegisterImplementationSourceOutput(initMembers.Collect(), (spc, initMemberTypes) =>
-            {
-                var types = initMemberTypes;
+//#if DEBUG
+//            context.RegisterImplementationSourceOutput(initMembers.Collect(), (spc, initMemberTypes) =>
+//            {
+//                var types = initMemberTypes;
 
-                var sb = new StringBuilder();
+//                var sb = new StringBuilder();
 
-                foreach (var (bpType, fields, properties, methods) in types)
-                {
-                    sb.AppendLine($"// {bpType}");
+//                foreach (var (bpType, fields, properties, methods) in types)
+//                {
+//                    sb.AppendLine($"// {bpType}");
 
-                    if (fields.Length > 0)
-                    {
-                        sb.AppendLine(" // Fields:");
-                        foreach (var f in fields)
-                        {
-                            sb.AppendLine($"  // {f}");
-                        }
-                    }
+//                    if (fields.Length > 0)
+//                    {
+//                        sb.AppendLine(" // Fields:");
+//                        foreach (var f in fields)
+//                        {
+//                            sb.AppendLine($"  // {f}");
+//                        }
+//                    }
 
-                    if (properties.Length > 0)
-                    {
-                        sb.AppendLine(" // Properties:");
-                        foreach (var p in properties)
-                        {
-                            sb.AppendLine($"  // {p}");
-                        }
-                    }
+//                    if (properties.Length > 0)
+//                    {
+//                        sb.AppendLine(" // Properties:");
+//                        foreach (var p in properties)
+//                        {
+//                            sb.AppendLine($"  // {p}");
+//                        }
+//                    }
 
-                    if (methods.Length > 0)
-                    {
-                        sb.AppendLine(" // Methods:");
-                        foreach (var m in methods)
-                        {
-                            sb.AppendLine($"  // {m}");
-                        }
-                    }
-                }
+//                    if (methods.Length > 0)
+//                    {
+//                        sb.AppendLine(" // Methods:");
+//                        foreach (var m in methods)
+//                        {
+//                            sb.AppendLine($"  // {m}");
+//                        }
+//                    }
+//                }
 
-                spc.AddSource("0DEBUG_blueprintInitTypes", sb.ToString());
-            });
-#endif
+//                spc.AddSource("0DEBUG_blueprintInitTypes", sb.ToString());
+//            });
+//#endif
             #endregion
             context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
             {
