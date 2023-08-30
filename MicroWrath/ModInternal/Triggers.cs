@@ -18,6 +18,29 @@ namespace MicroWrath
     [HarmonyPatch]
     internal static partial class Triggers
     {
+        private static event Action LocalizationManager_Init_PostfixEvent = () => { };
+
+        [HarmonyPatch(typeof(LocalizationManager), nameof(LocalizationManager.Init))]
+        [HarmonyPostfix]
+        private static void LocalizationManager_Init_Prefix_Patch()
+        {
+            var timer = new Stopwatch();
+
+            MicroLogger.Debug(() => $"Trigger {nameof(LocalizationManager_Init_Postfix)}");
+            timer.Restart();
+
+            LocalizationManager_Init_PostfixEvent();
+
+            timer.Stop();
+            MicroLogger.Debug(() => $"Trigger {nameof(LocalizationManager_Init_Postfix)} completed in {timer.ElapsedMilliseconds}ms");
+        }
+
+        public static readonly IObservable<Unit> LocalizationManager_Init_Postfix =
+            Observable.FromEvent(
+                addHandler: handler => LocalizationManager_Init_PostfixEvent += handler,
+                removeHandler: handler => LocalizationManager_Init_PostfixEvent -= handler);
+
+
         private static event Action BlueprintsCache_Init_PrefixEvent = () => { };
         private static event Action BlueprintsCache_InitEvent_Early = () => { };
         private static event Action BlueprintsCache_InitEvent = () => { };

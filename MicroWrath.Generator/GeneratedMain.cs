@@ -169,14 +169,14 @@ namespace {ns}
             this.modEntry = modEntry;
             MicroLogger.ModEntry = modEntry;
 
-            //DoInit();
+            instance = this;
 
-            Triggers.BlueprintsCache_Init_Prefix.Subscribe(_ => DoInit());
+            DoInit();
+
+            //Triggers.LocalizationManager_Init_Prefix.Subscribe(_ => DoInit());
 
             harmony = new Harmony(modEntry.Info.Id);
             ApplyHarmonyPatches();
-
-            instance = this;
 
             //Loaded(modEntry);
 
