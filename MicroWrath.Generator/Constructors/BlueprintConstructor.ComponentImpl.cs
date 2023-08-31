@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -22,7 +23,8 @@ namespace MicroWrath.Generator
             INamedTypeSymbol componentType,
             ImmutableArray<(IFieldSymbol field, IPropertySymbol init)> initFields,
             ImmutableArray<(IPropertySymbol property, IPropertySymbol init)> initProperties,
-            ImmutableArray<IMethodSymbol> initMethods)
+            ImmutableArray<IMethodSymbol> initMethods,
+            CancellationToken ct)
         {
             var sb = new StringBuilder();
 
@@ -36,7 +38,7 @@ namespace MicroWrath.Generator
 
             if (componentType.ContainingType != null)
             {
-                name = componentType.GetContainingTypes().Reverse()
+                name = componentType.GetContainingTypes(ct).Reverse()
                     .Select(t => t.Name)
                     .Aggregate((acc, next) => $"{acc}.{next}") + "." + name;
             }

@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using MicroWrath.Util;
 using MicroWrath.Generator.Common;
 using static MicroWrath.Generator.Constants;
+using System.Threading;
 
 namespace MicroWrath.Generator
 {
@@ -36,14 +37,18 @@ namespace MicroWrath.Generator
             return typeMembers.TryFind(static m => m.Name == "Owlcat");
         }
 
-        private static Option<string> TryGetBlueprintTypeNameFromSyntaxNode(MemberAccessExpressionSyntax bpTypeExpr, INamedTypeSymbol owlcatDbType, SemanticModel sm)
+        private static Option<string> TryGetBlueprintTypeNameFromSyntaxNode(
+            MemberAccessExpressionSyntax bpTypeExpr,
+            INamedTypeSymbol owlcatDbType,
+            SemanticModel sm,
+            CancellationToken ct)
         {
             var owlcatDbExpr = bpTypeExpr.GetExpression().ToOption();
 
             return owlcatDbExpr
                 .Bind<MemberAccessExpressionSyntax, string>(maybeOwlcat =>
                 {
-                    var exprType = sm.GetTypeInfo(maybeOwlcat).Type;
+                    var exprType = sm.GetTypeInfo(maybeOwlcat, ct).Type;
                     if (owlcatDbType.Equals(exprType, SymbolEqualityComparer.Default))
                         return Option.Some(bpTypeExpr.Name.ToString());
 

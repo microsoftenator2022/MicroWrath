@@ -38,12 +38,12 @@ namespace MicroWrath.Generator.Common
                 // Get all method invocation symbols
                 references = nodes
                     .Where(static sc => sc.Node is InvocationExpressionSyntax or MethodDeclarationSyntax)
-                    .SelectMany(static sc =>
+                    .SelectMany(sc =>
                     {
-                        if (sc.SemanticModel.GetDeclaredSymbol(sc.Node) is IMethodSymbol declaredSymbol)
+                        if (sc.SemanticModel.GetDeclaredSymbol(sc.Node, ct) is IMethodSymbol declaredSymbol)
                             return EnumerableExtensions.Singleton(declaredSymbol);
 
-                        var symbolInfo = sc.SemanticModel.GetSymbolInfo(sc.Node);
+                        var symbolInfo = sc.SemanticModel.GetSymbolInfo(sc.Node, ct);
 
                         if (symbolInfo.Symbol is IMethodSymbol simpleMethodSymbol)
                             return EnumerableExtensions.Singleton(simpleMethodSymbol);
@@ -79,7 +79,7 @@ namespace MicroWrath.Generator.Common
                 // Find all type declaration and generic type name symbols
                 references = nodes
                     .Where(static sc => sc.Node is TypeDeclarationSyntax or GenericNameSyntax)
-                    .Select(static sc => sc.SemanticModel.GetDeclaredSymbol(sc.Node) ?? sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol!)
+                    .Select(sc => sc.SemanticModel.GetDeclaredSymbol(sc.Node, ct) ?? sc.SemanticModel.GetSymbolInfo(sc.Node, ct).Symbol!)
                     .OfType<INamedTypeSymbol>()
                     // Where the type's unbound generic symbol is the same as the containing type
                     .Where(t =>
@@ -134,51 +134,64 @@ namespace MicroWrath.Generator.Common
 
         }
 
-        internal static IEnumerable<INamedTypeSymbol> GetBaseTypesAndSelf(this INamedTypeSymbol type)
+        internal static IEnumerable<INamedTypeSymbol> GetBaseTypesAndSelf(this INamedTypeSymbol type, CancellationToken ct = default)
         {
             yield return type;
 
             var baseType = type.BaseType;
             if (baseType is not null)
             { 
-                foreach (var t in GetBaseTypesAndSelf(baseType))
+                foreach (var t in GetBaseTypesAndSelf(baseType, ct))
+                {
+                    if (ct.IsCancellationRequested)
+                        yield break;
+
                     yield return t;
+                }
             }
         }
 
-        internal static IEnumerable<INamedTypeSymbol> AllNestedTypesAndSelf(this INamedTypeSymbol type)
+        internal static IEnumerable<INamedTypeSymbol> AllNestedTypesAndSelf(this INamedTypeSymbol type, CancellationToken ct)
         {
             yield return type;
             foreach (var typeMember in type.GetTypeMembers())
             {
-                foreach (var nestedType in typeMember.AllNestedTypesAndSelf())
+                foreach (var nestedType in typeMember.AllNestedTypesAndSelf(ct))
                 {
+                    if (ct.IsCancellationRequested)
+                        yield break;
+
                     yield return nestedType;
                 }
             }
         }
 
-        internal static IEnumerable<INamespaceSymbol> GetAllNamespaces(this INamespaceSymbol root)
+        internal static IEnumerable<INamespaceSymbol> GetAllNamespaces(this INamespaceSymbol root, CancellationToken ct)
         {
             yield return root;
             foreach (var child in root.GetNamespaceMembers())
-                foreach (var next in GetAllNamespaces(child))
+                foreach (var next in GetAllNamespaces(child, ct))
+                {
+                    if (ct.IsCancellationRequested)
+                        yield break;
+
                     yield return next;
+                }
         }
 
-        internal static IEnumerable<INamespaceSymbol> GetAllNamespaces(this IAssemblySymbol assembly) =>
-            assembly.GlobalNamespace.GetAllNamespaces();
+        internal static IEnumerable<INamespaceSymbol> GetAllNamespaces(this IAssemblySymbol assembly, CancellationToken ct) =>
+            assembly.GlobalNamespace.GetAllNamespaces(ct);
 
-        internal static IEnumerable<INamedTypeSymbol> GetAllTypes(this IEnumerable<INamedTypeSymbol> types, bool includeNested = false)
+        internal static IEnumerable<INamedTypeSymbol> GetAllTypes(this IEnumerable<INamedTypeSymbol> types, CancellationToken ct, bool includeNested = false)
         {
-            if(includeNested) types = types.SelectMany(t => t.AllNestedTypesAndSelf());
+            if(includeNested) types = types.SelectMany(t => t.AllNestedTypesAndSelf(ct));
 
             return types.Where(t => t.CanBeReferencedByName);
         }
 
-        internal static IEnumerable<INamedTypeSymbol> GetAssignableTypes(this IEnumerable<INamedTypeSymbol> types, bool includeNested = false)
+        internal static IEnumerable<INamedTypeSymbol> GetAssignableTypes(this IEnumerable<INamedTypeSymbol> types, CancellationToken ct, bool includeNested = false)
         {
-            return GetAllTypes(types, includeNested)
+            return GetAllTypes(types, ct, includeNested)
                 .Where((INamedTypeSymbol t) => t is
                 {
                     IsStatic: false,
@@ -189,15 +202,15 @@ namespace MicroWrath.Generator.Common
                 });
         }
 
-        internal static IEnumerable<INamedTypeSymbol> GetAssignableTypes(this INamespaceSymbol ns, bool includeNested = false) =>
-            ns.GetTypeMembers().GetAssignableTypes(includeNested);
+        internal static IEnumerable<INamedTypeSymbol> GetAssignableTypes(this INamespaceSymbol ns, CancellationToken ct, bool includeNested = false) =>
+            ns.GetTypeMembers().GetAssignableTypes(ct, includeNested);
 
         internal static Option<INamedTypeSymbol> TryGetTypeSymbolByName(this IEnumerable<INamedTypeSymbol> types, string name) =>
             types.TryFind(t => t.Name == name);
 
-        internal static Option<INamedTypeSymbol> TryGetTypeSymbolByName(string name, IAssemblySymbol assembly) => 
-            assembly.GetAllNamespaces()
-                .SelectMany(ns => ns.GetAssignableTypes()).TryGetTypeSymbolByName(name);
+        internal static Option<INamedTypeSymbol> TryGetTypeSymbolByName(string name, IAssemblySymbol assembly, CancellationToken ct) => 
+            assembly.GetAllNamespaces(ct)
+                .SelectMany(ns => ns.GetAssignableTypes(ct)).TryGetTypeSymbolByName(name);
 
         internal static bool HasGenericConstraints(ITypeParameterSymbol tp) =>
             tp.HasConstructorConstraint ||
@@ -256,14 +269,19 @@ namespace MicroWrath.Generator.Common
         //internal static string GenericConstraintsPart(this INamedTypeSymbol symbol) =>
         //    GenericParametersPart(symbol).Remove(0, GenericParametersPartNoConstraints(symbol).Length);
 
-        internal static IEnumerable<INamedTypeSymbol> GetContainingTypes(this INamedTypeSymbol symbol)
+        internal static IEnumerable<INamedTypeSymbol> GetContainingTypes(this INamedTypeSymbol symbol, CancellationToken ct)
         {
             if (symbol.ContainingType == null) yield break;
 
             yield return symbol.ContainingType;
 
-            foreach (var ancestor in symbol.ContainingType.GetContainingTypes())
+            foreach (var ancestor in symbol.ContainingType.GetContainingTypes(ct))
+            {
+                if (ct.IsCancellationRequested)
+                    yield break;
+
                 yield return ancestor;
+            }
         }
 
         internal static Option<T> ToOption<T>(this Optional<T?> optional) => optional.HasValue ? Option.Some(optional.Value!) : Option.None<T>();
@@ -339,8 +357,8 @@ namespace MicroWrath.Generator.Common
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValuesProvider<IAssemblySymbol> assemblies) =>
             assemblies
-                .SelectMany(static (a, _) => a.GlobalNamespace.GetAllNamespaces())
-                .SelectMany(static (ns, _) => ns.GetAssignableTypes());
+                .SelectMany(static (a, ct) => a.GlobalNamespace.GetAllNamespaces(ct))
+                .SelectMany(static (ns, ct) => ns.GetAssignableTypes(ct));
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValueProvider<Compilation> compilation) =>
             GetAssignableTypes(
@@ -378,11 +396,11 @@ namespace MicroWrath.Generator.Common
             return types
                 .Collect()
                 .Combine(compilation)
-                .SelectMany(static (typesAndCompilation, _) =>
+                .SelectMany(static (typesAndCompilation, ct) =>
                 {
                     var (types, compilation) = typesAndCompilation;
 
-                    types.Concat(compilation.GlobalNamespace.GetAssignableTypes());
+                    types.Concat(compilation.GlobalNamespace.GetAssignableTypes(ct));
 
                     return GetCompilationComponentTypes(compilation, types);
                 });

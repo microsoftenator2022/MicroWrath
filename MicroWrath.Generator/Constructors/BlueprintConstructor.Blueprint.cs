@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -11,7 +10,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using MicroWrath.Generator.Common;
 using MicroWrath.Util;
-using MicroWrath.Util.Linq;
 
 using static MicroWrath.Generator.Constants;
 
@@ -29,9 +27,9 @@ namespace MicroWrath.Generator
 
             var invocations = syntax
                 .Where(static sc => sc.Node is InvocationExpressionSyntax)
-                .Select(static (sc, _) =>
+                .Select(static (sc, ct) =>
                   (node: (InvocationExpressionSyntax)sc.Node,
-                    symbol: (sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol as IMethodSymbol)!,
+                    symbol: (sc.SemanticModel.GetSymbolInfo(sc.Node, ct).Symbol as IMethodSymbol)!,
                     sm: sc.SemanticModel))
                 .Where(static ns => ns.symbol is not null);
 

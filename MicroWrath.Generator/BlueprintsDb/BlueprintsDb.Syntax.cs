@@ -23,13 +23,13 @@ namespace MicroWrath.Generator
                     .SelectMany(static (sn, _) => TryGetOwlcatDbType(sn.SemanticModel)
                         .Map(owlcatDbType => (sn, owlcatDbType))
                         .ToEnumerable())
-                    .SelectMany(static (sn, _) =>
+                    .SelectMany(static (sn, ct) =>
                     {
                         var ((node, sm), owlcatDbType) = sn;
 
                         var bpTypeName = Option
                             .OfObj(node.GetExpression())
-                            .Bind(p => TryGetBlueprintTypeNameFromSyntaxNode(p, owlcatDbType, sm));
+                            .Bind(p => TryGetBlueprintTypeNameFromSyntaxNode(p, owlcatDbType, sm, ct));
 
                         var bpName = bpTypeName
                             .Map(bpt => (node.Name.Identifier.ValueText, bpt));

@@ -31,9 +31,9 @@ namespace MicroWrath.Generator
 
             var invocations = syntax
                 .Where(static sc => sc.Node is InvocationExpressionSyntax)
-                .Select(static (sc, _) =>
+                .Select(static (sc, ct) =>
                    (node: (InvocationExpressionSyntax)sc.Node,
-                    symbol: (sc.SemanticModel.GetSymbolInfo(sc.Node).Symbol as IMethodSymbol)!,
+                    symbol: (sc.SemanticModel.GetSymbolInfo(sc.Node, ct).Symbol as IMethodSymbol)!,
                     sm: sc.SemanticModel))
                 .Where(static ns => ns.symbol is not null);
 
@@ -44,96 +44,6 @@ namespace MicroWrath.Generator
                 invocations);
 
             var typeParams = Incremental.GetTypeParameters(newComponentMethodInvocations.Select((m, _) => m.symbol), syntax);
-
-            //context.RegisterSourceOutput(
-            //    newComponentMethodInvocations
-            //        .Collect()
-            //        .Combine(typeParams.Collect())
-            //        .Combine(syntax.Collect())
-            //        .Combine(compilation),
-            //    (spc, xs) =>
-            //{
-            //    var (((ncmis, tps), syntax), compilation) = xs;
-
-            //    var sb = new StringBuilder();
-
-            //    var methodInvocations = syntax
-            //        .Where(sc => sc.Node is GenericNameSyntax &&
-            //            sc.Node.GetText().ToString().Contains("AddNewComponent"));
-
-            //    foreach (var mi in methodInvocations)
-            //    {
-            //        sb.AppendLine("// Text:");
-            //        foreach (var line in mi.Node.GetText().Lines)
-            //        {
-            //            sb.AppendLine($" // {line}");
-            //        }
-
-            //        var node = mi.Node as GenericNameSyntax;
-
-            //        var id = node?.Identifier;
-
-            //        var symbol = node is not null ? mi.SemanticModel.GetSymbolInfo(node!).Symbol : null;
-
-            //        sb.AppendLine($"// Symbol: {symbol?.ToString() ?? "<null>" }");
-
-            //        var ancestors = mi.Node.Ancestors(true);
-
-            //        var treeSemanticModel = compilation.GetSemanticModel(ancestors.Last().SyntaxTree, true);
-
-            //        sb.AppendLine($" // Ancestors:");
-
-            //        foreach (var ancestor in ancestors)
-            //        {
-            //            foreach (var line in ancestor.GetText().Lines)
-            //            {
-            //                sb.AppendLine($"   // {line}");
-            //            }
-
-            //            var ancestorSymbol = treeSemanticModel.GetSymbolInfo(ancestor).Symbol ?? treeSemanticModel.GetDeclaredSymbol(ancestor);
-            //            if (ancestorSymbol is not null)
-            //            {
-            //                sb.AppendLine($"  // Non-null symbol: {ancestorSymbol}");
-
-            //                if (ancestorSymbol is not IMethodSymbol ms)
-            //                    continue;
-
-            //                var returnType = ms.ReturnType;
-
-            //                sb.AppendLine($"   // Method return type: {returnType?.ToString() ?? "<null>"}");
-
-            //                if (ancestor is SimpleLambdaExpressionSyntax sles)
-            //                {
-            //                    var paramTypeSymbol = treeSemanticModel.GetSymbolInfo(sles.Parameter).Symbol ?? treeSemanticModel.GetDeclaredSymbol(sles.Parameter);
-
-            //                    sb.AppendLine($"    //! {treeSemanticModel.GetSymbolInfo(sles.Parameter).CandidateReason}");
-
-            //                    sb.AppendLine($"  // param type: {paramTypeSymbol?.ToString() ?? "<null>"}");
-
-            //                    sb.AppendLine($"  // As parenthesized");
-
-            //                    //var parameter = sles.Parameter.WithType();
-
-            //                    var list = SyntaxFactory.SeparatedList(EnumerableExtensions.Singleton(sles.Parameter));
-            //                    var parameterList = SyntaxFactory.ParameterList(list);
-            //                    var parenthesized = SyntaxFactory.ParenthesizedLambdaExpression(
-            //                        parameterList, sles.Body);
-
-            //                    foreach (var line in parenthesized.GetText().Lines)
-            //                    {
-            //                        sb.AppendLine($"   // {line}");
-            //                    }
-            //                }
-            //            }
-
-            //            sb.AppendLine();
-            //        }
-
-            //        sb.AppendLine();
-            //    }
-
-            //    spc.AddSource("typeParams", sb.ToString());
-            //});
 
             var invocationTypeArguments = typeParams
                 .Collect()
@@ -206,7 +116,8 @@ namespace MicroWrath.Generator
             {
                 var (componentType, fields, properties, methods) = componentInit;
 
-                spc.AddSource(componentType.Name, ComponentConstructorPart(componentType, fields, properties, methods));
+
+                spc.AddSource(componentType.Name, ComponentConstructorPart(componentType, fields, properties, methods, spc.CancellationToken));
             });
         }
     }

@@ -50,7 +50,9 @@ namespace MicroWrath.Generator
             return sb.ToString();
         }
 
-        internal static IncrementalValuesProvider<InitMembers> GetTypeMemberInitialValues(IncrementalValuesProvider<INamedTypeSymbol> types, IncrementalValueProvider<Option<INamedTypeSymbol>> defaults)
+        internal static IncrementalValuesProvider<InitMembers> GetTypeMemberInitialValues(
+            IncrementalValuesProvider<INamedTypeSymbol> types,
+            IncrementalValueProvider<Option<INamedTypeSymbol>> defaults)
         {
 
             //var defaultValueFields = defaults
@@ -61,7 +63,7 @@ namespace MicroWrath.Generator
                 .SelectMany(static (defaults, _) => defaults.ToEnumerable().SelectMany(t => t.GetMembers().OfType<IPropertySymbol>()))
                 .Collect();
 
-            var withMembers = types.Select(static (t, _) => (t, t.GetBaseTypesAndSelf().SelectMany(t => t.GetMembers())));
+            var withMembers = types.Select(static (t, ct) => (t, t.GetBaseTypesAndSelf(ct).SelectMany(t => t.GetMembers())));
 
             var allFields = withMembers
                 .Select(static (tms, _) =>
@@ -126,12 +128,12 @@ namespace MicroWrath.Generator
                
             var withInitMethods = types
                 .Combine(initMethods.Collect())
-                .Select((tm, _) =>
+                .Select((tm, ct) =>
                 {
                     var (type, initMethods) =  tm;
 
                     return (type, initMethods
-                        .Where(m => type.GetBaseTypesAndSelf()
+                        .Where(m => type.GetBaseTypesAndSelf(ct)
                             .Any(bpType => m.ReturnType.Equals(bpType, SymbolEqualityComparer.Default)))
                         .ToImmutableArray());
                 })
