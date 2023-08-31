@@ -34,5 +34,18 @@ namespace MicroWrath.Generator
                         .SelectMany(bpt => bpt.componentTypes)
                         .Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
         }
+
+        internal static void AddSource(SourceProductionContext spc, INamedTypeSymbol typeSymbol, string content)
+        {
+            var name = typeSymbol.Name;
+
+            while (typeSymbol.ContainingType != null)
+            {
+                name = $" {typeSymbol.ContainingType.Name}.{name}";
+                typeSymbol = typeSymbol.ContainingType;
+            }
+
+            spc.AddSource(name, content);
+        }
     }
 }

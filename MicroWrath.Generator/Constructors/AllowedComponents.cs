@@ -21,10 +21,10 @@ namespace MicroWrath.Generator
             var componentTypes = Incremental.GetComponentTypes(compilation)
                 .Where(static c => !c.IsAbstract)
                 .Combine(allowedOnAttribute)
-                .Select(static (ct, _) => (
-                    componentType: ct.Left,
-                    allowedOnAttributes: ct.Left.GetAttributes()
-                        .Where(attr => attr.AttributeClass?.Equals(ct.Right, SymbolEqualityComparer.Default) ?? false)))
+                .Select(static (componentType, _) => (
+                    componentType: componentType.Left,
+                    allowedOnAttributes: componentType.Left.GetAttributes()
+                        .Where(attr => attr.AttributeClass?.Equals(componentType.Right, SymbolEqualityComparer.Default) ?? false)))
                 .Where(static ct => ct.allowedOnAttributes.Any());
 
             var componentsAllowedOn = componentTypes
@@ -70,33 +70,33 @@ namespace MicroWrath.Generator
         private void GenerateAllowedComponentsConstructors(IncrementalGeneratorInitializationContext context,
             IncrementalValuesProvider<(INamedTypeSymbol blueprintType, ImmutableArray<INamedTypeSymbol> componentTypes)> byBlueprintType)
         {
-//#if DEBUG
-//            context.RegisterImplementationSourceOutput(byBlueprintType.Collect(), static (spc, bpcs) =>
-//            {
-//                var sb = new StringBuilder();
+#if DEBUG
+            context.RegisterImplementationSourceOutput(byBlueprintType.Collect(), static (spc, bpcs) =>
+            {
+                var sb = new StringBuilder();
 
-//                sb.AppendLine($"// Blueprint types: {bpcs.Length}");
+                sb.AppendLine($"// Blueprint types: {bpcs.Length}");
 
-//                foreach (var (bpt, cs) in bpcs)
-//                {
-//                    if (spc.CancellationToken.IsCancellationRequested) return;
+                foreach (var (bpt, cs) in bpcs)
+                {
+                    if (spc.CancellationToken.IsCancellationRequested) return;
 
-//                    sb.AppendLine($"// Blueprint type: {bpt}");
-//                    sb.AppendLine("// Allowed components:");
+                    sb.AppendLine($"// Blueprint type: {bpt}");
+                    sb.AppendLine("// Allowed components:");
 
-//                    foreach (var c in cs)
-//                    {
-//                        if (spc.CancellationToken.IsCancellationRequested) return;
+                    foreach (var c in cs)
+                    {
+                        if (spc.CancellationToken.IsCancellationRequested) return;
 
-//                        sb.AppendLine($"    // {c}");
-//                    }
-//                }
+                        sb.AppendLine($"    // {c}");
+                    }
+                }
 
-//                if (spc.CancellationToken.IsCancellationRequested) return;
+                if (spc.CancellationToken.IsCancellationRequested) return;
 
-//                spc.AddSource("allowedComponents", sb.ToString());
-//            });
-//#endif
+                spc.AddSource("allowedComponents", sb.ToString());
+            });
+#endif
 
             context.RegisterSourceOutput(byBlueprintType, static (spc, bpt) =>
             {
