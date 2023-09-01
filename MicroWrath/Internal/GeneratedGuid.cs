@@ -86,6 +86,12 @@ namespace MicroWrath
             return new(key, new BlueprintGuid(guids[key]));
         }
 
+        public TRef ToBlueprintReference<TRef>() where TRef : BlueprintReferenceBase, new() =>
+            new() { deserializedGuid = this.Guid };
+
+        public IMicroBlueprint<TBlueprint> ToMicroBlueprint<TBlueprint>() where TBlueprint : SimpleBlueprint =>
+            new MicroBlueprint<TBlueprint>(this.Guid);
+
         public override string ToString() => this.Guid.ToString();
 
         public static implicit operator BlueprintGuid(GeneratedGuid guid) => guid.Guid;
