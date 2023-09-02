@@ -117,6 +117,9 @@ namespace MicroWrath.Generator
             {
                 var (componentType, fields, properties, methods) = componentInit;
 
+                if (spc.CancellationToken.IsCancellationRequested)
+                    return;
+
                 AddSource(spc, componentType, ComponentConstructorPart(componentType, fields, properties, methods, spc.CancellationToken));
             });
         }

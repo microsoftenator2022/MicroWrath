@@ -89,10 +89,10 @@ namespace MicroWrath.Extensions
             {
                 MicroLogger.Debug(() => $"Adding {f} to selection {selection.name}", selection.ToMicroBlueprint());
 
-                if (!featuresList.Contains(f.ToReference()) || allowDuplicates)
+                if (!featuresList.Contains(f.ToReference<BlueprintFeature, BlueprintFeatureReference>()) || allowDuplicates)
                     featuresList.Add(f.ToReference<BlueprintFeature, BlueprintFeatureReference>());
 
-                if (!allFeaturesList.Contains(f.ToReference()) || allowDuplicates)
+                if (!allFeaturesList.Contains(f.ToReference<BlueprintFeature, BlueprintFeatureReference>()) || allowDuplicates)
                     allFeaturesList.Add(f.ToReference<BlueprintFeature, BlueprintFeatureReference>());
             }
 

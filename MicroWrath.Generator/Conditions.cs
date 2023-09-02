@@ -59,7 +59,7 @@ using MicroWrath.Util;
 
 namespace MicroWrath
 {{
-    internal static class Conditions
+    internal static partial class Conditions
     {{");
         //public static T New<T>(Action<T>? init = null) where T : Condition, new()
         //{{
@@ -72,6 +72,9 @@ namespace MicroWrath
 
                 foreach (var i in initializers)
                 {
+                    if (spc.CancellationToken.IsCancellationRequested)
+                        break;
+
                     var t = i.ContainingType;
 
                     sb.AppendLine(@$"

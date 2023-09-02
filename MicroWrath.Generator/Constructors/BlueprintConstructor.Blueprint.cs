@@ -70,6 +70,9 @@ namespace MicroWrath.Generator
 
                 foreach (var (bpType, fields, properties, methods) in types)
                 {
+                    if (spc.CancellationToken.IsCancellationRequested)
+                        break;
+
                     sb.AppendLine($"// {bpType}");
 
                     if (fields.Length > 0)
@@ -108,6 +111,9 @@ namespace MicroWrath.Generator
             context.RegisterImplementationSourceOutput(initMembers, (spc, bpInit) =>
             {
                 var (bpType, fields, properties, methods) = bpInit;
+
+                if (spc.CancellationToken.IsCancellationRequested)
+                    return;
 
                 AddSource(spc, bpType, BlueprintConstructorPart(bpType, fields, properties, methods));
             });

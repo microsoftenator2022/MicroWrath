@@ -39,8 +39,14 @@ namespace MicroWrath.Generator
         {
             var name = typeSymbol.Name;
 
+            if (spc.CancellationToken.IsCancellationRequested)
+                return;
+
             while (typeSymbol.ContainingType != null)
             {
+                if (spc.CancellationToken.IsCancellationRequested)
+                    return;
+
                 name = $" {typeSymbol.ContainingType.Name}.{name}";
                 typeSymbol = typeSymbol.ContainingType;
             }

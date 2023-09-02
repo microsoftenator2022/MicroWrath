@@ -61,11 +61,14 @@ using MicroWrath.Util;
 
 namespace MicroWrath
 {{
-    internal static class GameActions
+    internal static partial class GameActions
     {{");
 
                 foreach (var i in initializers)
                 {
+                    if (spc.CancellationToken.IsCancellationRequested)
+                        break;
+
                     var t = i.ContainingType;
 
                     sb.AppendLine(@$"
