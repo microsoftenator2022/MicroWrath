@@ -13,6 +13,8 @@ using Kingmaker.Localization.Shared;
 
 using UniRx;
 
+using MicroWrath;
+
 namespace MicroWrath
 {
     [HarmonyPatch]
