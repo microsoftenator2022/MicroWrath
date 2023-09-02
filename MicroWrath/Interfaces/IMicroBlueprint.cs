@@ -17,9 +17,9 @@ namespace MicroWrath
             where TReference : BlueprintReference<TBlueprint>, new() =>
             new() { deserializedGuid = bpRef.BlueprintGuid };
 
-        public static BlueprintReference<TBlueprint> ToReference<TBlueprint>(this IMicroBlueprint<TBlueprint> bpRef)
-            where TBlueprint : SimpleBlueprint =>
-            bpRef.ToReference<TBlueprint, BlueprintReference<TBlueprint>>();
+        //public static BlueprintReference<TBlueprint> ToReference<TBlueprint>(this IMicroBlueprint<TBlueprint> bpRef)
+        //    where TBlueprint : SimpleBlueprint =>
+        //    bpRef.ToReference<TBlueprint, BlueprintReference<TBlueprint>>();
     }
 
     public interface IMicroBlueprint<out TBlueprint> where TBlueprint : SimpleBlueprint

@@ -99,7 +99,8 @@ namespace MicroWrath.BlueprintInitializationContext
         /// <returns>Blueprint initialization context for additional initialization steps</returns>
         public ContextInitializer<TBlueprint> GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            new BlueprintInit<TBlueprint>(this, Enumerable.Empty<IInitContextBlueprint>(), () => blueprint.ToReference());
+            new BlueprintInit<TBlueprint>(this, Enumerable.Empty<IInitContextBlueprint>(),
+                () => blueprint.ToReference<TBlueprint, BlueprintReference<TBlueprint>>());
 
         /// <summary>
         /// Adds an empty initializer to the context
