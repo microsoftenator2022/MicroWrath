@@ -20,7 +20,7 @@ namespace MicroWrath.BlueprintInitializationContext
             this BlueprintInitializationContext.ContextInitializer obj,
             IMicroBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            obj.Map(() => new object()).Combine(blueprint).Map(x => x.Right);
+            obj.Map(() => new object()).GetBlueprint(blueprint).Map(x => x.Right);
 
         internal static BlueprintInitializationContext.ContextInitializer<IEnumerable<T>> Combine<T>(
             this IEnumerable<BlueprintInitializationContext.ContextInitializer<T>> bpcs)
@@ -50,7 +50,7 @@ namespace MicroWrath.BlueprintInitializationContext
             public abstract ContextInitializer<TResult> Map<TResult>(Func<T, TResult> selector);
             public abstract ContextInitializer<(T Left, TOther Right)> Combine<TOther>(ContextInitializer<TOther> other);
 
-            public virtual ContextInitializer<(T Left, TBlueprint Right)> Combine<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
+            public virtual ContextInitializer<(T Left, TBlueprint Right)> GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
                 where TBlueprint : SimpleBlueprint =>
                 this.Combine(InitContext.GetBlueprint(blueprint));
         }

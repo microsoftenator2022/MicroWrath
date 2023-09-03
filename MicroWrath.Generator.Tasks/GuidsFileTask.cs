@@ -120,7 +120,7 @@ namespace MicroWrath.Generator
                 {
                     if (guids.ContainsKey(entry.Key)) 
                     {
-                        Log.LogMessage(MessageImportance.High, $"Existing guid with key {entry.Key}: {entry.Value}");
+                        Log.LogMessage(MessageImportance.High, $"{entry.Value}: {entry.Key}");
 
                         if (entry.Value != guids[entry.Key])
                         {
@@ -131,7 +131,7 @@ namespace MicroWrath.Generator
                         continue;
                     }
 
-                    Log.LogMessage(MessageImportance.High, $"New guid with key {entry.Key}: {entry.Value}");
+                    Log.LogMessage(MessageImportance.High, $"New guid {entry.Value}: {entry.Key}");
 
                     guids.Add(entry.Key, entry.Value);
                 }

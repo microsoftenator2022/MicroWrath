@@ -42,12 +42,19 @@ namespace MicroWrath.BlueprintInitializationContext
                     {
                         //MicroLogger.Debug(() => $"Adding blueprint {guid} {mbp.Name}");
 
+                        if (mbp.Blueprint is null)
+
                         if (ResourcesLibrary.BlueprintsCache.m_LoadedBlueprints.ContainsKey(guid))
                             MicroLogger.Warning($"BlueprintsCache already contains guid '{guid}'");
 
                         var bp = ResourcesLibrary.BlueprintsCache.AddCachedBlueprint(guid, mbp.Blueprint);
 
                         MicroLogger.Debug(() => $"Added {bp.NameSafe()}", bp.ToMicroBlueprint());
+                    }
+
+                    foreach (var bp in Blueprints.Values.Select(mbp => mbp.Blueprint))
+                    {
+                        bp?.OnEnable();
                     }
 
                     Complete();

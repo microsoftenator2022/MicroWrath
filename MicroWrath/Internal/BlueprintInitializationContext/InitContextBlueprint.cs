@@ -18,7 +18,7 @@ namespace MicroWrath.BlueprintInitializationContext
             string Name { get; }
             BlueprintGuid BlueprintGuid { get; }
             SimpleBlueprint CreateNew();
-            SimpleBlueprint? Blueprint { get; }
+            SimpleBlueprint Blueprint { get; }
         }
 
         private class InitContextBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint>, IInitContextBlueprint
@@ -31,7 +31,18 @@ namespace MicroWrath.BlueprintInitializationContext
 
             TBlueprint? blueprint = null;
 
-            SimpleBlueprint? IInitContextBlueprint.Blueprint => blueprint;
+            SimpleBlueprint IInitContextBlueprint.Blueprint
+            {
+                get
+                {
+                    if (blueprint is null)
+                        MicroLogger.Warning(
+                            $"{typeof(InitContextBlueprint<TBlueprint>)} {AssetId} ({Name}) " +
+                            $"blueprint accessed before it is created");
+
+                    return blueprint ??= CreateNew();
+                }
+            }
 
             string IInitContextBlueprint.Name => Name;
             public TBlueprint CreateNew()
