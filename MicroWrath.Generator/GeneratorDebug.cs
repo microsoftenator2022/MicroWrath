@@ -13,7 +13,6 @@ namespace MicroWrath.Generator
 {
 #if DEBUG
     [Generator]
-#endif
     public class GeneratorDebug : IIncrementalGenerator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -64,4 +63,5 @@ namespace MicroWrath.Generator
             //});
         }
     }
+#endif
 }
