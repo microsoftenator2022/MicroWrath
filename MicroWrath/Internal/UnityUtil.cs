@@ -75,7 +75,7 @@ namespace MicroWrath.Util.Unity
             return (float)h;
         }
 
-        public static Color RotateColorHue(Color color, double degrees)
+        public static Color RotateColorHue(Color color, double degrees, bool debugLog)
         {
             if (color.r == color.g && color.g == color.b)
                 return color;
@@ -119,13 +119,15 @@ namespace MicroWrath.Util.Unity
                 //hsv = hsv with { h = hue };
 
                 hsv = hsv with { h = RotateHueN((float)hsv.h, degrees) };
-
-                MicroLogger.Debug(() => $"{(oldH * 360)}\u00b0 -> {(hsv.h * 360)}\u00b0");
+                
+                if (debugLog)
+                    MicroLogger.Debug(() => $"{(oldH * 360)}\u00b0 -> {(hsv.h * 360)}\u00b0");
 
                 return hsv;
             });
 
-            MicroLogger.Debug(() => $"{oldColor} -> {color}");
+            if (debugLog)
+                MicroLogger.Debug(() => $"{oldColor} -> {color}");
 
             return color;
         }

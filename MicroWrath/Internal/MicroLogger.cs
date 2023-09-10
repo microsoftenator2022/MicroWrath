@@ -35,6 +35,8 @@ namespace MicroWrath
         private static Severity logLevel =
 #if DEBUG
             Severity.Debug;
+#else
+            default;
 #endif
         public static void SetLogLevel(Severity severity)
         {
