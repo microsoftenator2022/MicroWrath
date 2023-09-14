@@ -35,7 +35,7 @@ namespace MicroWrath
         public TReference ToReference<TReference>() where TReference : BlueprintReference<TBlueprint>, new() =>
             this.ToReference<TBlueprint, TReference>();
 
-        private readonly TBlueprint? MaybeBlueprint { get; init; } = null;
+        private TBlueprint? MaybeBlueprint { get; init; } = null;
 
         public string Name => MaybeBlueprint?.name ?? ToReference<BlueprintReference<TBlueprint>>().NameSafe();
 
@@ -55,5 +55,26 @@ namespace MicroWrath
 
         public static implicit operator MicroBlueprint<TBlueprint>(BlueprintReference<TBlueprint> blueprintReference) =>
             new(blueprintReference.Guid);
+    }
+
+    internal readonly record struct OwlcatBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint> where TBlueprint : SimpleBlueprint
+    {
+        public OwlcatBlueprint(string guidString)
+        {
+            BlueprintGuid = BlueprintGuid.Parse(guidString);
+        }
+
+        public BlueprintGuid BlueprintGuid { get; init; }
+
+        public TReference ToReference<TReference>() where TReference : BlueprintReference<TBlueprint>, new() =>
+            this.ToReference<TBlueprint, TReference>();
+
+        public TBlueprint Blueprint => ToReference<BlueprintReference<TBlueprint>>().Get();
+
+        public string Name => this.ToReference<BlueprintReference<TBlueprint>>().NameSafe();
+
+        TBlueprint? IMicroBlueprint<TBlueprint>.GetBlueprint() => Blueprint;
+
+        public override string ToString() => $"{typeof(TBlueprint)} {BlueprintGuid} ({Name})";
     }
 }

@@ -119,7 +119,7 @@ namespace MicroWrath.BlueprintsDb
                         if (spc.CancellationToken.IsCancellationRequested) break;
 
                         sb.Append($@"
-                internal static IMicroBlueprint<{type}> {bp.Name} => new MicroBlueprint<{type}>(""{bp.GuidString}"");");
+                internal static OwlcatBlueprint<{type}> {bp.Name} => new OwlcatBlueprint<{type}>(""{bp.GuidString}"");");
                     }
 
                     sb.Append($@"

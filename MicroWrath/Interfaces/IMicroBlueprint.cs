@@ -22,6 +22,10 @@ namespace MicroWrath
         //    bpRef.ToReference<TBlueprint, BlueprintReference<TBlueprint>>();
     }
 
+    /// <summary>
+    /// Reference to a blueprint. This blueprint may not exist for the current initialization state.
+    /// </summary>
+    /// <typeparam name="TBlueprint">Blueprint type</typeparam>
     public interface IMicroBlueprint<out TBlueprint> where TBlueprint : SimpleBlueprint
     {
         BlueprintGuid BlueprintGuid { get; }
