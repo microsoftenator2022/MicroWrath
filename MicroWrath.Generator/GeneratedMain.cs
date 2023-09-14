@@ -156,7 +156,10 @@ namespace {ns}
             var initMethods = Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
-                .Where(m => m.GetParameters().Length == 0 && m.GetCustomAttribute<InitAttribute>() is not null);
+                .Select(methodInfo => (methodInfo, attribute: methodInfo.GetCustomAttribute<InitAttribute>()))
+                .Where(m => m.attribute is not null)
+                .OrderBy(m => m.attribute.Priority)
+                .Select(m => m.methodInfo);
 
             foreach (var method in initMethods)
             {{
@@ -200,7 +203,7 @@ namespace {ns}
                     HasParameterlessConstructor = t.Constructors.Any(c => c.Parameters.Length == 0),
                 });
 
-                sb.AppendLine($@"using System;
+                sb.Append($@"using System;
 using System.Linq;
 using System.Reflection;
 

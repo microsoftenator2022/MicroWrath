@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MicroWrath
 {
     [AttributeUsage(validOn: AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    internal sealed class InitAttribute : Attribute { }
+    internal sealed class InitAttribute : Attribute
+    {
+        public InitAttribute(int priority)
+        {
+            Priority = priority;
+        }
+
+        public readonly int Priority;
+    }
 }
