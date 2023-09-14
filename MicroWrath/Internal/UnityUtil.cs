@@ -75,7 +75,7 @@ namespace MicroWrath.Util.Unity
             return (float)h;
         }
 
-        public static Color RotateColorHue(Color color, double degrees, bool debugLog)
+        public static Color RotateColorHue(Color color, double degrees, bool debugLog = false)
         {
             if (color.r == color.g && color.g == color.b)
                 return color;

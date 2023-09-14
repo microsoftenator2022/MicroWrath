@@ -10,11 +10,6 @@ namespace MicroWrath
     [AttributeUsage(validOn: AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     internal sealed class InitAttribute : Attribute
     {
-        public InitAttribute(int priority)
-        {
-            Priority = priority;
-        }
-
         public readonly int Priority;
     }
 }
