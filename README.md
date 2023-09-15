@@ -13,7 +13,6 @@ Most of the basic mod boilerplate is generated for you. You can see these files 
 ![image](https://github.com/microsoftenator2022/MicroWrath/assets/105488202/e67ea65e-f780-477e-8889-7ab20f9778f5)
 
 ### EmbeddedResources
-![image](https://github.com/microsoftenator2022/MicroWrath/assets/105488202/c5b2fd7b-bce4-48fd-8d8d-99ebba9a234e)
 
 These are simple embedded source files that comprise the majority of the MicroWrath API. They are internal to your mod assembly so that changes to the core MicroWrath library are less likely to affect consumers.
 
