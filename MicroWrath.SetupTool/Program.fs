@@ -97,7 +97,7 @@ let main args =
     printfn "Creating info.json"
     File.WriteAllText(Path.Join(projectDir, "info.json"), infoJson (projectName))
 
-    use proc = Process.Start("dotnet", $@"add {projectFilePath} package MicroWrath -s C:\Users\Aaron\nuget.local --prerelease")
+    use proc = Process.Start("dotnet", $@"add {projectFilePath} package MicroWrath --prerelease")
     proc.WaitForExit() |> ignore
     use proc = Process.Start("dotnet", $"restore {projectFilePath}")
     proc.WaitForExit() |> ignore
