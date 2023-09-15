@@ -1,0 +1,5 @@
+<Project>
+  <Target Name="GenerateGuidsFileTarget" AfterTargets="Build">
+    <GenerateGuidsFile WrathPath="$(WrathPath)" Assembly="$(OutDir)\$(MSBuildProjectName).dll" GuidsFile="guids.json" />
+  </Target>
+</Project>

@@ -26,7 +26,11 @@ namespace MicroWrath
     {
         internal static Assembly? MicroWrathAssembly;
 
-        internal static string OwlcatModsDirectory => OwlcatModificationsManager.DefaultModificationsDirectory;
+        internal static string OwlcatModsDirectory =>
+            (typeof(OwlcatModificationsManager)
+                    .GetProperty("DefaultModificationsDirectory", BindingFlags.NonPublic | BindingFlags.Static)
+                    .GetValue(null) as string)!;
+            //return OwlcatModificationsManager.DefaultModificationsDirectory;
 
         private static IEnumerable<string> GetModDirectories(INanoLogger logger)
         {

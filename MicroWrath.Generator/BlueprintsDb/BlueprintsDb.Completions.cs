@@ -135,7 +135,7 @@ namespace MicroWrath.Generator
                         new(TextTags.Class, owlcatDbTypeName),
                         new(bpTypeTag, $".{bpTypeNameShort}"),
                         new(TextTags.Property, $".{item.DisplayText}"),
-                        new(TextTags.LineBreak, Environment.NewLine),
+                        new(TextTags.LineBreak, "\n"),
                         new(TextTags.Label, "Guid: "),
                         new(TextTags.Text, guid),
                     }.ToImmutableArray();

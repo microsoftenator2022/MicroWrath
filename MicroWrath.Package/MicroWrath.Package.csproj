@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\common.props" />
+
+  <PropertyGroup>
+    <Description>
+      MicroWrath is a library to aid creation of mods for Pathfinder: Wrath of the Righteous.
+      It includes source generators to aid with tedious or repetitive code patterns including localization, GUID generation, and Blueprint and Component initialization.
+      This package is a metapackage that will install MicroWrath's component packages.
+    </Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>MicroWrath</PackageId>
+    <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildProjectDir)\..\</SolutionDir>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MicroWrath\MicroWrath.csproj" />
+    <ProjectReference Include="..\MicroWrath.Generator.Tasks\MicroWrath.Generator.Tasks.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\MicroWrath.Generator\MicroWrath.Generator.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\MicroWrath.Loader\MicroWrath.Loader.csproj" />
+  </ItemGroup>
+
+</Project>

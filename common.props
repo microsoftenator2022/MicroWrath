@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <VersionPrefix>0.7.1.0</VersionPrefix>
+    <Authors>https://github.com/microsoftenator2022</Authors>
+    <PackageProjectUrl>https://github.com/microsoftenator2022/MicroWrath</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/microsoftenator2022/MicroWrath</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <VersionSuffix>debug-$([System.DateTimeOffset]::UtcNow.ToString(yyyyMMdd-HHmm))</VersionSuffix>
+  </PropertyGroup>
+</Project>

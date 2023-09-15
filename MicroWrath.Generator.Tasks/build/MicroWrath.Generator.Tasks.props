@@ -1,0 +1,3 @@
+<Project>
+  <UsingTask TaskName="MicroWrath.Generator.GenerateGuidsFile" AssemblyFile="$(MSBuildThisFileDirectory)..\tasks\net472\MicroWrath.Generator.Tasks.dll" />
+</Project>
