@@ -4,13 +4,27 @@ using System.Text;
 
 namespace MicroWrath
 {
+    /// <summary>
+    /// Encyclopedia Utils
+    /// </summary>
     public static class Encyclopedia
     {
+        /// <summary>
+        /// Link to an encyclopedia page. See: <see cref="Page"/>
+        /// </summary>
         public readonly struct Link
         {
+            /// <summary>
+            /// Linked page
+            /// </summary>
             public readonly Page Page;
+
+            /// <summary>
+            /// Link text
+            /// </summary>
             public readonly string LinkText;
 
+#pragma warning disable CS1591
             public Link(Page page, string linkText)
             {
                 Page = page;
@@ -19,8 +33,10 @@ namespace MicroWrath
 
             public override string ToString()
                 => $"{{g|Encyclopedia:{Enum.GetName(typeof(Page), this.Page)}}}{LinkText}{{/g}}";
+#pragma warning restore
         }
 
+#pragma warning disable CS1591
         public enum Page
         {
             AbilityDamage,
@@ -214,5 +230,6 @@ namespace MicroWrath
             Wisdom,
             XP,
         }
+#pragma warning restore
     }
 }

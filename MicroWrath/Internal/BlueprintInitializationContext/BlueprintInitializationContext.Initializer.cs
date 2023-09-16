@@ -65,9 +65,9 @@ namespace MicroWrath.BlueprintInitializationContext
             /// <summary>
             /// Maps a function into this <see cref="BlueprintInitializationContext"/>.
             /// </summary>
-            /// <param name="action">Mapped function</param>
+            /// <param name="mapper">Mapped function</param>
             /// <returns>Context representing initialization state after evaluation of the mapped function.</returns>
-            public abstract ContextInitializer<TResult> Map<TResult>(Func<TResult> selector);
+            public abstract ContextInitializer<TResult> Map<TResult>(Func<TResult> mapper);
 
             /// <summary>
             /// Registers this initializer for execution

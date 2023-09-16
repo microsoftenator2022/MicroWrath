@@ -150,7 +150,8 @@ namespace MicroWrath.Util.Assets
         /// </list>
         /// </summary>
         /// <typeparam name="T">Asset Type.</typeparam>
-        /// <param name="link">A <typeparamref name="TLink"/> link.</param>
+        /// <typeparam name="TLink">AssetLink Type.</typeparam>
+        /// <param name="link">A <typeparamref name="TLink"/>link</param>.
         /// <param name="init">Initialization function to be executed on asset load.</param>
         /// <param name="assetId">Asset ID for the new link. Will be set to a new guid if absent or null.</param>
         /// <returns></returns>

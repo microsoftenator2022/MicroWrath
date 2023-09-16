@@ -13,8 +13,6 @@ using Kingmaker.Localization.Shared;
 
 using UniRx;
 
-using MicroWrath;
-
 namespace MicroWrath
 {
     [HarmonyPatch]
@@ -41,7 +39,6 @@ namespace MicroWrath
             Observable.FromEvent(
                 addHandler: handler => LocalizationManager_Init_PostfixEvent += handler,
                 removeHandler: handler => LocalizationManager_Init_PostfixEvent -= handler);
-
 
         private static event Action BlueprintsCache_Init_PrefixEvent = () => { };
         private static event Action BlueprintsCache_InitEvent_Early = () => { };

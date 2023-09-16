@@ -106,8 +106,7 @@ namespace MicroWrath.BlueprintInitializationContext
         /// name property from a <see cref="GeneratedGuid"/> object for the new blueprint's name.
         /// </summary>
         /// <typeparam name="TBlueprint">Blueprint type</typeparam>
-        /// <param name="assetId">GUID for new blueprint</param>
-        /// <param name="name">name for new blueprint</param>
+        /// <param name="generatedGuid">GUID for new blueprint</param>
         /// <returns>Blueprint initialization context for additional initialization steps</returns>
         public ContextInitializer<TBlueprint> NewBlueprint<TBlueprint>(GeneratedGuid generatedGuid)
             where TBlueprint : SimpleBlueprint, new() =>
@@ -197,8 +196,7 @@ namespace MicroWrath.BlueprintInitializationContext
         /// </summary>
         /// <typeparam name="TBlueprint">Blueprint type</typeparam>
         /// <param name="blueprint">Blueprint to clone</param>
-        /// <param name="guid">New blueprint guid</param>
-        /// <param name="name">New blueprint name</param>
+        /// <param name="generatedGuid">New blueprint guid</param>
         public ContextInitializer<TBlueprint> CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint, GeneratedGuid generatedGuid)
             where TBlueprint : SimpleBlueprint, new() =>
             CloneBlueprint(blueprint, generatedGuid.Guid, generatedGuid.Key);

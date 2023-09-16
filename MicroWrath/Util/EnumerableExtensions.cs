@@ -5,8 +5,14 @@ using System.Text;
 
 namespace MicroWrath.Util.Linq
 {
+    /// <summary>
+    /// <see cref="IEnumerable{T}"/> extensions
+    /// </summary>
     public static class EnumerableExtensions
     {
+        /// <summary>
+        /// Sequence containing exactly one item
+        /// </summary>
         public static IEnumerable<T> Singleton<T>(T value)
         {
             yield return value;
@@ -46,6 +52,12 @@ namespace MicroWrath.Util.Linq
         //    }
         //}
 
+        /// <summary>
+        /// Add item index to sequence
+        /// </summary>
+        /// <typeparam name="T">Element type</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <returns>Sequence of index/item pairs</returns>
         public static IEnumerable<(int index, T item)> Indexed<T>(this IEnumerable<T> source)
         {
             var index = 0;
@@ -55,9 +67,21 @@ namespace MicroWrath.Util.Linq
 
         //internal static IEnumerable<T> ToEnumerable<T, TEnumerable>(this TEnumerable source) where TEnumerable : IEnumerable<T> => source;
 
+        /// <summary>
+        /// Creates a dictionary from a sequence of Key/Value pairs
+        /// </summary>
+        
+        /// <typeparam name="TKey">Key type</typeparam>
+        /// <typeparam name="TValue">Value type</typeparam>
+        /// <param name="source">Source sequence</param>
         public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<(TKey key, TValue value)> source) =>
             source.ToDictionary(kv => kv.key, kv => kv.value);
 
+        /// <summary>
+        /// Creates a dictionary from a sequence of Key/Value pairs using a provided <see cref="IEqualityComparer{T}"/>
+        /// </summary>
+        /// <param name="source">Source sequence</param>
+        /// <param name="keyComparer">Key equality comparer</param>
         public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>
             (this IEnumerable<(TKey key, TValue value)> source, IEqualityComparer<TKey> keyComparer) =>
             source.ToDictionary(kv => kv.key, kv => kv.value, keyComparer);
@@ -67,7 +91,7 @@ namespace MicroWrath.Util.Linq
         /// </summary>
         /// <param name="array">The array to append to</param>
         /// <param name="value">The value to append</param>
-        /// <returns>A new array containing the values of the original array and the new value</returns>
+        /// <returns>New array containing the values of the original array and the new value</returns>
         public static T[] Append<T>(this T[] array, T value)
         {
             var newArray = new T[array.Length + 1];
@@ -79,6 +103,11 @@ namespace MicroWrath.Util.Linq
             return newArray;
         }
 
+        /// <summary>
+        /// Appends a value to a sequence
+        /// </summary>
+        /// <param name="source">Source sequence</param>
+        /// <param name="value">Value to append</param>
         public static IEnumerable<T> AppendValue<T>(this IEnumerable<T> source, T value)
         {
             foreach (var item in source)
@@ -87,6 +116,9 @@ namespace MicroWrath.Util.Linq
             yield return value;
         }
 
+        /// <summary>
+        /// Concatenates two arrays
+        /// </summary>
         public static T[] Concat<T>(this T[] arrayA, T[] arrayB)
         {
             var newArray = new T[arrayA.Length + arrayB.Length];
@@ -97,6 +129,35 @@ namespace MicroWrath.Util.Linq
             return newArray;
         }
 
+        /// <summary>
+        /// Concatenate arrays
+        /// </summary>
+        /// <param name="source">Initial array</param>
+        /// <param name="arrays">Arrays to append</param>
+        /// <returns>Concatenated array of <typeparamref name="T"/> values</returns>
+        public static T[] Concat<T>(this T[] source, params T[][] arrays)
+        {
+            var totalLength = arrays.Select(a => a.Length).Sum() + source.Length;
+
+            var newArray = new T[totalLength];
+
+            source.CopyTo(newArray.AsSpan(0, source.Length));
+
+            var offset = source.Length;
+
+            foreach (var array in arrays)
+            {
+                array.CopyTo(newArray.AsSpan(offset, array.Length));
+                offset += array.Length;
+            }
+
+            return newArray;
+        }
+
+        /// <summary>
+        /// Divides input sequence into chunks of at most <paramref name="chunkSize"/>
+        /// </summary>
+        /// <returns>Sequence of sequences of <paramref name="chunkSize"/> elements. The last chunk will contain at most <paramref name="chunkSize"/> elements</returns>
         public static IEnumerable<IEnumerable<T>> ChunkBySize<T>(this IEnumerable<T> source, int chunkSize)
         {
             var chunk = new T[chunkSize];
@@ -137,6 +198,13 @@ namespace MicroWrath.Util.Linq
         //    return source.Take(i);
         //}
 
+        /// <summary>
+        /// Finds a subsequence within a larger sequence by applying a sequence of predicates, providing a maximum match length
+        /// </summary>
+        /// <param name="source">Source sequence</param>
+        /// <param name="length">Number of elements to match</param>
+        /// <param name="predicateSequence">Sequence of match predicates</param>
+        /// <returns>Matched sequence if found or empty sequence</returns>
         public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, int length, IEnumerable<Func<T, bool>> predicateSequence)
         {
             var i = 0;
@@ -152,9 +220,22 @@ namespace MicroWrath.Util.Linq
             return Enumerable.Empty<T>();
         }
 
+        /// <summary>
+        /// Finds a subsequence within a larger sequence by applying a sequence of predicates
+        /// </summary>
+        /// <param name="source">Source sequence</param>
+        /// <param name="predicateSequence">Sequence of match predicates</param>
+        /// <returns>Matched sequence if found or empty sequence</returns>
         public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, IEnumerable<Func<T, bool>> predicateSequence) =>
             source.FindSequence(predicateSequence.Count(), predicateSequence);
 
+        /// <summary>
+        /// Finds a subsequence within a larger sequence by applying a predicate on a subsequences
+        /// </summary>
+        /// <param name="source">Source sequence</param>
+        /// <param name="length">Number of elements to match</param>
+        /// <param name="predicate">Subsequence predicate</param>
+        /// <returns>Matched sequence if found or empty sequence</returns>
         public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, int length, Func<IEnumerable<T>, bool> predicate)
         {
             var subSeq = source.Take(length);
@@ -165,6 +246,10 @@ namespace MicroWrath.Util.Linq
             return source.Skip(1).FindSequence(length, predicate);
         }
 
+        /// <summary>
+        /// Creates a sequence from a single nullable value
+        /// </summary>
+        /// <returns>Sequence containing single element <paramref name="item"/> or empty sequence if <paramref name="item"/> is null</returns>
         public static IEnumerable<T> EmptyIfNull<T>(this T? item) where T : class
         {
             if (item == null)
@@ -173,9 +258,24 @@ namespace MicroWrath.Util.Linq
             yield return item;
         }
 
+        /// <summary>
+        /// Skips null values in a sequence
+        /// </summary>
+        /// <typeparam name="T">Element (nullable) reference type</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <returns>Source sequence, skipping null values, if the source sequence is empty or only contains null values, returns an empty sequence</returns>
         public static IEnumerable<T> SkipIfNull<T>(this IEnumerable<T?> source) where T : class =>
             source.SelectMany(EmptyIfNull);
 
+        /// <summary>
+        /// Generates a sequence using a provided generator function.
+        /// This function is not eagerly evaluated and therefore the resulting sequence length is unbounded
+        /// </summary>
+        /// <typeparam name="TSource">Source type</typeparam>
+        /// <typeparam name="T">Output element type</typeparam>
+        /// <param name="state">Initial (seed) state</param>
+        /// <param name="generator">Generator function</param>
+        /// <returns>Generated sequence</returns>
         public static IEnumerable<T> Generate<TSource, T>(this TSource state, Func<TSource, Option<(T, TSource)>> generator)
         {
             var next = generator(state);
