@@ -1,0 +1,4 @@
+[submodule "WrathModificationTemplate"]
+	path = WrathModificationTemplate
+	url = https://github.com/microsoftenator2022/WrathModificationTemplate.git
+	branch = microwrath
