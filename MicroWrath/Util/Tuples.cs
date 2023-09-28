@@ -336,7 +336,7 @@ namespace MicroWrath.Util
         {
             var ((a, b), c) = tuple;
 
-            return [a, b, c];
+            return new[] { a, b, c };
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace MicroWrath.Util
         {
             var (((a, b), c), d) = tuple;
 
-            return [a, b, c, d];
+            return new[] { a, b, c, d };
         }
 
         /// <inheritdoc cref="ToArray{T}(ValueTuple{ValueTuple{T, T}, T})"/>
@@ -356,7 +356,7 @@ namespace MicroWrath.Util
         {
             var ((((a, b), c), d), e) = tuple;
 
-            return [a, b, c, d, e];
+            return new[] { a, b, c, d, e };
         }
 
         /// <inheritdoc cref="ToArray{T}(ValueTuple{ValueTuple{T, T}, T})"/>
@@ -365,7 +365,7 @@ namespace MicroWrath.Util
         {
             var (((((a, b), c), d), e), f) = tuple;
 
-            return [a, b, c, d, e, f];
+            return new[] { a, b, c, d, e, f };
         }
 
         /// <inheritdoc cref="ToArray{T}(ValueTuple{ValueTuple{T, T}, T})"/>
@@ -374,7 +374,7 @@ namespace MicroWrath.Util
         {
             var ((((((a, b), c), d), e), f), g) = tuple;
 
-            return [a, b, c, d, e, f, g];
+            return new[] { a, b, c, d, e, f, g };
         }
 
         /// <inheritdoc cref="ToArray{T}(ValueTuple{ValueTuple{T, T}, T})"/>
@@ -383,7 +383,7 @@ namespace MicroWrath.Util
         {
             var (((((((a, b), c), d), e), f), g), h) = tuple;
 
-            return [a, b, c, d, e, f, g, h];
+            return new[] { a, b, c, d, e, f, g, h };
         }
     }
 }
