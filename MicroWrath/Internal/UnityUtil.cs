@@ -186,6 +186,7 @@ namespace MicroWrath.Util.Unity
         public static Color AlphaBlend(Color c, params Color[] cs) =>
             cs.Aggregate(c, AlphaBlend);
 
+        [Obsolete("Use AssetUtils.AlphaBlend instead")]
         public static Texture2D AlphaBlend(Texture2D t1, Texture2D t2, int x = 0, int y = 0)
         {
             var output = new Texture2D(t1.width, t1.height);

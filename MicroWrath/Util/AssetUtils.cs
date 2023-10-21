@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ using Microsoft.SqlServer.Server;
 using TabletopTweaks.Core.Utilities;
 
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace MicroWrath.Util
 {
@@ -106,6 +108,115 @@ namespace MicroWrath.Util
             if (addToLibrary) ResourcesLibrary.BlueprintsCache.AddCachedBlueprint(blueprint.AssetGuid, blueprint);
 
             return blueprint;
+        }
+
+        static readonly Dictionary<string, AssetBundle> loadedBundles = new();
+        static AssetBundle LoadBundleFromResource(string name)
+        {
+            if (!loadedBundles.ContainsKey(name))
+            {
+                using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name);
+
+                if (stream is null)
+                {
+                    var sb = new StringBuilder();
+                    sb.AppendLine($"No resource with name {name}");
+                    sb.AppendLine($"Assembly resource names:");
+
+                    foreach (var n in Assembly.GetExecutingAssembly().GetManifestResourceNames())
+                    {
+                        sb.AppendLine($"  {n}");
+                    }
+
+                    throw new ArgumentException(sb.ToString());
+                }
+
+                loadedBundles[name] = AssetBundle.LoadFromStream(stream);
+            }
+
+            return loadedBundles[name];
+        }
+
+        struct AlphaBlendConfig
+        {
+            public float x;
+            public float y;
+            public Rect foregroundRect;
+        }
+
+        /// <summary>
+        /// Alpha blend textures. Uses a compute shader to not make bubbles sad
+        /// </summary>
+        /// <param name="background">Background texture.</param>
+        /// <param name="foreground">Foreground texture.</param>
+        /// <param name="position">Coordinates of the foreground texture on the background.</param>
+        /// <param name="foregroundRect">Subset of foreground texture. Clamped to background dimensions. Default: Use full foreground.</param>
+        /// <param name="format">Output texture format.</param>
+        /// <param name="mips">Autogenerate mip maps for output texture.</param>
+        /// <param name="renderFormat">RenderTexture format.</param>
+        /// <param name="filterMode">Output texture filter mode.</param>
+        /// <returns>New texture containing blended textures.</returns>
+        public static Texture2D AlphaBlend(
+            Texture2D background,
+            Texture2D foreground,
+            Vector2 position = default,
+            Rect foregroundRect = default,
+            TextureFormat format = TextureFormat.RGBA32,
+            bool mips = false,
+            RenderTextureFormat renderFormat = RenderTextureFormat.Default,
+            FilterMode filterMode = default)
+        {
+            var shader = LoadBundleFromResource("MicroWrath.Resources.UnityAssets")
+                .LoadAsset<ComputeShader>("4a82214c994c2964a8a3d1c02f6e4644");
+
+            int kernelIndex = shader.FindKernel("CSMain");
+
+            var rt =
+                RenderTexture.GetTemporary(
+                    background.width,
+                    background.height,
+                    0,
+                    renderFormat,
+                    RenderTextureReadWrite.Linear);
+
+            rt.autoGenerateMips = mips;
+            rt.enableRandomWrite = true;
+
+            var buffer = new ComputeBuffer(1, Marshal.SizeOf(typeof(AlphaBlendConfig)));
+
+            if (foregroundRect.width == 0)
+            {
+                foregroundRect.width = Math.Min(background.width - foregroundRect.x, foreground.width);
+            }
+
+            if (foregroundRect.height == 0)
+            {
+                foregroundRect.height = Math.Min(background.height - foregroundRect.y, foreground.height);
+            }
+
+            buffer.SetData(new[] { new AlphaBlendConfig() { x = position.x, y = position.y, foregroundRect = foregroundRect } });
+
+            shader.SetBuffer(kernelIndex, "RectPosition", buffer);
+
+            shader.SetTexture(kernelIndex, "Background", background);
+            shader.SetTexture(kernelIndex, "Foreground", foreground);
+            shader.SetTexture(kernelIndex, "Output", rt);
+
+            shader.Dispatch(kernelIndex, background.width, background.height, 1);
+
+            var output = new Texture2D(background.width, background.height, format, mips)
+            {
+                filterMode = filterMode
+            };
+
+            AsyncGPUReadback.Request(buffer).WaitForCompletion();
+
+            Graphics.ConvertTexture(rt, output);
+            
+            buffer.Dispose();
+            RenderTexture.ReleaseTemporary(rt);
+
+            return output;
         }
     }
 }
