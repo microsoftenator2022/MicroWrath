@@ -38,7 +38,7 @@ namespace MicroWrath.Util.Unity
                 TextureFormat.RGHalf or
                 TextureFormat.RHalf;
         }
-
+        
         public readonly record struct ColorHSV(double h, double s, double v);
 
         public static Color ModifyHSV(this Color c, Func<ColorHSV, ColorHSV> f)
