@@ -65,7 +65,7 @@ namespace MicroWrath.Generator
                 });
 
             var config = Incremental.GetConfig(context.AnalyzerConfigOptionsProvider);
-            var rootNamespace = config.Select(static (c, _) => c.RootNamespace as Option<string>.Some ?? "");
+            var rootNamespace = config.Select(static (c, _) => c.RootNamespace.DefaultValue(""));
 
             var localizedStrings = localizedStringInstances
                 .Combine(rootNamespace)
