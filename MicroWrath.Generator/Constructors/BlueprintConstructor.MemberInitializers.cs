@@ -60,7 +60,7 @@ namespace MicroWrath.Generator
             //    .Collect();
 
             var defaultValueProperties = defaults
-                .SelectMany(static (defaults, _) => defaults.ToEnumerable().SelectMany(t => t.GetMembers().OfType<IPropertySymbol>()))
+                .SelectMany(static (defaults, _) => defaults.SelectMany(t => t.GetMembers().OfType<IPropertySymbol>()))
                 .Collect();
 
             var withMembers = types.Select(static (t, ct) => (t, t.GetBaseTypesAndSelf(ct).SelectMany(t => t.GetMembers())));
@@ -82,8 +82,7 @@ namespace MicroWrath.Generator
                     return (t, fields: fields
                         .SelectMany(f => defaults
                             .TryFind(d => d.Type.Equals(f.Type, SymbolEqualityComparer.Default))
-                            .Map(d => (f, d))
-                            .ToEnumerable())
+                            .Map(d => (f, d)))
                         .ToImmutableArray());
                 })
                 .Where(tfds => tfds.fields.Length > 0)
@@ -109,8 +108,7 @@ namespace MicroWrath.Generator
                     return (t, properties: properties
                         .SelectMany(p => defaults
                             .TryFind(d => d.Type.Equals(p.Type, SymbolEqualityComparer.Default))
-                            .Map(d => (p, d))
-                            .ToEnumerable())
+                            .Map(d => (p, d)))
                         .ToImmutableArray());
                 })
                 .Where(tpds => tpds.properties.Length > 0)
@@ -120,7 +118,7 @@ namespace MicroWrath.Generator
                     .ToImmutableDictionary(SymbolEqualityComparer.Default));
 
             var initMethods = defaults
-                .SelectMany((d, _) => d.ToEnumerable())
+                .SelectMany((d, _) => d)
                 .SelectMany((d, _) => d.GetMembers()
                     .OfType<IMethodSymbol>()
                     .Where(m => m.Parameters.Length == 1 &&

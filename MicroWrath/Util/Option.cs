@@ -1,187 +1,181 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
+
+#pragma warning disable CS1591
 
 namespace MicroWrath.Util
 {
-    /// <summary>
-    /// Option type. Roughly mimics F#'s Option type
-    /// </summary>
-    public abstract class Option<T> : IEquatable<T>, IEquatable<Option<T>>
+    public readonly struct Option<T> : IEquatable<Option<T>>, IEquatable<T?>, IEnumerable<T> where T : notnull
     {
-        private Option() { }
+        public readonly T MaybeValue;
 
-        /// <summary>
-        /// Value. If this is <see cref="NoneType">None</see>, returns <see langword="default"/>
-        /// </summary>
-        public T? Value { get; init; }
+        public T Value => MaybeValue ?? throw new NullReferenceException();
 
-#pragma warning disable CS1591
-        public abstract bool IsSome { get; }
-        public abstract bool IsNone { get; }
+        public readonly bool IsSome;
+        public bool IsNone => !IsSome;
 
-        public abstract bool Equals(Option<T> other);
-        public abstract bool Equals(T other);
-
-        public static bool operator ==(Option<T> a, T other) => a.Equals(other);
-        public static bool operator !=(Option<T> a, T other) => !a.Equals(other);
-
-        public override bool Equals(object obj) => obj.Equals(Value);
-        public override int GetHashCode() => EqualityComparer<T?>.Default.GetHashCode(Value);
-#pragma warning restore CS1591
-
-        /// <summary>
-        /// Canonical <see cref="NoneType">None</see> instance.
-        /// </summary>
-        public static readonly NoneType None = new();
-
-        /// <summary>
-        /// Represent an absent or undefined value.
-        /// </summary>
-        public class NoneType : Option<T>
+        Option(T value)
         {
-            internal NoneType() { }
-
-#pragma warning disable CS1591
-            public override bool IsSome => false;
-            public override bool IsNone => true;
-
-            public bool Equals(NoneType _) => true;
-
-            public override bool Equals(Option<T> other) => other is NoneType;
-            public override bool Equals(T other) => other is null;
-
-            public override string ToString() => $"None";
-#pragma warning restore CS1591
-
-            /// <summary>
-            /// Cast <see cref="Option{T}.NoneType"/> to <typeparamref name="T"/>?. Always returns <see langword="default"/>.
-            /// </summary>
-            public static explicit operator T?(NoneType _) => default;
+            MaybeValue = value;
+            IsSome = true;
         }
 
-        /// <summary>
-        /// Represents a defined value.
-        /// </summary>
-        public class Some : Option<T>
+        public Option()
         {
-            /// <exception cref="ArgumentException">If <paramref name="value"/> is <see langword="default"/>.</exception>
-            public Some(T value)
-            {
-                if (value is null) throw new ArgumentException("'Some' value cannot be null", nameof(value));
-
-                base.Value = value;
-            }
-
-#pragma warning disable CS1591
-            public override bool IsSome => true;
-            public override bool IsNone => false;
-
-            public new T Value => base.Value!;
-
-            public override bool Equals(Option<T> other) =>
-                other is Some some &&
-                this.Value!.Equals(some.Value);
-
-            public override bool Equals(T other) => other is not null && other.Equals(Value);
-
-            public override string ToString() => $"Some {Value}";
-#pragma warning restore CS1591
-
-            /// <summary>
-            /// Implicit cast to <typeparamref name="T"/>.
-            /// </summary>
-            public static implicit operator T(Some some) => some.Value;
+            MaybeValue = default!;
         }
 
-        /// <summary>
-        /// Cast to <typeparamref name="T"/> to <see cref="Option{T}"/>. If <paramref name="option"/> is <see langword="default"/>, this returns <see cref="Option{T}.None"/>,
-        /// otherwise returns <see cref="Option{T}.Some"/>
-        /// </summary>
-        public static explicit operator Option<T>(T? option) => option is null ? new Option<T>.NoneType() : new Some(option);
+        public static Option<T> Some(T value) => new(value);
+        public static readonly Option<T> None = new();
 
-        /// <summary>
-        /// Cast <see cref="Option{T}"/> to <typeparamref name="T"/>?. If <paramref name="option"/> is <see cref="Option{T}.None"/> returns <see langword="default"/>.
-        /// </summary>
-        public static explicit operator T?(Option<T> option) => option.Value;
+        public bool Equals(Option<T> other)
+        {
+            if (this.IsNone)
+                return other.IsNone;
+
+            return this.MaybeValue?.Equals(other.MaybeValue) ??
+                throw new InvalidOperationException(
+                    $"null is an invalid value for {typeof(Option<T>)}.{nameof(Some)}");
+        }
+
+        public static bool operator ==(Option<T> a, Option<T> b) => a.Equals(b);
+        public static bool operator !=(Option<T> a, Option<T> b) => !a.Equals(b);
+
+        public bool Equals(T? other) => this switch
+        {
+            var some when some.IsSome => some.Value.Equals(other),
+            _ => other is null,
+        };
+
+        public static bool operator ==(Option<T> a, T? b) => a.Equals(b);
+        public static bool operator !=(Option<T> a, T? b) => !a.Equals(b);
+        public static bool operator ==(T? a, Option<T> b) => b.Equals(a);
+        public static bool operator !=(T? a, Option<T> b) => !b.Equals(a);
+
+        public override bool Equals(object obj) =>
+            base.Equals(obj) ||
+            (obj is Option<T> option && this.Equals(option)) ||
+            (this.MaybeValue is null && obj is null) ||
+            (this.MaybeValue?.Equals(obj) ?? false);
+
+        public override int GetHashCode() => HashCode.Combine(MaybeValue);
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            if (IsSome)
+                yield return MaybeValue!;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
-    /// <summary>
-    /// Utility and extension methods for <see cref="Option{T}"/>
-    /// </summary>
     public static class Option
     {
-        /// <summary>
-        /// Creates an <see cref="Option{T}"/>
-        /// </summary>
-        public static Option<T>.Some Some<T>(T value) => new(value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<T> Some<T>(T value) where T : notnull => Option<T>.Some(value);
 
-        /// <returns><see cref="Option{T}.None"/></returns>
-        public static Option<T>.NoneType None<T>() => Option<T>.None;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<T> None<T>() where T : notnull => Option<T>.None;
 
-#pragma warning disable CS1591
-        public static bool IsSome<T>(this Option<T> option) => option.IsSome;
-        public static bool IsNone<T>(this Option<T> option) => option.IsNone;
-#pragma warning restore CS1591
+        public static Option<T> OfObj<T>(T? obj) where T : notnull =>
+            obj switch
+            {
+                not null => Some(obj),
+                _ => None<T>()
+            };
 
-        /// <summary>
-        /// Creates an <see cref="Option{T}"/>
-        /// </summary>
-        /// <returns><see cref="Option{T}.None"/> is <paramref name="value"/> is <see langword="default"/>. Otherwise, <see cref="Option{T}.Some"/>.</returns>
-        public static Option<T> OfObj<T>(T? value) => (Option<T>)value;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<T> ToOption<T>(this T? obj) where T : notnull => OfObj(obj);
 
-        /// <inheritdoc cref="Option.OfObj{T}"/>
-        public static Option<T> ToOption<T>(this T? obj) => (Option<T>)obj;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T? ToObj<T>(Option<T> option) where T : notnull => option.Value;
 
-#pragma warning disable CS1591
-        [Obsolete]
-        public static Option<T> ToOption<T>(this Option<T> option) => option;
-#pragma warning restore CS1591
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsSome<T>(Option<T> option) where T : notnull => option.IsSome;
 
-#pragma warning disable CS1591
-        public static Option<U> Map<T, U>(this Option<T> option, Func<T, U> mapper) =>
-            option is Option<T>.Some value ?
-                Some(mapper(value)) :
-                None<U>();
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNone<T>(Option<T> option) where T : notnull => option.IsNone;
 
-        public static Option<U> Bind<T, U>(this Option<T> option, Func<T, Option<U>> binder) =>
-            option is Option<T>.Some value ?
-                binder(value) :
-                None<U>();
-#pragma warning restore CS1591
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<A> Return<A>(A value) where A : notnull => Some(value);
 
-        /// <summary>
-        /// Retrieve value from <see cref="Option{T}.Some"/>
-        /// </summary>
-        /// <returns><typeparamref name="T"/> value</returns>
-        public static T Cast<T>(this Option<T>.Some option) => option;
+        public static Func<Option<A>, Option<B>> Bind<A, B>(Func<A, Option<B>> binder)
+            where A : notnull
+            where B : notnull =>
+            option => option switch
+            {
+                var some when some.IsSome => binder(some.Value),
+                _ => Option<B>.None
+            };
 
-        /// <returns>Always returns <see langword="default"/></returns>
-        public static T? Cast<T>(this Option<T>.NoneType _) => default;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<B> Bind<A, B>(this Option<A> option, Func<A, Option<B>> binder)
+            where A : notnull
+            where B : notnull =>
+            Bind(binder)(option);
 
-        /// <summary>
-        /// Applies a selector function to <paramref name="source"/>, returning only the elements where it returns <see cref="Option.Some{U}"/>.
-        /// </summary>
-        public static IEnumerable<U> Choose<T, U>(this IEnumerable<T> source, Func<T, Option<U>> chooser) =>
-            source.Select(chooser).OfType<Option<U>.Some>().Select(some => some.Value);
+        public static Func<Option<A>, Option<B>> Lift<A, B>(Func<A, B> f)
+            where A : notnull
+            where B : notnull =>
+            option => option switch
+            {
+                var some when some.IsSome => ToOption(f(some.Value)),
+                _ => Option<B>.None
+            };
 
-        /// <returns>If <paramref name="option"/> is <see cref="Option{T}.Some"/>, returns a single element sequence. Otherwise returns an empty sequence</returns>
-        public static IEnumerable<T> ToEnumerable<T>(this Option<T> option)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<B> Map<A, B>(this Option<A> option, Func<A, B> f)
+            where A : notnull
+            where B : notnull =>
+            Lift(f)(option);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Func<Option<A>, Option<B>> Apply<A, B>(Option<Func<A, B>> lifted)
+            where A : notnull
+            where B : notnull =>
+            option => lifted.Bind(f => option.Map(f));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<B> Apply<A, B>(this Option<Func<A, B>> lifted, Option<A> option)
+            where A : notnull
+            where B : notnull =>
+            Apply(lifted)(option);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<C> Apply2<A, B, C>(this Option<Func<A, B, C>> lifted, Option<A> optionA, Option<B> optionB)
+            where A : notnull
+            where B : notnull
+            where C : notnull =>
+            lifted.Map(Functional.Curry).Apply(optionA).Apply(optionB);
+
+        public static IEnumerable<U> Choose<T, U>(this IEnumerable<T> source, Func<T, Option<U>> chooser) where U : notnull =>
+            //source.SelectMany(chooser);
+            // :owlcat_suspecting:
+            source.SelectMany(x => chooser(x));
+
+        public static Option<T> TryHead<T>(this IEnumerable<T> source) where T : notnull
         {
-            if (option is Option<T>.Some some) yield return some;
+            foreach (var x in source)
+                return Some(x);
+
+            return None<T>();
         }
 
-        /// <returns>First element in <paramref name="source"/> or <see cref="Option{T}.None"/>.</returns>
-        public static Option<T> TryHead<T>(this IEnumerable<T> source) => source.FirstOrDefault().ToOption();
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Option<T> TryFind<T>(this IEnumerable<T> source, Func<T, bool> predicate) where T : notnull =>
+            source.Where(predicate).TryHead();
 
-        /// <summary>
-        /// Applies a predicate to <paramref name="source"/>, returning the first element where it returns <see langword="true"/>.
-        /// If no matching elements are found, returns <see cref="Option{T}.None"/>
-        /// </summary>
-        public static Option<T> TryFind<T>(this IEnumerable<T> source, Func<T, bool> predicate) => source.FirstOrDefault(predicate).ToOption();
-
-        /// <returns>If <paramref name="option"/> is <see cref="Option{T}.Some"/>, returns its value. Otherwise returns <paramref name="defaultValue"/>.</returns>
-        public static T DefaultValue<T>(this Option<T> option, T defaultValue) => (T?)option ?? defaultValue;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T DefaultValue<T>(this Option<T> option, T defaultValue) where T : notnull =>
+            option switch
+            {
+                var some when some.IsSome => some.Value,
+                _ => defaultValue
+            };
     }
 }

@@ -284,7 +284,7 @@ namespace MicroWrath.Generator.Common
             }
         }
 
-        internal static Option<T> ToOption<T>(this Optional<T?> optional) => optional.HasValue ? Option.Some(optional.Value!) : Option.None<T>();
+        //internal static Option<T> ToOption<T>(this Optional<T?> optional) => optional.HasValue ? Option.Some(optional.Value!) : Option.None<T>();
     }
 
     internal static class Incremental
@@ -332,8 +332,7 @@ namespace MicroWrath.Generator.Common
                             if (m.Equals(symbol.ConstructedFrom, SymbolEqualityComparer.Default)) return Option.Some((symbol, node));
 
                             return Option.None<(IMethodSymbol, InvocationExpressionSyntax)>();
-                        })
-                        .ToEnumerable();
+                        });
                 });
         }
 
@@ -346,13 +345,13 @@ namespace MicroWrath.Generator.Common
         private static IEnumerable<INamedTypeSymbol> GetCompilationBlueprintTypes(
             Compilation compilation,
             IEnumerable<INamedTypeSymbol> types) =>
-            types.TryFind(t => t.Name == "SimpleBlueprint").ToEnumerable()
+            types.TryFind(t => t.Name == "SimpleBlueprint")
                 .SelectMany(simpleBlueprint => GetAssignableTo(compilation, types, simpleBlueprint));
 
         private static IEnumerable<INamedTypeSymbol> GetCompilationComponentTypes(
             Compilation compilation,
             IEnumerable<INamedTypeSymbol> types) =>
-            types.TryFind(t => t.Name == "BlueprintComponent").ToEnumerable()
+            types.TryFind(t => t.Name == "BlueprintComponent")
                 .SelectMany(blueprintComponent => GetAssignableTo(compilation, types, blueprintComponent));
 
         internal static IncrementalValuesProvider<INamedTypeSymbol> GetAssignableTypes(IncrementalValuesProvider<IAssemblySymbol> assemblies) =>

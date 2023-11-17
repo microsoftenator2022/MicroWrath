@@ -32,7 +32,7 @@ namespace MicroWrath.Generator
                 .Select(static (c, _) => c.Assembly.GetTypeByMetadataName(Constants.GeneratedGuidFullName).ToOption());
 
             var getGuidMethod = generatedGuidsType
-                .SelectMany(static (t, _) => t.ToEnumerable()
+                .SelectMany(static (t, _) => t
                     .SelectMany(static t => t.GetMembers("Get"))
                     .OfType<IMethodSymbol>())
                 .Where(static m =>
@@ -63,7 +63,6 @@ namespace MicroWrath.Generator
                         .Bind(static n => n.ArgumentList.Arguments.TryHead())
                         .Bind(static arg => arg.ChildNodes().TryHead())
                         .Bind(literal => sc.SemanticModel.GetConstantValue(literal).ToOption())
-                        .ToEnumerable()
                         .OfType<string>()
                         .Where(static s => !string.IsNullOrEmpty(s));
                 });
@@ -71,7 +70,7 @@ namespace MicroWrath.Generator
             var guidsFile = context.AdditionalTextsProvider
                 .Where(static at => at.Path.ToLower().EndsWith("guids.json"))
                 .Collect()
-                .SelectMany(static (ats, _) => ats.Reverse().TryHead().ToEnumerable())
+                .SelectMany(static (ats, _) => ats.Reverse().TryHead())
                 .Select(static (at, _) => (at.Path, at.GetText()?.ToString() ?? ""));
 
             context.RegisterSourceOutput(config.Combine(guidsFile.Collect()).Combine(constantKeys.Collect()), (spc, fileAndKeys) =>

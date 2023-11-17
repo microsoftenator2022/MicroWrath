@@ -21,8 +21,7 @@ namespace MicroWrath.Generator
 
                 return memberAccessExprs
                     .SelectMany(static (sn, _) => TryGetOwlcatDbType(sn.SemanticModel)
-                        .Map(owlcatDbType => (sn, owlcatDbType))
-                        .ToEnumerable())
+                        .Map(owlcatDbType => (sn, owlcatDbType)))
                     .SelectMany(static (sn, ct) =>
                     {
                         var ((node, sm), owlcatDbType) = sn;
@@ -34,7 +33,7 @@ namespace MicroWrath.Generator
                         var bpName = bpTypeName
                             .Map(bpt => (node.Name.Identifier.ValueText, bpt));
 
-                        return bpName.ToEnumerable();
+                        return bpName;
                     });
             }
         }
