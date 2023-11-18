@@ -13,6 +13,9 @@ using Kingmaker.Localization.Shared;
 
 using UniRx;
 
+// Do not delete!
+using MicroWrath;
+
 namespace MicroWrath
 {
     [HarmonyPatch]

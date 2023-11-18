@@ -82,7 +82,7 @@ namespace MicroWrath.Generator
                 .Combine(rootNamespace)
                 .Select(static (ts, _) =>
                 {
-                    var rootNs = ts.Right.Value;
+                    var rootNs = ts.Right.MaybeValue;
                     var type = ts.Left.FirstOrDefault();
 
                     if (rootNs is null) return Option.None<(string, Option<INamedTypeSymbol>)>();
@@ -194,7 +194,7 @@ namespace {ns}
                 
                 sb.Clear();
 
-                var name = maybeType.Value?.Name ?? "Main";
+                var name = maybeType.MaybeValue?.Name ?? "Main";
 
                 if (!shouldGen) return;
 
@@ -218,7 +218,7 @@ namespace {ns}
 {{
     internal partial class {name} : ModMain
     {{");
-                if(!(props.Value?.HasParameterlessConstructor ?? false))
+                if(!(props.MaybeValue?.HasParameterlessConstructor ?? false))
                 sb.Append($@"
         private {name}() {{ }}");
 

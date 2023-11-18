@@ -33,6 +33,8 @@ namespace MicroWrath.Util
         public static Option<T> Some(T value) => new(value);
         public static readonly Option<T> None = new();
 
+        public override string ToString() => this.IsSome ? $"Some {this.Value}" : "None";
+
         public bool Equals(Option<T> other)
         {
             if (this.IsNone)

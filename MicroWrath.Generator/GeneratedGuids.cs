@@ -57,14 +57,26 @@ namespace MicroWrath.Generator
             var constantKeys = invocations
                 .SelectMany(static (sc, _) =>
                 {
-                    var node = (sc.Node as InvocationExpressionSyntax).ToOption();
+                    if (sc.Node is not InvocationExpressionSyntax node)
+                        return Enumerable.Empty<string>();
 
-                    return node
-                        .Bind(static n => n.ArgumentList.Arguments.TryHead())
-                        .Bind(static arg => arg.ChildNodes().TryHead())
-                        .Bind(literal => sc.SemanticModel.GetConstantValue(literal).ToOption())
-                        .OfType<string>()
-                        .Where(static s => !string.IsNullOrEmpty(s));
+                    var arg0 = node.ArgumentList.Arguments.TryHead();
+                    
+                    var child0 = arg0.Bind(arg => arg.ChildNodes().TryHead());
+
+                    // :owlcat_suspecting:
+                    var constValue = child0.Map(literal => sc.SemanticModel.GetConstantValue(literal).ToString());
+
+                    return constValue.Where(s => !string.IsNullOrEmpty(s));
+
+                    //return node.ArgumentList.Arguments.TryHead()
+                    //    .Bind(static arg => arg.ChildNodes().TryHead())
+                    //    .Bind(literal => 
+                    //    {
+                    //        var constValue = sc.SemanticModel.GetConstantValue(literal);
+                    //        return constValue.HasValue ? (constValue.Value as string).ToOption() : Option.None<string>();
+                    //    })
+                    //    .Where(static s => !string.IsNullOrEmpty(s));
                 });
 
             var guidsFile = context.AdditionalTextsProvider
@@ -73,8 +85,42 @@ namespace MicroWrath.Generator
                 .SelectMany(static (ats, _) => ats.Reverse().TryHead())
                 .Select(static (at, _) => (at.Path, at.GetText()?.ToString() ?? ""));
 
+            //context.RegisterSourceOutput(generatedGuidsType.Combine(getGuidMethod.Combine(invocations.Collect())), (spc, items) =>
+            //{
+            //    var (guidType, guidMethod, invocations) = items.Flatten();
+
+            //    var sb = new StringBuilder();
+
+            //    sb.AppendLine($"// Type: {guidType}");
+            //    sb.AppendLine($"// Method: {guidMethod}");
+            //    sb.AppendLine("// Invocations:");
+            //    foreach(var invocation in invocations)
+            //    {
+            //        sb.AppendLine($"//   {invocation.Node}");
+
+            //        if (invocation.Node is InvocationExpressionSyntax ies)
+            //        {
+            //            var a0 = ies.ArgumentList.Arguments.TryHead();
+
+            //            sb.AppendLine($"//    First argument: {a0}");
+
+            //            var c0 = a0.Bind(arg => arg.ChildNodes().TryHead());
+
+            //            sb.AppendLine($"//     First child: {a0}");
+
+            //            var s = c0.Map(literal => invocation.SemanticModel.GetConstantValue(literal).ToString());
+
+            //            sb.AppendLine($"//      Literal value: {s}!!!");
+            //        }
+            //    }
+
+            //    spc.AddSource("generatedGuidsDebug", sb.ToString());
+            //});
+
             context.RegisterSourceOutput(config.Combine(guidsFile.Collect()).Combine(constantKeys.Collect()), (spc, fileAndKeys) =>
             {
+                var sb = new StringBuilder();
+
                 var ((config, filePaths), keys) = fileAndKeys;
 
                 var (filePath, fileText) = filePaths.FirstOrDefault();
@@ -89,13 +135,11 @@ namespace MicroWrath.Generator
                     if (!guids.ContainsKey(key))
                         guids = guids.Add(key, Guid.NewGuid());
 
-                var sb = new StringBuilder();
-                
                 sb.Append($@"using System;
 using System.Collections.Generic;
 using Kingmaker.Blueprints;
 
-using {config.RootNamespace.Value};
+using {config.RootNamespace.MaybeValue};
 
 namespace MicroWrath
 {{
