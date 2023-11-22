@@ -24,7 +24,7 @@
 
   <PropertyGroup>
     <UnityBuildScript>..\WrathModificationTemplate\MicroWrathAssetsBuild.fsx</UnityBuildScript>
-    <BundlePath>..\WrathModificationTemplate\Build\MicroWrathAssets\Bundles\assets_all</BundlePath>
+    <BundlePath>..\WrathModificationTemplate\Build\MicroWrathAssets\Bundles\MicroWrathAssets_assets_all</BundlePath>
   </PropertyGroup>
   
   <Target Name="Build Bundle"
