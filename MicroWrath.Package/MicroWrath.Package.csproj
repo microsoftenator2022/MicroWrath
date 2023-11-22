@@ -8,6 +8,7 @@
       It includes source generators to aid with tedious or repetitive code patterns including localization, GUID generation, and Blueprint and Component initialization.
       This package is a metapackage that will install MicroWrath's component packages.
     </Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
