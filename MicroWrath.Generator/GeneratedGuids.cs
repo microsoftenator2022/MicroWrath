@@ -62,12 +62,20 @@ namespace MicroWrath.Generator
 
                     var arg0 = node.ArgumentList.Arguments.TryHead();
                     
-                    var child0 = arg0.Bind(arg => arg.ChildNodes().TryHead());
+                    var child0 = arg0.Bind(static arg => arg.ChildNodes().TryHead());
 
                     // :owlcat_suspecting:
-                    var constValue = child0.Map(literal => sc.SemanticModel.GetConstantValue(literal).ToString());
+                    var constValue = child0.Bind(literal =>
+                    {
+                        var constValue = sc.SemanticModel.GetConstantValue(literal);
 
-                    return constValue.Where(s => !string.IsNullOrEmpty(s));
+                        if (!constValue.HasValue || constValue.Value is not string s)
+                            return Option.None<string>();
+                        
+                        return Option.Some(s);
+                    });
+
+                    return constValue.Where(static s => !string.IsNullOrEmpty(s));
 
                     //return node.ArgumentList.Arguments.TryHead()
                     //    .Bind(static arg => arg.ChildNodes().TryHead())
@@ -85,37 +93,42 @@ namespace MicroWrath.Generator
                 .SelectMany(static (ats, _) => ats.Reverse().TryHead())
                 .Select(static (at, _) => (at.Path, at.GetText()?.ToString() ?? ""));
 
-            //context.RegisterSourceOutput(generatedGuidsType.Combine(getGuidMethod.Combine(invocations.Collect())), (spc, items) =>
-            //{
-            //    var (guidType, guidMethod, invocations) = items.Flatten();
+            #if DEBUG
+            context.RegisterSourceOutput(generatedGuidsType.Combine(getGuidMethod.Combine(invocations.Collect().Combine(constantKeys.Collect()))), (spc, items) =>
+            {
+                var (guidType, guidMethod, invocations, keys) = items.Flatten();
 
-            //    var sb = new StringBuilder();
+                var sb = new StringBuilder();
 
-            //    sb.AppendLine($"// Type: {guidType}");
-            //    sb.AppendLine($"// Method: {guidMethod}");
-            //    sb.AppendLine("// Invocations:");
-            //    foreach(var invocation in invocations)
-            //    {
-            //        sb.AppendLine($"//   {invocation.Node}");
+                sb.AppendLine($"// Type: {guidType}");
+                sb.AppendLine($"// Method: {guidMethod}");
+                sb.AppendLine("// Invocations:");
+                foreach (var invocation in invocations)
+                {
+                    sb.AppendLine($"//   {invocation.Node}");
 
-            //        if (invocation.Node is InvocationExpressionSyntax ies)
-            //        {
-            //            var a0 = ies.ArgumentList.Arguments.TryHead();
+                    if (invocation.Node is InvocationExpressionSyntax ies)
+                    {
+                        var a0 = ies.ArgumentList.Arguments.TryHead();
 
-            //            sb.AppendLine($"//    First argument: {a0}");
+                        sb.AppendLine($"//    First argument: {a0}");
 
-            //            var c0 = a0.Bind(arg => arg.ChildNodes().TryHead());
+                        var c0 = a0.Bind(arg => arg.ChildNodes().TryHead());
 
-            //            sb.AppendLine($"//     First child: {a0}");
+                        sb.AppendLine($"//     First child: {a0}");
 
-            //            var s = c0.Map(literal => invocation.SemanticModel.GetConstantValue(literal).ToString());
+                        var s = c0.Map(literal => invocation.SemanticModel.GetConstantValue(literal));
 
-            //            sb.AppendLine($"//      Literal value: {s}!!!");
-            //        }
-            //    }
+                        sb.AppendLine($"//      Literal value: {(s.IsSome ? s.MaybeValue.Value as string : "")}");
+                        
+                        if (keys.Contains(s.MaybeValue.Value))
+                            sb.AppendLine($"//       Matching key!");
+                    }
+                }
 
-            //    spc.AddSource("generatedGuidsDebug", sb.ToString());
-            //});
+                spc.AddSource("generatedGuidsDebug", sb.ToString());
+            });
+            #endif
 
             context.RegisterSourceOutput(config.Combine(guidsFile.Collect()).Combine(constantKeys.Collect()), (spc, fileAndKeys) =>
             {
