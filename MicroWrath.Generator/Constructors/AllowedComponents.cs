@@ -18,6 +18,9 @@ namespace MicroWrath.Generator
             var allowedOnAttribute = compilation
                 .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.AllowedOnAttribute"));
 
+            var blueprintScriptableObjectType = compilation
+                .Select(static (c, _) => c.GetTypeByMetadataName("Kingmaker.Blueprints.BlueprintScriptableObject"));
+
             var componentTypes = Incremental.GetComponentTypes(compilation)
                 .Where(static c => !c.IsAbstract)
                 .Combine(allowedOnAttribute)
@@ -28,16 +31,22 @@ namespace MicroWrath.Generator
                 .Where(static ct => ct.allowedOnAttributes.Any());
 
             var componentsAllowedOn = componentTypes
-                .Select(static (cs, _) =>
+                .Combine(blueprintScriptableObjectType)
+                .Select(static (types, _) =>
                 {
-                    var (componentType, attributes) = cs;
+                    var ((componentType, attributes), blueprintScriptableObjectType) = types;
 
                     var allowedOn = attributes
                         .Select(static attr => attr.ConstructorArguments
                             .FirstOrDefault(static arg => arg.Kind == TypedConstantKind.Type))
-                        .Select(static arg => arg.Value);
+                        .Select(static arg => arg.Value)
+                        .OfType<INamedTypeSymbol>()
+                        // :owlcat_suspecting: owlcat sometimes incorrectly "allows" BlueprintComponents
+                        // on types that are not Blueprints
+                        .Where(t => t.GetBaseTypesAndSelf()
+                            .Contains(blueprintScriptableObjectType, SymbolEqualityComparer.Default));
 
-                    return (componentType, allowedOn: allowedOn.OfType<INamedTypeSymbol>());
+                    return (componentType, allowedOn);
                 });
 
             var byBlueprintType = componentsAllowedOn
