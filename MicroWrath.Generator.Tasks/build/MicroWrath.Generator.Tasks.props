@@ -1,3 +1,10 @@
 <Project>
+  <ItemGroup>
+    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
+    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.UI.dll" />
+    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll" />
+    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.SharedTypes.dll" />
+  </ItemGroup>
+
   <UsingTask TaskName="MicroWrath.Generator.GenerateGuidsFile" AssemblyFile="$(MSBuildThisFileDirectory)..\tasks\net472\MicroWrath.Generator.Tasks.dll" />
 </Project>

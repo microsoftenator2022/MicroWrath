@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Content Include="build\MicroWrath.Generator.Tasks.props" PackagePath="build\" />
+    <Content Include="build\MicroWrath.Generator.Tasks.targets" PackagePath="build\" />
   </ItemGroup>
 
   <PropertyGroup>
