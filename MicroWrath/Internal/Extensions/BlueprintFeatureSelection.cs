@@ -48,7 +48,7 @@ namespace MicroWrath.Extensions
             BlueprintReference<TBlueprint> feature,
             params BlueprintReference<TBlueprint>[] features)
             where TBlueprint : BlueprintFeature =>
-            AddFeatures(selection, allowDuplicates, [feature, .. features]);
+            AddFeatures(selection, allowDuplicates, new [] { feature }.Concat(features));
 
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
@@ -76,7 +76,7 @@ namespace MicroWrath.Extensions
             TBlueprint feature,
             params TBlueprint[] features)
             where TBlueprint : BlueprintFeature =>
-            AddFeatures(selection, allowDuplicates, [feature, .. features]);
+            AddFeatures(selection, allowDuplicates, new[] { feature }.Concat(features));
 
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
@@ -104,7 +104,7 @@ namespace MicroWrath.Extensions
             IMicroBlueprint<TBlueprint> feature,
             params IMicroBlueprint<TBlueprint>[] features)
             where TBlueprint : BlueprintFeature =>
-            AddFeatures(selection, allowDuplicates, [feature, .. features]);
+            AddFeatures(selection, allowDuplicates, new[] { feature }.Concat(features));
 
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
