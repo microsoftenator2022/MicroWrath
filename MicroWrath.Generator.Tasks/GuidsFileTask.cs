@@ -7,14 +7,24 @@ using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
+using TinyJson;
 
 namespace MicroWrath.Generator
 {
     public class GenerateGuidsFile : AppDomainIsolatedTask
     {
+        static string ToJson(Dictionary<string, Guid> guids) => guids
+            .ToDictionary(p => p.Key, p => p.Value.ToString())
+            .ToJson();
+
+        static Dictionary<string, Guid> FromJson(string json) => json
+            .FromJson<Dictionary<string, string>>()
+            .ToDictionary(p => p.Key, p => Guid.Parse(p.Value));
+
         [Required]
         public string WrathPath { get; set; }
 
@@ -56,7 +66,7 @@ namespace MicroWrath.Generator
             {
                 Log.LogMessage(MessageImportance.High, $"Loading guids from file {GuidsFile}");
 
-                guids = JsonConvert.DeserializeObject<Dictionary<string, Guid>>(File.ReadAllText(GuidsFile)) ?? guids;
+                guids = FromJson(File.ReadAllText(GuidsFile)) ?? guids;
             }
 
             if (!File.Exists(Assembly))
@@ -149,7 +159,7 @@ namespace MicroWrath.Generator
             {
                 Log.LogMessage(MessageImportance.High, $"Found runtimeGuids.json in {modDirectory}");
 
-                foreach (var entry in JsonConvert.DeserializeObject<Dictionary<string, Guid>>(File.ReadAllText(runtimeGuidsFilePath)))
+                foreach (var entry in FromJson(File.ReadAllText(runtimeGuidsFilePath)))
                 {
                     Log.LogMessage(MessageImportance.High, $"{entry.Key}: {entry.Value}");
 
@@ -171,7 +181,7 @@ namespace MicroWrath.Generator
 
             Log.LogMessage(MessageImportance.High, $"Writing guids to file {GuidsFile}");
 
-            var json = JsonConvert.SerializeObject(guids, Formatting.Indented);
+            var json = ToJson(guids);
 
             File.WriteAllText(GuidsFile, json);
 
