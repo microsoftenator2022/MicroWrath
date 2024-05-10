@@ -14,6 +14,7 @@ using MicroWrath.Util;
 using MicroWrath.Generator.Common;
 using System.IO;
 using System.Collections.Immutable;
+using MicroUtils;
 
 namespace MicroWrath.Generator
 {
@@ -146,7 +147,7 @@ namespace MicroWrath.Generator
 
                 foreach (var key in keys)
                     if (!guids.ContainsKey(key))
-                        guids = guids.Add(key, Guid.NewGuid());
+                        guids = guids.Add(key, GuidEx.CreateV5(Constants.GeneratedGuidFullName, key));
 
                 sb.Append($@"using System;
 using System.Collections.Generic;

@@ -11,6 +11,7 @@ using Kingmaker.Blueprints;
 
 using MonoMod.Utils;
 using System.Reflection;
+using MicroUtils;
 
 namespace MicroWrath
 {
@@ -74,7 +75,7 @@ namespace MicroWrath
                 if (runtimeGuids.Count == 0) TryLoadRuntimeGuids();
                 if (!runtimeGuids.ContainsKey(key))
                 {
-                    runtimeGuids[key] = System.Guid.NewGuid();
+                    runtimeGuids[key] = GuidEx.CreateV5(typeof(GeneratedGuid).FullName, key);
                     MicroLogger.Debug(() => $"No guid found for {key}. Generated new guid {runtimeGuids[key]}.");
 
                     if (!TrySaveRuntimeGuids()) MicroLogger.Warning("Could not save runtime guids. New saves may not load after game restart");
