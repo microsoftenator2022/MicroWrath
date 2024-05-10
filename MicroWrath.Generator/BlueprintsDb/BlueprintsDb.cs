@@ -58,6 +58,13 @@ namespace MicroWrath.Generator
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
+            var isDesignTime = context.AnalyzerConfigOptionsProvider.Select((aco, _) =>
+            {
+                aco.GlobalOptions.TryGetValue("build_property.DesignTimeBuild", out var designTime);
+
+                return designTime;
+            });
+
             var compilation = context.CompilationProvider;
             
             var cheatdata = context.AdditionalTextsProvider.Where(static at => Path.GetFileName(at.Path).ToLower() == "cheatdata.json");
@@ -70,9 +77,13 @@ namespace MicroWrath.Generator
 
             var blueprintsAccessorsToGenerate = blueprintData
                 .Combine(blueprintMemberSyntax.Collect())
+                .Combine(isDesignTime)
                 .Select(static (bpsAndMembers, _) =>
                 {
-                    var ((blueprintType, blueprints), memberAccesses) = bpsAndMembers;
+                    var (((blueprintType, blueprints), memberAccesses), designTime) = bpsAndMembers;
+
+                    if (designTime is not null)
+                        return (blueprintType, blueprints);
 
                     if (!memberAccesses.Any(member => member.BlueprintTypeName == blueprintType.Name))
                         return (blueprintType, Enumerable.Empty<BlueprintInfo>());

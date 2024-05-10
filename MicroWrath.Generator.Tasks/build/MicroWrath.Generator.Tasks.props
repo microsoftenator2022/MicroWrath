@@ -1,5 +1,9 @@
 <Project>
   <ItemGroup>
+    <CompilerVisibleProperty Include="DesignTimeBuild" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.UI.dll" />
     <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll" />
