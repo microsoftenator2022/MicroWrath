@@ -13,7 +13,7 @@ using Kingmaker.UnitLogic.Mechanics;
 
 using Newtonsoft.Json;
 
-namespace MicroWrath.Internal.Components
+namespace MicroWrath.Components
 {
     [AllowedOn(typeof(BlueprintBuff))]
     internal class ContextAddTemporaryHP : UnitBuffComponentDelegate<ContextAddTemporaryHP.ComponentData>
