@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
+using MicroWrath.Util;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
-using MicroWrath.Util;
 
 namespace MicroWrath.Generator
 {
@@ -26,6 +27,104 @@ namespace MicroWrath.Generator
 
         private static class Blueprints
         {
+            internal static IEnumerable<BlueprintInfo> ReadBlueprintsInfo(AdditionalText at, CancellationToken ct)
+            {
+                if (at.GetText(ct)?.ToString() is not string text)
+                    return Enumerable.Empty<BlueprintInfo>();
+
+                var entries = JValue.Parse(text)["Entries"].ToArray();
+
+                return entries.Choose<JToken, BlueprintInfo>(static entry =>
+                {
+                    if (entry["Guid"]?.ToString() is string guid &&
+                        entry["Name"]?.ToString() is string name &&
+                        entry["TypeFullName"]?.ToString() is string typeName)
+                    {
+                        var nameChars = new List<char>();
+                        string? escapedName = null;
+
+                        if (!SyntaxFacts.IsValidIdentifier(name))
+                        {
+                            nameChars = name.Select(static c =>
+                                SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_').ToList();
+
+                            if (!SyntaxFacts.IsIdentifierStartCharacter(name[0]))
+                                nameChars.Insert(0, '_');
+
+                            escapedName = new string(nameChars.ToArray());
+                        }
+                        else escapedName = name;
+
+                        return Option.Some(new BlueprintInfo(GuidString: guid, Name: escapedName, TypeName: typeName));
+                    }
+
+                    return Option.None<BlueprintInfo>();
+                });
+            }
+
+            internal static IEnumerable<(ISymbol, ImmutableArray<BlueprintInfo>)> GetDictionaryEntries(
+                IEnumerable<BlueprintInfo> bps,
+                Compilation compilation,
+                CancellationToken ct)
+            {
+                var types = new Dictionary<string, ISymbol?>();
+
+                foreach (var typeName in bps.Select(static bp => bp.TypeName).Distinct())
+                {
+                    if (ct.IsCancellationRequested) break;
+
+                    types[typeName] = compilation.GetTypeByMetadataName(typeName);
+                }
+
+                return bps
+                    .Select(
+                        bp => types[bp.TypeName]?.Name == bp.Name ?
+                        new BlueprintInfo(
+                            GuidString: bp.GuidString,
+                            TypeName: bp.TypeName,
+                            Name: bp.Name + "_blueprint") :
+                        bp)
+                    .GroupBy(bp => types[bp.TypeName]!, SymbolEqualityComparer.Default)
+                    .Where(static g => g.Key is not null && g.Key.DeclaredAccessibility == Accessibility.Public)
+                    .Select(bpType =>
+                    {
+                        if (BlueprintList.ContainsKey(bpType.Key) && BlueprintList[bpType.Key].Length > 0)
+                            return (bpType.Key, BlueprintList[bpType.Key]);
+
+                        BlueprintList = BlueprintList.Remove(bpType.Key);
+
+#if DEBUG
+                        CacheInvalidations++;
+#endif
+
+                        IEnumerable<BlueprintInfo> renameDuplicates(IEnumerable<BlueprintInfo> source)
+                        {
+                            if (source.Count() == 1)
+                            {
+                                yield return source.First();
+                            }
+                            else
+                            {
+                                foreach (var sourceItem in source)
+                                {
+                                    if (ct.IsCancellationRequested) break;
+
+                                    yield return new BlueprintInfo(
+                                        GuidString: sourceItem.GuidString,
+                                        TypeName: sourceItem.TypeName,
+                                        Name: sourceItem.Name + $"_{sourceItem.GuidString}");
+                                }
+                            }
+                        }
+                        var bps = (key: bpType.Key, bps: bpType.GroupBy(static bp => bp.Name).SelectMany(renameDuplicates).ToImmutableArray());
+
+                        if (bps.bps.Length > 0)
+                            BlueprintList = BlueprintList.SetItem(bpType.Key, bps.bps);
+
+                        return bps;
+                    });
+            }
+
             public static ImmutableDictionary<ISymbol, ImmutableArray<BlueprintInfo>> BlueprintList { get; private set; } =
                 ImmutableDictionary.Create<ISymbol, ImmutableArray<BlueprintInfo>>(SymbolEqualityComparer.Default);
 
@@ -45,101 +144,103 @@ namespace MicroWrath.Generator
 #endif
                 .SelectMany(static (at, ct) =>
                 {
-                    if (at.GetText(ct)?.ToString() is not string text)
-                        return Enumerable.Empty<BlueprintInfo>();
+                    return ReadBlueprintsInfo(at, ct);
+                    //if (at.GetText(ct)?.ToString() is not string text)
+                    //    return Enumerable.Empty<BlueprintInfo>();
 
-                    var entries = JValue.Parse(text)["Entries"].ToArray();
+                    //var entries = JValue.Parse(text)["Entries"].ToArray();
 
-                    return entries.Choose<JToken, BlueprintInfo>(static entry =>
-                    {
-                        if (entry["Guid"]?.ToString() is string guid &&
-                            entry["Name"]?.ToString() is string name &&
-                            entry["TypeFullName"]?.ToString() is string typeName)
-                        {
-                            var nameChars = new List<char>();
-                            string? escapedName = null;
+                    //return entries.Choose<JToken, BlueprintInfo>(static entry =>
+                    //{
+                    //    if (entry["Guid"]?.ToString() is string guid &&
+                    //        entry["Name"]?.ToString() is string name &&
+                    //        entry["TypeFullName"]?.ToString() is string typeName)
+                    //    {
+                    //        var nameChars = new List<char>();
+                    //        string? escapedName = null;
 
-                            if (!SyntaxFacts.IsValidIdentifier(name))
-                            {
-                                nameChars = name.Select(static c =>
-                                    SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_').ToList();
+                    //        if (!SyntaxFacts.IsValidIdentifier(name))
+                    //        {
+                    //            nameChars = name.Select(static c =>
+                    //                SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_').ToList();
 
-                                if (!SyntaxFacts.IsIdentifierStartCharacter(name[0]))
-                                    nameChars.Insert(0, '_');
+                    //            if (!SyntaxFacts.IsIdentifierStartCharacter(name[0]))
+                    //                nameChars.Insert(0, '_');
 
-                                escapedName = new string(nameChars.ToArray());
-                            }
-                            else escapedName = name;
+                    //            escapedName = new string(nameChars.ToArray());
+                    //        }
+                    //        else escapedName = name;
 
-                            return Option.Some(new BlueprintInfo(GuidString: guid, Name: escapedName, TypeName: typeName));
-                        }
+                    //        return Option.Some(new BlueprintInfo(GuidString: guid, Name: escapedName, TypeName: typeName));
+                    //    }
 
-                        return Option.None<BlueprintInfo>();
-                    });
+                    //    return Option.None<BlueprintInfo>();
+                    //});
                 })
                 .Collect()
                 .Combine(compilation)
                 .SelectMany(static (bpsc, ct) =>
                 {
                     var (bps, compilation) = bpsc;
+                    return GetDictionaryEntries(bps, compilation, ct);
 
-                    var types = new Dictionary<string, ISymbol?>();
+//                    var types = new Dictionary<string, ISymbol?>();
 
-                    foreach (var typeName in bps.Select(static bp => bp.TypeName).Distinct())
-                    {
-                        if (ct.IsCancellationRequested) break;
+//                    foreach (var typeName in bps.Select(static bp => bp.TypeName).Distinct())
+//                    {
+//                        if (ct.IsCancellationRequested) break;
 
-                        types[typeName] = compilation.GetTypeByMetadataName(typeName);
-                    }
+//                        types[typeName] = compilation.GetTypeByMetadataName(typeName);
+//                    }
 
-                    return bps
-                        .Select(
-                            bp => types[bp.TypeName]?.Name == bp.Name ?
-                            new BlueprintInfo(
-                                GuidString: bp.GuidString,
-                                TypeName: bp.TypeName,
-                                Name: bp.Name + "_blueprint") :
-                            bp)
-                        .GroupBy(bp => types[bp.TypeName]!, SymbolEqualityComparer.Default);
-                })
-                .Where(static g => g.Key is not null && g.Key.DeclaredAccessibility == Accessibility.Public)
-                .Select(static (bpType, ct) =>
-                {
-                    if (BlueprintList.ContainsKey(bpType.Key) && BlueprintList[bpType.Key].Length > 0)
-                        return (bpType.Key, BlueprintList[bpType.Key]);
+//                    return bps
+//                        .Select(
+//                            bp => types[bp.TypeName]?.Name == bp.Name ?
+//                            new BlueprintInfo(
+//                                GuidString: bp.GuidString,
+//                                TypeName: bp.TypeName,
+//                                Name: bp.Name + "_blueprint") :
+//                            bp)
+//                        .GroupBy(bp => types[bp.TypeName]!, SymbolEqualityComparer.Default);
+//                })
+//                .Where(static g => g.Key is not null && g.Key.DeclaredAccessibility == Accessibility.Public)
+//                .Select(static (bpType, ct) =>
+//                {
+//                    if (BlueprintList.ContainsKey(bpType.Key) && BlueprintList[bpType.Key].Length > 0)
+//                        return (bpType.Key, BlueprintList[bpType.Key]);
 
-                    BlueprintList = BlueprintList.Remove(bpType.Key);
+//                    BlueprintList = BlueprintList.Remove(bpType.Key);
 
-#if DEBUG
-                    CacheInvalidations++;
-#endif
+//#if DEBUG
+//                    CacheInvalidations++;
+//#endif
 
-                    IEnumerable<BlueprintInfo> renameDuplicates(IEnumerable<BlueprintInfo> source)
-                    {
-                        if (source.Count() == 1)
-                        {
-                            yield return source.First();
-                        }
-                        else
-                        {
-                            //var i = 0;
-                            foreach (var sourceItem in source)
-                            {
-                                if (ct.IsCancellationRequested) break;
+//                    IEnumerable<BlueprintInfo> renameDuplicates(IEnumerable<BlueprintInfo> source)
+//                    {
+//                        if (source.Count() == 1)
+//                        {
+//                            yield return source.First();
+//                        }
+//                        else
+//                        {
+//                            //var i = 0;
+//                            foreach (var sourceItem in source)
+//                            {
+//                                if (ct.IsCancellationRequested) break;
 
-                                yield return new BlueprintInfo(
-                                    GuidString: sourceItem.GuidString,
-                                    TypeName: sourceItem.TypeName,
-                                    Name: sourceItem.Name + $"_{sourceItem.GuidString}");
-                            }
-                        }
-                    }
-                    var bps = (key: bpType.Key, bps: bpType.GroupBy(static bp => bp.Name).SelectMany(renameDuplicates).ToImmutableArray());
+//                                yield return new BlueprintInfo(
+//                                    GuidString: sourceItem.GuidString,
+//                                    TypeName: sourceItem.TypeName,
+//                                    Name: sourceItem.Name + $"_{sourceItem.GuidString}");
+//                            }
+//                        }
+//                    }
+//                    var bps = (key: bpType.Key, bps: bpType.GroupBy(static bp => bp.Name).SelectMany(renameDuplicates).ToImmutableArray());
                     
-                    if (bps.bps.Length > 0)
-                        BlueprintList = BlueprintList.SetItem(bpType.Key, bps.bps);
+//                    if (bps.bps.Length > 0)
+//                        BlueprintList = BlueprintList.SetItem(bpType.Key, bps.bps);
 
-                    return bps;
+//                    return bps;
                 });
 
                 return blueprints;

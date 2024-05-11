@@ -16,6 +16,7 @@ using MicroWrath.Util;
 using MicroWrath.Generator.Common;
 using static MicroWrath.Generator.Constants;
 using System.Threading;
+using System.Diagnostics;
 
 namespace MicroWrath.Generator
 {
@@ -58,12 +59,11 @@ namespace MicroWrath.Generator
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            var isDesignTime = context.AnalyzerConfigOptionsProvider.Select((aco, _) =>
-            {
-                aco.GlobalOptions.TryGetValue("build_property.DesignTimeBuild", out var designTime);
-
-                return designTime;
-            });
+            //var isDesignTime = context.AnalyzerConfigOptionsProvider.Select((aco, _) =>
+            //{
+            //    var go = aco.GlobalOptions;
+            //    return (Func<bool>)(() => go.TryGetValue("build_property.DesignTimeBuild", out var designTime) && designTime.ToLower() == "true");
+            //});
 
             var compilation = context.CompilationProvider;
             
@@ -77,13 +77,10 @@ namespace MicroWrath.Generator
 
             var blueprintsAccessorsToGenerate = blueprintData
                 .Combine(blueprintMemberSyntax.Collect())
-                .Combine(isDesignTime)
+                //.Combine(isDesignTime)
                 .Select(static (bpsAndMembers, _) =>
                 {
-                    var (((blueprintType, blueprints), memberAccesses), designTime) = bpsAndMembers;
-
-                    if (designTime is not null)
-                        return (blueprintType, blueprints);
+                    var ((blueprintType, blueprints), memberAccesses) = bpsAndMembers;
 
                     if (!memberAccesses.Any(member => member.BlueprintTypeName == blueprintType.Name))
                         return (blueprintType, Enumerable.Empty<BlueprintInfo>());
