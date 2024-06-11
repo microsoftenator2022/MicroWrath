@@ -18,6 +18,7 @@ namespace MicroWrath.Components
     [AllowedOn(typeof(BlueprintBuff))]
     internal class ContextAddTemporaryHP : UnitBuffComponentDelegate<ContextAddTemporaryHP.ComponentData>
     {
+#pragma warning disable CS0649
         public ContextValue Value = null!;
         public ModifierDescriptor Descriptor;
 
@@ -45,5 +46,6 @@ namespace MicroWrath.Components
             [JsonProperty]
             public ModifiableValue.Modifier? Modifier;
         }
+#pragma warning restore CS0649
     }
 }

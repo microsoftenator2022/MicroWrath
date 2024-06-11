@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
-using System.Collections;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MicroUtils
 {
@@ -19,7 +19,7 @@ namespace MicroUtils
         /// without the requirement that the <paramref name="ns"/> parameter be a valid UUID.
         /// </summary>
         /// <param name="ns">UUID namespace. This method does not enforce UUIDv5 requirement that this 
-        /// parameter is a valid UUID.<br/>You can use <see cref="CreateV8(Span{byte})"/> for
+        /// parameter is a valid UUID.<br/>You can use <see cref="CreateV8"/> for
         /// this parameter if strict UUIDv5 conformance is required.</param>
         /// <param name="name">Name</param>
         /// <returns>Determinstic Guid generated from namespace and name (may conform to UUIDv5).</returns>

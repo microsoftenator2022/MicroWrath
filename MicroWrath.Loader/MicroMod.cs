@@ -9,9 +9,10 @@ using System.Text;
 using Kingmaker;
 using Kingmaker.Modding;
 
+using MicroWrath.Loader;
+
 using UnityModManagerNet;
 
-using MicroWrath.Loader;
 using static UnityModManagerNet.UnityModManager;
 
 namespace MicroWrath

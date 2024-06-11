@@ -186,7 +186,25 @@ namespace {ns}
             return true;
         }}
 
-        public virtual bool Load(Kingmaker.Modding.OwlcatModification mod) => throw new NotImplementedException();
+        private Kingmaker.Modding.OwlcatModification? owlcatMod;
+        public Kingmaker.Modding.OwlcatModification? OwlcatMod
+        {{
+            get => owlcatMod;
+            protected set => owlcatMod = value;
+        }}
+        public virtual bool Load(Kingmaker.Modding.OwlcatModification mod)
+        {{
+            this.owlcatMod = mod;
+            
+            instance = this;
+
+            DoInit();
+
+            harmony = new Harmony(mod.Manifest.UniqueName);
+            ApplyHarmonyPatches();
+            
+            return true;
+        }}
     }}
 }}");
 

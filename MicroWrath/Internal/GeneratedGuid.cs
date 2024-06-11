@@ -4,14 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 using Newtonsoft.Json;
 
 using Kingmaker.Blueprints;
 
-using MonoMod.Utils;
-using System.Reflection;
 using MicroUtils;
+using MicroWrath.Util.Linq;
+
+using MonoMod.Utils;
 
 namespace MicroWrath
 {

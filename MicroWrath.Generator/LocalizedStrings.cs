@@ -15,15 +15,22 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MicroWrath.Util;
 using MicroWrath.Util.Linq;
 using static MicroWrath.Generator.Constants;
+using Microsoft.CodeAnalysis.Editing;
+using System.Collections.Immutable;
 
 namespace MicroWrath.Generator
 {
     [Generator]
     public class LocalizedStrings : IIncrementalGenerator
     {
-        private readonly record struct LocalizedStringData(string Name, string ValueMemberFullName, string Key, Option<string> Locale);
+        const string LocalizedStringsClassName = "LocalizedStrings";
 
-        private static readonly LocalizedStringData Placeholder = new("", "", "", Option.None<string>());
+        private readonly record struct LocalizedStringData(ISymbol Symbol, string Name, string Key, Option<string> Locale)
+        {
+            public INamedTypeSymbol? ContainingType => this.Symbol.ContainingType;
+        }
+
+        //private static readonly LocalizedStringData Placeholder = new("", "", "", Option.None<string>());
 
         private static LocalizedStringData CreateLocalizedStringData(ISymbol symbol, AttributeData attribute, string rootNamespace)
         {
@@ -44,7 +51,7 @@ namespace MicroWrath.Generator
 
             var localeString = dict.TryGetValue("Locale", out var l) ? Option.Some(l.ToCSharpString()) : (Option<string>)Option.None<string>();
 
-            return new(name, fullName, key, localeString);
+            return new(symbol, name, key, localeString);
         }
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -70,13 +77,14 @@ namespace MicroWrath.Generator
             var localizedStrings = localizedStringInstances
                 .Combine(rootNamespace)
                 .SelectMany(static (ac, _) => ac.Left.Attributes
-                    .Select(a => CreateLocalizedStringData(ac.Left.TargetSymbol, a, ac.Right)));
+                    .Select(a => CreateLocalizedStringData(ac.Left.TargetSymbol, a, ac.Right)))
+                .Collect();
 
-            context.RegisterSourceOutput(rootNamespace.Combine(localizedStrings.Collect()), static (spc, lsAndConfig) =>
+            context.RegisterSourceOutput(rootNamespace.Combine(localizedStrings), static (spc, lsAndConfig) =>
             {
                 var (rootNamespace, localizedStrings) = lsAndConfig;
 
-                localizedStrings = localizedStrings.Remove(Placeholder);
+                //localizedStrings = localizedStrings.Remove(Placeholder);
 
                 var locales = localizedStrings.GroupBy(ls => ls.Locale);
 
@@ -85,6 +93,55 @@ namespace MicroWrath.Generator
                 spc.AddSource("LocalizedStrings",
                     CreateLocalizedStringsOutputString(rootNamespace, locales, uniqueStrings));
             });
+
+            var partialClassTargets = localizedStrings
+                .SelectMany(static (lss, _) => lss
+                    .Where(static ls => ls.ContainingType != null)
+                    .GroupBy(static ls => ls.ContainingType, SymbolEqualityComparer.Default))
+                .Where(static g =>
+                    g.Key is not null &&
+                    g.Key.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ClassDeclarationSyntax node &&
+                    node.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword) &&
+                    g.Key.ContainingSymbol is INamespaceSymbol))
+                .Select(static (g, _) => ((g.Key as INamedTypeSymbol)!, g.ToImmutableArray()));
+
+            context.RegisterSourceOutput(rootNamespace.Combine(partialClassTargets.Collect()), static (spc, classesAndConfig) =>
+            {
+                var (rootNamespace, localizedStringsClass) = classesAndConfig;
+
+                foreach (var (classSymbol, localizedStrings) in localizedStringsClass) {
+                    if (spc.CancellationToken.IsCancellationRequested)
+                        break;
+
+                    var sb = new StringBuilder();
+                    sb.AppendLine($@"using System;
+
+using Kingmaker.Localization;
+
+using MicroWrath;
+");
+                    var modifiers = (classSymbol.DeclaringSyntaxReferences.First()!.GetSyntax() as ClassDeclarationSyntax)!.Modifiers;
+                    sb.AppendLine($@"namespace {classSymbol.ContainingNamespace}
+{{
+    {modifiers} {(classSymbol.IsReferenceType ? "class" : "struct")} {classSymbol.Name}
+    {{
+        static class Localized
+        {{");
+                    foreach (var ls in localizedStrings)
+                    {
+                        sb.AppendLine($@"
+            public static LocalizedString {ls.Symbol.Name} => {rootNamespace}.LocalizedStrings.{ls.Name};");
+                    }
+
+                    sb.AppendLine($@"
+        }}
+    }}
+}}");
+
+                spc.AddSource(classSymbol.Name + ".LocalizedStrings.cs", sb.ToString());
+                }
+            });
+
         }
 
         private static string CreateLocalizedStringsOutputString(
@@ -105,7 +162,7 @@ using MicroWrath;
 
 namespace {rootNamespace}
 {{
-    internal static partial class LocalizedStrings
+    internal static partial class {LocalizedStringsClassName}
     {{
         public static readonly Dictionary<Kingmaker.Localization.Shared.Locale, Dictionary<string, string>> LocalizedStringEntries =
             new Dictionary<Kingmaker.Localization.Shared.Locale, Dictionary<string, string>>
@@ -124,7 +181,7 @@ namespace {rootNamespace}
                 foreach (var ls in group)
                 {
                     sb.Append($@"
-                    {{ {ls.Key}, {ls.ValueMemberFullName} }},");
+                    {{ {ls.Key}, {ls.Symbol} }},");
                 }
 
                 sb.Append($@"
@@ -147,7 +204,7 @@ namespace {rootNamespace}
                 foreach (var ls in defaultStrings)
                 {
                     sb.Append($@"
-            {{ {ls.Key}, {ls.ValueMemberFullName} }},");
+            {{ {ls.Key}, {ls.Symbol} }},");
                 }
             }
 

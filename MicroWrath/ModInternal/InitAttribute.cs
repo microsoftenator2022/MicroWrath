@@ -10,6 +10,8 @@ namespace MicroWrath
     [AttributeUsage(validOn: AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     internal sealed class InitAttribute : Attribute
     {
+#pragma warning disable CS0649
         public readonly int Priority;
+#pragma warning restore CS0649
     }
 }

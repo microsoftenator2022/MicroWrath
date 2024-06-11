@@ -20,7 +20,9 @@ namespace MicroWrath.Components
     [AllowedOn(typeof(BlueprintParametrizedFeature))]
     internal class OverrideSelectionPriority : BlueprintComponent
     {
+#pragma warning disable CS0649
         public CharGenPhaseBaseVM.ChargenPhasePriority Priority;
+#pragma warning restore CS0649
     }
 
     [HarmonyPatch(typeof(CharGenFeatureSelectorPhaseVM), nameof(CharGenFeatureSelectorPhaseVM.GetFeaturePriority))]

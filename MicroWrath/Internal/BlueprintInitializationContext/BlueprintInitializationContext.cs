@@ -13,7 +13,7 @@ using MicroWrath.Util;
 
 namespace MicroWrath.BlueprintInitializationContext
 {
-
+    [Obsolete]
     internal partial class BlueprintInitializationContext
     {
         private readonly Dictionary<BlueprintGuid, IInitContextBlueprint> Blueprints = new();
@@ -149,6 +149,8 @@ namespace MicroWrath.BlueprintInitializationContext
             {
                 var bp = initFunc();
 
+                MicroLogger.Warning("Check this is okay");
+                // Why is this here?
                 ResourcesLibrary.BlueprintsCache.AddCachedBlueprint(bp.AssetGuid, bp);
 
                 return bp;

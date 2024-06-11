@@ -290,5 +290,15 @@ namespace MicroWrath.Util.Linq
             foreach (var item in Generate(state, generator))
                 yield return item;
         }
+        /// <summary>
+        /// Adds the elements of the specified <see cref="IDictionary{TKey, TValue}"/> to the specified <see cref="IDictionary{TKey, TValue}"/>.s
+        /// </summary>
+        public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> dict, IDictionary<TKey, TValue> other)
+        {
+            foreach (var entry in other)
+            {
+                dict.Add(entry.Key, entry.Value);
+            }
+        }
     }
 }

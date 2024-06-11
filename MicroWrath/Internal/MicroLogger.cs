@@ -61,7 +61,10 @@ namespace MicroWrath
                 var oldModEntry = modEntry;
                 modEntry = value;
 
-                if (oldModEntry == null) ReplayLogUmm();
+                if (modEntry is null)
+                    return;
+
+                if (oldModEntry is null || modEntry != oldModEntry) ReplayLogUmm();
             }
         }
 
@@ -108,7 +111,10 @@ namespace MicroWrath
                 var oldMod = owlcatModification;
                 owlcatModification = value;
 
-                if (oldMod is not null)
+                if (owlcatModification is null)
+                    return;
+
+                if (oldMod is null || owlcatModification != oldMod)
                     ReplayLogOwlcat();
             }
         }

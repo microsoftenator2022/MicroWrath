@@ -9,6 +9,7 @@ using MicroWrath.Util.Linq;
 
 namespace MicroWrath.BlueprintInitializationContext
 {
+    [Obsolete]
     internal static class BlueprintInitializationContextExtension
     {
         /// <inheritdoc cref="BlueprintInitializationContext.ContextInitializer{T}.Combine{TOther}(BlueprintInitializationContext.ContextInitializer{TOther})"/>
