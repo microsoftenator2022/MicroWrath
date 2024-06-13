@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 using HarmonyLib;
 
+using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.JsonSystem;
 using Kingmaker.Localization;
 using Kingmaker.Localization.Shared;
 
 using UniRx;
-
-// Do not delete!
-using MicroWrath;
 
 namespace MicroWrath
 {
@@ -117,6 +115,23 @@ namespace MicroWrath
             LocalizationManager_OnLocaleChangedEvent(LocalizationManager.CurrentLocale);
             timer.Stop();
             MicroLogger.Debug(() => $"Trigger {nameof(LocaleChanged)} completed in {timer.ElapsedMilliseconds}ms");
+        }
+
+        private static event Action<BlueprintGuid> BlueprintLoad_PrefixEvent = _ => { };
+
+        public static readonly IObservable<BlueprintGuid> BlueprintLoad_Prefix =
+            Observable.FromEvent<BlueprintGuid>(
+                addHandler: handler => BlueprintLoad_PrefixEvent += handler,
+                removeHandler: handler => BlueprintLoad_PrefixEvent -= handler);
+
+        //public static IObservable<Unit> BlueprintLoad_Prefix_ByGuid(BlueprintGuid guid) =>
+        //    BlueprintLoad_Prefix.Where(loadGuid => loadGuid == guid).Select(_ => Unit.Default);
+
+        [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Load))]
+        private static void BlueprintsCache_Load(BlueprintGuid guid)
+        {
+            MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache)}.{nameof(BlueprintsCache.Load)}({guid})");
+            BlueprintLoad_PrefixEvent(guid);
         }
     }
 }

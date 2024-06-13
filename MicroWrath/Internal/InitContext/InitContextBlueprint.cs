@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
@@ -53,7 +54,7 @@ namespace MicroWrath.InitContext
     }
 
     [HarmonyPatch]
-    static class BlueprintInitContext
+    static class InitContextBlueprint
     {
         //public static IInitContextBlueprint<TBlueprint> RegisterBlueprint<TBlueprint>(
         //    this IInitContext<TBlueprint> context,
@@ -93,46 +94,107 @@ namespace MicroWrath.InitContext
             where TBlueprint : SimpleBlueprint =>
             new InitContextBlueprint<TBlueprint>(context.Bind(binder), guid);
 
-        public static IInitContextBlueprint<TBlueprint> RegisterBlueprint<TBlueprint>(
+        public static IInitContextBlueprint<TBlueprint> AddBlueprintDeferred<TBlueprint>(
+            this IInitContext<TBlueprint> context,
+            BlueprintGuid guid)
+            where TBlueprint : SimpleBlueprint =>
+            new InitContextBlueprint<TBlueprint>(context, guid);
+
+        public static IInitContextBlueprint<TBlueprint> AddOnTrigger<TBlueprint>(
             this IInitContext<TBlueprint> context,
             BlueprintGuid guid,
             IObservable<Unit> trigger)
             where TBlueprint : SimpleBlueprint
         {
-            var icb = new InitContextBlueprint<TBlueprint>(context, guid);
-            trigger.Take(1).Subscribe(icb);
+            var addBlueprint = context.AddBlueprintDeferred(guid);
 
-            return icb;
+            trigger.Take(1).Subscribe(addBlueprint);
+
+            return addBlueprint;
         }
 
-        static readonly Dictionary<BlueprintGuid, IInitContextBlueprint<SimpleBlueprint>> initContextBlueprints = [];
+        [Obsolete]
+        public static IInitContextBlueprint<TBlueprint> RegisterBlueprint<TBlueprint>(
+            this IInitContext<TBlueprint> context,
+            BlueprintGuid guid,
+            IObservable<Unit> trigger)
+            where TBlueprint : SimpleBlueprint =>
+            AddOnTrigger(context, guid, trigger);
 
-        static void Add(BlueprintGuid guid, IInitContextBlueprint<SimpleBlueprint> blueprint)
-        {
-            initContextBlueprints.Add(guid, blueprint);
-        }
+        //static readonly Dictionary<BlueprintGuid, IInitContextBlueprint<SimpleBlueprint>> initContextBlueprints = [];
 
+        //static void Add(BlueprintGuid guid, IInitContextBlueprint<SimpleBlueprint> blueprint) =>
+        //    initContextBlueprints.Add(guid, blueprint);
+
+        //[HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Load))]
+        //[HarmonyPostfix]
+        //static void BlueprintsCache_Load_Postfix(BlueprintGuid guid, ref SimpleBlueprint? __result)
+        //{
+        //    try
+        //    {
+        //        if (initContextBlueprints.TryGetValue(guid, out var blueprint))
+        //        {
+        //            initContextBlueprints.Remove(guid);
+        //            __result = blueprint.Eval();
+
+        //            if (__result is null)
+        //            {
+        //                throw new NullReferenceException("Deferred context returned null");
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MicroLogger.Error($"Exception while getting on-demand blueprint {guid}", e);
+        //    }
+        //}
+
+        public static IInitContext<TBlueprint> OnDemand<TBlueprint>(
+            this IInitContext<TBlueprint> context,
+            BlueprintGuid guid)
+            where TBlueprint : SimpleBlueprint =>
+                context.AddOnTrigger(
+                    guid,
+                    Triggers.BlueprintLoad_Prefix
+                        .Where(g => guid == g)
+                        .Select(_ => Unit.Default));
+
+
+        [HarmonyReversePatch]
         [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Load))]
-        [HarmonyPostfix]
-        static void BlueprintsCache_Load_Postfix(BlueprintGuid guid, ref SimpleBlueprint? __result)
+        internal static SimpleBlueprint LoadBlueprint(BlueprintsCache instance, BlueprintGuid guid) =>
+            throw new NotImplementedException("STUB");
+
+        internal static SimpleBlueprint? LoadBlueprint(BlueprintGuid guid) => LoadBlueprint(ResourcesLibrary.BlueprintsCache, guid);
+
+        internal static TBlueprint? TryGetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> microBlueprint)
+            where TBlueprint : SimpleBlueprint
         {
-            if (initContextBlueprints.TryGetValue(guid, out var blueprint))
-            {
-                initContextBlueprints.Remove(guid);
-                __result = blueprint.Eval();
-            }
+            if (microBlueprint is IInitContextBlueprint<TBlueprint> context)
+                return context.Eval();
+
+            var blueprint = LoadBlueprint(microBlueprint.BlueprintGuid) as TBlueprint;
+
+            return blueprint ?? ResourcesLibrary.BlueprintsCache.Load(microBlueprint.BlueprintGuid) as TBlueprint;
         }
+
+        internal static TBlueprint TryGetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint> blueprint)
+            where TBlueprint : SimpleBlueprint =>
+            (LoadBlueprint(blueprint.BlueprintGuid) as TBlueprint)!;
     }
 
     static partial class InitContext
     {
+        public static IInitContext<TBlueprint> GetBlueprint<TBlueprint>(IInitContextBlueprint<TBlueprint> context)
+            where TBlueprint : SimpleBlueprint => context;
+
         public static IInitContext<TBlueprint?> GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            new InitContext<TBlueprint?>(() => blueprint.GetBlueprint() ?? throw new NullReferenceException());
+            new InitContext<TBlueprint?>(() => InitContextBlueprint.TryGetBlueprint(blueprint));
 
         public static IInitContext<TBlueprint> GetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            new InitContext<TBlueprint>(() => blueprint.Blueprint);
+            new InitContext<TBlueprint>(() => InitContextBlueprint.TryGetBlueprint(blueprint));
 
         public static IInitContext<TBlueprint> NewBlueprint<TBlueprint>(string assetId, string name)
             where TBlueprint : SimpleBlueprint, new()
