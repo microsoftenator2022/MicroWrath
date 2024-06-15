@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <VersionPrefix>0.8.4</VersionPrefix>
+    <VersionPrefix>0.8.5</VersionPrefix>
     <Authors>https://github.com/microsoftenator2022</Authors>
     <PackageProjectUrl>https://github.com/microsoftenator2022/MicroWrath</PackageProjectUrl>
     <RepositoryUrl>https://github.com/microsoftenator2022/MicroWrath</RepositoryUrl>

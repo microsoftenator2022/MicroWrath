@@ -1,29 +1,35 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-//using Newtonsoft.Json;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-
-using TinyJson;
+//using TinyJson;
 
 namespace MicroWrath.Generator
 {
-    public class GenerateGuidsFile : AppDomainIsolatedTask
+    public class GenerateGuidsFile : Task
     {
-        static string ToJson(Dictionary<string, Guid> guids) => guids
-            .ToDictionary(p => p.Key, p => p.Value.ToString())
-            .ToJson();
+        static readonly JsonSerializerOptions SerializerOptions =
+            new()
+            {
+                WriteIndented = true
+            };
 
-        static Dictionary<string, Guid> FromJson(string json) => json
-            .FromJson<Dictionary<string, string>>()
-            .ToDictionary(p => p.Key, p => Guid.Parse(p.Value));
+        static string ToJson(Dictionary<string, Guid> guids) =>
+            //guids.ToDictionary(p => p.Key, p => p.Value.ToString()).ToJson();
+            JsonSerializer.Serialize(guids,  SerializerOptions);
+        static Dictionary<string, Guid> FromJson(string json) =>
+            //json.FromJson<Dictionary<string, string>>()
+            //    .ToDictionary(p => p.Key, p => Guid.Parse(p.Value));
+            JsonSerializer.Deserialize<Dictionary<string, string>>(json)
+                .ToDictionary(p => p.Key, p => Guid.Parse(p.Value));
 
         [Required]
         public string WrathPath { get; set; }

@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-using TinyJson;
+//using TinyJson;
 
 namespace MicroWrath.Generator
 {
     public class InfoJson : Task
     {
+        static readonly JsonSerializerOptions SerializerOptions =
+            new()
+            {
+                WriteIndented = true
+            };
+
         [Required]
         public string Id { get; set; }
 
@@ -48,21 +55,27 @@ namespace MicroWrath.Generator
             var requirements = Requirements?.Select(ti => ti.ItemSpec)?.ToArray();
             var loadAfter = LoadAfter?.Select(ti => ti.ItemSpec)?.ToArray();
 
-            File.WriteAllText(OutputPath, new
-            { 
-                Id,
-                Version,
-                AssemblyName,
-                EntryMethod,
-                DisplayName,
-                Author,
-                GameVersion,
-                ManagerVersion,
-                HomePage,
-                Repository,
-                Requirements = requirements,
-                LoadAfter = loadAfter
-            }.ToJson());
+            File.WriteAllText(OutputPath,
+                JsonSerializer.Serialize(
+                //(
+                new {
+                    Id,
+                    Version,
+                    AssemblyName,
+                    EntryMethod,
+                    DisplayName,
+                    Author,
+                    GameVersion,
+                    ManagerVersion,
+                    HomePage,
+                    Repository,
+                    Requirements = requirements,
+                    LoadAfter = loadAfter
+                }
+                , SerializerOptions
+                )
+                //.ToJson()
+                );
 
             return true;
         }
