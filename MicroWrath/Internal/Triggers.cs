@@ -128,9 +128,10 @@ namespace MicroWrath
         //    BlueprintLoad_Prefix.Where(loadGuid => loadGuid == guid).Select(_ => Unit.Default);
 
         [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Load))]
+        [HarmonyPrefix]
         private static void BlueprintsCache_Load(BlueprintGuid guid)
         {
-            MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache)}.{nameof(BlueprintsCache.Load)}({guid})");
+            //MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache)}.{nameof(BlueprintsCache.Load)}({guid})");
             BlueprintLoad_PrefixEvent(guid);
         }
     }
