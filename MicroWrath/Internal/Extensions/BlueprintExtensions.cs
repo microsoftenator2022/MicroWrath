@@ -38,7 +38,7 @@ namespace MicroWrath.Extensions
             for (var i = 2; blueprint.ComponentsArray.Select(c => c.name).Contains(component.name); i++)
                 component.name = $"{name}${i}";
 
-            MicroLogger.Debug(() => $"Adding {typeof(TComponent)} to {blueprint.name}", blueprint.ToMicroBlueprint());
+            MicroLogger.Debug(() => $"Adding {component.GetType()} ({typeof(TComponent)}) to {blueprint.name}", blueprint.ToMicroBlueprint());
 
             blueprint.ComponentsArray = blueprint.ComponentsArray.Append(component);
         }
@@ -54,6 +54,18 @@ namespace MicroWrath.Extensions
 
             return component;
         }
+
+        public static IEnumerable<TComponent> AddComponents<TComponent>(this BlueprintScriptableObject blueprint, IEnumerable<TComponent> components)
+            where TComponent : BlueprintComponent
+        {
+            foreach (var component in components)
+                blueprint.AddComponent(component);
+
+            return components;
+        }
+
+        public static IEnumerable<BlueprintComponent> AddComponents(this BlueprintScriptableObject blueprint, params BlueprintComponent[] components) =>
+            blueprint.AddComponents<BlueprintComponent>(components);
 
         public static TComponent AddComponent<TComponent>(this BlueprintScriptableObject blueprint, Action<TComponent>? init = default)
             where TComponent : BlueprintComponent, new() => AddComponent<TComponent>(blueprint, c => { init?.Invoke(c); return c; });
