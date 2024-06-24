@@ -1,9 +1,10 @@
 ﻿using System;
+using System.IO;
 
 using Kingmaker.Blueprints;
 
-using MicroWrath.Util;
 using MicroWrath;
+using MicroWrath.Util;
 
 namespace MicroWrath
 {
@@ -70,6 +71,32 @@ namespace MicroWrath
             this.ToReference<TBlueprint, TReference>();
 
         public TBlueprint Blueprint => ToReference<BlueprintReference<TBlueprint>>().Get();
+
+        /// <summary>
+        /// Fetches the original blueprint from the blueprints pack with no patches applied by any mod (including this one)
+        /// </summary>
+        /// <returns>The original blueprint</returns>
+        public TBlueprint GetOriginalBlueprint()
+        {
+            SimpleBlueprint? blueprint = null;
+
+            lock (ResourcesLibrary.BlueprintsCache.m_Lock)
+            {
+                try
+                {
+                    var cacheEntry = ResourcesLibrary.BlueprintsCache.m_LoadedBlueprints[this.BlueprintGuid];
+                    ResourcesLibrary.BlueprintsCache.m_PackFile.Seek(cacheEntry.Offset, SeekOrigin.Begin);
+
+                    ResourcesLibrary.BlueprintsCache.m_PackSerializer.Blueprint(ref blueprint);
+                }
+                catch (Exception ex)
+                {
+                    MicroLogger.Error($"Failed to load blueprint {this.BlueprintGuid}", ex);
+                }
+            }
+
+            return (blueprint as TBlueprint)!;
+        }
 
         public string Name => this.ToReference<BlueprintReference<TBlueprint>>().NameSafe();
 
