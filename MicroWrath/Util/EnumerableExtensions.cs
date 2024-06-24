@@ -300,5 +300,11 @@ namespace MicroWrath.Util.Linq
                 dict.Add(entry.Key, entry.Value);
             }
         }
+
+        /// <summary>
+        /// Returns non-null elements of a sequence of reference type
+        /// </summary>
+        public static IEnumerable<T> NotNull<T>(this IEnumerable<T?> source) where T : class =>
+            source.SelectMany(x => x.EmptyIfNull());
     }
 }
