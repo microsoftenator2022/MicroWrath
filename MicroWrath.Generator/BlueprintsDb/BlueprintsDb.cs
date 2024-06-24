@@ -83,7 +83,7 @@ namespace MicroWrath.Generator
                     var ((blueprintType, blueprints), memberAccesses) = bpsAndMembers;
 
                     if (!memberAccesses.Any(member => member.BlueprintTypeName == blueprintType.Name))
-                        return (blueprintType, Enumerable.Empty<BlueprintInfo>());
+                        return (blueprintType, []);
 
                     return (blueprintType, blueprints.Where(bp => memberAccesses.Any(member => member.Name == bp.Name)));
                 });

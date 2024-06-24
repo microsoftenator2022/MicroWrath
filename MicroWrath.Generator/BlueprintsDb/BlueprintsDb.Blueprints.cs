@@ -30,7 +30,7 @@ namespace MicroWrath.Generator
             internal static IEnumerable<BlueprintInfo> ReadBlueprintsInfo(AdditionalText at, CancellationToken ct)
             {
                 if (at.GetText(ct)?.ToString() is not string text)
-                    return Enumerable.Empty<BlueprintInfo>();
+                    return [];
 
                 var entries = JValue.Parse(text)["Entries"].ToArray();
 

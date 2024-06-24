@@ -201,7 +201,9 @@ namespace MicroWrath.Generator
 
                 public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
                 {
-                    if (trigger.Kind is not CompletionTriggerKind.Insertion || (trigger.Character != '.')) return false;
+                    if (!(trigger.Kind is CompletionTriggerKind.Insertion or
+                        CompletionTriggerKind.Invoke or
+                        CompletionTriggerKind.InvokeAndCommitIfUnique) || (trigger.Character != '.')) return false;
 
                     var prefixSpan = text.GetSubText(TextSpan.FromBounds(0, caretPosition));
                     return OwlcatDbAccess.IsMatch(prefixSpan.ToString());
