@@ -8,17 +8,12 @@ using System.Text.Json;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-//using TinyJson;
-
 namespace MicroWrath.Generator
 {
     public class InfoJson : Task
     {
         static readonly JsonSerializerOptions SerializerOptions =
-            new()
-            {
-                WriteIndented = true
-            };
+            new() { WriteIndented = true };
 
         [Required]
         public string Id { get; set; }
@@ -56,9 +51,7 @@ namespace MicroWrath.Generator
             var loadAfter = LoadAfter?.Select(ti => ti.ItemSpec)?.ToArray();
 
             File.WriteAllText(OutputPath,
-                JsonSerializer.Serialize(
-                //(
-                new {
+                JsonSerializer.Serialize(new {
                     Id,
                     Version,
                     AssemblyName,
@@ -71,11 +64,7 @@ namespace MicroWrath.Generator
                     Repository,
                     Requirements = requirements,
                     LoadAfter = loadAfter
-                }
-                , SerializerOptions
-                )
-                //.ToJson()
-                );
+                }, SerializerOptions));
 
             return true;
         }

@@ -10,24 +10,16 @@ using System.Text.Json;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-//using TinyJson;
-
 namespace MicroWrath.Generator
 {
-    public class GenerateGuidsFile : Task
+    public class GenerateGuidsFile : AppDomainIsolatedTask
     {
         static readonly JsonSerializerOptions SerializerOptions =
-            new()
-            {
-                WriteIndented = true
-            };
+            new() { WriteIndented = true };
 
         static string ToJson(Dictionary<string, Guid> guids) =>
-            //guids.ToDictionary(p => p.Key, p => p.Value.ToString()).ToJson();
             JsonSerializer.Serialize(guids,  SerializerOptions);
         static Dictionary<string, Guid> FromJson(string json) =>
-            //json.FromJson<Dictionary<string, string>>()
-            //    .ToDictionary(p => p.Key, p => Guid.Parse(p.Value));
             JsonSerializer.Deserialize<Dictionary<string, string>>(json)
                 .ToDictionary(p => p.Key, p => Guid.Parse(p.Value));
 
@@ -43,7 +35,7 @@ namespace MicroWrath.Generator
         public ITaskItem[] References { get; set; }
         public override bool Execute()
         {
-            References ??= new ITaskItem[0];
+            References ??= [];
 
             Log.LogMessage(MessageImportance.High, "Generating guids file");
 
