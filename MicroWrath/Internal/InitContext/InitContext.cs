@@ -80,16 +80,20 @@ namespace MicroWrath.InitContext
         public static IInitContext<(A, B)> Combine<A, B>(this IInitContext<A> context, IInitContext<B> other) =>
             Lift2<A, B, (A, B)>((a, b) => (a, b))(context, other);
 
-        public static IInitContext<IEnumerable<A>> Collect<A>(this IEnumerable<IInitContext<A>> source)
+        public static IInitContext<IEnumerable<B>> Collect<A, B>(this IEnumerable<IInitContext<A>> source, Func<A, IEnumerable<B>> binder)
         {
-            IEnumerable<A> getValues()
+            IEnumerable<B> getValues()
             {
-                foreach (var value in source.Select(c => c.Eval()))
+                foreach (var value in source.SelectMany(c => binder(c.Eval())))
                     yield return value;
             }
 
             return Return(getValues);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IInitContext<IEnumerable<A>> Collect<A>(this IEnumerable<IInitContext<A>> source) =>
+            source.Collect<A, A>(x => [x]);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IInitContext<Unit> Ignore<_>(this IInitContext<_> context) => context.Map(_ => Unit.Default);
