@@ -27,15 +27,12 @@
     <BundlePath>..\WrathModificationTemplate\Build\MicroWrathAssets\Bundles\MicroWrathAssets_assets_all</BundlePath>
   </PropertyGroup>
   
-  <Target Name="Build Bundle"
-          BeforeTargets="PrepareForBuild"
-          Condition="!Exists($(BundlePath))">
+  <Target Name="Build Bundle" BeforeTargets="PrepareForBuild" Condition="!Exists($(BundlePath))">
     <Message Importance="High" Text="Building Unity Project" />
     <Exec Command="dotnet fsi $(UnityBuildScript)" />
   </Target>
 
-  <Target Name="Include Bundle"
-          BeforeTargets="PrepareForBuild">
+  <Target Name="Include Bundle" BeforeTargets="PrepareForBuild">
     <Error Condition="!Exists($(BundlePath))" Text="$(BundlePath) does not exist" />
     <Message Importance="High" Text="Adding bundle from $(BundlePath)" />
     <ItemGroup>

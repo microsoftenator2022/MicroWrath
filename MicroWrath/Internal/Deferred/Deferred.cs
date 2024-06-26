@@ -8,20 +8,18 @@ using MicroWrath.Util;
 
 using UniRx;
 
-namespace MicroWrath.InitContext
+namespace MicroWrath.Deferred
 {
-    [Obsolete(InitContext.ObsoleteMessage)]
-    interface IInitContext<out A> : IObserver<Unit>
+    interface IDeferred<out A> : IObserver<Unit>
     {
         A Eval();
         IObservable<A> OnEvaluated { get; }
     }
 
-    [Obsolete(InitContext.ObsoleteMessage)]
-    class InitContext<A> : IInitContext<A>
+    class Deferred<A> : IDeferred<A>
     {
         readonly Lazy<A> value;
-        public InitContext(Func<A> getValue)
+        public Deferred(Func<A> getValue)
         {
             value = new(() => 
             {
@@ -43,49 +41,46 @@ namespace MicroWrath.InitContext
         public void OnCompleted() { }
     }
 
-    [Obsolete(InitContext.ObsoleteMessage)]
-    static partial class InitContext
+    static partial class Deferred
     {
-        public const string ObsoleteMessage = "Use types in MicroWrath.Deferred instead";
-
-        public static readonly IInitContext<Unit> Empty = new InitContext<Unit>(() => Unit.Default);
+        public static readonly IDeferred<Unit> Empty = new Deferred<Unit>(() => Unit.Default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<A> Return<A>(Func<A> get) => new InitContext<A>(get);
+        public static IDeferred<A> Return<A>(Func<A> get) => new Deferred<A>(get);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<B> Map<A, B>(this IInitContext<A> context, Func<A, B> map) =>
+        public static IDeferred<B> Map<A, B>(this IDeferred<A> context, Func<A, B> map) =>
             Return(() => map(context.Eval()));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<B> Bind<A, B>(this IInitContext<A> context, Func<A, IInitContext<B>> binder) =>
+        public static IDeferred<B> Bind<A, B>(this IDeferred<A> context, Func<A, IDeferred<B>> binder) =>
             Return(() => binder(context.Eval()).Eval());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Func<IInitContext<A>, IInitContext<B>> Lift<A, B>(Func<A, B> f) => context => context.Map(f);
+        public static Func<IDeferred<A>, IDeferred<B>> Lift<A, B>(Func<A, B> f) => context => context.Map(f);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Func<IInitContext<A>, IInitContext<B>, IInitContext<C>> Lift2<A, B, C>(Func<A, B, C> f) =>
+        public static Func<IDeferred<A>, IDeferred<B>, IDeferred<C>> Lift2<A, B, C>(Func<A, B, C> f) =>
             (ca, cb) => ca.Bind(a => cb.Map(b => f(a, b)));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<B> Apply<A, B>(this IInitContext<Func<A, B>> cf, IInitContext<A> ca) =>
+        public static IDeferred<B> Apply<A, B>(this IDeferred<Func<A, B>> cf, IDeferred<A> ca) =>
             cf.Bind(f => ca.Map(f));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<C> Apply2<A, B, C>(
-            this IInitContext<Func<A, B, C>> cf,
-            IInitContext<A> ca,
-            IInitContext<B> cb) =>
+        public static IDeferred<C> Apply2<A, B, C>(
+            this IDeferred<Func<A, B, C>> cf,
+            IDeferred<A> ca,
+            IDeferred<B> cb) =>
             cf.Map<Func<A, B, C>, Func<A, Func<B, C>>>(f => (A a) => (B b) => f(a, b))
                 .Apply(ca)
                 .Apply(cb);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<(A, B)> Combine<A, B>(this IInitContext<A> context, IInitContext<B> other) =>
+        public static IDeferred<(A, B)> Combine<A, B>(this IDeferred<A> context, IDeferred<B> other) =>
             Lift2<A, B, (A, B)>((a, b) => (a, b))(context, other);
 
-        public static IInitContext<IEnumerable<B>> Collect<A, B>(this IEnumerable<IInitContext<A>> source, Func<A, IEnumerable<B>> binder)
+        public static IDeferred<IEnumerable<B>> Collect<A, B>(this IEnumerable<IDeferred<A>> source, Func<A, IEnumerable<B>> binder)
         {
             IEnumerable<B> getValues()
             {
@@ -97,20 +92,20 @@ namespace MicroWrath.InitContext
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<IEnumerable<A>> Collect<A>(this IEnumerable<IInitContext<A>> source) =>
+        public static IDeferred<IEnumerable<A>> Collect<A>(this IEnumerable<IDeferred<A>> source) =>
             source.Collect<A, A>(x => [x]);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<Unit> Ignore<_>(this IInitContext<_> context) => context.Map(_ => Unit.Default);
+        public static IDeferred<Unit> Ignore<_>(this IDeferred<_> context) => context.Map(_ => Unit.Default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<Option<B>> MapOption<A, B>(this IInitContext<Option<A>> context, Func<A, B> f)
+        public static IDeferred<Option<B>> MapOption<A, B>(this IDeferred<Option<A>> context, Func<A, B> f)
             where A : notnull
             where B : notnull =>
             context.Map(value => value.Map(f));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IInitContext<Option<B>> BindOption<A, B>(this IInitContext<Option<A>> context, Func<A, IInitContext<B>> f)
+        public static IDeferred<Option<B>> BindOption<A, B>(this IDeferred<Option<A>> context, Func<A, IDeferred<B>> f)
             where A : notnull
             where B : notnull =>
             context.Bind(value =>

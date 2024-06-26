@@ -218,5 +218,91 @@ namespace MicroWrath.Util
 
             return output;
         }
+
+        struct DiagonalCutConfig
+        {
+            public float offset;
+            public float width;
+            public float height;
+            public float invertX;
+            public float invertY;
+        }
+
+        /// <summary>
+        /// Diagonal cut blend two textures with compute shader.
+        /// </summary>
+        /// <param name="textureA">The first texture.</param>
+        /// <param name="textureB">The second texture.</param>
+        /// <param name="offset">Cut start X offset.</param>
+        /// <param name="invertX">Invert cut along X axis.</param>
+        /// <param name="invertY">Invert cut along Y axis.</param>
+        /// <param name="width">Output width. Default is the smaller of two input textures.</param>
+        /// <param name="height">Output height. Default is the smaller of two input textures.</param>
+        /// <param name="format">Output texture format.</param>
+        /// <param name="mips">Autogenerate mip maps for output texture.</param>
+        /// <param name="renderFormat">RenderTexture format.</param>
+        /// <param name="filterMode">Output texture filter mode.</param>
+        /// <returns></returns>
+        public static Texture2D DiagonalCutBlend(
+            Texture2D textureA,
+            Texture2D textureB,
+            float offset = 0,
+            bool invertX = false,
+            bool invertY = false,
+            int width = 0,
+            int height = 0,
+            TextureFormat format = TextureFormat.RGBA32,
+            bool mips = false,
+            RenderTextureFormat renderFormat = RenderTextureFormat.Default,
+            FilterMode filterMode = default)
+        {
+            var shader = LoadBundleFromResource("MicroWrath.Resources.UnityAssets")
+                .LoadAsset<ComputeShader>("59d5c474bf3270c47ba11d9b07e7e063");
+
+            int kernelIndex = shader.FindKernel("CSMain");
+
+            if (width < 1)
+                width = Mathf.Min(textureA.width, textureB.width);
+
+            if (height < 1)
+                height = Mathf.Min(textureA.height, textureB.height);
+
+            var rt =
+                RenderTexture.GetTemporary(
+                    width,
+                    height,
+                    0,
+                    renderFormat,
+                    RenderTextureReadWrite.Linear);
+
+            rt.autoGenerateMips = mips;
+            rt.enableRandomWrite = true;
+
+            var buffer = new ComputeBuffer(1, Marshal.SizeOf(typeof(DiagonalCutConfig)));
+
+            buffer.SetData(new[] { new DiagonalCutConfig() { offset = offset, width = width, height = height, invertX = invertX ? 1f : 0f, invertY = invertY ? 1f : 0f } });
+
+            shader.SetBuffer(kernelIndex, "Params", buffer);
+
+            shader.SetTexture(kernelIndex, "InputA", textureA);
+            shader.SetTexture(kernelIndex, "InputB", textureB);
+            shader.SetTexture(kernelIndex, "Output", rt);
+
+            shader.Dispatch(kernelIndex, width, height, 1);
+
+            var output = new Texture2D(width, height, TextureFormat.RGBA32, false)
+            {
+                filterMode = filterMode
+            };
+
+            AsyncGPUReadback.Request(buffer).WaitForCompletion();
+
+            Graphics.ConvertTexture(rt, output);
+
+            buffer.Dispose();
+            RenderTexture.ReleaseTemporary(rt);
+
+            return output;
+        }
     }
 }

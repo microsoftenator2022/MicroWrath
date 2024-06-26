@@ -20,20 +20,18 @@ using Owlcat.Runtime.Core;
 
 using UniRx;
 
-namespace MicroWrath.InitContext
+namespace MicroWrath.Deferred
 {
-    [Obsolete(InitContext.ObsoleteMessage)]
-    interface IInitContextBlueprint<out TBlueprint>
-        : IInitContext<TBlueprint>, IMicroBlueprint<TBlueprint>
+    interface IDeferredBlueprint<out TBlueprint>
+        : IDeferred<TBlueprint>, IMicroBlueprint<TBlueprint>
         where TBlueprint : SimpleBlueprint
     { }
 
-    [Obsolete(InitContext.ObsoleteMessage)]
-    class InitContextBlueprint<TBlueprint>(IInitContext<TBlueprint> context, BlueprintGuid guid)
-        : IInitContextBlueprint<TBlueprint>
+    class DeferredBlueprint<TBlueprint>(IDeferred<TBlueprint> context, BlueprintGuid guid)
+        : IDeferredBlueprint<TBlueprint>
         where TBlueprint : SimpleBlueprint
     {
-        readonly IInitContext<TBlueprint> thisContext = context.Map(blueprint =>
+        readonly IDeferred<TBlueprint> thisContext = context.Map(blueprint =>
         {
             MicroLogger.Debug(() => $"Adding blueprint {blueprint} guid = {guid}");
 
@@ -55,30 +53,29 @@ namespace MicroWrath.InitContext
         public void OnCompleted() => thisContext.OnCompleted();
     }
 
-    [Obsolete(InitContext.ObsoleteMessage)]
     [HarmonyPatch]
-    static class InitContextBlueprint
+    static class DeferredBlueprint
     {
-        public static IInitContextBlueprint<TBlueprint> Bind<A, TBlueprint>(
-            this IInitContext<A> context,
-            Func<A, IInitContextBlueprint<TBlueprint>> binder, BlueprintGuid guid)
+        public static IDeferredBlueprint<TBlueprint> Bind<A, TBlueprint>(
+            this IDeferred<A> context,
+            Func<A, IDeferredBlueprint<TBlueprint>> binder, BlueprintGuid guid)
             where TBlueprint : SimpleBlueprint =>
-            new InitContextBlueprint<TBlueprint>(context.Bind(binder), guid);
+            new DeferredBlueprint<TBlueprint>(context.Bind(binder), guid);
 
-        public static IInitContextBlueprint<TBlueprint> AddBlueprintDeferred<TBlueprint>(
-            this IInitContext<TBlueprint> context,
+        public static IDeferredBlueprint<TBlueprint> AddBlueprintDeferred<TBlueprint>(
+            this IDeferred<TBlueprint> context,
             BlueprintGuid guid)
             where TBlueprint : SimpleBlueprint =>
-            new InitContextBlueprint<TBlueprint>(context, guid);
+            new DeferredBlueprint<TBlueprint>(context, guid);
 
-        public static IInitContextBlueprint<TBlueprint> AddBlueprintDeferred<TBlueprint>(
-            this IInitContext<TBlueprint> context,
+        public static IDeferredBlueprint<TBlueprint> AddBlueprintDeferred<TBlueprint>(
+            this IDeferred<TBlueprint> context,
             IMicroBlueprint<TBlueprint> microBlueprint)
             where TBlueprint : SimpleBlueprint =>
             context.AddBlueprintDeferred(microBlueprint.BlueprintGuid);
 
-        public static IInitContextBlueprint<TBlueprint> AddOnTrigger<TBlueprint>(
-            this IInitContext<TBlueprint> context,
+        public static IDeferredBlueprint<TBlueprint> AddOnTrigger<TBlueprint>(
+            this IDeferred<TBlueprint> context,
             BlueprintGuid guid,
             IObservable<Unit> trigger)
             where TBlueprint : SimpleBlueprint
@@ -90,23 +87,23 @@ namespace MicroWrath.InitContext
             return addBlueprint;
         }
 
-        public static IInitContextBlueprint<TBlueprint> AddOnTrigger<TBlueprint>(
-            this IInitContext<TBlueprint> context,
+        public static IDeferredBlueprint<TBlueprint> AddOnTrigger<TBlueprint>(
+            this IDeferred<TBlueprint> context,
             IMicroBlueprint<TBlueprint> microBlueprint,
             IObservable<Unit> trigger)
             where TBlueprint : SimpleBlueprint =>
             context.AddOnTrigger(microBlueprint.BlueprintGuid, trigger);
 
         [Obsolete]
-        public static IInitContextBlueprint<TBlueprint> RegisterBlueprint<TBlueprint>(
-            this IInitContext<TBlueprint> context,
+        public static IDeferredBlueprint<TBlueprint> RegisterBlueprint<TBlueprint>(
+            this IDeferred<TBlueprint> context,
             BlueprintGuid guid,
             IObservable<Unit> trigger)
             where TBlueprint : SimpleBlueprint =>
             AddOnTrigger(context, guid, trigger);
 
-        public static IInitContext<TBlueprint> OnDemand<TBlueprint>(
-            this IInitContext<TBlueprint> context,
+        public static IDeferred<TBlueprint> OnDemand<TBlueprint>(
+            this IDeferred<TBlueprint> context,
             BlueprintGuid guid)
             where TBlueprint : SimpleBlueprint =>
                 context
@@ -124,8 +121,8 @@ namespace MicroWrath.InitContext
                         .Where(g => guid == g)
                         .Select(_ => Unit.Default));
 
-        public static IInitContext<TBlueprint> OnDemand<TBlueprint>(
-            this IInitContext<TBlueprint> context,
+        public static IDeferred<TBlueprint> OnDemand<TBlueprint>(
+            this IDeferred<TBlueprint> context,
             IMicroBlueprint<TBlueprint> microBlueprint)
             where TBlueprint : SimpleBlueprint =>
             context.OnDemand(microBlueprint.BlueprintGuid);
@@ -140,7 +137,7 @@ namespace MicroWrath.InitContext
         internal static TBlueprint? TryGetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> microBlueprint)
             where TBlueprint : SimpleBlueprint
         {
-            if (microBlueprint is IInitContextBlueprint<TBlueprint> context)
+            if (microBlueprint is IDeferredBlueprint<TBlueprint> context)
                 return context.Eval();
 
             var blueprint = LoadBlueprint(microBlueprint.BlueprintGuid) as TBlueprint;
@@ -153,23 +150,23 @@ namespace MicroWrath.InitContext
             (LoadBlueprint(blueprint.BlueprintGuid) as TBlueprint)!;
     }
 
-    static partial class InitContext
+    static partial class Deferred
     {
-        public static IInitContext<TBlueprint> GetBlueprint<TBlueprint>(IInitContextBlueprint<TBlueprint> context)
+        public static IDeferred<TBlueprint> GetBlueprint<TBlueprint>(IDeferredBlueprint<TBlueprint> context)
             where TBlueprint : SimpleBlueprint => context;
 
-        public static IInitContext<TBlueprint?> GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
+        public static IDeferred<TBlueprint?> GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            new InitContext<TBlueprint?>(() => InitContextBlueprint.TryGetBlueprint(blueprint));
+            new Deferred<TBlueprint?>(() => DeferredBlueprint.TryGetBlueprint(blueprint));
 
-        public static IInitContext<TBlueprint> GetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint> blueprint)
+        public static IDeferred<TBlueprint> GetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            new InitContext<TBlueprint>(() => InitContextBlueprint.TryGetBlueprint(blueprint));
+            new Deferred<TBlueprint>(() => DeferredBlueprint.TryGetBlueprint(blueprint));
 
-        public static IInitContext<TBlueprint> NewBlueprint<TBlueprint>(string assetId, string name)
+        public static IDeferred<TBlueprint> NewBlueprint<TBlueprint>(string assetId, string name)
             where TBlueprint : SimpleBlueprint, new()
         {
-            var context = new InitContext<TBlueprint>(() =>
+            var context = new Deferred<TBlueprint>(() =>
             {
                 MicroLogger.Debug(() => $"Create new {typeof(TBlueprint)} {assetId} {name}");
 
@@ -179,67 +176,67 @@ namespace MicroWrath.InitContext
             return context;
         }
 
-        public static IInitContext<TBlueprint> NewBlueprint<TBlueprint>(BlueprintGuid guid, string name)
+        public static IDeferred<TBlueprint> NewBlueprint<TBlueprint>(BlueprintGuid guid, string name)
             where TBlueprint : SimpleBlueprint, new() =>
             NewBlueprint<TBlueprint>(guid.ToString(), name);
 
-        public static IInitContext<TBlueprint> NewBlueprint<TBlueprint>(GeneratedGuid generatedGuid, string? name = null)
+        public static IDeferred<TBlueprint> NewBlueprint<TBlueprint>(GeneratedGuid generatedGuid, string? name = null)
             where TBlueprint : SimpleBlueprint, new() =>
             NewBlueprint<TBlueprint>(generatedGuid.Guid, name ?? generatedGuid.Key);
 
-        public static IInitContext<TBlueprint> CloneBlueprint<TBlueprint>(
+        public static IDeferred<TBlueprint> CloneBlueprint<TBlueprint>(
             IMicroBlueprint<TBlueprint> blueprint,
             BlueprintGuid guid,
             string name)
             where TBlueprint : SimpleBlueprint, new() =>
             GetBlueprint(blueprint).Map(blueprint => AssetUtils.CloneBlueprint(blueprint!, guid, name));
 
-        public static IInitContext<TBlueprint> CloneBlueprint<TBlueprint>(
+        public static IDeferred<TBlueprint> CloneBlueprint<TBlueprint>(
             OwlcatBlueprint<TBlueprint> blueprint,
             BlueprintGuid guid,
             string name)
             where TBlueprint : SimpleBlueprint, new() =>
             GetBlueprint(blueprint).Map(blueprint => AssetUtils.CloneBlueprint(blueprint, guid, name, false));
 
-        public static IInitContext<TBlueprint> CloneBlueprint<TBlueprint>(
+        public static IDeferred<TBlueprint> CloneBlueprint<TBlueprint>(
             IMicroBlueprint<TBlueprint> blueprint,
             string assetId,
             string name)
             where TBlueprint : SimpleBlueprint, new() =>
             CloneBlueprint(blueprint, BlueprintGuid.Parse(assetId), name);
 
-        public static IInitContext<TBlueprint> CloneBlueprint<TBlueprint>(
+        public static IDeferred<TBlueprint> CloneBlueprint<TBlueprint>(
             OwlcatBlueprint<TBlueprint> blueprint,
             string assetId,
             string name)
             where TBlueprint : SimpleBlueprint, new() =>
             CloneBlueprint(blueprint, BlueprintGuid.Parse(assetId), name);
 
-        public static IInitContext<TBlueprint> CloneBlueprint<TBlueprint>(
+        public static IDeferred<TBlueprint> CloneBlueprint<TBlueprint>(
             IMicroBlueprint<TBlueprint> blueprint,
             GeneratedGuid generatedGuid,
             string? name = null)
             where TBlueprint : SimpleBlueprint, new() =>
             CloneBlueprint(blueprint, generatedGuid.Guid, name ?? generatedGuid.Key);
 
-        public static IInitContext<TBlueprint> CloneBlueprint<TBlueprint>(
+        public static IDeferred<TBlueprint> CloneBlueprint<TBlueprint>(
             OwlcatBlueprint<TBlueprint> blueprint,
             GeneratedGuid generatedGuid,
             string? name = null)
             where TBlueprint : SimpleBlueprint, new() =>
             CloneBlueprint(blueprint, generatedGuid.Guid, name ?? generatedGuid.Key);
 
-        public static IInitContext<(TContext, TBlueprint?)> Combine<TContext, TMicroBlueprint, TBlueprint>(
-            this IInitContext<TContext> context,
+        public static IDeferred<(TContext, TBlueprint?)> Combine<TContext, TMicroBlueprint, TBlueprint>(
+            this IDeferred<TContext> context,
             TMicroBlueprint blueprint)
             where TMicroBlueprint : IMicroBlueprint<TBlueprint>
             where TBlueprint : SimpleBlueprint =>
-            context.Combine(InitContext.GetBlueprint(blueprint));
+            context.Combine(Deferred.GetBlueprint(blueprint));
 
-        public static IInitContext<(TContext, TBlueprint)> Combine<TContext, TBlueprint>(
-            this IInitContext<TContext> context,
+        public static IDeferred<(TContext, TBlueprint)> Combine<TContext, TBlueprint>(
+            this IDeferred<TContext> context,
             OwlcatBlueprint<TBlueprint> blueprint)
             where TBlueprint : SimpleBlueprint =>
-            context.Combine(InitContext.GetBlueprint(blueprint));
+            context.Combine(Deferred.GetBlueprint(blueprint));
     }
 }
