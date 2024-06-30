@@ -1,0 +1,1 @@
+A simple Analyzer to suggest TableTopTweaks-Core replacement components.

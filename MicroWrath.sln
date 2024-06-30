@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TinyJson", "TinyJson", "{3F
 		TinyJson\JSONWriter.cs = TinyJson\JSONWriter.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTT.ReplacementComponents.Analyzer", "TTT.ReplacementComponents.Analyzer\TTT.ReplacementComponents.Analyzer.csproj", "{AEEE26CE-A7EB-40DB-9E59-A2363009BD2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{AD71E9E8-63BF-4A4F-A7CB-B53305403A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD71E9E8-63BF-4A4F-A7CB-B53305403A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD71E9E8-63BF-4A4F-A7CB-B53305403A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEEE26CE-A7EB-40DB-9E59-A2363009BD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEEE26CE-A7EB-40DB-9E59-A2363009BD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEEE26CE-A7EB-40DB-9E59-A2363009BD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEEE26CE-A7EB-40DB-9E59-A2363009BD2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
