@@ -105,7 +105,7 @@ namespace MicroWrath.Generator
                         }
                     }
 
-                    throw new FileNotFoundException();
+                    //throw new FileNotFoundException();
                 }
 
                 return null;
