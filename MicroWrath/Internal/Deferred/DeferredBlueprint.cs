@@ -94,14 +94,6 @@ namespace MicroWrath.Deferred
             where TBlueprint : SimpleBlueprint =>
             context.AddOnTrigger(microBlueprint.BlueprintGuid, trigger);
 
-        [Obsolete]
-        public static IDeferredBlueprint<TBlueprint> RegisterBlueprint<TBlueprint>(
-            this IDeferred<TBlueprint> context,
-            BlueprintGuid guid,
-            IObservable<Unit> trigger)
-            where TBlueprint : SimpleBlueprint =>
-            AddOnTrigger(context, guid, trigger);
-
         public static IDeferred<TBlueprint> OnDemand<TBlueprint>(
             this IDeferred<TBlueprint> context,
             BlueprintGuid guid)

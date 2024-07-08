@@ -179,25 +179,6 @@ namespace MicroWrath.Util.Linq
             if (i > 0 && i < chunkSize) yield return chunk.Take(i);
         }
 
-        //public static IEnumerable<T> FindSequence<T>(this IEnumerable<T> source, IEnumerable<Func<T, bool>> predicateSequence)
-        //{
-        //    var sEnumerator = source.GetEnumerator();
-        //    var fsEnumerator = predicateSequence.GetEnumerator();
-
-        //    var i = 0;
-        //    while (fsEnumerator.MoveNext())
-        //    {
-        //        if (!sEnumerator.MoveNext()) return Enumerable.Empty<T>();
-
-        //        if (fsEnumerator.Current(sEnumerator.Current))
-        //            return source.Skip(1).FindSequence(predicateSequence);
-
-        //        i++;
-        //    }
-
-        //    return source.Take(i);
-        //}
-
         /// <summary>
         /// Finds a subsequence within a larger sequence by applying a sequence of predicates, providing a maximum match length
         /// </summary>

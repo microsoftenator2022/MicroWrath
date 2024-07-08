@@ -124,9 +124,6 @@ namespace MicroWrath
                 addHandler: handler => BlueprintLoad_PrefixEvent += handler,
                 removeHandler: handler => BlueprintLoad_PrefixEvent -= handler);
 
-        //public static IObservable<Unit> BlueprintLoad_Prefix_ByGuid(BlueprintGuid guid) =>
-        //    BlueprintLoad_Prefix.Where(loadGuid => loadGuid == guid).Select(_ => Unit.Default);
-
         [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Load))]
         [HarmonyPrefix]
         private static void BlueprintsCache_Load(BlueprintGuid guid)

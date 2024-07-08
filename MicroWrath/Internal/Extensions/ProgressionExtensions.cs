@@ -8,7 +8,7 @@ using Kingmaker.Blueprints.Classes;
 
 namespace MicroWrath.Extensions
 {
-    internal static class ProgressionExtensions
+    internal static partial class BlueprintExtensions
     {
         public static LevelEntry AddFeatures(this LevelEntry levelEntry, params BlueprintFeatureBase[] features)
         {
