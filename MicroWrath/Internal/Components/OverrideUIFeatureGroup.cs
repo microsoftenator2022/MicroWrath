@@ -15,6 +15,9 @@ using Kingmaker.UnitLogic;
 
 namespace MicroWrath.Components
 {
+    /// <summary>
+    /// Set UI feature group.
+    /// </summary>
     [AllowedOn(typeof(BlueprintFeature))]
     [AllowedOn(typeof(BlueprintFeatureSelection))]
     [AllowedOn(typeof(BlueprintParametrizedFeature))]

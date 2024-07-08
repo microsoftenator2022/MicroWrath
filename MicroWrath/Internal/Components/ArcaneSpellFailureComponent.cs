@@ -11,18 +11,17 @@ using Kingmaker.UnitLogic.Abilities;
 
 namespace MicroWrath.Components
 {
+    /// <summary>
+    /// Adds arcane spell failure chance to this ability.
+    /// </summary>
     [HarmonyPatch(typeof(AbilityData), nameof(AbilityData.IsAffectedByArcaneSpellFailure), MethodType.Getter)]
-    internal static class ArcaneSpellFailurePatch
+    internal class ArcaneSpellFailureComponent : BlueprintComponent
     {
-        internal static bool Postfix(bool __result, AbilityData __instance)
+        private static bool Postfix(bool __result, AbilityData __instance)
         {
-            if(__instance.Blueprint.ComponentsArray.OfType<ArcaneSpellFailureComponent>().Any()) return true;
+            if (__instance.Blueprint.ComponentsArray.OfType<ArcaneSpellFailureComponent>().Any()) return true;
 
             return __result;
         }
-    }
-
-    internal class ArcaneSpellFailureComponent : BlueprintComponent
-    {
     }
 }

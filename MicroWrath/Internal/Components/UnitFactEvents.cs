@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Facts;
+using Kingmaker.EntitySystem;
+using Kingmaker.UnitLogic;
 
 using UniRx;
 
 namespace MicroWrath.Components
 {
-    internal abstract class UnitFactEvent : Kingmaker.UnitLogic.UnitFactComponentDelegate
+    /// <summary>
+    /// Events triggered by <see cref="UnitFactComponentDelegate"/> methods.
+    /// </summary>
+    internal abstract class UnitFactEvent : UnitFactComponentDelegate
     {
         protected event Action ActivateEvent = () => { };
         public override void OnActivate() => ActivateEvent();
@@ -53,6 +58,9 @@ namespace MicroWrath.Components
         public override void OnViewWillDetach() => ViewWillDetachEvent();
     }
 
+    /// <summary>
+    /// Event triggered by <see cref="EntityFactComponentDelegate{TEntity, TData}.OnActivate"/>.
+    /// </summary>
     [AllowedOn(typeof(BlueprintUnitFact))]
     [AllowedOn(typeof(BlueprintUnit))]
     internal class UnitFactActivateEvent : UnitFactEvent

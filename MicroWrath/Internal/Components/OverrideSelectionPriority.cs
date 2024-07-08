@@ -44,13 +44,23 @@ namespace MicroWrath.Components
         }
     }
 
+    /// <summary>
+    /// Set selection priority during level up.
+    /// </summary>
     [HarmonyPatch]
     [AllowedOn(typeof(IFeatureSelection))]
     [AllowedOn(typeof(BlueprintFeatureSelection))]
     [AllowedOn(typeof(BlueprintParametrizedFeature))]
     internal class SelectionPriority : BlueprintComponent
     {
+        /// <summary>
+        /// Phase priority (relative tab position).
+        /// </summary>
         public CharGenPhaseBaseVM.ChargenPhasePriority? PhasePriority = null;
+
+        /// <summary>
+        /// Level up action priority (when the selection is applied).
+        /// </summary>
         public LevelUpActionPriority? ActionPriority = null;
 
         [HarmonyPatch(typeof(CharGenFeatureSelectorPhaseVM), nameof(CharGenFeatureSelectorPhaseVM.GetFeaturePriority))]
