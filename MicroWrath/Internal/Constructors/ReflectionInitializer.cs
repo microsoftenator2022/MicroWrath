@@ -15,6 +15,9 @@ namespace MicroWrath.Constructors
 {
     internal interface IReflectionInitializer { public Type ForType { get; } }
 
+    /// <summary>
+    /// <see cref="Construct"/>'s reflection-based fallback for when source generated initializers are not present.
+    /// </summary>
     internal class ReflectionInitializer<T> : IReflectionInitializer
     {
         public Type ForType => typeof(T);
