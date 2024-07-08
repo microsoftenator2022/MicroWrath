@@ -19,8 +19,8 @@ namespace MicroUtils
         /// without the requirement that the <paramref name="ns"/> parameter be a valid UUID.
         /// </summary>
         /// <param name="ns">UUID namespace. This method does not enforce UUIDv5 requirement that this 
-        /// parameter is a valid UUID.<br/>You can use <see cref="CreateV8"/> for
-        /// this parameter if strict UUIDv5 conformance is required.</param>
+        /// parameter is a valid UUID.<br/>Use <see cref="CreateV5(System.Guid, System.String)"/>
+        /// if strict UUIDv5 conformance is required.</param>
         /// <param name="name">Name</param>
         /// <returns>Determinstic Guid generated from namespace and name (may conform to UUIDv5).</returns>
         public static Guid CreateV5(string ns, string name)

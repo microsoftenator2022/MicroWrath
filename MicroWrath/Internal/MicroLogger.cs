@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Kingmaker.Blueprints;
 using Kingmaker.Modding;
+using Kingmaker.Utility;
 
 using Owlcat.Runtime.Core.Logging;
 
@@ -13,6 +14,9 @@ using UnityModManagerNet;
 
 namespace MicroWrath
 {
+    /// <summary>
+    /// Log wrapper for UMM or Owlcat logger.
+    /// </summary>
     internal static class MicroLogger
     {
         internal enum Severity
@@ -38,6 +42,9 @@ namespace MicroWrath
 #else
             default;
 #endif
+        /// <summary>
+        /// Sets the minimum log severity. Events with lower severity will not be printed to the log.
+        /// </summary>
         public static void SetLogLevel(Severity severity)
         {
             if (logLevel == severity) return;
@@ -46,6 +53,9 @@ namespace MicroWrath
             logLevel = severity;
         }
 
+        /// <summary>
+        /// Gets or sets the log severity level
+        /// </summary>
         public static Severity LogLevel
         {
             get => logLevel;
@@ -53,6 +63,10 @@ namespace MicroWrath
         }
 
         private static UnityModManager.ModEntry? modEntry;
+
+        /// <summary>
+        /// For UMM mods. Returns <see cref="UnityModManager.ModEntry"/> or null if this is not a UMM mod.
+        /// </summary>
         public static UnityModManager.ModEntry? ModEntry
         {
             get => modEntry;
@@ -103,6 +117,10 @@ namespace MicroWrath
         }
         
         private static OwlcatModification? owlcatModification;
+
+        /// <summary>
+        /// For OwlMods. Returns <see cref="OwlcatModification"/> or null if this is not an OwlMod.
+        /// </summary>
         public static OwlcatModification? OwlcatModification
         {
             get => owlcatModification;
@@ -151,6 +169,9 @@ namespace MicroWrath
                 logger.Exception(entry.Exception);
         }
 
+        /// <summary>
+        /// Adds an entry to the log.
+        /// </summary>
         public static void AddEntry(Entry entry)
         {
             EntryList.Add(entry);
@@ -159,6 +180,9 @@ namespace MicroWrath
             OwlLog(entry);
         }
 
+        /// <summary>
+        /// Replays the log. Used to log message from before the logger is initialized.
+        /// </summary>
         public static void ReplayLogUmm()
         {
             if (ModEntry is null)
@@ -176,6 +200,7 @@ namespace MicroWrath
             UmmLog(new(() => "REPLAY LOG END"));
         }
 
+        /// <inheritdoc cref="ReplayLogUmm"/>
         public static void ReplayLogOwlcat()
         {
             if (OwlcatModification is null)
@@ -193,6 +218,9 @@ namespace MicroWrath
             UmmLog(new(() => "REPLAY LOG END"));
         }
 
+        /// <summary>
+        /// Clears log entries.
+        /// </summary>
         public static void Clear()
         {
             EntryList.Clear();
@@ -200,23 +228,73 @@ namespace MicroWrath
             AddEntry(new(() => "Log cleared"));
         }
 
+        /// <summary>
+        /// Create a new log entry of <see cref="Severity.Debug"/> severity with an associated blueprint and optional exception.
+        /// Takes a <see cref="Func{T}"/> for message generation to limit performance impact when Logger severity is greater than <see cref="Severity.Debug"/>
+        /// </summary>
+        /// <param name="message">Log message.</param>
+        /// <param name="blueprint">Associated blueprint.</param>
+        /// <param name="exception">Associated exception.</param>
         public static void Debug(Func<string> message, IMicroBlueprint<SimpleBlueprint>? blueprint, Exception? exception = null) =>
             AddEntry(new(message, Severity.Debug, exception) { Blueprint = blueprint });
+
+        /// <summary>
+        /// Create a new log entry of <see cref="Severity.Debug"/> severity with an optional associated exception.
+        /// Takes a <see cref="Func{T}"/> for message generation to limit performance impact when Logger severity is greater than <see cref="Severity.Debug"/>
+        /// </summary>
+        /// <param name="message">Log message.</param>
+        /// <param name="exception">Associated exception.</param>
         public static void Debug(Func<string> message, Exception? exception = null) => AddEntry(new(message, Severity.Debug, exception));
+
+        /// <summary>
+        /// Create a new log entry of <see cref="Severity.Debug"/> severity using a pooled <see cref="StringBuilder"/> with an optional associated exception.
+        /// </summary>
+        /// <param name="messageBuilder">Message builder function.</param>
+        /// <param name="exception">Associated exception.</param>
         public static void Debug(Action<StringBuilder> messageBuilder, Exception? exception = null)
         {
             AddEntry(new(() =>
             {
-                var sb = new StringBuilder();
+                using var psb = PooledStringBuilder.Request();
+                psb.Reset();
+
+                var sb = psb.Builder;
                 messageBuilder(sb);
 
-                return sb.ToString();
+                var s = sb.ToString();
+
+                psb.Reset();
+
+                return s;
             }, Severity.Debug, exception));
         }
 
+        /// <summary>
+        /// Create a new log entry of <see cref="Severity.Info"/> severity with an optional associated exception.
+        /// </summary>
+        /// <param name="message">Log message.</param>
+        /// <param name="exception">Associated exception.</param>
         public static void Log(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Info, exception));
-        public static void Warning(string messasge, Exception? exception = null) => AddEntry(new(() => messasge, Severity.Warning, exception));
+
+        /// <summary>
+        /// Create a new log entry of <see cref="Severity.Warning"/> severity with an optional associated exception.
+        /// </summary>
+        /// <param name="message">Log message.</param>
+        /// <param name="exception">Associated exception.</param>
+        public static void Warning(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Warning, exception));
+
+        /// <summary>
+        /// Create a new log entry of <see cref="Severity.Error"/> severity with an optional associated exception.
+        /// </summary>
+        /// <param name="message">Log message.</param>
+        /// <param name="exception">Associated exception.</param>
         public static void Error(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Error, exception));
+
+        /// <summary>
+        /// Create a new log entry of <see cref="Severity.Critical"/> severity with an optional associated exception.
+        /// </summary>
+        /// <param name="message">Log message.</param>
+        /// <param name="exception">Associated exception.</param>
         public static void Critical(string message, Exception? exception = null) => AddEntry(new(() => message, Severity.Critical, exception));
     }
 }

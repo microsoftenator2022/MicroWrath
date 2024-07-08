@@ -13,6 +13,13 @@ namespace MicroWrath.Util
 {
     internal static class TranspilerUtil
     {
+        /// <summary>
+        /// Tries to locate a range of instructions matching a sequence of predicates.
+        /// May return a subset (TODO: verify this) so you should check the length.
+        /// </summary>
+        /// <param name="instructions">Sequence of <see cref="CodeInstruction"/>s to search.</param>
+        /// <param name="matchFuncs">Sequence of predicates to match.</param>
+        /// <param name="start">Start index.</param>
         public static IEnumerable<(int index, CodeInstruction instruction)> FindInstructionsIndexed(
             this IEnumerable<CodeInstruction> instructions,
             IEnumerable<Func<CodeInstruction, bool>> matchFuncs,
@@ -30,6 +37,13 @@ namespace MicroWrath.Util
             return matched;
         }
 
+        /// <summary>
+        /// Replaces a matched sequence of instructions.
+        /// </summary>
+        /// <param name="source">Sequence of <see cref="CodeInstruction"/>s to search.</param>
+        /// <param name="match">Sequence of instructions to match (by opcode and operand).</param>
+        /// <param name="replaceWith"></param>
+        /// <returns></returns>
         public static IEnumerable<CodeInstruction> ReplaceInstructions(
             IEnumerable<CodeInstruction> source,
             IEnumerable<CodeInstruction> match,

@@ -15,8 +15,20 @@ using Kingmaker.UnitLogic.Abilities.Components;
 
 namespace MicroWrath.Extensions
 {
+    /// <summary>
+    /// <see cref="BlueprintComponent"/> extension methods.
+    /// </summary>
     internal static partial class ComponentExtensions
     {
+        /// <summary>
+        /// Add prerequisite to feature.
+        /// </summary>
+        /// <param name="feature">Feature to add to.</param>
+        /// <param name="prerequisiteFeature">Prerequisite feature</param>
+        /// <param name="removeOnApply">Also add a <see cref="RemoveFeatureOnApply"/> component to that removes 
+        /// the prerequisite feature (ie. this feature replaces its prerequisite).</param>
+        /// <param name="hideInUI">Hide this prerequisite in the UI.</param>
+        /// <returns>The added <see cref="PrerequisiteFeature"/>.</returns>
         public static PrerequisiteFeature AddPrerequisiteFeature(
             this BlueprintFeature feature,
             IMicroBlueprint<BlueprintFeature> prerequisiteFeature,
@@ -39,6 +51,12 @@ namespace MicroWrath.Extensions
             return prerequisite;
         }
 
+        /// <summary>
+        /// Add <see cref="GameAction"/>s to a <see cref="AbilityEffectRunAction"/> component's <see cref="AbilityEffectRunAction.Actions"/>.
+        /// </summary>
+        /// <param name="component"><see cref="AbilityEffectRunAction"/> component to add to.</param>
+        /// <param name="actions"><see cref="GameAction"/>s to add.</param>
+        /// <returns>The modified <see cref="AbilityEffectRunAction"/>.</returns>
         public static AbilityEffectRunAction AddActions(
             this AbilityEffectRunAction component,
             params GameAction[] actions)

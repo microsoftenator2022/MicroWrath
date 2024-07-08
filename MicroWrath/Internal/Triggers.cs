@@ -16,6 +16,9 @@ using UniRx;
 
 namespace MicroWrath
 {
+    /// <summary>
+    /// A set of useful <see cref="IObservable{T}"/> events.
+    /// </summary>
     [HarmonyPatch]
     internal static partial class Triggers
     {
@@ -36,6 +39,9 @@ namespace MicroWrath
             MicroLogger.Debug(() => $"Trigger {nameof(LocalizationManager_Init_Postfix)} completed in {timer.ElapsedMilliseconds}ms");
         }
 
+        /// <summary>
+        /// <see cref="LocalizationManager.Init"/> was run.
+        /// </summary>
         public static readonly IObservable<Unit> LocalizationManager_Init_Postfix =
             Observable.FromEvent(
                 addHandler: handler => LocalizationManager_Init_PostfixEvent += handler,
@@ -81,16 +87,25 @@ namespace MicroWrath
             MicroLogger.Debug(() => $"Trigger {nameof(BlueprintsCache_Init_Prefix)} completed in {timer.ElapsedMilliseconds}ms");
         }
 
+        /// <summary>
+        /// Immediately before <see cref="BlueprintsCache.Init"/>.
+        /// </summary>
         public static readonly IObservable<Unit> BlueprintsCache_Init_Prefix =
             Observable.FromEvent(
                 addHandler: handler => BlueprintsCache_Init_PrefixEvent += handler,
                 removeHandler: handler => BlueprintsCache_Init_PrefixEvent -= handler);
 
+        /// <summary>
+        /// <see cref="BlueprintsCache.Init"/> was run. Runs before <see cref="BlueprintsCache_Init"/>.
+        /// </summary>
         public static readonly IObservable<Unit> BlueprintsCache_Init_Early =
             Observable.FromEvent(
                 addHandler: handler => BlueprintsCache_InitEvent_Early += handler,
                 removeHandler: handler => BlueprintsCache_InitEvent_Early -= handler);
 
+        /// <summary>
+        /// <see cref="BlueprintsCache.Init"/> was run.
+        /// </summary>
         public static readonly IObservable<Unit> BlueprintsCache_Init =
             Observable.FromEvent(
                 addHandler: handler => BlueprintsCache_InitEvent += handler,
@@ -98,6 +113,9 @@ namespace MicroWrath
 
         private static event Action<Locale> LocalizationManager_OnLocaleChangedEvent = _ => { };
 
+        /// <summary>
+        /// <see cref="LocalizationManager.OnLocaleChanged"/> was run.
+        /// </summary>
         public static readonly IObservable<Locale> LocaleChanged =
             Observable.FromEvent<Locale>(
                 addHandler: handler => LocalizationManager_OnLocaleChangedEvent += handler,
@@ -119,6 +137,10 @@ namespace MicroWrath
 
         private static event Action<BlueprintGuid> BlueprintLoad_PrefixEvent = _ => { };
 
+        /// <summary>
+        /// Immediately before <see cref="BlueprintsCache.Load(BlueprintGuid)"/> runs.<br/>
+        /// Provided <see cref="BlueprintGuid"/> parameter is the requested blueprint's <see cref="SimpleBlueprint.AssetGuid"/>.
+        /// </summary>
         public static readonly IObservable<BlueprintGuid> BlueprintLoad_Prefix =
             Observable.FromEvent<BlueprintGuid>(
                 addHandler: handler => BlueprintLoad_PrefixEvent += handler,

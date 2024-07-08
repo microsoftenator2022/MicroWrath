@@ -13,6 +13,13 @@ namespace MicroWrath.Util.Unity
 {
     internal static class UnityUtil
     {
+        /// <summary>
+        /// Check whether this texture format supports setting pixel values
+        /// (eg. <see cref="Texture2D.SetPixel(int, int, Color)"/>,
+        /// <see cref="Texture2D.SetPixelData{T}(T[], int, int)"/>, <see cref="Texture3D.SetPixel(int, int, int, Color)"/>, etc.
+        /// </summary>
+        /// <param name="tFormat">Texture format.</param>
+        /// <returns><see langword="true"/> if a texture of the given format supports setting pixel values.</returns>
         public static bool SupportsSetPixel(this TextureFormat tFormat)
         {
             return tFormat is
@@ -39,8 +46,20 @@ namespace MicroWrath.Util.Unity
                 TextureFormat.RHalf;
         }
         
+        /// <summary>
+        /// Represents a HSV color value.
+        /// </summary>
+        /// <param name="h">Hue.</param>
+        /// <param name="s">Saturation.</param>
+        /// <param name="v">Value.</param>
         public readonly record struct ColorHSV(double h, double s, double v);
 
+        /// <summary>
+        /// Apply a transformation function to a HSV color.
+        /// </summary>
+        /// <param name="c">HSV color value.</param>
+        /// <param name="f">Function to apply.</param>
+        /// <returns>New HSV value.</returns>
         public static Color ModifyHSV(this Color c, Func<ColorHSV, ColorHSV> f)
         {
             var a = c.a;
@@ -75,6 +94,13 @@ namespace MicroWrath.Util.Unity
             return (float)h;
         }
 
+        /// <summary>
+        /// Rotates a <see cref="Color"/>'s hue.
+        /// </summary>
+        /// <param name="color">Color to change.</param>
+        /// <param name="degrees">Hue shift in degrees.</param>
+        /// <param name="debugLog">Log color values.</param>
+        /// <returns></returns>
         public static Color RotateColorHue(Color color, double degrees, bool debugLog = false)
         {
             if (color.r == color.g && color.g == color.b)
@@ -132,6 +158,12 @@ namespace MicroWrath.Util.Unity
             return color;
         }
 
+        /// <summary>
+        /// Apply a given transformation function to all colors in a <see cref="Gradient"/>.
+        /// </summary>
+        /// <param name="g">Gradient to modify.</param>
+        /// <param name="f">Function to apply.</param>
+        /// <returns>Modified gradient.</returns>
         public static Gradient? ChangeGradientColors(Gradient? g, Func<Color, Color> f)
         {
             if (g is null || g.colorKeys is null) return g;
@@ -152,6 +184,12 @@ namespace MicroWrath.Util.Unity
             return g;
         }
 
+        /// <summary>
+        /// Apply a given transformation function to all colors in a <see cref="ParticleSystem.MinMaxGradient"/>.
+        /// </summary>
+        /// <param name="mmg">Gradient to modify.</param>
+        /// <param name="f">Function to apply.</param>
+        /// <returns>Modified gradient.</returns>
         public static ParticleSystem.MinMaxGradient ChangeMinMaxGradientColors(ParticleSystem.MinMaxGradient mmg, Func<Color, Color> f) =>
             mmg.mode switch
             {
@@ -174,6 +212,12 @@ namespace MicroWrath.Util.Unity
                 _ => mmg,
             };
 
+        /// <summary>
+        /// Apply an alpha blend to two <see cref="Color"/>s.
+        /// </summary>
+        /// <param name="c1">First color.</param>
+        /// <param name="c2">Second color.</param>
+        /// <returns>Result of an alpha blend applied to the provided colors.</returns>
         public static Color AlphaBlend(Color c1, Color c2)
         {
             var output = Color.Lerp(c1, c2, 1f - (c1.a - c2.a));
@@ -183,6 +227,12 @@ namespace MicroWrath.Util.Unity
             return output;
         }
 
+        /// <summary>
+        /// Apply an alpha blend to a multiple colors.
+        /// </summary>
+        /// <param name="c">First color.</param>
+        /// <param name="cs">Additional colors.</param>
+        /// <returns>Result of an alpha blend applied to the provided colors.</returns>
         public static Color AlphaBlend(Color c, params Color[] cs) =>
             cs.Aggregate(c, AlphaBlend);
 
@@ -213,6 +263,13 @@ namespace MicroWrath.Util.Unity
             return output;
         }
 
+        /// <summary>
+        /// Copy and convert a texture to a given format and make it accessible from the CPU.
+        /// </summary>
+        /// <typeparam name="TData">Pixel data format.</typeparam>
+        /// <param name="texture">Texture to copy.</param>
+        /// <param name="format">Texture format.</param>
+        /// <returns>Readable texture.</returns>
         public static Texture2D CopyReadable<TData>(Texture2D texture, TextureFormat format = TextureFormat.RGBA32)
             where TData : struct
         {
@@ -236,11 +293,26 @@ namespace MicroWrath.Util.Unity
             return newTexture;
         }
 
+        /// <summary>
+        /// Copy and convert a texture to a given format and make it accessible from the CPU.<br/>
+        /// Note: Uses <see cref="Color32"/> pixel format.
+        /// </summary>
+        /// <param name="texture">Texture to copy.</param>
+        /// <param name="format">Texture format.</param>
+        /// <returns>Readable texture.</returns>
         public static Texture2D CopyReadable(Texture2D texture, TextureFormat format = TextureFormat.RGBA32) =>
             CopyReadable<Color32>(texture, format);
 
+        /// <summary>
+        /// Diagnostics.
+        /// </summary>
         public static class Debug
         {
+            /// <summary>
+            /// Print the structure of an object and its children.
+            /// </summary>
+            /// <param name="gameObject">Object to dump.</param>
+            /// <returns>String describing the object's structure.</returns>
             public static string DumpGameObject(GameObject gameObject)
             {
                 static IEnumerable<string> DumpGameObjectInner(GameObject obj, int depth = 0)

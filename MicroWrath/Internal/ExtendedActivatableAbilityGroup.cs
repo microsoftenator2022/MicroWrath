@@ -12,6 +12,10 @@ using Kingmaker.UnitLogic.Parts;
 
 namespace MicroWrath.Extensions
 {
+    /// <summary>
+    /// Extends <see cref="ActivatableAbilityGroup" /> to accept new values.
+    /// This class is partial so you may place your new values as fields within.
+    /// </summary>
     internal readonly partial struct ExtraActivatableAbilityGroup
     {
         public readonly int Value;

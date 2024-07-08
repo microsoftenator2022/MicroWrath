@@ -7,6 +7,9 @@ using Kingmaker.UnitLogic.Buffs.Blueprints;
 
 namespace MicroWrath
 {
+    /// <summary>
+    /// Default values for common blueprint/componenet field types.
+    /// </summary>
     internal static partial class Default
     {
         public static Kingmaker.ElementsSystem.ActionList ActionList => new();

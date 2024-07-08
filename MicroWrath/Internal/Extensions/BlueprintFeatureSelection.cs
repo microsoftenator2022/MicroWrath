@@ -13,6 +13,13 @@ namespace MicroWrath.Extensions
 {
     internal static partial class BlueprintExtensions
     {
+        /// <summary>
+        /// Add features to a <see cref="BlueprintFeatureSelection"/>.
+        /// </summary>
+        /// <typeparam name="TBlueprint">Feature blueprint type.</typeparam>
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="allowDuplicates">Are duplicates allowed?</param>
+        /// <param name="features">Features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             bool allowDuplicates,
@@ -36,12 +43,20 @@ namespace MicroWrath.Extensions
             selection.m_AllFeatures = allFeaturesList.ToArray();
         }
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="features">Features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
-            IEnumerable<BlueprintReference<TBlueprint>> blueprints)
+            IEnumerable<BlueprintReference<TBlueprint>> features)
             where TBlueprint : BlueprintFeature =>
-            AddFeatures(selection, false, blueprints);
+            AddFeatures(selection, false, features);
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="allowDuplicates">Are duplicates allowed?</param>
+        /// <param name="feature">First feature to add.</param>
+        /// <param name="features">Additional features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             bool allowDuplicates,
@@ -50,6 +65,10 @@ namespace MicroWrath.Extensions
             where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, allowDuplicates, new [] { feature }.Concat(features));
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="feature">First feature to add.</param>
+        /// <param name="features">Additional features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             BlueprintReference<TBlueprint> feature,
@@ -57,6 +76,10 @@ namespace MicroWrath.Extensions
             where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, false, feature, features);
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="allowDuplicates">Are duplicates allowed?</param>
+        /// <param name="features">Features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             bool allowDuplicates,
@@ -64,12 +87,20 @@ namespace MicroWrath.Extensions
             where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, allowDuplicates, features.Select(bp => bp.ToReference<BlueprintReference<TBlueprint>>()));
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="features">Features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
-            IEnumerable<TBlueprint> blueprints)
+            IEnumerable<TBlueprint> features)
             where TBlueprint : BlueprintFeature =>
-            AddFeatures(selection, false, blueprints);
+            AddFeatures(selection, false, features);
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="allowDuplicates">Are duplicates allowed?</param>
+        /// <param name="feature">First blueprint to add.</param>
+        /// <param name="features">Sequence of additional features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             bool allowDuplicates,
@@ -78,6 +109,10 @@ namespace MicroWrath.Extensions
             where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, allowDuplicates, new[] { feature }.Concat(features));
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="feature">First feature to add.</param>
+        /// <param name="features">Additional features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             TBlueprint feature,
@@ -85,6 +120,10 @@ namespace MicroWrath.Extensions
             where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, false, feature, features);
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="allowDuplicates">Are duplicates allowed?</param>
+        /// <param name="features">Features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             bool allowDuplicates,
@@ -92,12 +131,20 @@ namespace MicroWrath.Extensions
             where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, allowDuplicates, features.Select(bp => bp.ToReference<TBlueprint, BlueprintReference<TBlueprint>>()));
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="features">Features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
-            IEnumerable<IMicroBlueprint<TBlueprint>> blueprints)
+            IEnumerable<IMicroBlueprint<TBlueprint>> features)
             where TBlueprint : BlueprintFeature =>
-            AddFeatures(selection, false, blueprints);
+            AddFeatures(selection, false, features);
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="allowDuplicates">Are duplicates allowed?</param>
+        /// <param name="feature">First feature to add.</param>
+        /// <param name="features">Additional features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             bool allowDuplicates,
@@ -106,6 +153,10 @@ namespace MicroWrath.Extensions
             where TBlueprint : BlueprintFeature =>
             AddFeatures(selection, allowDuplicates, new[] { feature }.Concat(features));
 
+        /// <inheritdoc cref="AddFeatures{TBlueprint}(BlueprintFeatureSelection, bool, IEnumerable{BlueprintReference{TBlueprint}})" />
+        /// <param name="selection">Selection to add to.</param>
+        /// <param name="feature">First feature to add.</param>
+        /// <param name="features">Additional features to add.</param>
         public static void AddFeatures<TBlueprint>(
             this BlueprintFeatureSelection selection,
             IMicroBlueprint<TBlueprint> feature,
