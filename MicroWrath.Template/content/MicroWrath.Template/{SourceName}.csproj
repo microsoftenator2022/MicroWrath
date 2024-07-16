@@ -60,7 +60,7 @@
     <Copy SourceFiles="@(Files)" DestinationFiles="@(Files->'$(WrathInstallDir)\Mods\$(AssemblyName)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   
-	<Target Name="GenerateCustomPropsFile" BeforeTargets="ResolveReferences" Condition="$(WrathInstallDir) == ''">
+	<Target Name="GenerateCustomPropsFile" BeforeTargets="ResolveReferences;Restore" Condition="$(WrathInstallDir) == ''">
 		<Exec Command="findstr /C:&quot;Mono path[0]&quot; &quot;$(WrathData)\Player.log&quot;" IgnoreExitCode="true" ConsoleToMSBuild="true">
 			<Output TaskParameter="ExitCode" PropertyName="ExitCode" />
 			<Output TaskParameter="ConsoleOutput" PropertyName="MonoPathLine" />
