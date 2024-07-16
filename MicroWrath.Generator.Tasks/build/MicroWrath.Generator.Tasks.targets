@@ -1,10 +1,10 @@
 <Project>
-  <Target Name="Publicize" AfterTargets="BeforeBuild;PublicizeClean" Inputs="@(Publicize)" Outputs="$(SolutionDir)lib\%(Publicize.Filename)_public.dll">
+  <!--<Target Name="Publicize" AfterTargets="BeforeBuild;PublicizeClean" Inputs="@(Publicize)" Outputs="$(SolutionDir)lib\%(Publicize.Filename)_public.dll">
     <PublicizeTask InputAssemblies="@(Publicize)" OutputDir="$(SolutionDir)lib\" />
   </Target>
 
   <Target Name="PublicizeClean" AfterTargets="Clean">
     <Delete Files="$(SolutionDir)lib\%(Publicize.Filename)_public.dll" />
     <Delete Files="$(SolutionDir)lib\%(Publicize.Filename)_public.hash" />
-  </Target>
+  </Target>-->
 </Project>

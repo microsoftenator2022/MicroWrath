@@ -1,6 +1,0 @@
-<Project>
-  <ItemGroup>
-    <AdditionalFiles Include="$(WrathPath)\Bundles\cheatdata.json" />
-    <AdditionalFiles Include="guids.json" />
-  </ItemGroup>
-</Project>

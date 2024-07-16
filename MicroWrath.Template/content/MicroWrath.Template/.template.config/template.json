@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+    "author": "Microsoftenator",
+    "classifications": [
+		"Pathfinder Wrath of the Righteous",
+        "UMM",
+        "UnityModManager",
+        "OMM",
+        "Owlcat",
+        "Mod",
+        "MicroWrath"
+    ],
+    "identity": "MicroWrath.Template",
+    "name": "MicroWrath Mod Template",
+    "shortName": "MicroWrathMod",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "preferNameDirectory": true,
+    "sourceName": "{SourceName}"
+}
