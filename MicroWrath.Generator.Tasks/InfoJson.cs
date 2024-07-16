@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -13,7 +14,7 @@ namespace MicroWrath.Generator
     public class InfoJson : Task
     {
         static readonly JsonSerializerOptions SerializerOptions =
-            new() { WriteIndented = true };
+            new() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
         [Required]
         public string Id { get; set; }
@@ -56,7 +57,7 @@ namespace MicroWrath.Generator
                     Version,
                     AssemblyName,
                     EntryMethod,
-                    DisplayName,
+                    DisplayName = DisplayName ?? Id,
                     Author,
                     GameVersion,
                     ManagerVersion,
