@@ -12,11 +12,13 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <!--<IncludeBuildOutput>false</IncludeBuildOutput>-->
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.10.4" PrivateAssets="all" />
-    <PackageReference Include="System.Text.Json" Version="8.0.3" PrivateAssets="all"/>
+    <PackageReference Include="Microsoft.IO.Redist" Version="6.0.1" />
+    <PackageReference Include="System.Text.Json" Version="8.0.4" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,4 +45,12 @@
       <TargetPathWithTargetPlatformMoniker Include="$(PKGNewtonsoft_Json)\lib\net45\Newtonsoft.Json.dll" IncludeRuntimeDependency="false" />
     </ItemGroup>
   </Target>-->
+
+  <!-- This target adds the generated deps.json file to our package output -->
+  <Target Name="AddBuildDependencyFileToBuiltProjectOutputGroupOutput" BeforeTargets="BuiltProjectOutputGroup" Condition=" '$(GenerateDependencyFile)' == 'true'">
+
+    <ItemGroup>
+      <BuiltProjectOutputGroupOutput Include="$(ProjectDepsFilePath)" TargetPath="$(ProjectDepsFileName)" FinalOutputPath="$(ProjectDepsFilePath)" />
+    </ItemGroup>
+  </Target>
 </Project>
