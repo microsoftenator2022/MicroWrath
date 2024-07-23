@@ -38,31 +38,32 @@ namespace MicroWrath.Generator
 
         public override bool Execute()
         {
-            if (!OutputPath.ToLower().EndsWith("info.json") && Directory.Exists(OutputPath))
-            {
-                OutputPath = Path.Combine(Path.GetFullPath(OutputPath), "Info.json");
-            }
-            else
-            {
-                Log.LogError("OutputPath is not 'Info.json' path or directory");
-                return false;
-            }
+            if (!Path.GetFileName(this.OutputPath).Equals("info.json", StringComparison.InvariantCultureIgnoreCase))
+                if (Directory.Exists(this.OutputPath))
+                {
+                    this.OutputPath = Path.Combine(Path.GetFullPath(this.OutputPath), "Info.json");
+                }
+                else
+                {
+                    base.Log.LogError($"OutputPath {this.OutputPath} is not 'Info.json' path or directory");
+                    return false;
+                }
 
-            var requirements = Requirements?.Select(ti => ti.ItemSpec)?.ToArray();
-            var loadAfter = LoadAfter?.Select(ti => ti.ItemSpec)?.ToArray();
+            var requirements = this.Requirements?.Select(ti => ti.ItemSpec)?.ToArray();
+            var loadAfter = this.LoadAfter?.Select(ti => ti.ItemSpec)?.ToArray();
 
             File.WriteAllText(OutputPath,
                 JsonSerializer.Serialize(new {
-                    Id,
-                    Version,
-                    AssemblyName,
-                    EntryMethod,
-                    DisplayName = DisplayName ?? Id,
-                    Author,
-                    GameVersion,
-                    ManagerVersion,
-                    HomePage,
-                    Repository,
+                    this.Id,
+                    this.Version,
+                    this.AssemblyName,
+                    this.EntryMethod,
+                    DisplayName = this.DisplayName ?? this.Id,
+                    this.Author,
+                    this.GameVersion,
+                    this.ManagerVersion,
+                    this.HomePage,
+                    this.Repository,
                     Requirements = requirements,
                     LoadAfter = loadAfter
                 }, SerializerOptions));
