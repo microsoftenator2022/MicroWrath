@@ -97,9 +97,18 @@ namespace MicroWrath.Util
         /// <param name="name">New blueprint's name</param>
         /// <param name="addToLibrary">Add to library immediately</param>
         /// <returns>Blueprint clone</returns>
-        public static TBlueprint CloneBlueprint<TBlueprint>(TBlueprint blueprint, BlueprintGuid guid, string? name = null, bool addToLibrary = true) where TBlueprint : SimpleBlueprint
+        public static TBlueprint CloneBlueprint<TBlueprint>(TBlueprint blueprint, BlueprintGuid guid, string? name = null, bool addToLibrary = true) 
+            where TBlueprint : SimpleBlueprint
         {
             blueprint = (ObjectDeepCopier.Clone(blueprint) as TBlueprint)!;
+
+            if (blueprint is BlueprintScriptableObject bso)
+            {
+                foreach (var c in bso.Components)
+                {
+                    c.OwnerBlueprint = bso;
+                }
+            }
 
             blueprint.AssetGuid = guid;
 

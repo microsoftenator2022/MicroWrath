@@ -62,6 +62,8 @@ namespace MicroWrath.Extensions
             MicroLogger.Debug(() => $"Adding {component.GetType()} ({typeof(TComponent)}) to {blueprint.name}", blueprint.ToMicroBlueprint());
 
             blueprint.ComponentsArray = blueprint.ComponentsArray.Append(component);
+
+            component.OwnerBlueprint = blueprint;
         }
 
         /// <summary>
