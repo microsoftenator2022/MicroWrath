@@ -22,7 +22,7 @@ namespace MicroWrath.Components
     internal class ContextAddTemporaryHP : UnitBuffComponentDelegate<ContextAddTemporaryHP.ComponentData>
     {
         public ContextValue Value = null!;
-        public ModifierDescriptor Descriptor;
+        public ModifierDescriptor Descriptor = default;
 
         public override void OnActivate()
         {

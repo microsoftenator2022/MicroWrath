@@ -4,24 +4,15 @@
   </ItemGroup>
 
   <!--<ItemGroup>
-    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
-    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.UI.dll" />
-    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll" />
-    <Publicize Include="$(WrathPath)\Wrath_Data\Managed\Owlcat.SharedTypes.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Assembly-CSharp" HintPath="$(SolutionDir)lib\Assembly-CSharp_public.dll" Private="False" />
-    <Reference Include="Owlcat.Runtime.UI" HintPath="$(SolutionDir)lib\Owlcat.Runtime.UI_public.dll" Private="False" />
-    <Reference Include="Owlcat.Runtime.Core" HintPath="$(SolutionDir)lib\Owlcat.Runtime.Core_public.dll" Private="False" />
-    <Reference Include="Owlcat.SharedTypes" HintPath="$(SolutionDir)lib\Owlcat.SharedTypes_public.dll" Private="False" />
+    <CompilerVisibleProperty Include="DesignTimeBuild" />
   </ItemGroup>-->
 
   <ItemGroup>
-    <AdditionalFiles Include="$(WrathPath)\Bundles\cheatdata.json" />
+    <AdditionalFiles Include="$(WrathPath)\Bundles\cheatdata.json" Visible="False" />
     <AdditionalFiles Include="guids.json">
       <Visible Condition="!Exists('guids.json')">False</Visible>
     </AdditionalFiles>
+    <None Include="GamePath.props" Visible="False" />
   </ItemGroup>
 
   <UsingTask TaskName="MicroWrath.Generator.GenerateGuidsFile" AssemblyFile="$(MSBuildThisFileDirectory)..\tasks\net472\MicroWrath.Generator.Tasks.dll" />

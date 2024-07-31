@@ -12,6 +12,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <GenerateDependencyFile>true</GenerateDependencyFile>
+    <NoWarn>NU5100;NU5128</NoWarn>
+    <NoWarn Condition="'$(Configuration)' == 'Release'">NU5100;NU5128;MSB3277</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

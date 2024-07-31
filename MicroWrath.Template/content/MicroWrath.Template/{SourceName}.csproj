@@ -35,7 +35,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
     <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" IncludeAssets="build; contentfiles" Version="0.4.2" PrivateAssets="all" />
-    <PackageReference Include="MicroWrath" Version="0.9.1-*" />
+    <PackageReference Include="MicroWrath" Version="0.10.0-*" />
   </ItemGroup>
 
   <Target Name="GuidsJson" AfterTargets="Build">
@@ -46,19 +46,19 @@
     <WriteLinesToFile File="guids.json" Lines="{}" />
   </Target>
 
-  <Target Name="GenerateJson" AfterTargets="Build">
-    <CreateProperty Value="$(OutDir)" Condition="'$(ManifestJsonOutputPath)' == ''">
-      <Output TaskParameter="Value" PropertyName="ManifestJsonOutputPath" />
+  <Target Name="GenerateInfoJson" AfterTargets="Build">
+    <CreateProperty Value="$(OutDir)Info.json" Condition="'$(InfoJsonOutputPath)' == ''">
+      <Output TaskParameter="Value" PropertyName="InfoJsonOutputPath" />
     </CreateProperty>
     <InfoJson
-      OutputPath="$(ManifestJsonOutputPath)"
+      OutputPath="$(InfoJsonOutputPath)"
       Id="$(MSBuildProjectName)"
       Version="$(VersionPrefix)"
       GameVersion="2.3.0"
       ManagerVersion="0.27.11" />
   </Target>
 
-  <Target Name="Deploy" AfterTargets="GenerateJson">
+  <Target Name="Deploy" AfterTargets="GenerateInfoJson">
     <ItemGroup>
       <Files Include="$(TargetDir)\**\*.*" />
     </ItemGroup>

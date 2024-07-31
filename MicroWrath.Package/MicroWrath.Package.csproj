@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MicroWrath\MicroWrath.csproj" />
-    <ProjectReference Include="..\MicroWrath.Generator.Tasks\MicroWrath.Generator.Tasks.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\MicroWrath.Generator\MicroWrath.Generator.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\MicroWrath.Generator.Tasks\MicroWrath.Generator.Tasks.csproj" IncludeAssets="build;buildTransitive;" PrivateAssets="none" />
+    <ProjectReference Include="..\MicroWrath.Generator\MicroWrath.Generator.csproj" IncludeAssets="build;analyzers" PrivateAssets="none" />
     <ProjectReference Include="..\MicroWrath.Loader\MicroWrath.Loader.csproj" />
   </ItemGroup>
 

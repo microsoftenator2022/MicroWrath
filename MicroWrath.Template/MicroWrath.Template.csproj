@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**;content\**\GamePath.props" />
+    <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**;content\**\GamePath.props;content\**\guids.json" />
   </ItemGroup>
 
 </Project>
