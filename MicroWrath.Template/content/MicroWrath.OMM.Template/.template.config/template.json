@@ -1,0 +1,30 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+    "author": "Microsoftenator",
+    "classifications": [
+		"Pathfinder Wrath of the Righteous",
+      "OMM",
+      "OwlcatModification",
+      "Owlcat",
+      "Mod",
+      "MicroWrath"
+    ],
+    "identity": "MicroWrath.OMM.Template",
+    "name": "MicroWrath Owlcat Mod Template",
+    "shortName": "MicroWrathOwlcatMod",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "preferNameDirectory": true,
+  "sourceName": "{SourceName}",
+  "symbols": {
+    "ommModPath": {
+      "type": "parameter",
+      "description": "Reference files from Owlcat Template Mod at this path",
+      "datatype": "text",
+      "replaces": "{ModPath}",
+      "isRequired": true
+    }
+  }
+}

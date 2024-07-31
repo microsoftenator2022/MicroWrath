@@ -6,6 +6,8 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+using Newtonsoft.Json;
+
 namespace MicroWrath.Util
 {
     /// <summary>
@@ -16,6 +18,7 @@ namespace MicroWrath.Util
         /// <summary>
         /// <see langword="default"/> if <see cref="None"/>
         /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public readonly T MaybeValue;
 
         /// <summary>

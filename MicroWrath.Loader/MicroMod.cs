@@ -23,7 +23,7 @@ namespace MicroWrath
         bool Load(OwlcatModification owlMod);
     }
 
-    internal static partial class MicroMod
+    public static partial class MicroMod
     {
         internal static Assembly? MicroWrathAssembly;
 
@@ -50,6 +50,60 @@ namespace MicroWrath
             yield return modsDir;
         }
 
+        private static Version? GetFileVersion(string path)
+        {
+            if (Version.TryParse(FileVersionInfo.GetVersionInfo(path).FileVersion, out var version))
+                return version;
+
+            return null;
+        }
+
+        private static bool UpdateMicroWrathLoader(IEnumerable<string> modsDirectories, INanoLogger logger)
+        {
+            var loaderUpdated = false;
+
+            var executingAssemblyPath = Assembly.GetExecutingAssembly().Location;
+            var executingAssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+            //if (executingAssemblyVersion is null)
+            //    return false;
+
+            foreach (var file in modsDirectories
+                .SelectMany(dir => Directory.EnumerateFiles(dir, "*.dll", SearchOption.AllDirectories))
+                .Distinct())
+            {
+                if (Path.GetFileName(file) != "MicroWrath.Loader.dll")
+                    continue;
+
+                var otherFileVersion = GetFileVersion(file);
+
+                if (otherFileVersion is null)
+                {
+#if DEBUG
+                    logger.Log($"{file} version is null");
+#endif
+                    continue;
+                }
+
+                if (executingAssemblyVersion > otherFileVersion)
+                {
+                    logger.Warn($"Updating loader at {file}");
+                    File.Copy(executingAssemblyPath, file, true);
+                    
+                    loaderUpdated = false;
+                }
+                else if (otherFileVersion > executingAssemblyVersion)
+                {
+                    logger.Warn($"Updating loader at {executingAssemblyPath}");
+                    File.Copy(file, executingAssemblyPath);
+
+                    loaderUpdated = true;
+                }
+            }
+
+            return loaderUpdated;
+        }
+
         private static bool EnsureMicroWrath(IEnumerable<string> modsDirectories, INanoLogger logger)
         {
             if (MicroWrathAssembly != null)
@@ -59,6 +113,12 @@ namespace MicroWrath
             }
 
             logger.Log($"MicroMod loader v{Assembly.GetExecutingAssembly().GetName().Version}");
+
+            if (UpdateMicroWrathLoader(modsDirectories, logger))
+            {
+                logger.Error("Newer loader version was found. Restart for the change to take effect.");
+                return false;
+            }
 
             var monoRuntimeVersion = Type.GetType("Mono.Runtime")
                 ?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static)
@@ -72,10 +132,10 @@ namespace MicroWrath
                 .Where(f => Path.GetFileName(f) == "MicroWrath.dll")
                 .Select(f =>
                 {
-                    if (Version.TryParse(FileVersionInfo.GetVersionInfo(f).FileVersion, out var version))
-                        return (version, f);
+                    //if (Version.TryParse(FileVersionInfo.GetVersionInfo(f).FileVersion, out var version))
+                    //    return (version, f);
 
-                    return (version: new Version(0,0,0,0), f);
+                    return (version: GetFileVersion(f) ?? new Version(0, 0, 0, 0), f);
                 })
                 .OrderByDescending(f => f.version)
                 .ToArray();

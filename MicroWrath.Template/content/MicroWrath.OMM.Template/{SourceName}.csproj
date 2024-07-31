@@ -11,6 +11,7 @@
     <WrathData>$(LocalAppData)Low\Owlcat Games\Pathfinder Wrath Of The Righteous</WrathData>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <SolutionDir Condition="'$(SolutionDir)' == ''">.\</SolutionDir>
+    <OwlcatTemplateModPath>{ModPath}</OwlcatTemplateModPath>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -28,10 +29,6 @@
     <Reference Include="$(WrathInstallDir)\Wrath_Data\Managed\UniRx.dll*" Private="False" />
   </ItemGroup>
 
-  <Target Name="ZipRelease" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
-    <ZipDirectory SourceDirectory="$(OutDir)" DestinationFile="$(SolutionDir)\bin\$(MSBuildProjectName)-$(Version).zip" Overwrite="true" />
-  </Target>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
     <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" IncludeAssets="build; contentfiles" Version="0.4.2" PrivateAssets="all" />
@@ -46,24 +43,26 @@
     <WriteLinesToFile File="guids.json" Lines="{}" />
   </Target>
 
-  <Target Name="GenerateInfoJson" AfterTargets="Build">
-    <CreateProperty Value="$(OutDir)Info.json" Condition="'$(InfoJsonOutputPath)' == ''">
-      <Output TaskParameter="Value" PropertyName="InfoJsonOutputPath" />
-    </CreateProperty>
-    <InfoJson
-      OutputPath="$(InfoJsonOutputPath)"
-      Id="$(MSBuildProjectName)"
-      Version="$(VersionPrefix)"
-      GameVersion="2.3.0"
-      ManagerVersion="0.27.11" />
+  <Target Name="OwlcatModTemplateTask" AfterTargets="Build">
+    <OwlcatMod
+      OwlcatTemplateModPath="$(OwlcatTemplateModPath)"
+      BuildOutputPath="$(OutDir)" />
   </Target>
 
-  <Target Name="Deploy" AfterTargets="GenerateInfoJson">
+  <Target Name="ZipRelease" AfterTargets="OwlcatModTemplateTask" Condition="'$(Configuration)' == 'Release'">
+    <ZipDirectory SourceDirectory="$(OwlcatTemplateModPath)" DestinationFile="$(SolutionDir)\bin\$(MSBuildProjectName)-$(Version).zip" Overwrite="true" />
+  </Target>
+
+  <Target Name="Deploy" AfterTargets="OwlcatModTemplateTask">
     <ItemGroup>
-      <Files Include="$(TargetDir)\**\*.*" />
+      <OwlcatFiles Include="$(OwlcatTemplateModPath)\**\*.*" />
+      <Files Include="$(TargetDir)\**\*.*" Exclude="$(TargetDir)\MicroWrath.Loader.dll" />
+      <Loader Include="$(TargetDir)\MicroWrath.Loader.dll" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(Files)" DestinationFiles="@(Files->'$(WrathInstallDir)\Mods\$(AssemblyName)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(OwlcatFiles)" DestinationFiles="@(OwlcatFiles->'$(WrathData)\Modifications\$(MSBuildProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Files)" DestinationFiles="@(Files->'$(WrathData)\Modifications\$(MSBuildProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Loader)" DestinationFiles="@(Loader->'$(WrathData)\Modifications\$(MSBuildProjectName)\Assemblies\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
 

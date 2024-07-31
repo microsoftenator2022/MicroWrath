@@ -1,8 +1,4 @@
 <Project>
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DesignTimeBuild" />
-  </ItemGroup>
-
   <!--<ItemGroup>
     <CompilerVisibleProperty Include="DesignTimeBuild" />
   </ItemGroup>-->
@@ -17,4 +13,5 @@
 
   <UsingTask TaskName="MicroWrath.Generator.GenerateGuidsFile" AssemblyFile="$(MSBuildThisFileDirectory)..\tasks\net472\MicroWrath.Generator.Tasks.dll" />
   <UsingTask TaskName="MicroWrath.Generator.InfoJson" AssemblyFile="$(MSBuildThisFileDirectory)..\tasks\net472\MicroWrath.Generator.Tasks.dll" />
+  <UsingTask TaskName="MicroWrath.Generator.Tasks.OwlcatMod" AssemblyFile="$(MSBuildThisFileDirectory)..\tasks\net472\MicroWrath.Generator.Tasks.dll" />
 </Project>

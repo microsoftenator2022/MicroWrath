@@ -11,17 +11,21 @@ using MicroWrath.Loader;
 
 namespace MicroWrath
 {
-    internal static partial class MicroMod
+    public static partial class MicroMod
     {
+        //static readonly string ModAssemblyDirectory = 
+        //    "..";
+        //    //Path.Combine("..", "MicroWrathMod");
+
         [OwlcatModificationEnterPoint]
-        static void Init(OwlcatModification owlMod)
+        public static void Init(OwlcatModification owlMod)
         {
             var logger = new OwlLogger(owlMod.Logger);
 
             if (!EnsureMicroWrath(GetModDirectories(logger), logger))
                 throw new Exception("Failed to load MicroWrath");
 
-            var assPath = Path.Combine(owlMod.Path, $"{owlMod.Manifest.UniqueName}.dll");
+            var assPath = Path.GetFullPath(Path.Combine(owlMod.Path, $"{owlMod.Manifest.UniqueName}.dll"));
 
             var (succ, mod) = LoadMod(assPath, logger);
 
