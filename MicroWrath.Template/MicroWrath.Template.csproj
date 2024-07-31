@@ -17,4 +17,11 @@
     <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**;content\**\GamePath.props;content\**\guids.json" />
   </ItemGroup>
 
+  <Target Name="UpdatePackageReferenceVersion" BeforeTargets="BeforeBuild">
+    <PropertyGroup>
+      <ScriptPath>UpdatePackageReferenceVersion.fsx</ScriptPath>
+    </PropertyGroup>
+    <Exec Command="cmd.exe /c dotnet fsi $(ScriptPath) &quot;$(Version)&quot;" IgnoreExitCode="true" ConsoleToMSBuild="true" WorkingDirectory="$(MSBuildProjectDir)" />
+  </Target>
+
 </Project>
