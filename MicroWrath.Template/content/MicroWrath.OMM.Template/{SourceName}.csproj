@@ -43,17 +43,20 @@
     <WriteLinesToFile File="guids.json" Lines="{}" />
   </Target>
 
-  <Target Name="OwlcatModTemplateTask" AfterTargets="Build">
+  <Target Name="OwlcatModPostBuildTask" AfterTargets="Build">
     <OwlcatMod
       OwlcatTemplateModPath="$(OwlcatTemplateModPath)"
-      BuildOutputPath="$(OutDir)" />
+      BinPath="$(OutDir)"
+      ModZipFile="$(SolutionDir)\bin\$(MSBuildProjectName)-$(Version).zip"
+      DeployPath="$(WrathData)\Modifications\" />
+    
   </Target>
 
-  <Target Name="ZipRelease" AfterTargets="OwlcatModTemplateTask" Condition="'$(Configuration)' == 'Release'">
+  <!--<Target Name="ZipRelease" AfterTargets="OwlcatModTemplateTask" Condition="'$(Configuration)' == 'Release'">
     <ZipDirectory SourceDirectory="$(OwlcatTemplateModPath)" DestinationFile="$(SolutionDir)\bin\$(MSBuildProjectName)-$(Version).zip" Overwrite="true" />
-  </Target>
+  </Target>-->
 
-  <Target Name="Deploy" AfterTargets="OwlcatModTemplateTask">
+  <!--<Target Name="Deploy" AfterTargets="OwlcatModTemplateTask">
     <ItemGroup>
       <OwlcatFiles Include="$(OwlcatTemplateModPath)\**\*.*" />
       <Files Include="$(TargetDir)\**\*.*" Exclude="$(TargetDir)\MicroWrath.Loader.dll" />
@@ -63,7 +66,7 @@
     <Copy SourceFiles="@(OwlcatFiles)" DestinationFiles="@(OwlcatFiles->'$(WrathData)\Modifications\$(MSBuildProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Files)" DestinationFiles="@(Files->'$(WrathData)\Modifications\$(MSBuildProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Loader)" DestinationFiles="@(Loader->'$(WrathData)\Modifications\$(MSBuildProjectName)\Assemblies\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
+  </Target>-->
 
 
   <Target Name="GenerateCustomPropsFile" BeforeTargets="ResolveReferences;Restore" Condition="$(WrathInstallDir) == ''">
