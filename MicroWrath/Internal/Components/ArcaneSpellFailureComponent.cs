@@ -17,6 +17,7 @@ namespace MicroWrath.Components
     [HarmonyPatch(typeof(AbilityData), nameof(AbilityData.IsAffectedByArcaneSpellFailure), MethodType.Getter)]
     internal class ArcaneSpellFailureComponent : BlueprintComponent
     {
+        /// <exclude />
         private static bool Postfix(bool __result, AbilityData __instance)
         {
             if (__instance.Blueprint.ComponentsArray.OfType<ArcaneSpellFailureComponent>().Any()) return true;

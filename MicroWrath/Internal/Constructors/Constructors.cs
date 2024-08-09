@@ -13,6 +13,7 @@ namespace MicroWrath.Constructors
             TBlueprint New(string assetId, string name);
         }
 
+        /// <exclude />
         private partial class BlueprintConstructor : IBlueprintConstructor<SimpleBlueprint>
         {
             internal BlueprintConstructor() { }
@@ -45,6 +46,7 @@ namespace MicroWrath.Constructors
             TComponent New();
         }
 
+        /// <exclude />
         private partial class ComponentConstructor : IComponentConstructor<BlueprintComponent>
         {
             internal ComponentConstructor() { }
@@ -76,7 +78,9 @@ namespace MicroWrath.Constructors
         /// </summary>
         public static class New
         {
+            /// <exclude />
             private static readonly Lazy<BlueprintConstructor> blueprintConstructor = new(() => new());
+
             /// <summary>
             /// Creates a new blueprint. Fields are initialized using <see cref="Default"/> values.
             /// </summary>
@@ -94,6 +98,7 @@ namespace MicroWrath.Constructors
             public static TBlueprint Blueprint<TBlueprint>(GeneratedGuid generatedGuid) where TBlueprint : SimpleBlueprint, new() =>
                 blueprintConstructor.Value.New<TBlueprint>(generatedGuid.Guid.ToString(), generatedGuid.Key);
 
+            /// <exclude />
             private static readonly Lazy<ComponentConstructor> componentConstructor = new(() => new());
 
             /// <summary>

@@ -34,7 +34,8 @@ namespace TabletopTweaks.Core.Utilities
 {
     public class ObjectDeepCopier
     {
-        internal class ArrayTraverse
+        /// <exclude />
+        private class ArrayTraverse
         {
             public int[] Position;
             private int[] maxLengths;
@@ -66,7 +67,9 @@ namespace TabletopTweaks.Core.Utilities
                 return false;
             }
         }
-        internal class ReferenceEqualityComparer : EqualityComparer<Object>
+
+        /// <exclude />
+        private class ReferenceEqualityComparer : EqualityComparer<Object>
         {
             public override bool Equals(object x, object y)
             {
@@ -89,17 +92,23 @@ namespace TabletopTweaks.Core.Utilities
                 return obj.GetHashCode();
             }
         }
+
+        /// <exclude />
         private static readonly MethodInfo CloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        internal static bool IsPrimitive(Type type)
+        /// <exclude />
+        private static bool IsPrimitive(Type type)
         {
             if (type == typeof(string)) return true;
             return (type.IsValueType & type.IsPrimitive);
         }
+
         public static object? Clone(object originalObject)
         {
             return InternalCopy(originalObject, new Dictionary<object, object>(new ReferenceEqualityComparer()));
         }
+
+        /// <exclude />
         private static object? InternalCopy(object originalObject, IDictionary<object, object> visited)
         {
             if (originalObject == null) return null;
@@ -132,6 +141,8 @@ namespace TabletopTweaks.Core.Utilities
                 while (walker.Step());
             }
         }
+
+        /// <exclude />
         private static void RecursiveCopyBaseTypePrivateFields(object originalObject, IDictionary<object, object> visited, object cloneObject, Type typeToReflect)
         {
             if (typeToReflect.BaseType != null)
@@ -140,6 +151,8 @@ namespace TabletopTweaks.Core.Utilities
                 CopyFields(originalObject, visited, cloneObject, typeToReflect.BaseType, BindingFlags.Instance | BindingFlags.NonPublic, info => info.IsPrivate);
             }
         }
+
+        /// <exclude />
         private static void CopyFields(object originalObject, IDictionary<object, object> visited, object cloneObject, Type typeToReflect, BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy, Func<FieldInfo, bool>? filter = null)
         {
             foreach (FieldInfo fieldInfo in typeToReflect.GetFields(bindingFlags))

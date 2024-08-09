@@ -9,6 +9,7 @@ using MicroWrath.Util.Linq;
 
 namespace MicroWrath.BlueprintInitializationContext
 {
+    /// <exclude />
     [Obsolete]
     internal static class BlueprintInitializationContextExtension
     {
@@ -47,6 +48,7 @@ namespace MicroWrath.BlueprintInitializationContext
         }
     }
 
+    /// <exclude />
     internal partial class BlueprintInitializationContext
     { 
         /// <summary>

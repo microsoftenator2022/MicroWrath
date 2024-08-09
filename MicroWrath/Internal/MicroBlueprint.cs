@@ -46,6 +46,7 @@ namespace MicroWrath
         public TReference ToReference<TReference>() where TReference : BlueprintReference<TBlueprint>, new() =>
             this.ToReference<TBlueprint, TReference>();
 
+        /// <exclude />
         private TBlueprint? MaybeBlueprint { get; init; } = null;
 
         /// <summary>

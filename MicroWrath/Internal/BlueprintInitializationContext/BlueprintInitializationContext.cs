@@ -13,6 +13,7 @@ using MicroWrath.Util;
 
 namespace MicroWrath.BlueprintInitializationContext
 {
+    /// <exclude />
     [Obsolete]
     internal partial class BlueprintInitializationContext
     {

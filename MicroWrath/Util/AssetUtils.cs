@@ -119,7 +119,10 @@ namespace MicroWrath.Util
             return blueprint;
         }
 
+        /// <exclude />
         static readonly Dictionary<string, AssetBundle> loadedBundles = new();
+
+        /// <exclude />
         static AssetBundle LoadBundleFromResource(string name)
         {
             if (!loadedBundles.ContainsKey(name))
@@ -146,6 +149,7 @@ namespace MicroWrath.Util
             return loadedBundles[name];
         }
 
+        /// <exclude />
         struct AlphaBlendConfig
         {
             public float x;
@@ -228,6 +232,7 @@ namespace MicroWrath.Util
             return output;
         }
 
+        /// <exclude />
         struct DiagonalCutConfig
         {
             public float offset;

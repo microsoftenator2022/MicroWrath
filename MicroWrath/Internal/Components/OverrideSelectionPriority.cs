@@ -63,6 +63,7 @@ namespace MicroWrath.Components
         /// </summary>
         public LevelUpActionPriority? ActionPriority = null;
 
+        /// <exclude />
         [HarmonyPatch(typeof(CharGenFeatureSelectorPhaseVM), nameof(CharGenFeatureSelectorPhaseVM.GetFeaturePriority))]
         [HarmonyPostfix]
         static CharGenPhaseBaseVM.ChargenPhasePriority GetFeaturePriority_Postfix(
@@ -76,6 +77,7 @@ namespace MicroWrath.Components
             return __result;
         }
 
+        /// <exclude />
         [HarmonyPatch(typeof(SelectFeature), nameof(SelectFeature.CalculatePriority))]
         [HarmonyPostfix]
         static LevelUpActionPriority CalculatePriority_Postfix(LevelUpActionPriority __result, IFeatureSelection selection)

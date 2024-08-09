@@ -45,7 +45,10 @@ namespace MicroWrath
         /// </summary>
         internal static IEnumerable<string> Keys => guids.Keys;
 
+        /// <exclude />
         private static string ModDirectory => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        /// <exclude />
 
         private static readonly Dictionary<string, Guid> runtimeGuids = new();
 

@@ -29,6 +29,7 @@ namespace MicroWrath.Deferred
             });
         }
 
+        /// <exclude />
         private event Action<A> Evaluated = Functional.Ignore;
 
         public IObservable<A> OnEvaluated => Observable.FromEvent<A>(

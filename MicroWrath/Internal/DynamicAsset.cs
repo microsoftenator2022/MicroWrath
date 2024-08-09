@@ -13,6 +13,7 @@ namespace MicroWrath.Util.Assets
 {
     internal static class Dynamic
     {
+        /// <exclude />
         private interface IDynamicAssetLink
         {
             WeakResourceLink Link { get; }
@@ -22,6 +23,7 @@ namespace MicroWrath.Util.Assets
             Type LinkType { get; }
         }
 
+        /// <exclude />
         private abstract class DynamicAssetLink<T, TLink> : IDynamicAssetLink
             where T : UnityEngine.Object
             where TLink : WeakResourceLink<T>, new()
@@ -59,6 +61,7 @@ namespace MicroWrath.Util.Assets
             }
         }
 
+        /// <exclude />
         private class DynamicGameObjectLink<TLink> : DynamicAssetLink<GameObject, TLink>
             where TLink : WeakResourceLink<GameObject>, new()
         {
@@ -74,6 +77,7 @@ namespace MicroWrath.Util.Assets
             public DynamicGameObjectLink(TLink link, Func<GameObject, GameObject> init) : base(link, init) { }
         }
 
+        /// <exclude />
         private class DynamicMonobehaviourLink<T, TLink> : DynamicAssetLink<T, TLink>
             where T : MonoBehaviour
             where TLink : WeakResourceLink<T>, new()
@@ -97,8 +101,10 @@ namespace MicroWrath.Util.Assets
             public DynamicMonobehaviourLink(TLink link, Func<T, T> init) : base(link, init) { }
         }
 
+        /// <exclude />
         private static readonly Dictionary<string, IDynamicAssetLink> DynamicAssetLinks = new();
 
+        /// <exclude />
         private static TLink CreateDynamicAssetLinkProxy<TLink>(IDynamicAssetLink proxy, string? assetId = null)
             where TLink : WeakResourceLink, new()
         {
