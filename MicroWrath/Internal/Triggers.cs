@@ -22,6 +22,7 @@ namespace MicroWrath
     [HarmonyPatch]
     internal static partial class Triggers
     {
+        /// <exclude />
         private static event Action LocalizationManager_Init_PostfixEvent = () => { };
 
         [HarmonyPatch(typeof(LocalizationManager), nameof(LocalizationManager.Init))]
@@ -47,8 +48,13 @@ namespace MicroWrath
                 addHandler: handler => LocalizationManager_Init_PostfixEvent += handler,
                 removeHandler: handler => LocalizationManager_Init_PostfixEvent -= handler);
 
+        /// <exclude />
         private static event Action BlueprintsCache_Init_PrefixEvent = () => { };
+
+        /// <exclude />
         private static event Action BlueprintsCache_InitEvent_Early = () => { };
+
+        /// <exclude />
         private static event Action BlueprintsCache_InitEvent = () => { };
         
         [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Init))]
@@ -135,6 +141,7 @@ namespace MicroWrath
             MicroLogger.Debug(() => $"Trigger {nameof(LocaleChanged)} completed in {timer.ElapsedMilliseconds}ms");
         }
 
+        /// <exclude />
         private static event Action<BlueprintGuid> BlueprintLoad_PrefixEvent = _ => { };
 
         /// <summary>
@@ -146,6 +153,7 @@ namespace MicroWrath
                 addHandler: handler => BlueprintLoad_PrefixEvent += handler,
                 removeHandler: handler => BlueprintLoad_PrefixEvent -= handler);
 
+        /// <exclude />
         [HarmonyPatch(typeof(BlueprintsCache), nameof(BlueprintsCache.Load))]
         [HarmonyPrefix]
         private static void BlueprintsCache_Load(BlueprintGuid guid)

@@ -11,6 +11,7 @@ using MicroWrath.Constructors;
 
 namespace MicroWrath.BlueprintInitializationContext
 {
+    /// <exclude />
     internal partial class BlueprintInitializationContext
     {
         private interface IInitContextBlueprint

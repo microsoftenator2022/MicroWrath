@@ -33,9 +33,12 @@ namespace MicroWrath
             internal IMicroBlueprint<SimpleBlueprint>? Blueprint { get; init; }
         }
 
+        /// <exclude />
         private static readonly List<Entry> EntryList = new();
+
         public static IEnumerable<Entry> Entries = EntryList.ToArray();
 
+        /// <exclude />
         private static Severity logLevel =
 #if DEBUG
             Severity.Debug;
@@ -62,6 +65,7 @@ namespace MicroWrath
             set => SetLogLevel(value);
         }
 
+        /// <exclude />
         private static UnityModManager.ModEntry? modEntry;
 
         /// <summary>
@@ -82,6 +86,7 @@ namespace MicroWrath
             }
         }
 
+        /// <exclude />
         private static void UmmLog(Entry entry)
         {
             if (entry.Severity < logLevel) return;
@@ -115,7 +120,8 @@ namespace MicroWrath
             if (entry.Exception is not null)
                 logger.LogException(entry.Exception);
         }
-        
+
+        /// <exclude />
         private static OwlcatModification? owlcatModification;
 
         /// <summary>
@@ -137,6 +143,7 @@ namespace MicroWrath
             }
         }
 
+        /// <exclude />
         private static void OwlLog(Entry entry)
         {
             if (entry.Severity < logLevel) return;

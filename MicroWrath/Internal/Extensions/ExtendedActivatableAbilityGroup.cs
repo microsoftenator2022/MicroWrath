@@ -86,6 +86,7 @@ namespace MicroWrath.Extensions
         public static implicit operator ActivatableAbilityGroup(ExtraActivatableAbilityGroup extraGroup) =>
             (ActivatableAbilityGroup)extraGroup.GroupId;
 
+        /// <exclude />
         static int GetGroupSizeIncrease(uint groupId, UnitDescriptor owner)
         {
             if (owner.Get<ExtraActivatableAbilityGroup.UnitPart>() is { } unitPart &&
@@ -95,6 +96,7 @@ namespace MicroWrath.Extensions
             return 0;
         }
 
+        /// <exclude />
         static void SetGroupSizeIncrease(uint groupId, UnitDescriptor owner, int increase)
         {
             var unitPart = owner.Ensure<ExtraActivatableAbilityGroup.UnitPart>();
@@ -112,6 +114,7 @@ namespace MicroWrath.Extensions
             unitPart.GroupSizeIncreases[groupId] = increase;
         }
 
+        /// <exclude />
         static bool TryGetGroupSize(ActivatableAbilityGroup groupId, UnitDescriptor owner , out int value)
         {
             var result = Groups.TryGetValue((uint)groupId, out value);

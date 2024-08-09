@@ -36,6 +36,7 @@ namespace MicroWrath.Util
         /// </summary>
         public bool IsNone => !IsSome;
 
+        /// <exclude />
         Option(T value)
         {
             MaybeValue = value;

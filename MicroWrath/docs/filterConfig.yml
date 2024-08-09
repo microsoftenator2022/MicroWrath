@@ -1,4 +1,8 @@
 ### YamlMime:ManagedReference
 apiRules:
 - exclude:
-    uidRegex: (_|\.)Patch(es)?$
+    hasAttribute:
+        uid: HarmonyLib.HarmonyPatch
+    uidRegex: (_|\.)?Patch(es)?$
+- exclude:
+    uidRegex: ^System.Runtime.CompilerServices    
