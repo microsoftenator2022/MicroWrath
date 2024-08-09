@@ -117,6 +117,7 @@ namespace MicroWrath
                 addHandler: handler => BlueprintsCache_InitEvent += handler,
                 removeHandler: handler => BlueprintsCache_InitEvent -= handler);
 
+        /// <exclude /> 
         private static event Action<Locale> LocalizationManager_OnLocaleChangedEvent = _ => { };
 
         /// <summary>
