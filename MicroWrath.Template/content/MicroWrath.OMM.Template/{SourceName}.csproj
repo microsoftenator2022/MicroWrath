@@ -49,25 +49,7 @@
       BinPath="$(OutDir)"
       ModZipFile="$(SolutionDir)\bin\$(MSBuildProjectName)-$(Version).zip"
       DeployPath="$(WrathData)\Modifications\" />
-    
   </Target>
-
-  <!--<Target Name="ZipRelease" AfterTargets="OwlcatModTemplateTask" Condition="'$(Configuration)' == 'Release'">
-    <ZipDirectory SourceDirectory="$(OwlcatTemplateModPath)" DestinationFile="$(SolutionDir)\bin\$(MSBuildProjectName)-$(Version).zip" Overwrite="true" />
-  </Target>-->
-
-  <!--<Target Name="Deploy" AfterTargets="OwlcatModTemplateTask">
-    <ItemGroup>
-      <OwlcatFiles Include="$(OwlcatTemplateModPath)\**\*.*" />
-      <Files Include="$(TargetDir)\**\*.*" Exclude="$(TargetDir)\MicroWrath.Loader.dll" />
-      <Loader Include="$(TargetDir)\MicroWrath.Loader.dll" />
-    </ItemGroup>
-
-    <Copy SourceFiles="@(OwlcatFiles)" DestinationFiles="@(OwlcatFiles->'$(WrathData)\Modifications\$(MSBuildProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Files)" DestinationFiles="@(Files->'$(WrathData)\Modifications\$(MSBuildProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loader)" DestinationFiles="@(Loader->'$(WrathData)\Modifications\$(MSBuildProjectName)\Assemblies\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>-->
-
 
   <Target Name="GenerateCustomPropsFile" BeforeTargets="ResolveReferences;Restore" Condition="$(WrathInstallDir) == ''">
     <Exec Command="findstr /C:&quot;Mono path[0]&quot; &quot;$(WrathData)\Player.log&quot;" IgnoreExitCode="true" ConsoleToMSBuild="true">

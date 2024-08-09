@@ -150,8 +150,9 @@ public class OwlcatMod : Task
         base.Log.LogMessage(MessageImportance.High, nameof(this.ExtractToOutput));
         this.ExtractToOutput(uniqueName, zipPath);
 
-        //if (this.DeployPath is not null)
-        //    this.Deploy(uniqueName, zipPath, this.DeployPath);
+        base.Log.LogMessage(MessageImportance.High, nameof(this.Deploy));
+        if (this.DeployPath is not null)
+            this.Deploy(uniqueName, zipPath, this.DeployPath);
 
         return true;
     }
