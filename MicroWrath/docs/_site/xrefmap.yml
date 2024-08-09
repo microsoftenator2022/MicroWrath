@@ -1008,22 +1008,6 @@ references:
   commentId: T:MicroWrath.Components.ArcaneSpellFailureComponent
   fullName: MicroWrath.Components.ArcaneSpellFailureComponent
   nameWithType: ArcaneSpellFailureComponent
-- uid: MicroWrath.Components.ArcaneSpellFailureComponent.Postfix(System.Boolean,Kingmaker.UnitLogic.Abilities.AbilityData)
-  name: Postfix(bool, AbilityData)
-  href: api/MicroWrath.Components.ArcaneSpellFailureComponent.html#MicroWrath_Components_ArcaneSpellFailureComponent_Postfix_System_Boolean_Kingmaker_UnitLogic_Abilities_AbilityData_
-  commentId: M:MicroWrath.Components.ArcaneSpellFailureComponent.Postfix(System.Boolean,Kingmaker.UnitLogic.Abilities.AbilityData)
-  name.vb: Postfix(Boolean, AbilityData)
-  fullName: MicroWrath.Components.ArcaneSpellFailureComponent.Postfix(bool, Kingmaker.UnitLogic.Abilities.AbilityData)
-  fullName.vb: MicroWrath.Components.ArcaneSpellFailureComponent.Postfix(Boolean, Kingmaker.UnitLogic.Abilities.AbilityData)
-  nameWithType: ArcaneSpellFailureComponent.Postfix(bool, AbilityData)
-  nameWithType.vb: ArcaneSpellFailureComponent.Postfix(Boolean, AbilityData)
-- uid: MicroWrath.Components.ArcaneSpellFailureComponent.Postfix*
-  name: Postfix
-  href: api/MicroWrath.Components.ArcaneSpellFailureComponent.html#MicroWrath_Components_ArcaneSpellFailureComponent_Postfix_
-  commentId: Overload:MicroWrath.Components.ArcaneSpellFailureComponent.Postfix
-  isSpec: "True"
-  fullName: MicroWrath.Components.ArcaneSpellFailureComponent.Postfix
-  nameWithType: ArcaneSpellFailureComponent.Postfix
 - uid: MicroWrath.Components.ContextAddTemporaryHP
   name: ContextAddTemporaryHP
   href: api/MicroWrath.Components.ContextAddTemporaryHP.html
@@ -1146,32 +1130,6 @@ references:
   commentId: F:MicroWrath.Components.SelectionPriority.ActionPriority
   fullName: MicroWrath.Components.SelectionPriority.ActionPriority
   nameWithType: SelectionPriority.ActionPriority
-- uid: MicroWrath.Components.SelectionPriority.CalculatePriority_Postfix(Kingmaker.UnitLogic.Class.LevelUp.Actions.LevelUpActionPriority,Kingmaker.Blueprints.Classes.Selection.IFeatureSelection)
-  name: CalculatePriority_Postfix(LevelUpActionPriority, IFeatureSelection)
-  href: api/MicroWrath.Components.SelectionPriority.html#MicroWrath_Components_SelectionPriority_CalculatePriority_Postfix_Kingmaker_UnitLogic_Class_LevelUp_Actions_LevelUpActionPriority_Kingmaker_Blueprints_Classes_Selection_IFeatureSelection_
-  commentId: M:MicroWrath.Components.SelectionPriority.CalculatePriority_Postfix(Kingmaker.UnitLogic.Class.LevelUp.Actions.LevelUpActionPriority,Kingmaker.Blueprints.Classes.Selection.IFeatureSelection)
-  fullName: MicroWrath.Components.SelectionPriority.CalculatePriority_Postfix(Kingmaker.UnitLogic.Class.LevelUp.Actions.LevelUpActionPriority, Kingmaker.Blueprints.Classes.Selection.IFeatureSelection)
-  nameWithType: SelectionPriority.CalculatePriority_Postfix(LevelUpActionPriority, IFeatureSelection)
-- uid: MicroWrath.Components.SelectionPriority.CalculatePriority_Postfix*
-  name: CalculatePriority_Postfix
-  href: api/MicroWrath.Components.SelectionPriority.html#MicroWrath_Components_SelectionPriority_CalculatePriority_Postfix_
-  commentId: Overload:MicroWrath.Components.SelectionPriority.CalculatePriority_Postfix
-  isSpec: "True"
-  fullName: MicroWrath.Components.SelectionPriority.CalculatePriority_Postfix
-  nameWithType: SelectionPriority.CalculatePriority_Postfix
-- uid: MicroWrath.Components.SelectionPriority.GetFeaturePriority_Postfix(Kingmaker.UI.MVVM._VM.CharGen.Phases.CharGenPhaseBaseVM.ChargenPhasePriority,Kingmaker.UnitLogic.Class.LevelUp.FeatureSelectionState)
-  name: GetFeaturePriority_Postfix(ChargenPhasePriority, FeatureSelectionState)
-  href: api/MicroWrath.Components.SelectionPriority.html#MicroWrath_Components_SelectionPriority_GetFeaturePriority_Postfix_Kingmaker_UI_MVVM__VM_CharGen_Phases_CharGenPhaseBaseVM_ChargenPhasePriority_Kingmaker_UnitLogic_Class_LevelUp_FeatureSelectionState_
-  commentId: M:MicroWrath.Components.SelectionPriority.GetFeaturePriority_Postfix(Kingmaker.UI.MVVM._VM.CharGen.Phases.CharGenPhaseBaseVM.ChargenPhasePriority,Kingmaker.UnitLogic.Class.LevelUp.FeatureSelectionState)
-  fullName: MicroWrath.Components.SelectionPriority.GetFeaturePriority_Postfix(Kingmaker.UI.MVVM._VM.CharGen.Phases.CharGenPhaseBaseVM.ChargenPhasePriority, Kingmaker.UnitLogic.Class.LevelUp.FeatureSelectionState)
-  nameWithType: SelectionPriority.GetFeaturePriority_Postfix(CharGenPhaseBaseVM.ChargenPhasePriority, FeatureSelectionState)
-- uid: MicroWrath.Components.SelectionPriority.GetFeaturePriority_Postfix*
-  name: GetFeaturePriority_Postfix
-  href: api/MicroWrath.Components.SelectionPriority.html#MicroWrath_Components_SelectionPriority_GetFeaturePriority_Postfix_
-  commentId: Overload:MicroWrath.Components.SelectionPriority.GetFeaturePriority_Postfix
-  isSpec: "True"
-  fullName: MicroWrath.Components.SelectionPriority.GetFeaturePriority_Postfix
-  nameWithType: SelectionPriority.GetFeaturePriority_Postfix
 - uid: MicroWrath.Components.SelectionPriority.PhasePriority
   name: PhasePriority
   href: api/MicroWrath.Components.SelectionPriority.html#MicroWrath_Components_SelectionPriority_PhasePriority
@@ -1789,18 +1747,6 @@ references:
   fullName.vb: MicroWrath.Constructors.Construct.New.Component(Of TComponent)()
   nameWithType: Construct.New.Component<TComponent>()
   nameWithType.vb: Construct.New.Component(Of TComponent)()
-- uid: MicroWrath.Constructors.Construct.New.blueprintConstructor
-  name: blueprintConstructor
-  href: api/MicroWrath.Constructors.Construct.New.html#MicroWrath_Constructors_Construct_New_blueprintConstructor
-  commentId: F:MicroWrath.Constructors.Construct.New.blueprintConstructor
-  fullName: MicroWrath.Constructors.Construct.New.blueprintConstructor
-  nameWithType: Construct.New.blueprintConstructor
-- uid: MicroWrath.Constructors.Construct.New.componentConstructor
-  name: componentConstructor
-  href: api/MicroWrath.Constructors.Construct.New.html#MicroWrath_Constructors_Construct_New_componentConstructor
-  commentId: F:MicroWrath.Constructors.Construct.New.componentConstructor
-  fullName: MicroWrath.Constructors.Construct.New.componentConstructor
-  nameWithType: Construct.New.componentConstructor
 - uid: MicroWrath.Constructors.IReflectionInitializer
   name: IReflectionInitializer
   href: api/MicroWrath.Constructors.IReflectionInitializer.html
@@ -2909,14 +2855,6 @@ references:
   fullName.vb: MicroWrath.Deferred.Deferred(Of A).Eval
   nameWithType: Deferred<A>.Eval
   nameWithType.vb: Deferred(Of A).Eval
-- uid: MicroWrath.Deferred.Deferred`1.Evaluated
-  name: Evaluated
-  href: api/MicroWrath.Deferred.Deferred-1.html#MicroWrath_Deferred_Deferred_1_Evaluated
-  commentId: E:MicroWrath.Deferred.Deferred`1.Evaluated
-  fullName: MicroWrath.Deferred.Deferred<A>.Evaluated
-  fullName.vb: MicroWrath.Deferred.Deferred(Of A).Evaluated
-  nameWithType: Deferred<A>.Evaluated
-  nameWithType.vb: Deferred(Of A).Evaluated
 - uid: MicroWrath.Deferred.Deferred`1.OnCompleted
   name: OnCompleted()
   href: api/MicroWrath.Deferred.Deferred-1.html#MicroWrath_Deferred_Deferred_1_OnCompleted
@@ -4508,22 +4446,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.EnumValues
   nameWithType: ExtraActivatableAbilityGroup.EnumValues
-- uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.GetGroupSizeIncrease(System.UInt32,Kingmaker.UnitLogic.UnitDescriptor)
-  name: GetGroupSizeIncrease(uint, UnitDescriptor)
-  href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.html#MicroWrath_Extensions_ExtraActivatableAbilityGroup_GetGroupSizeIncrease_System_UInt32_Kingmaker_UnitLogic_UnitDescriptor_
-  commentId: M:MicroWrath.Extensions.ExtraActivatableAbilityGroup.GetGroupSizeIncrease(System.UInt32,Kingmaker.UnitLogic.UnitDescriptor)
-  name.vb: GetGroupSizeIncrease(UInteger, UnitDescriptor)
-  fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.GetGroupSizeIncrease(uint, Kingmaker.UnitLogic.UnitDescriptor)
-  fullName.vb: MicroWrath.Extensions.ExtraActivatableAbilityGroup.GetGroupSizeIncrease(UInteger, Kingmaker.UnitLogic.UnitDescriptor)
-  nameWithType: ExtraActivatableAbilityGroup.GetGroupSizeIncrease(uint, UnitDescriptor)
-  nameWithType.vb: ExtraActivatableAbilityGroup.GetGroupSizeIncrease(UInteger, UnitDescriptor)
-- uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.GetGroupSizeIncrease*
-  name: GetGroupSizeIncrease
-  href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.html#MicroWrath_Extensions_ExtraActivatableAbilityGroup_GetGroupSizeIncrease_
-  commentId: Overload:MicroWrath.Extensions.ExtraActivatableAbilityGroup.GetGroupSizeIncrease
-  isSpec: "True"
-  fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.GetGroupSizeIncrease
-  nameWithType: ExtraActivatableAbilityGroup.GetGroupSizeIncrease
 - uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.GroupId
   name: GroupId
   href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.html#MicroWrath_Extensions_ExtraActivatableAbilityGroup_GroupId
@@ -4536,38 +4458,6 @@ references:
   commentId: F:MicroWrath.Extensions.ExtraActivatableAbilityGroup.Groups
   fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.Groups
   nameWithType: ExtraActivatableAbilityGroup.Groups
-- uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.SetGroupSizeIncrease(System.UInt32,Kingmaker.UnitLogic.UnitDescriptor,System.Int32)
-  name: SetGroupSizeIncrease(uint, UnitDescriptor, int)
-  href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.html#MicroWrath_Extensions_ExtraActivatableAbilityGroup_SetGroupSizeIncrease_System_UInt32_Kingmaker_UnitLogic_UnitDescriptor_System_Int32_
-  commentId: M:MicroWrath.Extensions.ExtraActivatableAbilityGroup.SetGroupSizeIncrease(System.UInt32,Kingmaker.UnitLogic.UnitDescriptor,System.Int32)
-  name.vb: SetGroupSizeIncrease(UInteger, UnitDescriptor, Integer)
-  fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.SetGroupSizeIncrease(uint, Kingmaker.UnitLogic.UnitDescriptor, int)
-  fullName.vb: MicroWrath.Extensions.ExtraActivatableAbilityGroup.SetGroupSizeIncrease(UInteger, Kingmaker.UnitLogic.UnitDescriptor, Integer)
-  nameWithType: ExtraActivatableAbilityGroup.SetGroupSizeIncrease(uint, UnitDescriptor, int)
-  nameWithType.vb: ExtraActivatableAbilityGroup.SetGroupSizeIncrease(UInteger, UnitDescriptor, Integer)
-- uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.SetGroupSizeIncrease*
-  name: SetGroupSizeIncrease
-  href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.html#MicroWrath_Extensions_ExtraActivatableAbilityGroup_SetGroupSizeIncrease_
-  commentId: Overload:MicroWrath.Extensions.ExtraActivatableAbilityGroup.SetGroupSizeIncrease
-  isSpec: "True"
-  fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.SetGroupSizeIncrease
-  nameWithType: ExtraActivatableAbilityGroup.SetGroupSizeIncrease
-- uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.TryGetGroupSize(Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityGroup,Kingmaker.UnitLogic.UnitDescriptor,System.Int32@)
-  name: TryGetGroupSize(ActivatableAbilityGroup, UnitDescriptor, out int)
-  href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.html#MicroWrath_Extensions_ExtraActivatableAbilityGroup_TryGetGroupSize_Kingmaker_UnitLogic_ActivatableAbilities_ActivatableAbilityGroup_Kingmaker_UnitLogic_UnitDescriptor_System_Int32__
-  commentId: M:MicroWrath.Extensions.ExtraActivatableAbilityGroup.TryGetGroupSize(Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityGroup,Kingmaker.UnitLogic.UnitDescriptor,System.Int32@)
-  name.vb: TryGetGroupSize(ActivatableAbilityGroup, UnitDescriptor, Integer)
-  fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.TryGetGroupSize(Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityGroup, Kingmaker.UnitLogic.UnitDescriptor, out int)
-  fullName.vb: MicroWrath.Extensions.ExtraActivatableAbilityGroup.TryGetGroupSize(Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityGroup, Kingmaker.UnitLogic.UnitDescriptor, Integer)
-  nameWithType: ExtraActivatableAbilityGroup.TryGetGroupSize(ActivatableAbilityGroup, UnitDescriptor, out int)
-  nameWithType.vb: ExtraActivatableAbilityGroup.TryGetGroupSize(ActivatableAbilityGroup, UnitDescriptor, Integer)
-- uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.TryGetGroupSize*
-  name: TryGetGroupSize
-  href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.html#MicroWrath_Extensions_ExtraActivatableAbilityGroup_TryGetGroupSize_
-  commentId: Overload:MicroWrath.Extensions.ExtraActivatableAbilityGroup.TryGetGroupSize
-  isSpec: "True"
-  fullName: MicroWrath.Extensions.ExtraActivatableAbilityGroup.TryGetGroupSize
-  nameWithType: ExtraActivatableAbilityGroup.TryGetGroupSize
 - uid: MicroWrath.Extensions.ExtraActivatableAbilityGroup.UnitPart
   name: ExtraActivatableAbilityGroup.UnitPart
   href: api/MicroWrath.Extensions.ExtraActivatableAbilityGroup.UnitPart.html
@@ -4679,19 +4569,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.GeneratedGuid.Keys
   nameWithType: GeneratedGuid.Keys
-- uid: MicroWrath.GeneratedGuid.ModDirectory
-  name: ModDirectory
-  href: api/MicroWrath.GeneratedGuid.html#MicroWrath_GeneratedGuid_ModDirectory
-  commentId: P:MicroWrath.GeneratedGuid.ModDirectory
-  fullName: MicroWrath.GeneratedGuid.ModDirectory
-  nameWithType: GeneratedGuid.ModDirectory
-- uid: MicroWrath.GeneratedGuid.ModDirectory*
-  name: ModDirectory
-  href: api/MicroWrath.GeneratedGuid.html#MicroWrath_GeneratedGuid_ModDirectory_
-  commentId: Overload:MicroWrath.GeneratedGuid.ModDirectory
-  isSpec: "True"
-  fullName: MicroWrath.GeneratedGuid.ModDirectory
-  nameWithType: GeneratedGuid.ModDirectory
 - uid: MicroWrath.GeneratedGuid.ToBlueprintReference*
   name: ToBlueprintReference
   href: api/MicroWrath.GeneratedGuid.html#MicroWrath_GeneratedGuid_ToBlueprintReference_
@@ -4788,12 +4665,6 @@ references:
   fullName.vb: MicroWrath.GeneratedGuid.CType
   nameWithType: GeneratedGuid.implicit operator
   nameWithType.vb: GeneratedGuid.CType
-- uid: MicroWrath.GeneratedGuid.runtimeGuids
-  name: runtimeGuids
-  href: api/MicroWrath.GeneratedGuid.html#MicroWrath_GeneratedGuid_runtimeGuids
-  commentId: F:MicroWrath.GeneratedGuid.runtimeGuids
-  fullName: MicroWrath.GeneratedGuid.runtimeGuids
-  nameWithType: GeneratedGuid.runtimeGuids
 - uid: MicroWrath.ILocalizedStringData
   name: ILocalizedStringData
   href: api/MicroWrath.ILocalizedStringData.html
@@ -5112,23 +4983,6 @@ references:
   fullName.vb: MicroWrath.MicroBlueprint(Of TBlueprint).GetBlueprint
   nameWithType: MicroBlueprint<TBlueprint>.GetBlueprint
   nameWithType.vb: MicroBlueprint(Of TBlueprint).GetBlueprint
-- uid: MicroWrath.MicroBlueprint`1.MaybeBlueprint
-  name: MaybeBlueprint
-  href: api/MicroWrath.MicroBlueprint-1.html#MicroWrath_MicroBlueprint_1_MaybeBlueprint
-  commentId: P:MicroWrath.MicroBlueprint`1.MaybeBlueprint
-  fullName: MicroWrath.MicroBlueprint<TBlueprint>.MaybeBlueprint
-  fullName.vb: MicroWrath.MicroBlueprint(Of TBlueprint).MaybeBlueprint
-  nameWithType: MicroBlueprint<TBlueprint>.MaybeBlueprint
-  nameWithType.vb: MicroBlueprint(Of TBlueprint).MaybeBlueprint
-- uid: MicroWrath.MicroBlueprint`1.MaybeBlueprint*
-  name: MaybeBlueprint
-  href: api/MicroWrath.MicroBlueprint-1.html#MicroWrath_MicroBlueprint_1_MaybeBlueprint_
-  commentId: Overload:MicroWrath.MicroBlueprint`1.MaybeBlueprint
-  isSpec: "True"
-  fullName: MicroWrath.MicroBlueprint<TBlueprint>.MaybeBlueprint
-  fullName.vb: MicroWrath.MicroBlueprint(Of TBlueprint).MaybeBlueprint
-  nameWithType: MicroBlueprint<TBlueprint>.MaybeBlueprint
-  nameWithType.vb: MicroBlueprint(Of TBlueprint).MaybeBlueprint
 - uid: MicroWrath.MicroBlueprint`1.Name
   name: Name
   href: api/MicroWrath.MicroBlueprint-1.html#MicroWrath_MicroBlueprint_1_Name
@@ -5365,12 +5219,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.MicroLogger.Entry.Severity
   nameWithType: MicroLogger.Entry.Severity
-- uid: MicroWrath.MicroLogger.EntryList
-  name: EntryList
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_EntryList
-  commentId: F:MicroWrath.MicroLogger.EntryList
-  fullName: MicroWrath.MicroLogger.EntryList
-  nameWithType: MicroLogger.EntryList
 - uid: MicroWrath.MicroLogger.Error(System.String,System.Exception)
   name: Error(string, Exception?)
   href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_Error_System_String_System_Exception_
@@ -5429,19 +5277,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.MicroLogger.ModEntry
   nameWithType: MicroLogger.ModEntry
-- uid: MicroWrath.MicroLogger.OwlLog(MicroWrath.MicroLogger.Entry)
-  name: OwlLog(Entry)
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_OwlLog_MicroWrath_MicroLogger_Entry_
-  commentId: M:MicroWrath.MicroLogger.OwlLog(MicroWrath.MicroLogger.Entry)
-  fullName: MicroWrath.MicroLogger.OwlLog(MicroWrath.MicroLogger.Entry)
-  nameWithType: MicroLogger.OwlLog(MicroLogger.Entry)
-- uid: MicroWrath.MicroLogger.OwlLog*
-  name: OwlLog
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_OwlLog_
-  commentId: Overload:MicroWrath.MicroLogger.OwlLog
-  isSpec: "True"
-  fullName: MicroWrath.MicroLogger.OwlLog
-  nameWithType: MicroLogger.OwlLog
 - uid: MicroWrath.MicroLogger.OwlcatModification
   name: OwlcatModification
   href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_OwlcatModification
@@ -5530,19 +5365,6 @@ references:
   commentId: F:MicroWrath.MicroLogger.Severity.Warning
   fullName: MicroWrath.MicroLogger.Severity.Warning
   nameWithType: MicroLogger.Severity.Warning
-- uid: MicroWrath.MicroLogger.UmmLog(MicroWrath.MicroLogger.Entry)
-  name: UmmLog(Entry)
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_UmmLog_MicroWrath_MicroLogger_Entry_
-  commentId: M:MicroWrath.MicroLogger.UmmLog(MicroWrath.MicroLogger.Entry)
-  fullName: MicroWrath.MicroLogger.UmmLog(MicroWrath.MicroLogger.Entry)
-  nameWithType: MicroLogger.UmmLog(MicroLogger.Entry)
-- uid: MicroWrath.MicroLogger.UmmLog*
-  name: UmmLog
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_UmmLog_
-  commentId: Overload:MicroWrath.MicroLogger.UmmLog
-  isSpec: "True"
-  fullName: MicroWrath.MicroLogger.UmmLog
-  nameWithType: MicroLogger.UmmLog
 - uid: MicroWrath.MicroLogger.Warning(System.String,System.Exception)
   name: Warning(string, Exception?)
   href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_Warning_System_String_System_Exception_
@@ -5559,24 +5381,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.MicroLogger.Warning
   nameWithType: MicroLogger.Warning
-- uid: MicroWrath.MicroLogger.logLevel
-  name: logLevel
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_logLevel
-  commentId: F:MicroWrath.MicroLogger.logLevel
-  fullName: MicroWrath.MicroLogger.logLevel
-  nameWithType: MicroLogger.logLevel
-- uid: MicroWrath.MicroLogger.modEntry
-  name: modEntry
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_modEntry
-  commentId: F:MicroWrath.MicroLogger.modEntry
-  fullName: MicroWrath.MicroLogger.modEntry
-  nameWithType: MicroLogger.modEntry
-- uid: MicroWrath.MicroLogger.owlcatModification
-  name: owlcatModification
-  href: api/MicroWrath.MicroLogger.html#MicroWrath_MicroLogger_owlcatModification
-  commentId: F:MicroWrath.MicroLogger.owlcatModification
-  fullName: MicroWrath.MicroLogger.owlcatModification
-  nameWithType: MicroLogger.owlcatModification
 - uid: MicroWrath.OwlcatBlueprint`1
   name: OwlcatBlueprint<TBlueprint>
   href: api/MicroWrath.OwlcatBlueprint-1.html
@@ -5736,30 +5540,12 @@ references:
   commentId: F:MicroWrath.Triggers.BlueprintLoad_Prefix
   fullName: MicroWrath.Triggers.BlueprintLoad_Prefix
   nameWithType: Triggers.BlueprintLoad_Prefix
-- uid: MicroWrath.Triggers.BlueprintLoad_PrefixEvent
-  name: BlueprintLoad_PrefixEvent
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintLoad_PrefixEvent
-  commentId: E:MicroWrath.Triggers.BlueprintLoad_PrefixEvent
-  fullName: MicroWrath.Triggers.BlueprintLoad_PrefixEvent
-  nameWithType: Triggers.BlueprintLoad_PrefixEvent
 - uid: MicroWrath.Triggers.BlueprintsCache_Init
   name: BlueprintsCache_Init
   href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintsCache_Init
   commentId: F:MicroWrath.Triggers.BlueprintsCache_Init
   fullName: MicroWrath.Triggers.BlueprintsCache_Init
   nameWithType: Triggers.BlueprintsCache_Init
-- uid: MicroWrath.Triggers.BlueprintsCache_InitEvent
-  name: BlueprintsCache_InitEvent
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintsCache_InitEvent
-  commentId: E:MicroWrath.Triggers.BlueprintsCache_InitEvent
-  fullName: MicroWrath.Triggers.BlueprintsCache_InitEvent
-  nameWithType: Triggers.BlueprintsCache_InitEvent
-- uid: MicroWrath.Triggers.BlueprintsCache_InitEvent_Early
-  name: BlueprintsCache_InitEvent_Early
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintsCache_InitEvent_Early
-  commentId: E:MicroWrath.Triggers.BlueprintsCache_InitEvent_Early
-  fullName: MicroWrath.Triggers.BlueprintsCache_InitEvent_Early
-  nameWithType: Triggers.BlueprintsCache_InitEvent_Early
 - uid: MicroWrath.Triggers.BlueprintsCache_Init_Early
   name: BlueprintsCache_Init_Early
   href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintsCache_Init_Early
@@ -5772,25 +5558,6 @@ references:
   commentId: F:MicroWrath.Triggers.BlueprintsCache_Init_Prefix
   fullName: MicroWrath.Triggers.BlueprintsCache_Init_Prefix
   nameWithType: Triggers.BlueprintsCache_Init_Prefix
-- uid: MicroWrath.Triggers.BlueprintsCache_Init_PrefixEvent
-  name: BlueprintsCache_Init_PrefixEvent
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintsCache_Init_PrefixEvent
-  commentId: E:MicroWrath.Triggers.BlueprintsCache_Init_PrefixEvent
-  fullName: MicroWrath.Triggers.BlueprintsCache_Init_PrefixEvent
-  nameWithType: Triggers.BlueprintsCache_Init_PrefixEvent
-- uid: MicroWrath.Triggers.BlueprintsCache_Load(Kingmaker.Blueprints.BlueprintGuid)
-  name: BlueprintsCache_Load(BlueprintGuid)
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintsCache_Load_Kingmaker_Blueprints_BlueprintGuid_
-  commentId: M:MicroWrath.Triggers.BlueprintsCache_Load(Kingmaker.Blueprints.BlueprintGuid)
-  fullName: MicroWrath.Triggers.BlueprintsCache_Load(Kingmaker.Blueprints.BlueprintGuid)
-  nameWithType: Triggers.BlueprintsCache_Load(BlueprintGuid)
-- uid: MicroWrath.Triggers.BlueprintsCache_Load*
-  name: BlueprintsCache_Load
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintsCache_Load_
-  commentId: Overload:MicroWrath.Triggers.BlueprintsCache_Load
-  isSpec: "True"
-  fullName: MicroWrath.Triggers.BlueprintsCache_Load
-  nameWithType: Triggers.BlueprintsCache_Load
 - uid: MicroWrath.Triggers.LocaleChanged
   name: LocaleChanged
   href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_LocaleChanged
@@ -5803,12 +5570,6 @@ references:
   commentId: F:MicroWrath.Triggers.LocalizationManager_Init_Postfix
   fullName: MicroWrath.Triggers.LocalizationManager_Init_Postfix
   nameWithType: Triggers.LocalizationManager_Init_Postfix
-- uid: MicroWrath.Triggers.LocalizationManager_Init_PostfixEvent
-  name: LocalizationManager_Init_PostfixEvent
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_LocalizationManager_Init_PostfixEvent
-  commentId: E:MicroWrath.Triggers.LocalizationManager_Init_PostfixEvent
-  fullName: MicroWrath.Triggers.LocalizationManager_Init_PostfixEvent
-  nameWithType: Triggers.LocalizationManager_Init_PostfixEvent
 - uid: MicroWrath.Triggers.LocalizationManager_OnLocaleChangedEvent
   name: LocalizationManager_OnLocaleChangedEvent
   href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_LocalizationManager_OnLocaleChangedEvent
@@ -6115,28 +5876,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.Util.AssetUtils.GetTextureAssemblyResource
   nameWithType: AssetUtils.GetTextureAssemblyResource
-- uid: MicroWrath.Util.AssetUtils.LoadBundleFromResource(System.String)
-  name: LoadBundleFromResource(string)
-  href: api/MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_LoadBundleFromResource_System_String_
-  commentId: M:MicroWrath.Util.AssetUtils.LoadBundleFromResource(System.String)
-  name.vb: LoadBundleFromResource(String)
-  fullName: MicroWrath.Util.AssetUtils.LoadBundleFromResource(string)
-  fullName.vb: MicroWrath.Util.AssetUtils.LoadBundleFromResource(String)
-  nameWithType: AssetUtils.LoadBundleFromResource(string)
-  nameWithType.vb: AssetUtils.LoadBundleFromResource(String)
-- uid: MicroWrath.Util.AssetUtils.LoadBundleFromResource*
-  name: LoadBundleFromResource
-  href: api/MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_LoadBundleFromResource_
-  commentId: Overload:MicroWrath.Util.AssetUtils.LoadBundleFromResource
-  isSpec: "True"
-  fullName: MicroWrath.Util.AssetUtils.LoadBundleFromResource
-  nameWithType: AssetUtils.LoadBundleFromResource
-- uid: MicroWrath.Util.AssetUtils.loadedBundles
-  name: loadedBundles
-  href: api/MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_loadedBundles
-  commentId: F:MicroWrath.Util.AssetUtils.loadedBundles
-  fullName: MicroWrath.Util.AssetUtils.loadedBundles
-  nameWithType: AssetUtils.loadedBundles
 - uid: MicroWrath.Util.Assets
   name: MicroWrath.Util.Assets
   href: api/MicroWrath.Util.Assets.html
@@ -6149,22 +5888,6 @@ references:
   commentId: T:MicroWrath.Util.Assets.Dynamic
   fullName: MicroWrath.Util.Assets.Dynamic
   nameWithType: Dynamic
-- uid: MicroWrath.Util.Assets.Dynamic.CreateDynamicAssetLinkProxy*
-  name: CreateDynamicAssetLinkProxy
-  href: api/MicroWrath.Util.Assets.Dynamic.html#MicroWrath_Util_Assets_Dynamic_CreateDynamicAssetLinkProxy_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.CreateDynamicAssetLinkProxy
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.CreateDynamicAssetLinkProxy
-  nameWithType: Dynamic.CreateDynamicAssetLinkProxy
-- uid: MicroWrath.Util.Assets.Dynamic.CreateDynamicAssetLinkProxy``1(MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink,System.String)
-  name: CreateDynamicAssetLinkProxy<TLink>(IDynamicAssetLink, string?)
-  href: api/MicroWrath.Util.Assets.Dynamic.html#MicroWrath_Util_Assets_Dynamic_CreateDynamicAssetLinkProxy__1_MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_System_String_
-  commentId: M:MicroWrath.Util.Assets.Dynamic.CreateDynamicAssetLinkProxy``1(MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink,System.String)
-  name.vb: CreateDynamicAssetLinkProxy(Of TLink)(IDynamicAssetLink, String)
-  fullName: MicroWrath.Util.Assets.Dynamic.CreateDynamicAssetLinkProxy<TLink>(MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink, string?)
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.CreateDynamicAssetLinkProxy(Of TLink)(MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink, String)
-  nameWithType: Dynamic.CreateDynamicAssetLinkProxy<TLink>(Dynamic.IDynamicAssetLink, string?)
-  nameWithType.vb: Dynamic.CreateDynamicAssetLinkProxy(Of TLink)(Dynamic.IDynamicAssetLink, String)
 - uid: MicroWrath.Util.Assets.Dynamic.CreateDynamicMonobehaviourProxy*
   name: CreateDynamicMonobehaviourProxy
   href: api/MicroWrath.Util.Assets.Dynamic.html#MicroWrath_Util_Assets_Dynamic_CreateDynamicMonobehaviourProxy_
@@ -6383,12 +6106,6 @@ references:
   fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
   nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Dynamic.IDynamicAssetLink.Link
   nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLinks
-  name: DynamicAssetLinks
-  href: api/MicroWrath.Util.Assets.Dynamic.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLinks
-  commentId: F:MicroWrath.Util.Assets.Dynamic.DynamicAssetLinks
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLinks
-  nameWithType: Dynamic.DynamicAssetLinks
 - uid: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1
   name: Dynamic.DynamicGameObjectLink<TLink>
   href: api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.html
@@ -7866,15 +7583,6 @@ references:
   fullName.vb: MicroWrath.Util.Option(Of T).New()
   nameWithType: Option<T>.Option()
   nameWithType.vb: Option(Of T).New()
-- uid: MicroWrath.Util.Option`1.#ctor(`0)
-  name: Option(T)
-  href: api/MicroWrath.Util.Option-1.html#MicroWrath_Util_Option_1__ctor__0_
-  commentId: M:MicroWrath.Util.Option`1.#ctor(`0)
-  name.vb: New(T)
-  fullName: MicroWrath.Util.Option<T>.Option(T)
-  fullName.vb: MicroWrath.Util.Option(Of T).New(T)
-  nameWithType: Option<T>.Option(T)
-  nameWithType.vb: Option(Of T).New(T)
 - uid: MicroWrath.Util.Option`1.#ctor*
   name: Option
   href: api/MicroWrath.Util.Option-1.html#MicroWrath_Util_Option_1__ctor_
@@ -8530,73 +8238,6 @@ references:
   isSpec: "True"
   fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.Clone
   nameWithType: ObjectDeepCopier.Clone
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.CloneMethod
-  name: CloneMethod
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_CloneMethod
-  commentId: F:TabletopTweaks.Core.Utilities.ObjectDeepCopier.CloneMethod
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.CloneMethod
-  nameWithType: ObjectDeepCopier.CloneMethod
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object},System.Object,System.Type,System.Reflection.BindingFlags,System.Func{System.Reflection.FieldInfo,System.Boolean})
-  name: CopyFields(object, IDictionary<object, object>, object, Type, BindingFlags, Func<FieldInfo, bool>?)
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_CopyFields_System_Object_System_Collections_Generic_IDictionary_System_Object_System_Object__System_Object_System_Type_System_Reflection_BindingFlags_System_Func_System_Reflection_FieldInfo_System_Boolean__
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object},System.Object,System.Type,System.Reflection.BindingFlags,System.Func{System.Reflection.FieldInfo,System.Boolean})
-  name.vb: CopyFields(Object, IDictionary(Of Object, Object), Object, Type, BindingFlags, Func(Of FieldInfo, Boolean))
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields(object, System.Collections.Generic.IDictionary<object, object>, object, System.Type, System.Reflection.BindingFlags, System.Func<System.Reflection.FieldInfo, bool>?)
-  fullName.vb: TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields(Object, System.Collections.Generic.IDictionary(Of Object, Object), Object, System.Type, System.Reflection.BindingFlags, System.Func(Of System.Reflection.FieldInfo, Boolean))
-  nameWithType: ObjectDeepCopier.CopyFields(object, IDictionary<object, object>, object, Type, BindingFlags, Func<FieldInfo, bool>?)
-  nameWithType.vb: ObjectDeepCopier.CopyFields(Object, IDictionary(Of Object, Object), Object, Type, BindingFlags, Func(Of FieldInfo, Boolean))
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields*
-  name: CopyFields
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_CopyFields_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields
-  isSpec: "True"
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields
-  nameWithType: ObjectDeepCopier.CopyFields
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object})
-  name: InternalCopy(object, IDictionary<object, object>)
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_InternalCopy_System_Object_System_Collections_Generic_IDictionary_System_Object_System_Object__
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object})
-  name.vb: InternalCopy(Object, IDictionary(Of Object, Object))
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy(object, System.Collections.Generic.IDictionary<object, object>)
-  fullName.vb: TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy(Object, System.Collections.Generic.IDictionary(Of Object, Object))
-  nameWithType: ObjectDeepCopier.InternalCopy(object, IDictionary<object, object>)
-  nameWithType.vb: ObjectDeepCopier.InternalCopy(Object, IDictionary(Of Object, Object))
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy*
-  name: InternalCopy
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_InternalCopy_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy
-  isSpec: "True"
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy
-  nameWithType: ObjectDeepCopier.InternalCopy
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive(System.Type)
-  name: IsPrimitive(Type)
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_IsPrimitive_System_Type_
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive(System.Type)
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive(System.Type)
-  nameWithType: ObjectDeepCopier.IsPrimitive(Type)
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive*
-  name: IsPrimitive
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_IsPrimitive_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive
-  isSpec: "True"
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive
-  nameWithType: ObjectDeepCopier.IsPrimitive
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object},System.Object,System.Type)
-  name: RecursiveCopyBaseTypePrivateFields(object, IDictionary<object, object>, object, Type)
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_RecursiveCopyBaseTypePrivateFields_System_Object_System_Collections_Generic_IDictionary_System_Object_System_Object__System_Object_System_Type_
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object},System.Object,System.Type)
-  name.vb: RecursiveCopyBaseTypePrivateFields(Object, IDictionary(Of Object, Object), Object, Type)
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields(object, System.Collections.Generic.IDictionary<object, object>, object, System.Type)
-  fullName.vb: TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields(Object, System.Collections.Generic.IDictionary(Of Object, Object), Object, System.Type)
-  nameWithType: ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields(object, IDictionary<object, object>, object, Type)
-  nameWithType.vb: ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields(Object, IDictionary(Of Object, Object), Object, Type)
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields*
-  name: RecursiveCopyBaseTypePrivateFields
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_RecursiveCopyBaseTypePrivateFields_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields
-  isSpec: "True"
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields
-  nameWithType: ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields
 - uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer
   name: ObjectDeepCopier.ReferenceEqualityComparer
   href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.html

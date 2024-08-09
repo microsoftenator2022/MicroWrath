@@ -173,40 +173,6 @@ Class ObjectDeepCopier  <a class="header-action link-secondary" title="View sour
 
 
 
-  <h2 class="section" id="fields">Fields
-</h2>
-
-
-
-  <h3 id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_CloneMethod" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.CloneMethod">
-  CloneMethod
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/ObjectDeepCopy.cs/#L92"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">private static readonly MethodInfo CloneMethod</code></pre>
-  </div>
-
-
-
-
-  <h4 class="section">Field Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
   <h2 class="section" id="methods">Methods
 </h2>
 
@@ -215,7 +181,7 @@ Class ObjectDeepCopier  <a class="header-action link-secondary" title="View sour
 
   <h3 id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_Clone_System_Object_" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.Clone(System.Object)">
   Clone(object)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/ObjectDeepCopy.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/ObjectDeepCopy.cs/#L106"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -236,158 +202,6 @@ Class ObjectDeepCopier  <a class="header-action link-secondary" title="View sour
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
     <dd></dd>
   </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_CopyFields_" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields*"></a>
-
-  <h3 id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_CopyFields_System_Object_System_Collections_Generic_IDictionary_System_Object_System_Object__System_Object_System_Type_System_Reflection_BindingFlags_System_Func_System_Reflection_FieldInfo_System_Boolean__" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.CopyFields(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object},System.Object,System.Type,System.Reflection.BindingFlags,System.Func{System.Reflection.FieldInfo,System.Boolean})">
-  CopyFields(object, IDictionary&lt;object, object&gt;, object, Type, BindingFlags, Func&lt;FieldInfo, bool&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/ObjectDeepCopy.cs/#L143"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">private static void CopyFields(object originalObject, IDictionary&lt;object, object&gt; visited, object cloneObject, Type typeToReflect, BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy, Func&lt;FieldInfo, bool&gt;? filter = null)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>originalObject</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd></dd>
-    <dt><code>visited</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
-    <dd></dd>
-    <dt><code>cloneObject</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd></dd>
-    <dt><code>typeToReflect</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd></dd>
-    <dt><code>bindingFlags</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.bindingflags">BindingFlags</a></dt>
-    <dd></dd>
-    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.fieldinfo">FieldInfo</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-
-  <a id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_InternalCopy_" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy*"></a>
-
-  <h3 id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_InternalCopy_System_Object_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.InternalCopy(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object})">
-  InternalCopy(object, IDictionary&lt;object, object&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/ObjectDeepCopy.cs/#L103"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">private static object? InternalCopy(object originalObject, IDictionary&lt;object, object&gt; visited)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>originalObject</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd></dd>
-    <dt><code>visited</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_IsPrimitive_" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive*"></a>
-
-  <h3 id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_IsPrimitive_System_Type_" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.IsPrimitive(System.Type)">
-  IsPrimitive(Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/ObjectDeepCopy.cs/#L94"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">internal static bool IsPrimitive(Type type)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_RecursiveCopyBaseTypePrivateFields_" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields*"></a>
-
-  <h3 id="TabletopTweaks_Core_Utilities_ObjectDeepCopier_RecursiveCopyBaseTypePrivateFields_System_Object_System_Collections_Generic_IDictionary_System_Object_System_Object__System_Object_System_Type_" data-uid="TabletopTweaks.Core.Utilities.ObjectDeepCopier.RecursiveCopyBaseTypePrivateFields(System.Object,System.Collections.Generic.IDictionary{System.Object,System.Object},System.Object,System.Type)">
-  RecursiveCopyBaseTypePrivateFields(object, IDictionary&lt;object, object&gt;, object, Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/ObjectDeepCopy.cs/#L135"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">private static void RecursiveCopyBaseTypePrivateFields(object originalObject, IDictionary&lt;object, object&gt; visited, object cloneObject, Type typeToReflect)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>originalObject</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd></dd>
-    <dt><code>visited</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
-    <dd></dd>
-    <dt><code>cloneObject</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd></dd>
-    <dt><code>typeToReflect</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd></dd>
-  </dl>
-
 
 
 
