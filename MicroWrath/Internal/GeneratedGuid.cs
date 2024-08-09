@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 using Kingmaker.Blueprints;
 
-using MicroUtils;
+using MicroWrath.Util;
 using MicroWrath.Util.Linq;
 
 using MonoMod.Utils;

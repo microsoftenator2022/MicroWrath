@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace MicroUtils
+namespace MicroWrath.Util
 {
     /// <summary>
     /// GUID utils
@@ -22,7 +22,7 @@ namespace MicroUtils
         /// parameter is a valid UUID.<br/>Use <see cref="CreateV5(System.Guid, System.String)"/>
         /// if strict UUIDv5 conformance is required.</param>
         /// <param name="name">Name</param>
-        /// <returns>Determinstic Guid generated from namespace and name (may conform to UUIDv5).</returns>
+        /// <returns>Determinstic Guid generated from namespace and name (may not conform to UUIDv5).</returns>
         public static Guid CreateV5(string ns, string name)
         {
             var nsBytes = Encoding.UTF8.GetBytes(ns);

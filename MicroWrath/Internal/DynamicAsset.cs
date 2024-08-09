@@ -38,7 +38,7 @@ namespace MicroWrath.Util.Assets
                 if (obj is not T t)
                     throw new InvalidCastException();
 
-                    return Init(t);
+                return Init(t);
             };
 
             public DynamicAssetLink(TLink assetLink, Func<T, T> init)

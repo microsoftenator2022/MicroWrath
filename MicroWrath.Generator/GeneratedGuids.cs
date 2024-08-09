@@ -14,7 +14,6 @@ using MicroWrath.Util;
 using MicroWrath.Generator.Common;
 using System.IO;
 using System.Collections.Immutable;
-using MicroUtils;
 
 namespace MicroWrath.Generator
 {
