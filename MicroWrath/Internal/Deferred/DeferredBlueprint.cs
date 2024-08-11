@@ -23,7 +23,7 @@ using UniRx;
 namespace MicroWrath.Deferred
 {
     interface IDeferredBlueprint<out TBlueprint>
-        : IDeferred<TBlueprint>, IMicroBlueprint<TBlueprint>
+        : IDeferred<TBlueprint>, IMicroBlueprint<TBlueprint>, IMicroBlueprintReference<BlueprintReferenceBase, TBlueprint>
         where TBlueprint : SimpleBlueprint
     { }
 
@@ -48,13 +48,28 @@ namespace MicroWrath.Deferred
         public BlueprintGuid BlueprintGuid => guid;
 
         public TBlueprint? GetBlueprint() => thisContext.Eval();
+
+        /// <exlude />
+        bool referenced = false;
+
+        /// <inheritdoc />
+        BlueprintReferenceBase IMicroBlueprintReference<BlueprintReferenceBase, TBlueprint>.ToReference()
+        {
+            if (!referenced) _ = this.OnDemand(this.BlueprintGuid);
+
+            referenced = true;
+
+            return new() { deserializedGuid = this.BlueprintGuid };
+        }
+
+        /// <inheritdoc />
         public void OnNext(Unit value) => thisContext.Eval();
         public void OnError(Exception error) => thisContext.OnError(error);
         public void OnCompleted() => thisContext.OnCompleted();
     }
 
     [HarmonyPatch]
-    static class DeferredBlueprint
+    internal static class DeferredBlueprint
     {
         public static IDeferredBlueprint<TBlueprint> Bind<A, TBlueprint>(
             this IDeferred<A> context,
@@ -94,7 +109,7 @@ namespace MicroWrath.Deferred
             where TBlueprint : SimpleBlueprint =>
             context.AddOnTrigger(microBlueprint.BlueprintGuid, trigger);
 
-        public static IDeferred<TBlueprint> OnDemand<TBlueprint>(
+        public static IDeferredBlueprint<TBlueprint> OnDemand<TBlueprint>(
             this IDeferred<TBlueprint> context,
             BlueprintGuid guid)
             where TBlueprint : SimpleBlueprint =>
@@ -113,7 +128,7 @@ namespace MicroWrath.Deferred
                         .Where(g => guid == g)
                         .Select(_ => Unit.Default));
 
-        public static IDeferred<TBlueprint> OnDemand<TBlueprint>(
+        public static IDeferredBlueprint<TBlueprint> OnDemand<TBlueprint>(
             this IDeferred<TBlueprint> context,
             IMicroBlueprint<TBlueprint> microBlueprint)
             where TBlueprint : SimpleBlueprint =>

@@ -1,11 +1,10 @@
-﻿using System;
+﻿global using IMicroBlueprintReference = MicroWrath.IMicroBlueprintReference<Kingmaker.Blueprints.BlueprintReferenceBase, Kingmaker.Blueprints.SimpleBlueprint>;
+
+using System;
 using System.IO;
 
 using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.JsonSystem;
-
-using MicroWrath;
-using MicroWrath.Util;
 
 namespace MicroWrath
 {
@@ -24,7 +23,10 @@ namespace MicroWrath
     /// <summary>
     /// A safe(r) wrapper/proxy for <see cref="BlueprintReference{TBlueprint}"/>
     /// </summary>
-    internal readonly record struct MicroBlueprint<TBlueprint> : IMicroBlueprint<TBlueprint> where TBlueprint : SimpleBlueprint
+    internal readonly partial record struct MicroBlueprint<TBlueprint>
+        : IMicroBlueprint<TBlueprint>,
+        IMicroBlueprintReference<BlueprintReference<TBlueprint>, TBlueprint>
+        where TBlueprint : SimpleBlueprint
     {
         public MicroBlueprint(string assetId)
         {
@@ -41,10 +43,14 @@ namespace MicroWrath
         public readonly string AssetId;
 
         /// <summary>
-        /// Create a <typeparamref name="TReference"/> from this <see langword="object"/>.
+        /// Create a <typeparamref name="TReference"/> from this <see cref="MicroBlueprint{TBlueprint}"/>.
         /// </summary>
         public TReference ToReference<TReference>() where TReference : BlueprintReference<TBlueprint>, new() =>
             this.ToReference<TBlueprint, TReference>();
+
+        /// <inheritdoc />
+        BlueprintReference<TBlueprint> IMicroBlueprintReference<BlueprintReference<TBlueprint>, TBlueprint>.ToReference() =>
+            new() { deserializedGuid = this.BlueprintGuid };
 
         /// <exclude />
         private TBlueprint? MaybeBlueprint { get; init; } = null;
