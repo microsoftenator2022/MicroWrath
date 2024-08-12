@@ -60,924 +60,6 @@ references:
   commentId: N:MicroWrath
   fullName: MicroWrath
   nameWithType: MicroWrath
-- uid: MicroWrath.BlueprintInitializationContext
-  name: MicroWrath.BlueprintInitializationContext
-  href: api/MicroWrath.BlueprintInitializationContext.html
-  commentId: N:MicroWrath.BlueprintInitializationContext
-  fullName: MicroWrath.BlueprintInitializationContext
-  nameWithType: MicroWrath.BlueprintInitializationContext
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext
-  name: BlueprintInitializationContext
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext
-  nameWithType: BlueprintInitializationContext
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.#ctor(System.IObservable{UniRx.Unit})
-  name: BlueprintInitializationContext(IObservable<Unit>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext__ctor_System_IObservable_UniRx_Unit__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.#ctor(System.IObservable{UniRx.Unit})
-  name.vb: New(IObservable(Of Unit))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInitializationContext(System.IObservable<UniRx.Unit>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.New(System.IObservable(Of UniRx.Unit))
-  nameWithType: BlueprintInitializationContext.BlueprintInitializationContext(IObservable<Unit>)
-  nameWithType.vb: BlueprintInitializationContext.New(IObservable(Of Unit))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.#ctor*
-  name: BlueprintInitializationContext
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext__ctor_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInitializationContext
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.New
-  nameWithType: BlueprintInitializationContext.BlueprintInitializationContext
-  nameWithType.vb: BlueprintInitializationContext.New
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1
-  name: BlueprintInitializationContext.BlueprintInit<T>
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1
-  name.vb: BlueprintInitializationContext.BlueprintInit(Of T)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T)
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.#ctor(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext,MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint[],System.Func{`0})
-  name: BlueprintInit(BlueprintInitializationContext, IInitContextBlueprint[], Func<T>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1__ctor_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint___System_Func__0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.#ctor(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext,MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint[],System.Func{`0})
-  name.vb: New(BlueprintInitializationContext, IInitContextBlueprint(), Func(Of T))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.BlueprintInit(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext, MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint[], System.Func<T>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).New(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext, MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint(), System.Func(Of T))
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.BlueprintInit(BlueprintInitializationContext, BlueprintInitializationContext.IInitContextBlueprint[], Func<T>)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).New(BlueprintInitializationContext, BlueprintInitializationContext.IInitContextBlueprint(), Func(Of T))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.#ctor(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext,System.Collections.Generic.IEnumerable{MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint},System.Func{`0})
-  name: BlueprintInit(BlueprintInitializationContext, IEnumerable<IInitContextBlueprint>, Func<T>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1__ctor_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_System_Collections_Generic_IEnumerable_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint__System_Func__0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.#ctor(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext,System.Collections.Generic.IEnumerable{MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint},System.Func{`0})
-  name.vb: New(BlueprintInitializationContext, IEnumerable(Of IInitContextBlueprint), Func(Of T))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.BlueprintInit(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext, System.Collections.Generic.IEnumerable<MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint>, System.Func<T>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).New(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext, System.Collections.Generic.IEnumerable(Of MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint), System.Func(Of T))
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.BlueprintInit(BlueprintInitializationContext, IEnumerable<BlueprintInitializationContext.IInitContextBlueprint>, Func<T>)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).New(BlueprintInitializationContext, IEnumerable(Of BlueprintInitializationContext.IInitContextBlueprint), Func(Of T))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.#ctor*
-  name: BlueprintInit
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1__ctor_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.BlueprintInit
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).New
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.BlueprintInit
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).New
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Blueprints
-  name: Blueprints
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Blueprints
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Blueprints
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Blueprints
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Blueprints
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Blueprints
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Blueprints
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Combine*
-  name: Combine
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Combine_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Combine
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Combine
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Combine
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Combine
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Combine
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Combine``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0})
-  name: Combine<TOther>(ContextInitializer<TOther>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Combine__1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Combine``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0})
-  name.vb: Combine(Of TOther)(ContextInitializer(Of TOther))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Combine<TOther>(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<TOther>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Combine(Of TOther)(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of TOther))
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Combine<TOther>(BlueprintInitializationContext.ContextInitializer<TOther>)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Combine(Of TOther)(BlueprintInitializationContext.ContextInitializer(Of TOther))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.GetValue
-  name: GetValue()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_GetValue
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.GetValue
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.GetValue()
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).GetValue()
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.GetValue()
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).GetValue()
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.GetValue*
-  name: GetValue
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_GetValue_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.GetValue
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.GetValue
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).GetValue
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.GetValue
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).GetValue
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitContext
-  name: InitContext
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_InitContext
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitContext
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.InitContext
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).InitContext
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.InitContext
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).InitContext
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitContext*
-  name: InitContext
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_InitContext_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitContext
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.InitContext
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).InitContext
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.InitContext
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).InitContext
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitFunc
-  name: InitFunc
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_InitFunc
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitFunc
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.InitFunc
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).InitFunc
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.InitFunc
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).InitFunc
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitFunc*
-  name: InitFunc
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_InitFunc_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.InitFunc
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.InitFunc
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).InitFunc
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.InitFunc
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).InitFunc
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map(System.Action)
-  name: Map(Action)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Map_System_Action_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map(System.Action)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Map(System.Action)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Map(System.Action)
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Map(Action)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Map(Action)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map(System.Action{`0})
-  name: Map(Action<T>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Map_System_Action__0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map(System.Action{`0})
-  name.vb: Map(Action(Of T))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Map(System.Action<T>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Map(System.Action(Of T))
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Map(Action<T>)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Map(Action(Of T))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map*
-  name: Map
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Map_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Map
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Map
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Map
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Map
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map``1(System.Func{`0,``0})
-  name: Map<TResult>(Func<T, TResult>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Map__1_System_Func__0___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map``1(System.Func{`0,``0})
-  name.vb: Map(Of TResult)(Func(Of T, TResult))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Map<TResult>(System.Func<T, TResult>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Map(Of TResult)(System.Func(Of T, TResult))
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Map<TResult>(Func<T, TResult>)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Map(Of TResult)(Func(Of T, TResult))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map``1(System.Func{``0})
-  name: Map<TResult>(Func<TResult>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Map__1_System_Func___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Map``1(System.Func{``0})
-  name.vb: Map(Of TResult)(Func(Of TResult))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Map<TResult>(System.Func<TResult>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Map(Of TResult)(System.Func(Of TResult))
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Map<TResult>(Func<TResult>)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Map(Of TResult)(Func(Of TResult))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IBlueprintInit#Execute
-  name: IBlueprintInit.Execute()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_Execute
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IBlueprintInit#Execute
-  name.vb: ''
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute()
-  fullName.vb: ''
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.BlueprintInitializationContext.IBlueprintInit.Execute()
-  nameWithType.vb: ''
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IBlueprintInit#Execute*
-  name: IBlueprintInit.Execute
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_Execute_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IBlueprintInit#Execute
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.BlueprintInitializationContext.IBlueprintInit.Execute
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Register
-  name: Register()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Register
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Register
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Register()
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Register()
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Register()
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Register()
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Register*
-  name: Register
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_Register_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.Register
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.Register
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).Register
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.Register
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).Register
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.With*
-  name: With
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_With_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.With
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.With
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).With
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.With
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).With
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.With``1(System.Func{``0})
-  name: With<TResult>(Func<TResult>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_With__1_System_Func___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.With``1(System.Func{``0})
-  name.vb: With(Of TResult)(Func(Of TResult))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.With<TResult>(System.Func<TResult>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).With(Of TResult)(System.Func(Of TResult))
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.With<TResult>(Func<TResult>)
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).With(Of TResult)(Func(Of TResult))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.initContext
-  name: initContext
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_initContext
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.initContext
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.initContext
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).initContext
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.initContext
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).initContext
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.lazyValue
-  name: lazyValue
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_BlueprintInit_1_lazyValue
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit`1.lazyValue
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit<T>.lazyValue
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit(Of T).lazyValue
-  nameWithType: BlueprintInitializationContext.BlueprintInit<T>.lazyValue
-  nameWithType.vb: BlueprintInitializationContext.BlueprintInit(Of T).lazyValue
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Blueprints
-  name: Blueprints
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Blueprints
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Blueprints
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Blueprints
-  nameWithType: BlueprintInitializationContext.Blueprints
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint*
-  name: CloneBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_CloneBlueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint
-  nameWithType: BlueprintInitializationContext.CloneBlueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},Kingmaker.Blueprints.BlueprintGuid,System.String)
-  name: CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>, BlueprintGuid, string)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_CloneBlueprint__1_MicroWrath_IMicroBlueprint___0__Kingmaker_Blueprints_BlueprintGuid_System_String_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},Kingmaker.Blueprints.BlueprintGuid,System.String)
-  name.vb: CloneBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint), BlueprintGuid, String)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint<TBlueprint>(MicroWrath.IMicroBlueprint<TBlueprint>, Kingmaker.Blueprints.BlueprintGuid, string)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint(Of TBlueprint)(MicroWrath.IMicroBlueprint(Of TBlueprint), Kingmaker.Blueprints.BlueprintGuid, String)
-  nameWithType: BlueprintInitializationContext.CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>, BlueprintGuid, string)
-  nameWithType.vb: BlueprintInitializationContext.CloneBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint), BlueprintGuid, String)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},MicroWrath.GeneratedGuid)
-  name: CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>, GeneratedGuid)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_CloneBlueprint__1_MicroWrath_IMicroBlueprint___0__MicroWrath_GeneratedGuid_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},MicroWrath.GeneratedGuid)
-  name.vb: CloneBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint), GeneratedGuid)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint<TBlueprint>(MicroWrath.IMicroBlueprint<TBlueprint>, MicroWrath.GeneratedGuid)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint(Of TBlueprint)(MicroWrath.IMicroBlueprint(Of TBlueprint), MicroWrath.GeneratedGuid)
-  nameWithType: BlueprintInitializationContext.CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>, GeneratedGuid)
-  nameWithType.vb: BlueprintInitializationContext.CloneBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint), GeneratedGuid)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},System.String,System.String)
-  name: CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>, string, string)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_CloneBlueprint__1_MicroWrath_IMicroBlueprint___0__System_String_System_String_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},System.String,System.String)
-  name.vb: CloneBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint), String, String)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint<TBlueprint>(MicroWrath.IMicroBlueprint<TBlueprint>, string, string)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.CloneBlueprint(Of TBlueprint)(MicroWrath.IMicroBlueprint(Of TBlueprint), String, String)
-  nameWithType: BlueprintInitializationContext.CloneBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>, string, string)
-  nameWithType.vb: BlueprintInitializationContext.CloneBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint), String, String)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Complete
-  name: Complete()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Complete
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Complete
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Complete()
-  nameWithType: BlueprintInitializationContext.Complete()
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Complete*
-  name: Complete
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Complete_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Complete
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Complete
-  nameWithType: BlueprintInitializationContext.Complete
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer
-  name: BlueprintInitializationContext.ContextInitializer
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer
-  nameWithType: BlueprintInitializationContext.ContextInitializer
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.InitContext
-  name: InitContext
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_InitContext
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.InitContext
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.InitContext
-  nameWithType: BlueprintInitializationContext.ContextInitializer.InitContext
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.InitContext*
-  name: InitContext
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_InitContext_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.InitContext
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.InitContext
-  nameWithType: BlueprintInitializationContext.ContextInitializer.InitContext
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map(System.Action)
-  name: Map(Action)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_Map_System_Action_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map(System.Action)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map(System.Action)
-  nameWithType: BlueprintInitializationContext.ContextInitializer.Map(Action)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map*
-  name: Map
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_Map_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map
-  nameWithType: BlueprintInitializationContext.ContextInitializer.Map
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map``1(System.Func{``0})
-  name: Map<TResult>(Func<TResult>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_Map__1_System_Func___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map``1(System.Func{``0})
-  name.vb: Map(Of TResult)(Func(Of TResult))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map<TResult>(System.Func<TResult>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Map(Of TResult)(System.Func(Of TResult))
-  nameWithType: BlueprintInitializationContext.ContextInitializer.Map<TResult>(Func<TResult>)
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer.Map(Of TResult)(Func(Of TResult))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Register
-  name: Register()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_Register
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Register
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Register()
-  nameWithType: BlueprintInitializationContext.ContextInitializer.Register()
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Register*
-  name: Register
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_Register_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Register
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.Register
-  nameWithType: BlueprintInitializationContext.ContextInitializer.Register
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1
-  name: BlueprintInitializationContext.ContextInitializer<T>
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1
-  name.vb: BlueprintInitializationContext.ContextInitializer(Of T)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T)
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Combine*
-  name: Combine
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_Combine_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Combine
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.Combine
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).Combine
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.Combine
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).Combine
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Combine``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0})
-  name: Combine<TOther>(ContextInitializer<TOther>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_Combine__1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Combine``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0})
-  name.vb: Combine(Of TOther)(ContextInitializer(Of TOther))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.Combine<TOther>(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<TOther>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).Combine(Of TOther)(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of TOther))
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.Combine<TOther>(BlueprintInitializationContext.ContextInitializer<TOther>)
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).Combine(Of TOther)(BlueprintInitializationContext.ContextInitializer(Of TOther))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.GetBlueprint*
-  name: GetBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_GetBlueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.GetBlueprint
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.GetBlueprint
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).GetBlueprint
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.GetBlueprint
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).GetBlueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.GetBlueprint``1(MicroWrath.IMicroBlueprint{``0})
-  name: GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_GetBlueprint__1_MicroWrath_IMicroBlueprint___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.GetBlueprint``1(MicroWrath.IMicroBlueprint{``0})
-  name.vb: GetBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.GetBlueprint<TBlueprint>(MicroWrath.IMicroBlueprint<TBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).GetBlueprint(Of TBlueprint)(MicroWrath.IMicroBlueprint(Of TBlueprint))
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>)
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).GetBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.GetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})
-  name: GetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_GetBlueprint__1_MicroWrath_OwlcatBlueprint___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.GetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})
-  name.vb: GetBlueprint(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.GetBlueprint<TBlueprint>(MicroWrath.OwlcatBlueprint<TBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).GetBlueprint(Of TBlueprint)(MicroWrath.OwlcatBlueprint(Of TBlueprint))
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.GetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint>)
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).GetBlueprint(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Map(System.Action{`0})
-  name: Map(Action<T>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_Map_System_Action__0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Map(System.Action{`0})
-  name.vb: Map(Action(Of T))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.Map(System.Action<T>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).Map(System.Action(Of T))
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.Map(Action<T>)
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).Map(Action(Of T))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Map*
-  name: Map
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_Map_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Map
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.Map
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).Map
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.Map
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).Map
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Map``1(System.Func{`0,``0})
-  name: Map<TResult>(Func<T, TResult>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_1_Map__1_System_Func__0___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer`1.Map``1(System.Func{`0,``0})
-  name.vb: Map(Of TResult)(Func(Of T, TResult))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>.Map<TResult>(System.Func<T, TResult>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T).Map(Of TResult)(System.Func(Of T, TResult))
-  nameWithType: BlueprintInitializationContext.ContextInitializer<T>.Map<TResult>(Func<T, TResult>)
-  nameWithType.vb: BlueprintInitializationContext.ContextInitializer(Of T).Map(Of TResult)(Func(Of T, TResult))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Empty
-  name: Empty
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Empty
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Empty
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Empty
-  nameWithType: BlueprintInitializationContext.Empty
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Empty*
-  name: Empty
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Empty_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Empty
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Empty
-  nameWithType: BlueprintInitializationContext.Empty
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint*
-  name: GetBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_GetBlueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint
-  nameWithType: BlueprintInitializationContext.GetBlueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint``1(MicroWrath.IMicroBlueprint{``0})
-  name: GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_GetBlueprint__1_MicroWrath_IMicroBlueprint___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint``1(MicroWrath.IMicroBlueprint{``0})
-  name.vb: GetBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint<TBlueprint>(MicroWrath.IMicroBlueprint<TBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint(Of TBlueprint)(MicroWrath.IMicroBlueprint(Of TBlueprint))
-  nameWithType: BlueprintInitializationContext.GetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>)
-  nameWithType.vb: BlueprintInitializationContext.GetBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})
-  name: GetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_GetBlueprint__1_MicroWrath_OwlcatBlueprint___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})
-  name.vb: GetBlueprint(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint<TBlueprint>(MicroWrath.OwlcatBlueprint<TBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.GetBlueprint(Of TBlueprint)(MicroWrath.OwlcatBlueprint(Of TBlueprint))
-  nameWithType: BlueprintInitializationContext.GetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint>)
-  nameWithType.vb: BlueprintInitializationContext.GetBlueprint(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit
-  name: BlueprintInitializationContext.IBlueprintInit
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit
-  nameWithType: BlueprintInitializationContext.IBlueprintInit
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute
-  name: Execute()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_Execute
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute()
-  nameWithType: BlueprintInitializationContext.IBlueprintInit.Execute()
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute*
-  name: Execute
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_Execute_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.Execute
-  nameWithType: BlueprintInitializationContext.IBlueprintInit.Execute
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1
-  name: BlueprintInitializationContext.IBlueprintInit<T>
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit-1.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1
-  name.vb: BlueprintInitializationContext.IBlueprintInit(Of T)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit<T>
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit(Of T)
-  nameWithType: BlueprintInitializationContext.IBlueprintInit<T>
-  nameWithType.vb: BlueprintInitializationContext.IBlueprintInit(Of T)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1.InitFunc
-  name: InitFunc
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_1_InitFunc
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1.InitFunc
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit<T>.InitFunc
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit(Of T).InitFunc
-  nameWithType: BlueprintInitializationContext.IBlueprintInit<T>.InitFunc
-  nameWithType.vb: BlueprintInitializationContext.IBlueprintInit(Of T).InitFunc
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1.InitFunc*
-  name: InitFunc
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_1_InitFunc_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1.InitFunc
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit<T>.InitFunc
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit(Of T).InitFunc
-  nameWithType: BlueprintInitializationContext.IBlueprintInit<T>.InitFunc
-  nameWithType.vb: BlueprintInitializationContext.IBlueprintInit(Of T).InitFunc
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint
-  name: BlueprintInitializationContext.IInitContextBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  name: Blueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Blueprint
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint*
-  name: Blueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Blueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid
-  name: BlueprintGuid
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_BlueprintGuid
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid*
-  name: BlueprintGuid
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_BlueprintGuid_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.BlueprintGuid
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew
-  name: CreateNew()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_CreateNew
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew()
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.CreateNew()
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew*
-  name: CreateNew
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_CreateNew_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.CreateNew
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  name: Name
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Name
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.Name
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name*
-  name: Name
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Name_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  nameWithType: BlueprintInitializationContext.IInitContextBlueprint.Name
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1
-  name: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1
-  name.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint)
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.#ctor(Kingmaker.Blueprints.BlueprintGuid,System.String)
-  name: InitContextBlueprint(BlueprintGuid, string)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1__ctor_Kingmaker_Blueprints_BlueprintGuid_System_String_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.#ctor(Kingmaker.Blueprints.BlueprintGuid,System.String)
-  name.vb: New(BlueprintGuid, String)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.InitContextBlueprint(Kingmaker.Blueprints.BlueprintGuid, string)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).New(Kingmaker.Blueprints.BlueprintGuid, String)
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.InitContextBlueprint(BlueprintGuid, string)
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).New(BlueprintGuid, String)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.#ctor(System.String,System.String)
-  name: InitContextBlueprint(string, string)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1__ctor_System_String_System_String_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.#ctor(System.String,System.String)
-  name.vb: New(String, String)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.InitContextBlueprint(string, string)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).New(String, String)
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.InitContextBlueprint(string, string)
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).New(String, String)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.#ctor*
-  name: InitContextBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1__ctor_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.InitContextBlueprint
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).New
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.InitContextBlueprint
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).New
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.AssetId
-  name: AssetId
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_AssetId
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.AssetId
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.AssetId
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).AssetId
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.AssetId
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).AssetId
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.BlueprintGuid
-  name: BlueprintGuid
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_BlueprintGuid
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.BlueprintGuid
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintGuid
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).BlueprintGuid
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintGuid
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).BlueprintGuid
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.BlueprintGuid*
-  name: BlueprintGuid
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_BlueprintGuid_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.BlueprintGuid
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintGuid
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).BlueprintGuid
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintGuid
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).BlueprintGuid
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.CreateNew
-  name: CreateNew()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_CreateNew
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.CreateNew
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.CreateNew()
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).CreateNew()
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.CreateNew()
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).CreateNew()
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.CreateNew*
-  name: CreateNew
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_CreateNew_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.CreateNew
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.CreateNew
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).CreateNew
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.CreateNew
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).CreateNew
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Blueprint
-  name: IInitContextBlueprint.Blueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Blueprint
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Blueprint
-  name.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Blueprint*
-  name: IInitContextBlueprint.Blueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Blueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Blueprint
-  isSpec: "True"
-  name.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Blueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#CreateNew
-  name: IInitContextBlueprint.CreateNew()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_CreateNew
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#CreateNew
-  name.vb: ''
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew()
-  fullName.vb: ''
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintInitializationContext.IInitContextBlueprint.CreateNew()
-  nameWithType.vb: ''
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#CreateNew*
-  name: IInitContextBlueprint.CreateNew
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_CreateNew_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#CreateNew
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.CreateNew
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintInitializationContext.IInitContextBlueprint.CreateNew
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Name
-  name: IInitContextBlueprint.Name
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Name
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Name
-  name.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintInitializationContext.IInitContextBlueprint.Name
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Name*
-  name: IInitContextBlueprint.Name
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint_Name_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#BlueprintInitializationContext#BlueprintInitializationContext#IInitContextBlueprint#Name
-  isSpec: "True"
-  name.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.BlueprintInitializationContext.IInitContextBlueprint.Name
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.Name
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#BlueprintGuid
-  name: IMicroBlueprint<TBlueprint>.BlueprintGuid
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_IMicroBlueprint_TBlueprint__BlueprintGuid
-  commentId: P:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#BlueprintGuid
-  name.vb: MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#BlueprintGuid*
-  name: IMicroBlueprint<TBlueprint>.BlueprintGuid
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_IMicroBlueprint_TBlueprint__BlueprintGuid_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#BlueprintGuid
-  isSpec: "True"
-  name.vb: MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.IMicroBlueprint<TBlueprint>.BlueprintGuid
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).MicroWrath.IMicroBlueprint<TBlueprint>.BlueprintGuid
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#GetBlueprint
-  name: IMicroBlueprint<TBlueprint>.GetBlueprint()
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_IMicroBlueprint_TBlueprint__GetBlueprint
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#GetBlueprint
-  name.vb: ''
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.IMicroBlueprint<TBlueprint>.GetBlueprint()
-  fullName.vb: ''
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.IMicroBlueprint<TBlueprint>.GetBlueprint()
-  nameWithType.vb: ''
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#GetBlueprint*
-  name: IMicroBlueprint<TBlueprint>.GetBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_MicroWrath_IMicroBlueprint_TBlueprint__GetBlueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.MicroWrath#IMicroBlueprint{TBlueprint}#GetBlueprint
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.MicroWrath.IMicroBlueprint<TBlueprint>.GetBlueprint
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.IMicroBlueprint<TBlueprint>.GetBlueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.Name
-  name: Name
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_Name
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.Name
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.Name
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).Name
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.Name
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).Name
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.blueprint
-  name: blueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_InitContextBlueprint_1_blueprint
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint`1.blueprint
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.blueprint
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).blueprint
-  nameWithType: BlueprintInitializationContext.InitContextBlueprint<TBlueprint>.blueprint
-  nameWithType.vb: BlueprintInitializationContext.InitContextBlueprint(Of TBlueprint).blueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Initializers
-  name: Initializers
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Initializers
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Initializers
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Initializers
-  nameWithType: BlueprintInitializationContext.Initializers
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint*
-  name: NewBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_NewBlueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint
-  nameWithType: BlueprintInitializationContext.NewBlueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(Kingmaker.Blueprints.BlueprintGuid,System.String)
-  name: NewBlueprint<TBlueprint>(BlueprintGuid, string)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_NewBlueprint__1_Kingmaker_Blueprints_BlueprintGuid_System_String_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(Kingmaker.Blueprints.BlueprintGuid,System.String)
-  name.vb: NewBlueprint(Of TBlueprint)(BlueprintGuid, String)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint<TBlueprint>(Kingmaker.Blueprints.BlueprintGuid, string)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(Kingmaker.Blueprints.BlueprintGuid, String)
-  nameWithType: BlueprintInitializationContext.NewBlueprint<TBlueprint>(BlueprintGuid, string)
-  nameWithType.vb: BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(BlueprintGuid, String)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(MicroWrath.GeneratedGuid)
-  name: NewBlueprint<TBlueprint>(GeneratedGuid)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_NewBlueprint__1_MicroWrath_GeneratedGuid_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(MicroWrath.GeneratedGuid)
-  name.vb: NewBlueprint(Of TBlueprint)(GeneratedGuid)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint<TBlueprint>(MicroWrath.GeneratedGuid)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(MicroWrath.GeneratedGuid)
-  nameWithType: BlueprintInitializationContext.NewBlueprint<TBlueprint>(GeneratedGuid)
-  nameWithType.vb: BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(GeneratedGuid)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(System.Func{``0})
-  name: NewBlueprint<TBlueprint>(Func<TBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_NewBlueprint__1_System_Func___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(System.Func{``0})
-  name.vb: NewBlueprint(Of TBlueprint)(Func(Of TBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint<TBlueprint>(System.Func<TBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(System.Func(Of TBlueprint))
-  nameWithType: BlueprintInitializationContext.NewBlueprint<TBlueprint>(Func<TBlueprint>)
-  nameWithType.vb: BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(Func(Of TBlueprint))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(System.String,System.String)
-  name: NewBlueprint<TBlueprint>(string, string)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_NewBlueprint__1_System_String_System_String_
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint``1(System.String,System.String)
-  name.vb: NewBlueprint(Of TBlueprint)(String, String)
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint<TBlueprint>(string, string)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(String, String)
-  nameWithType: BlueprintInitializationContext.NewBlueprint<TBlueprint>(string, string)
-  nameWithType.vb: BlueprintInitializationContext.NewBlueprint(Of TBlueprint)(String, String)
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprints*
-  name: NewBlueprints
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_NewBlueprints_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprints
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprints
-  nameWithType: BlueprintInitializationContext.NewBlueprints
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprints``2(System.Collections.Generic.IEnumerable{System.ValueTuple{Kingmaker.Blueprints.BlueprintGuid,System.String,``1}})
-  name: NewBlueprints<TBlueprint, TState>(IEnumerable<(BlueprintGuid guid, string name, TState state)>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_NewBlueprints__2_System_Collections_Generic_IEnumerable_System_ValueTuple_Kingmaker_Blueprints_BlueprintGuid_System_String___1___
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprints``2(System.Collections.Generic.IEnumerable{System.ValueTuple{Kingmaker.Blueprints.BlueprintGuid,System.String,``1}})
-  name.vb: NewBlueprints(Of TBlueprint, TState)(IEnumerable(Of (guid As BlueprintGuid, name As String, state As TState)))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprints<TBlueprint, TState>(System.Collections.Generic.IEnumerable<(Kingmaker.Blueprints.BlueprintGuid guid, string name, TState state)>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.NewBlueprints(Of TBlueprint, TState)(System.Collections.Generic.IEnumerable(Of (guid As Kingmaker.Blueprints.BlueprintGuid, name As String, state As TState)))
-  nameWithType: BlueprintInitializationContext.NewBlueprints<TBlueprint, TState>(IEnumerable<(BlueprintGuid guid, string name, TState state)>)
-  nameWithType.vb: BlueprintInitializationContext.NewBlueprints(Of TBlueprint, TState)(IEnumerable(Of (guid As BlueprintGuid, name As String, state As TState)))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Register(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit,System.Collections.Generic.IEnumerable{MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint})
-  name: Register(IBlueprintInit, IEnumerable<IInitContextBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Register_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_System_Collections_Generic_IEnumerable_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IInitContextBlueprint__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Register(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit,System.Collections.Generic.IEnumerable{MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint})
-  name.vb: Register(IBlueprintInit, IEnumerable(Of IInitContextBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Register(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit, System.Collections.Generic.IEnumerable<MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Register(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit, System.Collections.Generic.IEnumerable(Of MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint))
-  nameWithType: BlueprintInitializationContext.Register(BlueprintInitializationContext.IBlueprintInit, IEnumerable<BlueprintInitializationContext.IInitContextBlueprint>)
-  nameWithType.vb: BlueprintInitializationContext.Register(BlueprintInitializationContext.IBlueprintInit, IEnumerable(Of BlueprintInitializationContext.IInitContextBlueprint))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Register*
-  name: Register
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Register_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Register
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Register
-  nameWithType: BlueprintInitializationContext.Register
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Trigger
-  name: Trigger
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_Trigger
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Trigger
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.Trigger
-  nameWithType: BlueprintInitializationContext.Trigger
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.done
-  name: done
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_done
-  commentId: F:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.done
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.done
-  nameWithType: BlueprintInitializationContext.done
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension
-  name: BlueprintInitializationContextExtension
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html
-  commentId: T:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension
-  nameWithType: BlueprintInitializationContextExtension
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine*
-  name: Combine
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContextExtension_Combine_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine
-  nameWithType: BlueprintInitializationContextExtension.Combine
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer,MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0})
-  name: Combine<TOther>(ContextInitializer, ContextInitializer<TOther>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContextExtension_Combine__1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer,MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0})
-  name.vb: Combine(Of TOther)(ContextInitializer, ContextInitializer(Of TOther))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine<TOther>(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer, MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<TOther>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine(Of TOther)(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer, MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of TOther))
-  nameWithType: BlueprintInitializationContextExtension.Combine<TOther>(BlueprintInitializationContext.ContextInitializer, BlueprintInitializationContext.ContextInitializer<TOther>)
-  nameWithType.vb: BlueprintInitializationContextExtension.Combine(Of TOther)(BlueprintInitializationContext.ContextInitializer, BlueprintInitializationContext.ContextInitializer(Of TOther))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine``1(System.Collections.Generic.IEnumerable{MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0}})
-  name: Combine<T>(IEnumerable<ContextInitializer<T>>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContextExtension_Combine__1_System_Collections_Generic_IEnumerable_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer___0___
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine``1(System.Collections.Generic.IEnumerable{MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer{``0}})
-  name.vb: Combine(Of T)(IEnumerable(Of ContextInitializer(Of T)))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine<T>(System.Collections.Generic.IEnumerable<MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer<T>>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.Combine(Of T)(System.Collections.Generic.IEnumerable(Of MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer(Of T)))
-  nameWithType: BlueprintInitializationContextExtension.Combine<T>(IEnumerable<BlueprintInitializationContext.ContextInitializer<T>>)
-  nameWithType.vb: BlueprintInitializationContextExtension.Combine(Of T)(IEnumerable(Of BlueprintInitializationContext.ContextInitializer(Of T)))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint*
-  name: GetBlueprint
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContextExtension_GetBlueprint_
-  commentId: Overload:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint
-  isSpec: "True"
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint
-  nameWithType: BlueprintInitializationContextExtension.GetBlueprint
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer,MicroWrath.IMicroBlueprint{``0})
-  name: GetBlueprint<TBlueprint>(ContextInitializer, IMicroBlueprint<TBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContextExtension_GetBlueprint__1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_MicroWrath_IMicroBlueprint___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer,MicroWrath.IMicroBlueprint{``0})
-  name.vb: GetBlueprint(Of TBlueprint)(ContextInitializer, IMicroBlueprint(Of TBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint<TBlueprint>(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer, MicroWrath.IMicroBlueprint<TBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint(Of TBlueprint)(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer, MicroWrath.IMicroBlueprint(Of TBlueprint))
-  nameWithType: BlueprintInitializationContextExtension.GetBlueprint<TBlueprint>(BlueprintInitializationContext.ContextInitializer, IMicroBlueprint<TBlueprint>)
-  nameWithType.vb: BlueprintInitializationContextExtension.GetBlueprint(Of TBlueprint)(BlueprintInitializationContext.ContextInitializer, IMicroBlueprint(Of TBlueprint))
-- uid: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer,MicroWrath.OwlcatBlueprint{``0})
-  name: GetBlueprint<TBlueprint>(ContextInitializer, OwlcatBlueprint<TBlueprint>)
-  href: api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContextExtension_GetBlueprint__1_MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_ContextInitializer_MicroWrath_OwlcatBlueprint___0__
-  commentId: M:MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint``1(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer,MicroWrath.OwlcatBlueprint{``0})
-  name.vb: GetBlueprint(Of TBlueprint)(ContextInitializer, OwlcatBlueprint(Of TBlueprint))
-  fullName: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint<TBlueprint>(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer, MicroWrath.OwlcatBlueprint<TBlueprint>)
-  fullName.vb: MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.GetBlueprint(Of TBlueprint)(MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer, MicroWrath.OwlcatBlueprint(Of TBlueprint))
-  nameWithType: BlueprintInitializationContextExtension.GetBlueprint<TBlueprint>(BlueprintInitializationContext.ContextInitializer, OwlcatBlueprint<TBlueprint>)
-  nameWithType.vb: BlueprintInitializationContextExtension.GetBlueprint(Of TBlueprint)(BlueprintInitializationContext.ContextInitializer, OwlcatBlueprint(Of TBlueprint))
 - uid: MicroWrath.BlueprintsDb
   name: MicroWrath.BlueprintsDb
   href: api/MicroWrath.BlueprintsDb.html
@@ -1523,130 +605,6 @@ references:
   commentId: T:MicroWrath.Constructors.Construct
   fullName: MicroWrath.Constructors.Construct
   nameWithType: Construct
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor
-  name: Construct.BlueprintConstructor
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html
-  commentId: T:MicroWrath.Constructors.Construct.BlueprintConstructor
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor
-  nameWithType: Construct.BlueprintConstructor
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor.#ctor
-  name: BlueprintConstructor()
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html#MicroWrath_Constructors_Construct_BlueprintConstructor__ctor
-  commentId: M:MicroWrath.Constructors.Construct.BlueprintConstructor.#ctor
-  name.vb: New()
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor.BlueprintConstructor()
-  fullName.vb: MicroWrath.Constructors.Construct.BlueprintConstructor.New()
-  nameWithType: Construct.BlueprintConstructor.BlueprintConstructor()
-  nameWithType.vb: Construct.BlueprintConstructor.New()
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor.#ctor*
-  name: BlueprintConstructor
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html#MicroWrath_Constructors_Construct_BlueprintConstructor__ctor_
-  commentId: Overload:MicroWrath.Constructors.Construct.BlueprintConstructor.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor.BlueprintConstructor
-  fullName.vb: MicroWrath.Constructors.Construct.BlueprintConstructor.New
-  nameWithType: Construct.BlueprintConstructor.BlueprintConstructor
-  nameWithType.vb: Construct.BlueprintConstructor.New
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor.MicroWrath#Constructors#Construct#IBlueprintConstructor{Kingmaker#Blueprints#SimpleBlueprint}#New(System.String,System.String)
-  name: IBlueprintConstructor<SimpleBlueprint>.New(string, string)
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html#MicroWrath_Constructors_Construct_BlueprintConstructor_MicroWrath_Constructors_Construct_IBlueprintConstructor_Kingmaker_Blueprints_SimpleBlueprint__New_System_String_System_String_
-  commentId: M:MicroWrath.Constructors.Construct.BlueprintConstructor.MicroWrath#Constructors#Construct#IBlueprintConstructor{Kingmaker#Blueprints#SimpleBlueprint}#New(System.String,System.String)
-  name.vb: ''
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor.MicroWrath.Constructors.Construct.IBlueprintConstructor<Kingmaker.Blueprints.SimpleBlueprint>.New(string, string)
-  fullName.vb: ''
-  nameWithType: Construct.BlueprintConstructor.Construct.IBlueprintConstructor<SimpleBlueprint>.New(string, string)
-  nameWithType.vb: ''
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor.MicroWrath#Constructors#Construct#IBlueprintConstructor{Kingmaker#Blueprints#SimpleBlueprint}#New*
-  name: IBlueprintConstructor<SimpleBlueprint>.New
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html#MicroWrath_Constructors_Construct_BlueprintConstructor_MicroWrath_Constructors_Construct_IBlueprintConstructor_Kingmaker_Blueprints_SimpleBlueprint__New_
-  commentId: Overload:MicroWrath.Constructors.Construct.BlueprintConstructor.MicroWrath#Constructors#Construct#IBlueprintConstructor{Kingmaker#Blueprints#SimpleBlueprint}#New
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor.MicroWrath.Constructors.Construct.IBlueprintConstructor<Kingmaker.Blueprints.SimpleBlueprint>.New
-  nameWithType: Construct.BlueprintConstructor.Construct.IBlueprintConstructor<SimpleBlueprint>.New
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor.New*
-  name: New
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html#MicroWrath_Constructors_Construct_BlueprintConstructor_New_
-  commentId: Overload:MicroWrath.Constructors.Construct.BlueprintConstructor.New
-  isSpec: "True"
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor.New
-  nameWithType: Construct.BlueprintConstructor.New
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor.New``1(System.String,System.String)
-  name: New<TBlueprint>(string, string)
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html#MicroWrath_Constructors_Construct_BlueprintConstructor_New__1_System_String_System_String_
-  commentId: M:MicroWrath.Constructors.Construct.BlueprintConstructor.New``1(System.String,System.String)
-  name.vb: New(Of TBlueprint)(String, String)
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor.New<TBlueprint>(string, string)
-  fullName.vb: MicroWrath.Constructors.Construct.BlueprintConstructor.New(Of TBlueprint)(String, String)
-  nameWithType: Construct.BlueprintConstructor.New<TBlueprint>(string, string)
-  nameWithType.vb: Construct.BlueprintConstructor.New(Of TBlueprint)(String, String)
-- uid: MicroWrath.Constructors.Construct.BlueprintConstructor.initializers
-  name: initializers
-  href: api/MicroWrath.Constructors.Construct.BlueprintConstructor.html#MicroWrath_Constructors_Construct_BlueprintConstructor_initializers
-  commentId: F:MicroWrath.Constructors.Construct.BlueprintConstructor.initializers
-  fullName: MicroWrath.Constructors.Construct.BlueprintConstructor.initializers
-  nameWithType: Construct.BlueprintConstructor.initializers
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor
-  name: Construct.ComponentConstructor
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html
-  commentId: T:MicroWrath.Constructors.Construct.ComponentConstructor
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor
-  nameWithType: Construct.ComponentConstructor
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor.#ctor
-  name: ComponentConstructor()
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html#MicroWrath_Constructors_Construct_ComponentConstructor__ctor
-  commentId: M:MicroWrath.Constructors.Construct.ComponentConstructor.#ctor
-  name.vb: New()
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor.ComponentConstructor()
-  fullName.vb: MicroWrath.Constructors.Construct.ComponentConstructor.New()
-  nameWithType: Construct.ComponentConstructor.ComponentConstructor()
-  nameWithType.vb: Construct.ComponentConstructor.New()
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor.#ctor*
-  name: ComponentConstructor
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html#MicroWrath_Constructors_Construct_ComponentConstructor__ctor_
-  commentId: Overload:MicroWrath.Constructors.Construct.ComponentConstructor.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor.ComponentConstructor
-  fullName.vb: MicroWrath.Constructors.Construct.ComponentConstructor.New
-  nameWithType: Construct.ComponentConstructor.ComponentConstructor
-  nameWithType.vb: Construct.ComponentConstructor.New
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor.MicroWrath#Constructors#Construct#IComponentConstructor{Kingmaker#Blueprints#BlueprintComponent}#New
-  name: IComponentConstructor<BlueprintComponent>.New()
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html#MicroWrath_Constructors_Construct_ComponentConstructor_MicroWrath_Constructors_Construct_IComponentConstructor_Kingmaker_Blueprints_BlueprintComponent__New
-  commentId: M:MicroWrath.Constructors.Construct.ComponentConstructor.MicroWrath#Constructors#Construct#IComponentConstructor{Kingmaker#Blueprints#BlueprintComponent}#New
-  name.vb: ''
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor.MicroWrath.Constructors.Construct.IComponentConstructor<Kingmaker.Blueprints.BlueprintComponent>.New()
-  fullName.vb: ''
-  nameWithType: Construct.ComponentConstructor.Construct.IComponentConstructor<BlueprintComponent>.New()
-  nameWithType.vb: ''
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor.MicroWrath#Constructors#Construct#IComponentConstructor{Kingmaker#Blueprints#BlueprintComponent}#New*
-  name: IComponentConstructor<BlueprintComponent>.New
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html#MicroWrath_Constructors_Construct_ComponentConstructor_MicroWrath_Constructors_Construct_IComponentConstructor_Kingmaker_Blueprints_BlueprintComponent__New_
-  commentId: Overload:MicroWrath.Constructors.Construct.ComponentConstructor.MicroWrath#Constructors#Construct#IComponentConstructor{Kingmaker#Blueprints#BlueprintComponent}#New
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor.MicroWrath.Constructors.Construct.IComponentConstructor<Kingmaker.Blueprints.BlueprintComponent>.New
-  nameWithType: Construct.ComponentConstructor.Construct.IComponentConstructor<BlueprintComponent>.New
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor.New*
-  name: New
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html#MicroWrath_Constructors_Construct_ComponentConstructor_New_
-  commentId: Overload:MicroWrath.Constructors.Construct.ComponentConstructor.New
-  isSpec: "True"
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor.New
-  nameWithType: Construct.ComponentConstructor.New
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor.New``1
-  name: New<TComponent>()
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html#MicroWrath_Constructors_Construct_ComponentConstructor_New__1
-  commentId: M:MicroWrath.Constructors.Construct.ComponentConstructor.New``1
-  name.vb: New(Of TComponent)()
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor.New<TComponent>()
-  fullName.vb: MicroWrath.Constructors.Construct.ComponentConstructor.New(Of TComponent)()
-  nameWithType: Construct.ComponentConstructor.New<TComponent>()
-  nameWithType.vb: Construct.ComponentConstructor.New(Of TComponent)()
-- uid: MicroWrath.Constructors.Construct.ComponentConstructor.initializers
-  name: initializers
-  href: api/MicroWrath.Constructors.Construct.ComponentConstructor.html#MicroWrath_Constructors_Construct_ComponentConstructor_initializers
-  commentId: F:MicroWrath.Constructors.Construct.ComponentConstructor.initializers
-  fullName: MicroWrath.Constructors.Construct.ComponentConstructor.initializers
-  nameWithType: Construct.ComponentConstructor.initializers
 - uid: MicroWrath.Constructors.Construct.IBlueprintConstructor`1
   name: Construct.IBlueprintConstructor<TBlueprint>
   href: api/MicroWrath.Constructors.Construct.IBlueprintConstructor-1.html
@@ -2586,25 +1544,19 @@ references:
   fullName.vb: MicroWrath.Deferred.DeferredBlueprint.Bind(Of A, TBlueprint)(MicroWrath.Deferred.IDeferred(Of A), System.Func(Of A, MicroWrath.Deferred.IDeferredBlueprint(Of TBlueprint)), Kingmaker.Blueprints.BlueprintGuid)
   nameWithType: DeferredBlueprint.Bind<A, TBlueprint>(IDeferred<A>, Func<A, IDeferredBlueprint<TBlueprint>>, BlueprintGuid)
   nameWithType.vb: DeferredBlueprint.Bind(Of A, TBlueprint)(IDeferred(Of A), Func(Of A, IDeferredBlueprint(Of TBlueprint)), BlueprintGuid)
-- uid: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.BlueprintGuid)
-  name: LoadBlueprint(BlueprintGuid)
-  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_LoadBlueprint_Kingmaker_Blueprints_BlueprintGuid_
-  commentId: M:MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.BlueprintGuid)
-  fullName: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.BlueprintGuid)
-  nameWithType: DeferredBlueprint.LoadBlueprint(BlueprintGuid)
-- uid: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.JsonSystem.BlueprintsCache,Kingmaker.Blueprints.BlueprintGuid)
-  name: LoadBlueprint(BlueprintsCache, BlueprintGuid)
-  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_LoadBlueprint_Kingmaker_Blueprints_JsonSystem_BlueprintsCache_Kingmaker_Blueprints_BlueprintGuid_
-  commentId: M:MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.JsonSystem.BlueprintsCache,Kingmaker.Blueprints.BlueprintGuid)
-  fullName: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.JsonSystem.BlueprintsCache, Kingmaker.Blueprints.BlueprintGuid)
-  nameWithType: DeferredBlueprint.LoadBlueprint(BlueprintsCache, BlueprintGuid)
-- uid: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint*
-  name: LoadBlueprint
-  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_LoadBlueprint_
-  commentId: Overload:MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint
+- uid: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect(Kingmaker.Blueprints.BlueprintGuid)
+  name: LoadBlueprintDirect(BlueprintGuid)
+  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_LoadBlueprintDirect_Kingmaker_Blueprints_BlueprintGuid_
+  commentId: M:MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect(Kingmaker.Blueprints.BlueprintGuid)
+  fullName: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect(Kingmaker.Blueprints.BlueprintGuid)
+  nameWithType: DeferredBlueprint.LoadBlueprintDirect(BlueprintGuid)
+- uid: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect*
+  name: LoadBlueprintDirect
+  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_LoadBlueprintDirect_
+  commentId: Overload:MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect
   isSpec: "True"
-  fullName: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint
-  nameWithType: DeferredBlueprint.LoadBlueprint
+  fullName: MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect
+  nameWithType: DeferredBlueprint.LoadBlueprintDirect
 - uid: MicroWrath.Deferred.DeferredBlueprint.OnDemand*
   name: OnDemand
   href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_OnDemand_
@@ -2637,6 +1589,22 @@ references:
   isSpec: "True"
   fullName: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint
   nameWithType: DeferredBlueprint.TryGetBlueprint
+- uid: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect*
+  name: TryGetBlueprintDirect
+  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprintDirect_
+  commentId: Overload:MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect
+  isSpec: "True"
+  fullName: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect
+  nameWithType: DeferredBlueprint.TryGetBlueprintDirect
+- uid: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect``1(MicroWrath.OwlcatBlueprint{``0})
+  name: TryGetBlueprintDirect<TBlueprint>(OwlcatBlueprint<TBlueprint>)
+  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprintDirect__1_MicroWrath_OwlcatBlueprint___0__
+  commentId: M:MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect``1(MicroWrath.OwlcatBlueprint{``0})
+  name.vb: TryGetBlueprintDirect(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
+  fullName: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect<TBlueprint>(MicroWrath.OwlcatBlueprint<TBlueprint>)
+  fullName.vb: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect(Of TBlueprint)(MicroWrath.OwlcatBlueprint(Of TBlueprint))
+  nameWithType: DeferredBlueprint.TryGetBlueprintDirect<TBlueprint>(OwlcatBlueprint<TBlueprint>)
+  nameWithType.vb: DeferredBlueprint.TryGetBlueprintDirect(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
 - uid: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint``1(MicroWrath.IMicroBlueprint{``0})
   name: TryGetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>)
   href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprint__1_MicroWrath_IMicroBlueprint___0__
@@ -2646,15 +1614,6 @@ references:
   fullName.vb: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint(Of TBlueprint)(MicroWrath.IMicroBlueprint(Of TBlueprint))
   nameWithType: DeferredBlueprint.TryGetBlueprint<TBlueprint>(IMicroBlueprint<TBlueprint>)
   nameWithType.vb: DeferredBlueprint.TryGetBlueprint(Of TBlueprint)(IMicroBlueprint(Of TBlueprint))
-- uid: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})
-  name: TryGetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint>)
-  href: api/MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprint__1_MicroWrath_OwlcatBlueprint___0__
-  commentId: M:MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})
-  name.vb: TryGetBlueprint(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
-  fullName: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint<TBlueprint>(MicroWrath.OwlcatBlueprint<TBlueprint>)
-  fullName.vb: MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint(Of TBlueprint)(MicroWrath.OwlcatBlueprint(Of TBlueprint))
-  nameWithType: DeferredBlueprint.TryGetBlueprint<TBlueprint>(OwlcatBlueprint<TBlueprint>)
-  nameWithType.vb: DeferredBlueprint.TryGetBlueprint(Of TBlueprint)(OwlcatBlueprint(Of TBlueprint))
 - uid: MicroWrath.Deferred.DeferredBlueprint`1
   name: DeferredBlueprint<TBlueprint>
   href: api/MicroWrath.Deferred.DeferredBlueprint-1.html
@@ -2734,6 +1693,21 @@ references:
   fullName.vb: MicroWrath.Deferred.DeferredBlueprint(Of TBlueprint).GetBlueprint
   nameWithType: DeferredBlueprint<TBlueprint>.GetBlueprint
   nameWithType.vb: DeferredBlueprint(Of TBlueprint).GetBlueprint
+- uid: MicroWrath.Deferred.DeferredBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReferenceBase,TBlueprint}#ToReference
+  name: IMicroBlueprintReference<BlueprintReferenceBase, TBlueprint>.ToReference()
+  href: api/MicroWrath.Deferred.DeferredBlueprint-1.html#MicroWrath_Deferred_DeferredBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReferenceBase_TBlueprint__ToReference
+  commentId: M:MicroWrath.Deferred.DeferredBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReferenceBase,TBlueprint}#ToReference
+  name.vb: ''
+  fullName: MicroWrath.Deferred.DeferredBlueprint<TBlueprint>.MicroWrath.IMicroBlueprintReference<Kingmaker.Blueprints.BlueprintReferenceBase, TBlueprint>.ToReference()
+  fullName.vb: ''
+  nameWithType: DeferredBlueprint<TBlueprint>.IMicroBlueprintReference<BlueprintReferenceBase, TBlueprint>.ToReference()
+  nameWithType.vb: ''
+- uid: MicroWrath.Deferred.DeferredBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReferenceBase,TBlueprint}#ToReference*
+  name: IMicroBlueprintReference<BlueprintReferenceBase, TBlueprint>.ToReference
+  href: api/MicroWrath.Deferred.DeferredBlueprint-1.html#MicroWrath_Deferred_DeferredBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReferenceBase_TBlueprint__ToReference_
+  commentId: Overload:MicroWrath.Deferred.DeferredBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReferenceBase,TBlueprint}#ToReference
+  fullName: MicroWrath.Deferred.DeferredBlueprint<TBlueprint>.MicroWrath.IMicroBlueprintReference<Kingmaker.Blueprints.BlueprintReferenceBase, TBlueprint>.ToReference
+  nameWithType: DeferredBlueprint<TBlueprint>.IMicroBlueprintReference<BlueprintReferenceBase, TBlueprint>.ToReference
 - uid: MicroWrath.Deferred.DeferredBlueprint`1.OnCompleted
   name: OnCompleted()
   href: api/MicroWrath.Deferred.DeferredBlueprint-1.html#MicroWrath_Deferred_DeferredBlueprint_1_OnCompleted
@@ -2802,6 +1776,14 @@ references:
   fullName.vb: MicroWrath.Deferred.DeferredBlueprint(Of TBlueprint).OnNext
   nameWithType: DeferredBlueprint<TBlueprint>.OnNext
   nameWithType.vb: DeferredBlueprint(Of TBlueprint).OnNext
+- uid: MicroWrath.Deferred.DeferredBlueprint`1.referenced
+  name: referenced
+  href: api/MicroWrath.Deferred.DeferredBlueprint-1.html#MicroWrath_Deferred_DeferredBlueprint_1_referenced
+  commentId: F:MicroWrath.Deferred.DeferredBlueprint`1.referenced
+  fullName: MicroWrath.Deferred.DeferredBlueprint<TBlueprint>.referenced
+  fullName.vb: MicroWrath.Deferred.DeferredBlueprint(Of TBlueprint).referenced
+  nameWithType: DeferredBlueprint<TBlueprint>.referenced
+  nameWithType.vb: DeferredBlueprint(Of TBlueprint).referenced
 - uid: MicroWrath.Deferred.DeferredBlueprint`1.thisContext
   name: thisContext
   href: api/MicroWrath.Deferred.DeferredBlueprint-1.html#MicroWrath_Deferred_DeferredBlueprint_1_thisContext
@@ -2923,14 +1905,6 @@ references:
   fullName.vb: MicroWrath.Deferred.Deferred(Of A).OnNext
   nameWithType: Deferred<A>.OnNext
   nameWithType.vb: Deferred(Of A).OnNext
-- uid: MicroWrath.Deferred.Deferred`1.value
-  name: value
-  href: api/MicroWrath.Deferred.Deferred-1.html#MicroWrath_Deferred_Deferred_1_value
-  commentId: F:MicroWrath.Deferred.Deferred`1.value
-  fullName: MicroWrath.Deferred.Deferred<A>.value
-  fullName.vb: MicroWrath.Deferred.Deferred(Of A).value
-  nameWithType: Deferred<A>.value
-  nameWithType.vb: Deferred(Of A).value
 - uid: MicroWrath.Deferred.IDeferredBlueprint`1
   name: IDeferredBlueprint<TBlueprint>
   href: api/MicroWrath.Deferred.IDeferredBlueprint-1.html
@@ -4710,6 +3684,32 @@ references:
   isSpec: "True"
   fullName: MicroWrath.ILocalizedStringData.Name
   nameWithType: ILocalizedStringData.Name
+- uid: MicroWrath.IMicroBlueprintReference`2
+  name: IMicroBlueprintReference<TReference, TBlueprint>
+  href: api/MicroWrath.IMicroBlueprintReference-2.html
+  commentId: T:MicroWrath.IMicroBlueprintReference`2
+  name.vb: IMicroBlueprintReference(Of TReference, TBlueprint)
+  fullName: MicroWrath.IMicroBlueprintReference<TReference, TBlueprint>
+  fullName.vb: MicroWrath.IMicroBlueprintReference(Of TReference, TBlueprint)
+  nameWithType: IMicroBlueprintReference<TReference, TBlueprint>
+  nameWithType.vb: IMicroBlueprintReference(Of TReference, TBlueprint)
+- uid: MicroWrath.IMicroBlueprintReference`2.ToReference
+  name: ToReference()
+  href: api/MicroWrath.IMicroBlueprintReference-2.html#MicroWrath_IMicroBlueprintReference_2_ToReference
+  commentId: M:MicroWrath.IMicroBlueprintReference`2.ToReference
+  fullName: MicroWrath.IMicroBlueprintReference<TReference, TBlueprint>.ToReference()
+  fullName.vb: MicroWrath.IMicroBlueprintReference(Of TReference, TBlueprint).ToReference()
+  nameWithType: IMicroBlueprintReference<TReference, TBlueprint>.ToReference()
+  nameWithType.vb: IMicroBlueprintReference(Of TReference, TBlueprint).ToReference()
+- uid: MicroWrath.IMicroBlueprintReference`2.ToReference*
+  name: ToReference
+  href: api/MicroWrath.IMicroBlueprintReference-2.html#MicroWrath_IMicroBlueprintReference_2_ToReference_
+  commentId: Overload:MicroWrath.IMicroBlueprintReference`2.ToReference
+  isSpec: "True"
+  fullName: MicroWrath.IMicroBlueprintReference<TReference, TBlueprint>.ToReference
+  fullName.vb: MicroWrath.IMicroBlueprintReference(Of TReference, TBlueprint).ToReference
+  nameWithType: IMicroBlueprintReference<TReference, TBlueprint>.ToReference
+  nameWithType.vb: IMicroBlueprintReference(Of TReference, TBlueprint).ToReference
 - uid: MicroWrath.IMicroBlueprint`1
   name: IMicroBlueprint<TBlueprint>
   href: api/MicroWrath.IMicroBlueprint-1.html
@@ -4983,6 +3983,21 @@ references:
   fullName.vb: MicroWrath.MicroBlueprint(Of TBlueprint).GetBlueprint
   nameWithType: MicroBlueprint<TBlueprint>.GetBlueprint
   nameWithType.vb: MicroBlueprint(Of TBlueprint).GetBlueprint
+- uid: MicroWrath.MicroBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReference{TBlueprint},TBlueprint}#ToReference
+  name: IMicroBlueprintReference<BlueprintReference<TBlueprint>, TBlueprint>.ToReference()
+  href: api/MicroWrath.MicroBlueprint-1.html#MicroWrath_MicroBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReference_TBlueprint__TBlueprint__ToReference
+  commentId: M:MicroWrath.MicroBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReference{TBlueprint},TBlueprint}#ToReference
+  name.vb: ''
+  fullName: MicroWrath.MicroBlueprint<TBlueprint>.MicroWrath.IMicroBlueprintReference<Kingmaker.Blueprints.BlueprintReference<TBlueprint>, TBlueprint>.ToReference()
+  fullName.vb: ''
+  nameWithType: MicroBlueprint<TBlueprint>.IMicroBlueprintReference<BlueprintReference<TBlueprint>, TBlueprint>.ToReference()
+  nameWithType.vb: ''
+- uid: MicroWrath.MicroBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReference{TBlueprint},TBlueprint}#ToReference*
+  name: IMicroBlueprintReference<BlueprintReference<TBlueprint>, TBlueprint>.ToReference
+  href: api/MicroWrath.MicroBlueprint-1.html#MicroWrath_MicroBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReference_TBlueprint__TBlueprint__ToReference_
+  commentId: Overload:MicroWrath.MicroBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReference{TBlueprint},TBlueprint}#ToReference
+  fullName: MicroWrath.MicroBlueprint<TBlueprint>.MicroWrath.IMicroBlueprintReference<Kingmaker.Blueprints.BlueprintReference<TBlueprint>, TBlueprint>.ToReference
+  nameWithType: MicroBlueprint<TBlueprint>.IMicroBlueprintReference<BlueprintReference<TBlueprint>, TBlueprint>.ToReference
 - uid: MicroWrath.MicroBlueprint`1.Name
   name: Name
   href: api/MicroWrath.MicroBlueprint-1.html#MicroWrath_MicroBlueprint_1_Name
@@ -5570,12 +4585,6 @@ references:
   commentId: F:MicroWrath.Triggers.LocalizationManager_Init_Postfix
   fullName: MicroWrath.Triggers.LocalizationManager_Init_Postfix
   nameWithType: Triggers.LocalizationManager_Init_Postfix
-- uid: MicroWrath.Triggers.LocalizationManager_OnLocaleChangedEvent
-  name: LocalizationManager_OnLocaleChangedEvent
-  href: api/MicroWrath.Triggers.html#MicroWrath_Triggers_LocalizationManager_OnLocaleChangedEvent
-  commentId: E:MicroWrath.Triggers.LocalizationManager_OnLocaleChangedEvent
-  fullName: MicroWrath.Triggers.LocalizationManager_OnLocaleChangedEvent
-  nameWithType: Triggers.LocalizationManager_OnLocaleChangedEvent
 - uid: MicroWrath.Util
   name: MicroWrath.Util
   href: api/MicroWrath.Util.html
@@ -5717,30 +4726,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.Util.AssetUtils.AlphaBlend
   nameWithType: AssetUtils.AlphaBlend
-- uid: MicroWrath.Util.AssetUtils.AlphaBlendConfig
-  name: AssetUtils.AlphaBlendConfig
-  href: api/MicroWrath.Util.AssetUtils.AlphaBlendConfig.html
-  commentId: T:MicroWrath.Util.AssetUtils.AlphaBlendConfig
-  fullName: MicroWrath.Util.AssetUtils.AlphaBlendConfig
-  nameWithType: AssetUtils.AlphaBlendConfig
-- uid: MicroWrath.Util.AssetUtils.AlphaBlendConfig.foregroundRect
-  name: foregroundRect
-  href: api/MicroWrath.Util.AssetUtils.AlphaBlendConfig.html#MicroWrath_Util_AssetUtils_AlphaBlendConfig_foregroundRect
-  commentId: F:MicroWrath.Util.AssetUtils.AlphaBlendConfig.foregroundRect
-  fullName: MicroWrath.Util.AssetUtils.AlphaBlendConfig.foregroundRect
-  nameWithType: AssetUtils.AlphaBlendConfig.foregroundRect
-- uid: MicroWrath.Util.AssetUtils.AlphaBlendConfig.x
-  name: x
-  href: api/MicroWrath.Util.AssetUtils.AlphaBlendConfig.html#MicroWrath_Util_AssetUtils_AlphaBlendConfig_x
-  commentId: F:MicroWrath.Util.AssetUtils.AlphaBlendConfig.x
-  fullName: MicroWrath.Util.AssetUtils.AlphaBlendConfig.x
-  nameWithType: AssetUtils.AlphaBlendConfig.x
-- uid: MicroWrath.Util.AssetUtils.AlphaBlendConfig.y
-  name: y
-  href: api/MicroWrath.Util.AssetUtils.AlphaBlendConfig.html#MicroWrath_Util_AssetUtils_AlphaBlendConfig_y
-  commentId: F:MicroWrath.Util.AssetUtils.AlphaBlendConfig.y
-  fullName: MicroWrath.Util.AssetUtils.AlphaBlendConfig.y
-  nameWithType: AssetUtils.AlphaBlendConfig.y
 - uid: MicroWrath.Util.AssetUtils.CloneBlueprint*
   name: CloneBlueprint
   href: api/MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_CloneBlueprint_
@@ -5786,42 +4771,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.Util.AssetUtils.DiagonalCutBlend
   nameWithType: AssetUtils.DiagonalCutBlend
-- uid: MicroWrath.Util.AssetUtils.DiagonalCutConfig
-  name: AssetUtils.DiagonalCutConfig
-  href: api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.html
-  commentId: T:MicroWrath.Util.AssetUtils.DiagonalCutConfig
-  fullName: MicroWrath.Util.AssetUtils.DiagonalCutConfig
-  nameWithType: AssetUtils.DiagonalCutConfig
-- uid: MicroWrath.Util.AssetUtils.DiagonalCutConfig.height
-  name: height
-  href: api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.html#MicroWrath_Util_AssetUtils_DiagonalCutConfig_height
-  commentId: F:MicroWrath.Util.AssetUtils.DiagonalCutConfig.height
-  fullName: MicroWrath.Util.AssetUtils.DiagonalCutConfig.height
-  nameWithType: AssetUtils.DiagonalCutConfig.height
-- uid: MicroWrath.Util.AssetUtils.DiagonalCutConfig.invertX
-  name: invertX
-  href: api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.html#MicroWrath_Util_AssetUtils_DiagonalCutConfig_invertX
-  commentId: F:MicroWrath.Util.AssetUtils.DiagonalCutConfig.invertX
-  fullName: MicroWrath.Util.AssetUtils.DiagonalCutConfig.invertX
-  nameWithType: AssetUtils.DiagonalCutConfig.invertX
-- uid: MicroWrath.Util.AssetUtils.DiagonalCutConfig.invertY
-  name: invertY
-  href: api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.html#MicroWrath_Util_AssetUtils_DiagonalCutConfig_invertY
-  commentId: F:MicroWrath.Util.AssetUtils.DiagonalCutConfig.invertY
-  fullName: MicroWrath.Util.AssetUtils.DiagonalCutConfig.invertY
-  nameWithType: AssetUtils.DiagonalCutConfig.invertY
-- uid: MicroWrath.Util.AssetUtils.DiagonalCutConfig.offset
-  name: offset
-  href: api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.html#MicroWrath_Util_AssetUtils_DiagonalCutConfig_offset
-  commentId: F:MicroWrath.Util.AssetUtils.DiagonalCutConfig.offset
-  fullName: MicroWrath.Util.AssetUtils.DiagonalCutConfig.offset
-  nameWithType: AssetUtils.DiagonalCutConfig.offset
-- uid: MicroWrath.Util.AssetUtils.DiagonalCutConfig.width
-  name: width
-  href: api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.html#MicroWrath_Util_AssetUtils_DiagonalCutConfig_width
-  commentId: F:MicroWrath.Util.AssetUtils.DiagonalCutConfig.width
-  fullName: MicroWrath.Util.AssetUtils.DiagonalCutConfig.width
-  nameWithType: AssetUtils.DiagonalCutConfig.width
 - uid: MicroWrath.Util.AssetUtils.Direct
   name: AssetUtils.Direct
   href: api/MicroWrath.Util.AssetUtils.Direct.html
@@ -5938,335 +4887,6 @@ references:
   fullName.vb: MicroWrath.Util.Assets.Dynamic.CreateDynamicProxy(Of TLink)(TLink, System.Func(Of UnityEngine.GameObject, UnityEngine.GameObject), String)
   nameWithType: Dynamic.CreateDynamicProxy<TLink>(TLink, Func<GameObject, GameObject>, string?)
   nameWithType.vb: Dynamic.CreateDynamicProxy(Of TLink)(TLink, Func(Of GameObject, GameObject), String)
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2
-  name: Dynamic.DynamicAssetLink<T, TLink>
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html
-  commentId: T:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2
-  name.vb: Dynamic.DynamicAssetLink(Of T, TLink)
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink)
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink)
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.#ctor(`1,System.Func{`0,`0})
-  name: DynamicAssetLink(TLink, Func<T, T>)
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2__ctor__1_System_Func__0__0__
-  commentId: M:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.#ctor(`1,System.Func{`0,`0})
-  name.vb: New(TLink, Func(Of T, T))
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.DynamicAssetLink(TLink, System.Func<T, T>)
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).New(TLink, System.Func(Of T, T))
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.DynamicAssetLink(TLink, Func<T, T>)
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).New(TLink, Func(Of T, T))
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.#ctor*
-  name: DynamicAssetLink
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2__ctor_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.DynamicAssetLink
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).New
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.DynamicAssetLink
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).New
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.AssetType
-  name: AssetType
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_AssetType
-  commentId: P:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.AssetType
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.AssetType
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).AssetType
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.AssetType
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).AssetType
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.AssetType*
-  name: AssetType
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_AssetType_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.AssetType
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.AssetType
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).AssetType
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.AssetType
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).AssetType
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CloneObject(`0)
-  name: CloneObject(T)
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_CloneObject__0_
-  commentId: M:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CloneObject(`0)
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.CloneObject(T)
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).CloneObject(T)
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.CloneObject(T)
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).CloneObject(T)
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CloneObject*
-  name: CloneObject
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_CloneObject_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CloneObject
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.CloneObject
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).CloneObject
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.CloneObject
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).CloneObject
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CreateObject
-  name: CreateObject()
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_CreateObject
-  commentId: M:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CreateObject
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.CreateObject()
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).CreateObject()
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.CreateObject()
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).CreateObject()
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CreateObject*
-  name: CreateObject
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_CreateObject_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.CreateObject
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.CreateObject
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).CreateObject
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.CreateObject
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).CreateObject
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Init
-  name: Init
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_Init
-  commentId: P:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Init
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.Init
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).Init
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Init
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).Init
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Init*
-  name: Init
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_Init_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Init
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.Init
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).Init
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Init
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).Init
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Link
-  name: Link
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_Link
-  commentId: P:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Link
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.Link
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).Link
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Link
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).Link
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Link*
-  name: Link
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_Link_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.Link
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.Link
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).Link
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Link
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).Link
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.LinkType
-  name: LinkType
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_LinkType
-  commentId: P:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.LinkType
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.LinkType
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).LinkType
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.LinkType
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).LinkType
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.LinkType*
-  name: LinkType
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_LinkType_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.LinkType
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.LinkType
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).LinkType
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.LinkType
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).LinkType
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Init
-  name: IDynamicAssetLink.Init
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Init
-  commentId: P:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Init
-  name.vb: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Dynamic.IDynamicAssetLink.Init
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Init*
-  name: IDynamicAssetLink.Init
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Init_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Init
-  isSpec: "True"
-  name.vb: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Dynamic.IDynamicAssetLink.Init
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Link
-  name: IDynamicAssetLink.Link
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Link
-  commentId: P:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Link
-  name.vb: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Dynamic.IDynamicAssetLink.Link
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Link*
-  name: IDynamicAssetLink.Link
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicAssetLink_2_MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Link_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicAssetLink`2.MicroWrath#Util#Assets#Dynamic#IDynamicAssetLink#Link
-  isSpec: "True"
-  name.vb: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink<T, TLink>.MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  nameWithType: Dynamic.DynamicAssetLink<T, TLink>.Dynamic.IDynamicAssetLink.Link
-  nameWithType.vb: Dynamic.DynamicAssetLink(Of T, TLink).MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1
-  name: Dynamic.DynamicGameObjectLink<TLink>
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.html
-  commentId: T:MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1
-  name.vb: Dynamic.DynamicGameObjectLink(Of TLink)
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink<TLink>
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink(Of TLink)
-  nameWithType: Dynamic.DynamicGameObjectLink<TLink>
-  nameWithType.vb: Dynamic.DynamicGameObjectLink(Of TLink)
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.#ctor(`0,System.Func{UnityEngine.GameObject,UnityEngine.GameObject})
-  name: DynamicGameObjectLink(TLink, Func<GameObject, GameObject>)
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.html#MicroWrath_Util_Assets_Dynamic_DynamicGameObjectLink_1__ctor__0_System_Func_UnityEngine_GameObject_UnityEngine_GameObject__
-  commentId: M:MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.#ctor(`0,System.Func{UnityEngine.GameObject,UnityEngine.GameObject})
-  name.vb: New(TLink, Func(Of GameObject, GameObject))
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink<TLink>.DynamicGameObjectLink(TLink, System.Func<UnityEngine.GameObject, UnityEngine.GameObject>)
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink(Of TLink).New(TLink, System.Func(Of UnityEngine.GameObject, UnityEngine.GameObject))
-  nameWithType: Dynamic.DynamicGameObjectLink<TLink>.DynamicGameObjectLink(TLink, Func<GameObject, GameObject>)
-  nameWithType.vb: Dynamic.DynamicGameObjectLink(Of TLink).New(TLink, Func(Of GameObject, GameObject))
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.#ctor*
-  name: DynamicGameObjectLink
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.html#MicroWrath_Util_Assets_Dynamic_DynamicGameObjectLink_1__ctor_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink<TLink>.DynamicGameObjectLink
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink(Of TLink).New
-  nameWithType: Dynamic.DynamicGameObjectLink<TLink>.DynamicGameObjectLink
-  nameWithType.vb: Dynamic.DynamicGameObjectLink(Of TLink).New
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.CloneObject(UnityEngine.GameObject)
-  name: CloneObject(GameObject)
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.html#MicroWrath_Util_Assets_Dynamic_DynamicGameObjectLink_1_CloneObject_UnityEngine_GameObject_
-  commentId: M:MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.CloneObject(UnityEngine.GameObject)
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink<TLink>.CloneObject(UnityEngine.GameObject)
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink(Of TLink).CloneObject(UnityEngine.GameObject)
-  nameWithType: Dynamic.DynamicGameObjectLink<TLink>.CloneObject(GameObject)
-  nameWithType.vb: Dynamic.DynamicGameObjectLink(Of TLink).CloneObject(GameObject)
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.CloneObject*
-  name: CloneObject
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.html#MicroWrath_Util_Assets_Dynamic_DynamicGameObjectLink_1_CloneObject_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink`1.CloneObject
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink<TLink>.CloneObject
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink(Of TLink).CloneObject
-  nameWithType: Dynamic.DynamicGameObjectLink<TLink>.CloneObject
-  nameWithType.vb: Dynamic.DynamicGameObjectLink(Of TLink).CloneObject
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2
-  name: Dynamic.DynamicMonobehaviourLink<T, TLink>
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink-2.html
-  commentId: T:MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2
-  name.vb: Dynamic.DynamicMonobehaviourLink(Of T, TLink)
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink<T, TLink>
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink(Of T, TLink)
-  nameWithType: Dynamic.DynamicMonobehaviourLink<T, TLink>
-  nameWithType.vb: Dynamic.DynamicMonobehaviourLink(Of T, TLink)
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.#ctor(`1,System.Func{`0,`0})
-  name: DynamicMonobehaviourLink(TLink, Func<T, T>)
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicMonobehaviourLink_2__ctor__1_System_Func__0__0__
-  commentId: M:MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.#ctor(`1,System.Func{`0,`0})
-  name.vb: New(TLink, Func(Of T, T))
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink<T, TLink>.DynamicMonobehaviourLink(TLink, System.Func<T, T>)
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink(Of T, TLink).New(TLink, System.Func(Of T, T))
-  nameWithType: Dynamic.DynamicMonobehaviourLink<T, TLink>.DynamicMonobehaviourLink(TLink, Func<T, T>)
-  nameWithType.vb: Dynamic.DynamicMonobehaviourLink(Of T, TLink).New(TLink, Func(Of T, T))
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.#ctor*
-  name: DynamicMonobehaviourLink
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicMonobehaviourLink_2__ctor_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink<T, TLink>.DynamicMonobehaviourLink
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink(Of T, TLink).New
-  nameWithType: Dynamic.DynamicMonobehaviourLink<T, TLink>.DynamicMonobehaviourLink
-  nameWithType.vb: Dynamic.DynamicMonobehaviourLink(Of T, TLink).New
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.CloneObject(`0)
-  name: CloneObject(T)
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicMonobehaviourLink_2_CloneObject__0_
-  commentId: M:MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.CloneObject(`0)
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink<T, TLink>.CloneObject(T)
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink(Of T, TLink).CloneObject(T)
-  nameWithType: Dynamic.DynamicMonobehaviourLink<T, TLink>.CloneObject(T)
-  nameWithType.vb: Dynamic.DynamicMonobehaviourLink(Of T, TLink).CloneObject(T)
-- uid: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.CloneObject*
-  name: CloneObject
-  href: api/MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink-2.html#MicroWrath_Util_Assets_Dynamic_DynamicMonobehaviourLink_2_CloneObject_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink`2.CloneObject
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink<T, TLink>.CloneObject
-  fullName.vb: MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink(Of T, TLink).CloneObject
-  nameWithType: Dynamic.DynamicMonobehaviourLink<T, TLink>.CloneObject
-  nameWithType.vb: Dynamic.DynamicMonobehaviourLink(Of T, TLink).CloneObject
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink
-  name: Dynamic.IDynamicAssetLink
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html
-  commentId: T:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink
-  nameWithType: Dynamic.IDynamicAssetLink
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.AssetType
-  name: AssetType
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_AssetType
-  commentId: P:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.AssetType
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.AssetType
-  nameWithType: Dynamic.IDynamicAssetLink.AssetType
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.AssetType*
-  name: AssetType
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_AssetType_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.AssetType
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.AssetType
-  nameWithType: Dynamic.IDynamicAssetLink.AssetType
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.CreateObject
-  name: CreateObject()
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_CreateObject
-  commentId: M:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.CreateObject
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.CreateObject()
-  nameWithType: Dynamic.IDynamicAssetLink.CreateObject()
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.CreateObject*
-  name: CreateObject
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_CreateObject_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.CreateObject
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.CreateObject
-  nameWithType: Dynamic.IDynamicAssetLink.CreateObject
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  name: Init
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Init
-  commentId: P:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  nameWithType: Dynamic.IDynamicAssetLink.Init
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init*
-  name: Init
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Init_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Init
-  nameWithType: Dynamic.IDynamicAssetLink.Init
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  name: Link
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Link
-  commentId: P:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  nameWithType: Dynamic.IDynamicAssetLink.Link
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link*
-  name: Link
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_Link_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.Link
-  nameWithType: Dynamic.IDynamicAssetLink.Link
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.LinkType
-  name: LinkType
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_LinkType
-  commentId: P:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.LinkType
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.LinkType
-  nameWithType: Dynamic.IDynamicAssetLink.LinkType
-- uid: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.LinkType*
-  name: LinkType
-  href: api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html#MicroWrath_Util_Assets_Dynamic_IDynamicAssetLink_LinkType_
-  commentId: Overload:MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.LinkType
-  isSpec: "True"
-  fullName: MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.LinkType
-  nameWithType: Dynamic.IDynamicAssetLink.LinkType
 - uid: MicroWrath.Util.Functional
   name: Functional
   href: api/MicroWrath.Util.Functional.html
@@ -8123,43 +6743,6 @@ references:
   isSpec: "True"
   fullName: MicroWrath.Util.Unity.UnityUtil.SupportsSetPixel
   nameWithType: UnityUtil.SupportsSetPixel
-- uid: System.Runtime.CompilerServices
-  name: System.Runtime.CompilerServices
-  href: api/System.Runtime.CompilerServices.html
-  commentId: N:System.Runtime.CompilerServices
-  fullName: System.Runtime.CompilerServices
-  nameWithType: System.Runtime.CompilerServices
-- uid: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute
-  name: IgnoresAccessChecksToAttribute
-  href: api/System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.html
-  commentId: T:System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute
-  fullName: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute
-  nameWithType: IgnoresAccessChecksToAttribute
-- uid: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.#ctor(System.String)
-  name: IgnoresAccessChecksToAttribute(string)
-  href: api/System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.html#System_Runtime_CompilerServices_IgnoresAccessChecksToAttribute__ctor_System_String_
-  commentId: M:System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.#ctor(System.String)
-  name.vb: New(String)
-  fullName: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.IgnoresAccessChecksToAttribute(string)
-  fullName.vb: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.New(String)
-  nameWithType: IgnoresAccessChecksToAttribute.IgnoresAccessChecksToAttribute(string)
-  nameWithType.vb: IgnoresAccessChecksToAttribute.New(String)
-- uid: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.#ctor*
-  name: IgnoresAccessChecksToAttribute
-  href: api/System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.html#System_Runtime_CompilerServices_IgnoresAccessChecksToAttribute__ctor_
-  commentId: Overload:System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.IgnoresAccessChecksToAttribute
-  fullName.vb: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.New
-  nameWithType: IgnoresAccessChecksToAttribute.IgnoresAccessChecksToAttribute
-  nameWithType.vb: IgnoresAccessChecksToAttribute.New
-- uid: System.Runtime.CompilerServices.IsExternalInit
-  name: IsExternalInit
-  href: api/System.Runtime.CompilerServices.IsExternalInit.html
-  commentId: T:System.Runtime.CompilerServices.IsExternalInit
-  fullName: System.Runtime.CompilerServices.IsExternalInit
-  nameWithType: IsExternalInit
 - uid: TabletopTweaks.Core.Utilities
   name: TabletopTweaks.Core.Utilities
   href: api/TabletopTweaks.Core.Utilities.html
@@ -8172,56 +6755,6 @@ references:
   commentId: T:TabletopTweaks.Core.Utilities.ObjectDeepCopier
   fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier
   nameWithType: ObjectDeepCopier
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse
-  name: ObjectDeepCopier.ArrayTraverse
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html
-  commentId: T:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse
-  nameWithType: ObjectDeepCopier.ArrayTraverse
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.#ctor(System.Array)
-  name: ArrayTraverse(Array)
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ArrayTraverse__ctor_System_Array_
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.#ctor(System.Array)
-  name.vb: New(Array)
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.ArrayTraverse(System.Array)
-  fullName.vb: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.New(System.Array)
-  nameWithType: ObjectDeepCopier.ArrayTraverse.ArrayTraverse(Array)
-  nameWithType.vb: ObjectDeepCopier.ArrayTraverse.New(Array)
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.#ctor*
-  name: ArrayTraverse
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ArrayTraverse__ctor_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.ArrayTraverse
-  fullName.vb: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.New
-  nameWithType: ObjectDeepCopier.ArrayTraverse.ArrayTraverse
-  nameWithType.vb: ObjectDeepCopier.ArrayTraverse.New
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Position
-  name: Position
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ArrayTraverse_Position
-  commentId: F:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Position
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Position
-  nameWithType: ObjectDeepCopier.ArrayTraverse.Position
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Step
-  name: Step()
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ArrayTraverse_Step
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Step
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Step()
-  nameWithType: ObjectDeepCopier.ArrayTraverse.Step()
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Step*
-  name: Step
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ArrayTraverse_Step_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Step
-  isSpec: "True"
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.Step
-  nameWithType: ObjectDeepCopier.ArrayTraverse.Step
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.maxLengths
-  name: maxLengths
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ArrayTraverse_maxLengths
-  commentId: F:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.maxLengths
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.maxLengths
-  nameWithType: ObjectDeepCopier.ArrayTraverse.maxLengths
 - uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.Clone(System.Object)
   name: Clone(object)
   href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_Clone_System_Object_
@@ -8238,41 +6771,3 @@ references:
   isSpec: "True"
   fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.Clone
   nameWithType: ObjectDeepCopier.Clone
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer
-  name: ObjectDeepCopier.ReferenceEqualityComparer
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.html
-  commentId: T:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer
-  nameWithType: ObjectDeepCopier.ReferenceEqualityComparer
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.Equals(System.Object,System.Object)
-  name: Equals(object, object)
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ReferenceEqualityComparer_Equals_System_Object_System_Object_
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.Equals(System.Object,System.Object)
-  name.vb: Equals(Object, Object)
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.Equals(object, object)
-  fullName.vb: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.Equals(Object, Object)
-  nameWithType: ObjectDeepCopier.ReferenceEqualityComparer.Equals(object, object)
-  nameWithType.vb: ObjectDeepCopier.ReferenceEqualityComparer.Equals(Object, Object)
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.Equals*
-  name: Equals
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ReferenceEqualityComparer_Equals_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.Equals
-  isSpec: "True"
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.Equals
-  nameWithType: ObjectDeepCopier.ReferenceEqualityComparer.Equals
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode(System.Object)
-  name: GetHashCode(object)
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ReferenceEqualityComparer_GetHashCode_System_Object_
-  commentId: M:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode(System.Object)
-  name.vb: GetHashCode(Object)
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode(object)
-  fullName.vb: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode(Object)
-  nameWithType: ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode(object)
-  nameWithType.vb: ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode(Object)
-- uid: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode*
-  name: GetHashCode
-  href: api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.html#TabletopTweaks_Core_Utilities_ObjectDeepCopier_ReferenceEqualityComparer_GetHashCode_
-  commentId: Overload:TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode
-  isSpec: "True"
-  fullName: TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode
-  nameWithType: ObjectDeepCopier.ReferenceEqualityComparer.GetHashCode

@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Interface IDeferred&lt;A&gt; | MicroWrath ">
       
-      
+      <meta name="description" content="Deferred execution context returning A. A deferred context is a function or collection of functions whose execution can be invoked at a later time. The return value may be memoized ie. execution of  only invokes the underlying function once. In addition, this evaluation is also an  event source. These contexts may be chained or combined to construct a deferrred &amp;quot;pipeline&amp;quot;. See also: ,">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroWrath_Deferred_IDeferred_1" data-uid="MicroWrath.Deferred.IDeferred`1" class="text-break">
-Interface IDeferred&lt;A&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L13"><i class="bi bi-code-slash"></i></a>
+Interface IDeferred&lt;A&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,7 +97,13 @@ Interface IDeferred&lt;A&gt;  <a class="header-action link-secondary" title="Vie
   <dl><dt>Assembly</dt><dd>MicroWrath.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Deferred execution context returning <code class="typeparamref">A</code>.<br>
+A deferred context is a function or collection of functions whose execution can be invoked at a later time.
+The return value may be memoized ie. execution of <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html#MicroWrath_Deferred_IDeferred_1_Eval">Eval()</a> only invokes the underlying function once.<br>
+In addition, this evaluation is also an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a> event source.<br>
+These contexts may be chained or combined to construct a deferrred &quot;pipeline&quot;.<br><br>
+See also: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a></p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -182,10 +188,11 @@ Interface IDeferred&lt;A&gt;  <a class="header-action link-secondary" title="Vie
 
   <h3 id="MicroWrath_Deferred_IDeferred_1_OnEvaluated" data-uid="MicroWrath.Deferred.IDeferred`1.OnEvaluated">
   OnEvaluated
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Notifies subscribers on context execution.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -217,10 +224,11 @@ Interface IDeferred&lt;A&gt;  <a class="header-action link-secondary" title="Vie
 
   <h3 id="MicroWrath_Deferred_IDeferred_1_Eval" data-uid="MicroWrath.Deferred.IDeferred`1.Eval">
   Eval()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L28"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluate the context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -248,7 +256,7 @@ Interface IDeferred&lt;A&gt;  <a class="header-action link-secondary" title="Vie
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L13" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L22" class="edit-link">Edit this page</a>
         </div>
 
 

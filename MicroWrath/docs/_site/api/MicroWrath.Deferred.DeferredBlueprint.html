@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroWrath_Deferred_DeferredBlueprint" data-uid="MicroWrath.Deferred.DeferredBlueprint" class="text-break">
-Class DeferredBlueprint  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L56"><i class="bi bi-code-slash"></i></a>
+Class DeferredBlueprint  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L100"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -157,10 +157,11 @@ internal static class DeferredBlueprint</code></pre>
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_AddBlueprintDeferred__1_MicroWrath_Deferred_IDeferred___0__Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.Deferred.DeferredBlueprint.AddBlueprintDeferred``1(MicroWrath.Deferred.IDeferred{``0},Kingmaker.Blueprints.BlueprintGuid)">
   AddBlueprintDeferred&lt;TBlueprint&gt;(IDeferred&lt;TBlueprint&gt;, BlueprintGuid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L116"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>When this context executes, add the provided blueprint to the library. Replaces any existing blueprint with the same guid.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -170,21 +171,25 @@ internal static class DeferredBlueprint</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>Guid of blueprint to add</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a> context that returns the blueprint after it is added</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -200,10 +205,11 @@ internal static class DeferredBlueprint</code></pre>
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_AddBlueprintDeferred__1_MicroWrath_Deferred_IDeferred___0__MicroWrath_IMicroBlueprint___0__" data-uid="MicroWrath.Deferred.DeferredBlueprint.AddBlueprintDeferred``1(MicroWrath.Deferred.IDeferred{``0},MicroWrath.IMicroBlueprint{``0})">
   AddBlueprintDeferred&lt;TBlueprint&gt;(IDeferred&lt;TBlueprint&gt;, IMicroBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L125"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>When this context executes, add the provided blueprint to the library. Replaces any existing blueprint with the same guid.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -213,21 +219,25 @@ internal static class DeferredBlueprint</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>microBlueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a> with guid of blueprint to add</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a> context that returns the blueprint after it is added</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -243,10 +253,11 @@ internal static class DeferredBlueprint</code></pre>
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_AddOnTrigger__1_MicroWrath_Deferred_IDeferred___0__Kingmaker_Blueprints_BlueprintGuid_System_IObservable_UniRx_Unit__" data-uid="MicroWrath.Deferred.DeferredBlueprint.AddOnTrigger``1(MicroWrath.Deferred.IDeferred{``0},Kingmaker.Blueprints.BlueprintGuid,System.IObservable{UniRx.Unit})">
   AddOnTrigger&lt;TBlueprint&gt;(IDeferred&lt;TBlueprint&gt;, BlueprintGuid, IObservable&lt;Unit&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L139"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Executes this context and adds the resulting blueprint to the library in response to an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -256,23 +267,28 @@ internal static class DeferredBlueprint</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>Guid of blueprint to add</p>
+</dd>
     <dt><code>trigger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<span class="xref">Unit</span>&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a> to observe</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a> context that returns the blueprint after it is added</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -288,10 +304,11 @@ internal static class DeferredBlueprint</code></pre>
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_AddOnTrigger__1_MicroWrath_Deferred_IDeferred___0__MicroWrath_IMicroBlueprint___0__System_IObservable_UniRx_Unit__" data-uid="MicroWrath.Deferred.DeferredBlueprint.AddOnTrigger``1(MicroWrath.Deferred.IDeferred{``0},MicroWrath.IMicroBlueprint{``0},System.IObservable{UniRx.Unit})">
   AddOnTrigger&lt;TBlueprint&gt;(IDeferred&lt;TBlueprint&gt;, IMicroBlueprint&lt;TBlueprint&gt;, IObservable&lt;Unit&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L156"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Executes this context and adds the resulting blueprint to the library in response to an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -301,23 +318,28 @@ internal static class DeferredBlueprint</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>microBlueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a> with guid of blueprint to add</p>
+</dd>
     <dt><code>trigger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable</a>&lt;<span class="xref">Unit</span>&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a> to observe</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a> context that returns the blueprint after it is added</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -333,7 +355,7 @@ internal static class DeferredBlueprint</code></pre>
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_Bind__2_MicroWrath_Deferred_IDeferred___0__System_Func___0_MicroWrath_Deferred_IDeferredBlueprint___1___Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.Deferred.DeferredBlueprint.Bind``2(MicroWrath.Deferred.IDeferred{``0},System.Func{``0,MicroWrath.Deferred.IDeferredBlueprint{``1}},Kingmaker.Blueprints.BlueprintGuid)">
   Bind&lt;A, TBlueprint&gt;(IDeferred&lt;A&gt;, Func&lt;A, IDeferredBlueprint&lt;TBlueprint&gt;&gt;, BlueprintGuid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L103"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -376,70 +398,33 @@ internal static class DeferredBlueprint</code></pre>
 
 
 
-  <a id="MicroWrath_Deferred_DeferredBlueprint_LoadBlueprint_" data-uid="MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint*"></a>
+  <a id="MicroWrath_Deferred_DeferredBlueprint_LoadBlueprintDirect_" data-uid="MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect*"></a>
 
-  <h3 id="MicroWrath_Deferred_DeferredBlueprint_LoadBlueprint_Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.BlueprintGuid)">
-  LoadBlueprint(BlueprintGuid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  <h3 id="MicroWrath_Deferred_DeferredBlueprint_LoadBlueprintDirect_Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.Deferred.DeferredBlueprint.LoadBlueprintDirect(Kingmaker.Blueprints.BlueprintGuid)">
+  LoadBlueprintDirect(BlueprintGuid)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L209"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Load a blueprint from the library, skipping any triggers defined by this mod.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">internal static SimpleBlueprint? LoadBlueprint(BlueprintGuid guid)</code></pre>
+    <pre><code class="lang-csharp hljs">internal static SimpleBlueprint? LoadBlueprintDirect(BlueprintGuid guid)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>Guid of blueprint to load</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><span class="xref">SimpleBlueprint</span></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="MicroWrath_Deferred_DeferredBlueprint_LoadBlueprint_" data-uid="MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint*"></a>
-
-  <h3 id="MicroWrath_Deferred_DeferredBlueprint_LoadBlueprint_Kingmaker_Blueprints_JsonSystem_BlueprintsCache_Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.Deferred.DeferredBlueprint.LoadBlueprint(Kingmaker.Blueprints.JsonSystem.BlueprintsCache,Kingmaker.Blueprints.BlueprintGuid)">
-  LoadBlueprint(BlueprintsCache, BlueprintGuid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L122"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[HarmonyReversePatch(HarmonyReversePatchType.Original)]
-[HarmonyPatch(typeof(BlueprintsCache), &quot;Load&quot;)]
-internal static SimpleBlueprint LoadBlueprint(BlueprintsCache instance, BlueprintGuid guid)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>instance</code> <span class="xref">BlueprintsCache</span></dt>
-    <dd></dd>
-    <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><span class="xref">SimpleBlueprint</span></dt>
-    <dd></dd>
+    <dd><p>Blueprint or null if the blueprint is not present in the library</p>
+</dd>
   </dl>
 
 
@@ -456,34 +441,39 @@ internal static SimpleBlueprint LoadBlueprint(BlueprintsCache instance, Blueprin
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_OnDemand__1_MicroWrath_Deferred_IDeferred___0__Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.Deferred.DeferredBlueprint.OnDemand``1(MicroWrath.Deferred.IDeferred{``0},Kingmaker.Blueprints.BlueprintGuid)">
   OnDemand&lt;TBlueprint&gt;(IDeferred&lt;TBlueprint&gt;, BlueprintGuid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L170"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Add this blueprint to library on demand via <a class="xref" href="MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintLoad_Prefix">BlueprintLoad_Prefix</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IDeferred&lt;TBlueprint&gt; OnDemand&lt;TBlueprint&gt;(this IDeferred&lt;TBlueprint&gt; context, BlueprintGuid guid) where TBlueprint : SimpleBlueprint</code></pre>
+    <pre><code class="lang-csharp hljs">public static IDeferredBlueprint&lt;TBlueprint&gt; OnDemand&lt;TBlueprint&gt;(this IDeferred&lt;TBlueprint&gt; context, BlueprintGuid guid) where TBlueprint : SimpleBlueprint</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>This <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a></p>
+</dd>
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>Blueprint's guid</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dt><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint</a>&lt;TBlueprint&gt;</dt>
+    <dd><p><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a> that adds the blueprint to library</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -499,34 +489,84 @@ internal static SimpleBlueprint LoadBlueprint(BlueprintsCache instance, Blueprin
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_OnDemand__1_MicroWrath_Deferred_IDeferred___0__MicroWrath_IMicroBlueprint___0__" data-uid="MicroWrath.Deferred.DeferredBlueprint.OnDemand``1(MicroWrath.Deferred.IDeferred{``0},MicroWrath.IMicroBlueprint{``0})">
   OnDemand&lt;TBlueprint&gt;(IDeferred&lt;TBlueprint&gt;, IMicroBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L192"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Add this blueprint to library on demand via <a class="xref" href="MicroWrath.Triggers.html#MicroWrath_Triggers_BlueprintLoad_Prefix">BlueprintLoad_Prefix</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IDeferred&lt;TBlueprint&gt; OnDemand&lt;TBlueprint&gt;(this IDeferred&lt;TBlueprint&gt; context, IMicroBlueprint&lt;TBlueprint&gt; microBlueprint) where TBlueprint : SimpleBlueprint</code></pre>
+    <pre><code class="lang-csharp hljs">public static IDeferredBlueprint&lt;TBlueprint&gt; OnDemand&lt;TBlueprint&gt;(this IDeferred&lt;TBlueprint&gt; context, IMicroBlueprint&lt;TBlueprint&gt; microBlueprint) where TBlueprint : SimpleBlueprint</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>This <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a></p>
+</dd>
     <dt><code>microBlueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a> to get guid from.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dt><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint</a>&lt;TBlueprint&gt;</dt>
+    <dd><p><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a> that adds the blueprint to library</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprintDirect_" data-uid="MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect*"></a>
+
+  <h3 id="MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprintDirect__1_MicroWrath_OwlcatBlueprint___0__" data-uid="MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprintDirect``1(MicroWrath.OwlcatBlueprint{``0})">
+  TryGetBlueprintDirect&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L232"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Load a blueprint from the library, skipping any triggers defined by this mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">internal static TBlueprint TryGetBlueprintDirect&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt; blueprint) where TBlueprint : SimpleBlueprint</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>blueprint</code> <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint</a>&lt;TBlueprint&gt;</dt>
+    <dd><p>Blueprint to load</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TBlueprint</span></dt>
+    <dd><p>Blueprint or null if the blueprint is not present in the library</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TBlueprint</code></dt>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -542,10 +582,12 @@ internal static SimpleBlueprint LoadBlueprint(BlueprintsCache instance, Blueprin
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprint__1_MicroWrath_IMicroBlueprint___0__" data-uid="MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint``1(MicroWrath.IMicroBlueprint{``0})">
   TryGetBlueprint&lt;TBlueprint&gt;(IMicroBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L218"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>If the provided <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a> is a <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a>, evaluate the context and return the result.
+Otherwise, tries to load the blueprint from the library, skipping any triggers as with <a class="xref" href="MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_LoadBlueprintDirect_Kingmaker_Blueprints_BlueprintGuid_">LoadBlueprintDirect(BlueprintGuid)</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -555,60 +597,22 @@ internal static SimpleBlueprint LoadBlueprint(BlueprintsCache instance, Blueprin
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>microBlueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Blueprint to load</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><span class="xref">TBlueprint</span></dt>
-    <dd></dd>
+    <dd><p>Blueprint or null if the blueprint is not found</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprint_" data-uid="MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint*"></a>
-
-  <h3 id="MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprint__1_MicroWrath_OwlcatBlueprint___0__" data-uid="MicroWrath.Deferred.DeferredBlueprint.TryGetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})">
-  TryGetBlueprint&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L140"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">internal static TBlueprint TryGetBlueprint&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt; blueprint) where TBlueprint : SimpleBlueprint</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>blueprint</code> <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><span class="xref">TBlueprint</span></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -624,7 +628,7 @@ internal static SimpleBlueprint LoadBlueprint(BlueprintsCache instance, Blueprin
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L56" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L100" class="edit-link">Edit this page</a>
         </div>
 
 

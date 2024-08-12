@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class Deferred&lt;A&gt; | MicroWrath ">
       
-      
+      <meta name="description" content="Deferred execution context returning A. Canonical implementation of . The return value is memoized ie. execution of  only invokes the underlying function once. See also: ,">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroWrath_Deferred_Deferred_1" data-uid="MicroWrath.Deferred.Deferred`1" class="text-break">
-Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L19"><i class="bi bi-code-slash"></i></a>
+Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L43"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,7 +97,10 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
   <dl><dt>Assembly</dt><dd>MicroWrath.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Deferred execution context returning <code class="typeparamref">A</code>. Canonical implementation of <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a>.
+The return value is memoized ie. execution of <a class="xref" href="MicroWrath.Deferred.Deferred-1.html#MicroWrath_Deferred_Deferred_1_Eval">Eval()</a> only invokes the underlying function once.<br><br>
+See also: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a></p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -208,10 +211,11 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 
   <h3 id="MicroWrath_Deferred_Deferred_1__ctor_System_Func__0__" data-uid="MicroWrath.Deferred.Deferred`1.#ctor(System.Func{`0})">
   Deferred(Func&lt;A&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L51"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Constructs a new context from the provided <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -235,40 +239,6 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 
 
 
-  <h2 class="section" id="fields">Fields
-</h2>
-
-
-
-  <h3 id="MicroWrath_Deferred_Deferred_1_value" data-uid="MicroWrath.Deferred.Deferred`1.value">
-  value
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L21"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">private readonly Lazy&lt;A&gt; value</code></pre>
-  </div>
-
-
-
-
-  <h4 class="section">Field Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.lazy-1">Lazy</a>&lt;A&gt;</dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
   <h2 class="section" id="properties">Properties
 </h2>
 
@@ -277,10 +247,11 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 
   <h3 id="MicroWrath_Deferred_Deferred_1_OnEvaluated" data-uid="MicroWrath.Deferred.Deferred`1.OnEvaluated">
   OnEvaluated
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L65"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Notifies subscribers on context execution.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -312,10 +283,11 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 
   <h3 id="MicroWrath_Deferred_Deferred_1_Eval" data-uid="MicroWrath.Deferred.Deferred`1.Eval">
   Eval()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L70"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluate the context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -343,7 +315,7 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 
   <h3 id="MicroWrath_Deferred_Deferred_1_OnCompleted" data-uid="MicroWrath.Deferred.Deferred`1.OnCompleted">
   OnCompleted()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L79"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Notifies the observer that the provider has finished sending push-based notifications.</p>
@@ -370,7 +342,7 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 
   <h3 id="MicroWrath_Deferred_Deferred_1_OnError_System_Exception_" data-uid="MicroWrath.Deferred.Deferred`1.OnError(System.Exception)">
   OnError(Exception)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L76"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Notifies the observer that the provider has experienced an error condition.</p>
@@ -403,7 +375,7 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 
   <h3 id="MicroWrath_Deferred_Deferred_1_OnNext_UniRx_Unit_" data-uid="MicroWrath.Deferred.Deferred`1.OnNext(UniRx.Unit)">
   OnNext(Unit)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L73"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provides the observer with new data.</p>
@@ -436,7 +408,7 @@ Class Deferred&lt;A&gt;  <a class="header-action link-secondary" title="View sou
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L19" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L43" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class DeferredBlueprint&lt;TBlueprint&gt; | MicroWrath ">
       
-      
+      <meta name="description" content="A deferred execution context returning a TBlueprint. Canonical implmentation of . The value of the returned blueprint&#39;s  is replaced with the guid parameter.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroWrath_Deferred_DeferredBlueprint_1" data-uid="MicroWrath.Deferred.DeferredBlueprint`1" class="text-break">
-Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L30"><i class="bi bi-code-slash"></i></a>
+Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L43"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,11 +97,14 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
   <dl><dt>Assembly</dt><dd>MicroWrath.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>A deferred execution context returning a <code class="typeparamref">TBlueprint</code>.
+Canonical implmentation of <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a>.
+The value of the returned blueprint's <span class="xref">Kingmaker.Blueprints.SimpleBlueprint.AssetGuid</span> is replaced with the <code class="paramref">guid</code> parameter.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">internal class DeferredBlueprint&lt;TBlueprint&gt; : IDeferredBlueprint&lt;TBlueprint&gt;, IDeferred&lt;TBlueprint&gt;, IObserver&lt;Unit&gt;, IMicroBlueprint&lt;TBlueprint&gt; where TBlueprint : SimpleBlueprint</code></pre>
+    <pre><code class="lang-csharp hljs">internal class DeferredBlueprint&lt;TBlueprint&gt; : IDeferredBlueprint&lt;TBlueprint&gt;, IDeferred&lt;TBlueprint&gt;, IObserver&lt;Unit&gt;, IMicroBlueprint&lt;TBlueprint&gt;, IMicroBlueprintReference&lt;BlueprintReferenceBase, TBlueprint&gt; where TBlueprint : SimpleBlueprint</code></pre>
   </div>
 
 
@@ -109,7 +112,8 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type.</p>
+</dd>
   </dl>
 
   <dl class="typelist inheritance">
@@ -127,6 +131,7 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
       <div><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobserver-1">IObserver</a>&lt;<span class="xref">Unit</span>&gt;</div>
       <div><a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</div>
+      <div><a class="xref" href="MicroWrath.IMicroBlueprintReference-2.html">IMicroBlueprintReference</a>&lt;<span class="xref">BlueprintReferenceBase</span>, TBlueprint&gt;</div>
     </dd>
   </dl>
 
@@ -234,10 +239,13 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1__ctor_MicroWrath_Deferred_IDeferred__0__Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.#ctor(MicroWrath.Deferred.IDeferred{`0},Kingmaker.Blueprints.BlueprintGuid)">
   DeferredBlueprint(IDeferred&lt;TBlueprint&gt;, BlueprintGuid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L43"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A deferred execution context returning a <code class="typeparamref">TBlueprint</code>.
+Canonical implmentation of <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a>.
+The value of the returned blueprint's <span class="xref">Kingmaker.Blueprints.SimpleBlueprint.AssetGuid</span> is replaced with the <code class="paramref">guid</code> parameter.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -247,9 +255,11 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Source <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> context.</p>
+</dd>
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>Guid of returned blueprint.</p>
+</dd>
   </dl>
 
 
@@ -260,6 +270,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -268,9 +284,45 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_referenced" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.referenced">
+  referenced
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">private bool referenced</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
+
+
+
+
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_thisContext" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.thisContext">
   thisContext
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L47"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -294,6 +346,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -305,10 +363,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_BlueprintGuid" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.BlueprintGuid">
   BlueprintGuid
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L72"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Blueprint's <a class="xref" href="MicroWrath.IMicroBlueprint-1.html#MicroWrath_IMicroBlueprint_1_BlueprintGuid">BlueprintGuid</a>.<br><br>
+See also: <span class="xref">Kingmaker.Blueprints.SimpleBlueprint.AssetGuid</span>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -329,6 +389,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -336,10 +402,11 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_OnEvaluated" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.OnEvaluated">
   OnEvaluated
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L69"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Notifies subscribers on context execution.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -360,6 +427,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -371,10 +444,11 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_Eval" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.Eval">
   Eval()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L66"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluate the context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -395,6 +469,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -402,7 +482,7 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_GetBlueprint" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.GetBlueprint">
   GetBlueprint()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L75"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Retrieves the blueprint (<span class="xref">Kingmaker.Blueprints.ResourcesLibrary.TryGetBlueprint(Kingmaker.Blueprints.BlueprintGuid)</span>). Returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the blueprint is not present.</p>
@@ -427,6 +507,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -434,7 +520,7 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_OnCompleted" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.OnCompleted">
   OnCompleted()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L97"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Notifies the observer that the provider has finished sending push-based notifications.</p>
@@ -454,6 +540,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -461,7 +553,7 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_OnError_System_Exception_" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.OnError(System.Exception)">
   OnError(Exception)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L94"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Notifies the observer that the provider has experienced an error condition.</p>
@@ -487,6 +579,12 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -494,7 +592,7 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
   <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_OnNext_UniRx_Unit_" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.OnNext(UniRx.Unit)">
   OnNext(Unit)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L91"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provides the observer with new data.</p>
@@ -520,6 +618,55 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 
 
 
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="eii">Explicit Interface Implementations
+</h2>
+
+
+  <a id="MicroWrath_Deferred_DeferredBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReferenceBase_TBlueprint__ToReference_" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReferenceBase,TBlueprint}#ToReference*"></a>
+
+  <h3 id="MicroWrath_Deferred_DeferredBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReferenceBase_TBlueprint__ToReference" data-uid="MicroWrath.Deferred.DeferredBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReferenceBase,TBlueprint}#ToReference">
+  IMicroBlueprintReference&lt;BlueprintReferenceBase, TBlueprint&gt;.ToReference()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <span class="xref">Kingmaker.Blueprints.BlueprintReferenceBase</span> from this <a class="xref" href="MicroWrath.IMicroBlueprintReference-2.html">IMicroBlueprintReference&lt;TReference, TBlueprint&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">BlueprintReferenceBase IMicroBlueprintReference&lt;BlueprintReferenceBase, TBlueprint&gt;.ToReference()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">BlueprintReferenceBase</span></dt>
+    <dd><p><span class="xref">Kingmaker.Blueprints.BlueprintReferenceBase</span></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></dt>
+    <dd><p>If returned blueprint is null.</p>
+</dd>
+  </dl>
 
 
 
@@ -527,7 +674,7 @@ Class DeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondar
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L30" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L43" class="edit-link">Edit this page</a>
         </div>
 
 

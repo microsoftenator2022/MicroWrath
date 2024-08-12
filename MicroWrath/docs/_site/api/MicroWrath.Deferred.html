@@ -96,7 +96,8 @@ Classes
 </h3>
     <dl class="jumplist">
       <dt><a class="xref" href="MicroWrath.Deferred.Deferred.html">Deferred</a></dt>
-      <dd></dd>
+      <dd><p>Extensions for <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> and <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a></p>
+</dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="MicroWrath.Deferred.DeferredBlueprint.html">DeferredBlueprint</a></dt>
@@ -104,22 +105,35 @@ Classes
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="MicroWrath.Deferred.DeferredBlueprint-1.html">DeferredBlueprint&lt;TBlueprint&gt;</a></dt>
-      <dd></dd>
+      <dd><p>A deferred execution context returning a <code class="typeparamref">TBlueprint</code>.
+Canonical implmentation of <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a>.
+The value of the returned blueprint's <span class="xref">Kingmaker.Blueprints.SimpleBlueprint.AssetGuid</span> is replaced with the <code class="paramref">guid</code> parameter.</p>
+</dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="MicroWrath.Deferred.Deferred-1.html">Deferred&lt;A&gt;</a></dt>
-      <dd></dd>
+      <dd><p>Deferred execution context returning <code class="typeparamref">A</code>. Canonical implementation of <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a>.
+The return value is memoized ie. execution of <a class="xref" href="MicroWrath.Deferred.Deferred-1.html#MicroWrath_Deferred_Deferred_1_Eval">Eval()</a> only invokes the underlying function once.<br><br>
+See also: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a></p>
+</dd>
     </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
     <dl class="jumplist">
       <dt><a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a></dt>
-      <dd></dd>
+      <dd><p><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> that also implements <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a>.</p>
+</dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a></dt>
-      <dd></dd>
+      <dd><p>Deferred execution context returning <code class="typeparamref">A</code>.<br>
+A deferred context is a function or collection of functions whose execution can be invoked at a later time.
+The return value may be memoized ie. execution of <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html#MicroWrath_Deferred_IDeferred_1_Eval">Eval()</a> only invokes the underlying function once.<br>
+In addition, this evaluation is also an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a> event source.<br>
+These contexts may be chained or combined to construct a deferrred &quot;pipeline&quot;.<br><br>
+See also: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a></p>
+</dd>
     </dl>
 
 

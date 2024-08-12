@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroWrath_MicroBlueprint_1" data-uid="MicroWrath.MicroBlueprint`1" class="text-break">
-Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L27"><i class="bi bi-code-slash"></i></a>
+Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">internal readonly record struct MicroBlueprint&lt;TBlueprint&gt; : IMicroBlueprint&lt;TBlueprint&gt;, IEquatable&lt;MicroBlueprint&lt;TBlueprint&gt;&gt; where TBlueprint : SimpleBlueprint</code></pre>
+    <pre><code class="lang-csharp hljs">internal readonly record struct MicroBlueprint&lt;TBlueprint&gt; : IMicroBlueprint&lt;TBlueprint&gt;, IMicroBlueprintReference&lt;BlueprintReference&lt;TBlueprint&gt;, TBlueprint&gt;, IEquatable&lt;MicroBlueprint&lt;TBlueprint&gt;&gt; where TBlueprint : SimpleBlueprint</code></pre>
   </div>
 
 
@@ -118,6 +118,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
     <dt>Implements</dt>
     <dd>
       <div><a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</div>
+      <div><a class="xref" href="MicroWrath.IMicroBlueprintReference-2.html">IMicroBlueprintReference</a>&lt;<span class="xref">BlueprintReference</span>&lt;TBlueprint&gt;, TBlueprint&gt;</div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="MicroWrath.MicroBlueprint-1.html">MicroBlueprint</a>&lt;TBlueprint&gt;&gt;</div>
     </dd>
   </dl>
@@ -184,7 +185,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1__ctor_Kingmaker_Blueprints_BlueprintGuid_" data-uid="MicroWrath.MicroBlueprint`1.#ctor(Kingmaker.Blueprints.BlueprintGuid)">
   MicroBlueprint(BlueprintGuid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L37"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -215,7 +216,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1__ctor_System_String_" data-uid="MicroWrath.MicroBlueprint`1.#ctor(System.String)">
   MicroBlueprint(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L31"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -249,7 +250,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1_AssetId" data-uid="MicroWrath.MicroBlueprint`1.AssetId">
   AssetId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L43"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -284,7 +285,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1_BlueprintGuid" data-uid="MicroWrath.MicroBlueprint`1.BlueprintGuid">
   BlueprintGuid
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L66"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Guid for this blueprint</p>
@@ -316,7 +317,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1_Name" data-uid="MicroWrath.MicroBlueprint`1.Name">
   Name
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L61"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Blueprint name or <span class="xref">Kingmaker.Blueprints.BlueprintReference&lt;T&gt;.NameSafe()</span> if it is not loaded.</p>
@@ -352,7 +353,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1_GetBlueprint" data-uid="MicroWrath.MicroBlueprint`1.GetBlueprint">
   GetBlueprint()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L69"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Retrieves the blueprint (<span class="xref">Kingmaker.Blueprints.ResourcesLibrary.TryGetBlueprint(Kingmaker.Blueprints.BlueprintGuid)</span>). Returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the blueprint is not present.</p>
@@ -384,10 +385,10 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1_ToReference__1" data-uid="MicroWrath.MicroBlueprint`1.ToReference``1">
   ToReference&lt;TReference&gt;()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L48"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Create a <code class="typeparamref">TReference</code> from this <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/reference-types">object</a>.</p>
+  <div class="markdown level1 summary"><p>Create a <code class="typeparamref">TReference</code> from this <a class="xref" href="MicroWrath.MicroBlueprint-1.html">MicroBlueprint&lt;TBlueprint&gt;</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -421,7 +422,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1_ToString" data-uid="MicroWrath.MicroBlueprint`1.ToString">
   ToString()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L71"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the fully qualified type name of this instance.</p>
@@ -458,7 +459,7 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
   <h3 id="MicroWrath_MicroBlueprint_1_op_Implicit_Kingmaker_Blueprints_BlueprintReference__0___MicroWrath_MicroBlueprint__0_" data-uid="MicroWrath.MicroBlueprint`1.op_Implicit(Kingmaker.Blueprints.BlueprintReference{`0})~MicroWrath.MicroBlueprint{`0}">
   implicit operator MicroBlueprint&lt;TBlueprint&gt;(BlueprintReference&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L85"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Implicit conversion from <span class="xref">Kingmaker.Blueprints.BlueprintReference&lt;T&gt;</span></p>
@@ -491,11 +492,48 @@ Struct MicroBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary"
 
 
 
+  <h2 class="section" id="eii">Explicit Interface Implementations
+</h2>
+
+
+  <a id="MicroWrath_MicroBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReference_TBlueprint__TBlueprint__ToReference_" data-uid="MicroWrath.MicroBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReference{TBlueprint},TBlueprint}#ToReference*"></a>
+
+  <h3 id="MicroWrath_MicroBlueprint_1_MicroWrath_IMicroBlueprintReference_Kingmaker_Blueprints_BlueprintReference_TBlueprint__TBlueprint__ToReference" data-uid="MicroWrath.MicroBlueprint`1.MicroWrath#IMicroBlueprintReference{Kingmaker#Blueprints#BlueprintReference{TBlueprint},TBlueprint}#ToReference">
+  IMicroBlueprintReference&lt;BlueprintReference&lt;TBlueprint&gt;, TBlueprint&gt;.ToReference()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <span class="xref">Kingmaker.Blueprints.BlueprintReference{`0}</span> from this <a class="xref" href="MicroWrath.IMicroBlueprintReference-2.html">IMicroBlueprintReference&lt;TReference, TBlueprint&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">BlueprintReference&lt;TBlueprint&gt; IMicroBlueprintReference&lt;BlueprintReference&lt;TBlueprint&gt;, TBlueprint&gt;.ToReference()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">BlueprintReference</span>&lt;TBlueprint&gt;</dt>
+    <dd><p><span class="xref">Kingmaker.Blueprints.BlueprintReference{`0}</span></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L27" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/MicroBlueprint.cs/#L26" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/microsoftenator2022/MicroWrath/new/master/apiSpec/new?filename=MicroUtils_GuidEx.md&amp;value=---%0Auid%3A%20MicroUtils.GuidEx%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/microsoftenator2022/MicroWrath/new/docs/apiSpec/new?filename=MicroUtils_GuidEx.md&amp;value=---%0Auid%3A%20MicroUtils.GuidEx%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroUtils_GuidEx" data-uid="MicroUtils.GuidEx" class="text-break">
-Class GuidEx  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/master/MicroWrath/Util/Guid.cs/#L14"><i class="bi bi-code-slash"></i></a>
+Class GuidEx  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/Guid_Compat.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class GuidEx  <a class="header-action link-secondary" title="View source" href="
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class GuidEx</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Moved namespace&quot;, true)]
+public static class GuidEx</code></pre>
   </div>
 
 
@@ -157,7 +158,7 @@ Class GuidEx  <a class="header-action link-secondary" title="View source" href="
 
   <h3 id="MicroUtils_GuidEx_CreateV5_System_Guid_System_String_" data-uid="MicroUtils.GuidEx.CreateV5(System.Guid,System.String)">
   CreateV5(Guid, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/master/MicroWrath/Util/Guid.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/Guid_Compat.cs/#L60"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Create a GUID from a namespace and name according to the
@@ -200,7 +201,7 @@ Class GuidEx  <a class="header-action link-secondary" title="View source" href="
 
   <h3 id="MicroUtils_GuidEx_CreateV5_System_String_System_String_" data-uid="MicroUtils.GuidEx.CreateV5(System.String,System.String)">
   CreateV5(string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/master/MicroWrath/Util/Guid.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/Guid_Compat.cs/#L27"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Create a GUID from a namespace and name according to the
@@ -228,7 +229,7 @@ if strict UUIDv5 conformance is required.</p>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>Determinstic Guid generated from namespace and name (may conform to UUIDv5).</p>
+    <dd><p>Determinstic Guid generated from namespace and name (may not conform to UUIDv5).</p>
 </dd>
   </dl>
 
@@ -246,7 +247,7 @@ if strict UUIDv5 conformance is required.</p>
 
   <h3 id="MicroUtils_GuidEx_CreateV8_System_Span_System_Byte__" data-uid="MicroUtils.GuidEx.CreateV8(System.Span{System.Byte})">
   CreateV8(Span&lt;byte&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/master/MicroWrath/Util/Guid.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/Guid_Compat.cs/#L69"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Create a GUID from the first 16 bytes of a byte array according to the
@@ -292,7 +293,7 @@ if strict UUIDv5 conformance is required.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/master/MicroWrath/Util/Guid.cs/#L14" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Util/Guid_Compat.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
 

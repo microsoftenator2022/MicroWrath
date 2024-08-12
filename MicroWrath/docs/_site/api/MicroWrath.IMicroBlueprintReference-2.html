@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Interface BlueprintInitializationContext.IBlueprintInit&lt;T&gt; | MicroWrath </title>
+      <title>Interface IMicroBlueprintReference&lt;TReference, TBlueprint&gt; | MicroWrath </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Interface BlueprintInitializationContext.IBlueprintInit&lt;T&gt; | MicroWrath ">
+      <meta name="title" content="Interface IMicroBlueprintReference&lt;TReference, TBlueprint&gt; | MicroWrath ">
       
-      
+      <meta name="description" content="TReference constructor for TBlueprint">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/microsoftenator2022/MicroWrath/new/docs/apiSpec/new?filename=MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_1.md&amp;value=---%0Auid%3A%20MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/microsoftenator2022/MicroWrath/new/docs/apiSpec/new?filename=MicroWrath_IMicroBlueprintReference_2.md&amp;value=---%0Auid%3A%20MicroWrath.IMicroBlueprintReference%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,44 +84,42 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1">
+        <article data-uid="MicroWrath.IMicroBlueprintReference`2">
 
 
 
-  <h1 id="MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_1" data-uid="MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1" class="text-break">
-Interface BlueprintInitializationContext.IBlueprintInit&lt;T&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/BlueprintInitializationContext/BlueprintInitializationContext.Initializer.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  <h1 id="MicroWrath_IMicroBlueprintReference_2" data-uid="MicroWrath.IMicroBlueprintReference`2" class="text-break">
+Interface IMicroBlueprintReference&lt;TReference, TBlueprint&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Interfaces/IMicroBlueprint.cs/#L58"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="MicroWrath.html">MicroWrath</a>.<a class="xref" href="MicroWrath.BlueprintInitializationContext.html">BlueprintInitializationContext</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="MicroWrath.html">MicroWrath</a></dd></dl>
   <dl><dt>Assembly</dt><dd>MicroWrath.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p><code class="typeparamref">TReference</code> constructor for <code class="typeparamref">TBlueprint</code></p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">private interface BlueprintInitializationContext.IBlueprintInit&lt;T&gt; : BlueprintInitializationContext.IBlueprintInit</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IMicroBlueprintReference&lt;out TReference, out TBlueprint&gt; where TReference : BlueprintReferenceBase where TBlueprint : SimpleBlueprint</code></pre>
   </div>
 
 
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
-    <dt><code>T</code></dt>
-    <dd></dd>
+    <dt><code>TReference</code></dt>
+    <dd><p>Reference type</p>
+</dd>
+    <dt><code>TBlueprint</code></dt>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
 
 
-  <dl class="typelist inheritedMembers">
-    <dt>Inherited Members</dt>
-    <dd>
-    <div>
-      <a class="xref" href="MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.html#MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_Execute">BlueprintInitializationContext.IBlueprintInit.Execute()</a>
-    </div>
-  </dd></dl>
 
   <dl class="typelist extensionMethods">
     <dt>Extension Methods</dt>
@@ -147,33 +145,35 @@ Interface BlueprintInitializationContext.IBlueprintInit&lt;T&gt;  <a class="head
 
 
 
-  <h2 class="section" id="properties">Properties
+  <h2 class="section" id="methods">Methods
 </h2>
 
 
-  <a id="MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_1_InitFunc_" data-uid="MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1.InitFunc*"></a>
+  <a id="MicroWrath_IMicroBlueprintReference_2_ToReference_" data-uid="MicroWrath.IMicroBlueprintReference`2.ToReference*"></a>
 
-  <h3 id="MicroWrath_BlueprintInitializationContext_BlueprintInitializationContext_IBlueprintInit_1_InitFunc" data-uid="MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit`1.InitFunc">
-  InitFunc
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/BlueprintInitializationContext/BlueprintInitializationContext.Initializer.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  <h3 id="MicroWrath_IMicroBlueprintReference_2_ToReference" data-uid="MicroWrath.IMicroBlueprintReference`2.ToReference">
+  ToReference()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Interfaces/IMicroBlueprint.cs/#L66"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Create a <code class="typeparamref">TReference</code> from this <a class="xref" href="MicroWrath.IMicroBlueprintReference-2.html">IMicroBlueprintReference&lt;TReference, TBlueprint&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Func&lt;T&gt; InitFunc { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">TReference ToReference()</code></pre>
   </div>
 
 
-
-
-
-  <h4 class="section">Property Value</h4>
+  <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;T&gt;</dt>
-    <dd></dd>
+    <dt><span class="xref">TReference</span></dt>
+    <dd><p><code class="typeparamref">TReference</code></p>
+</dd>
   </dl>
+
+
+
 
 
 
@@ -186,7 +186,7 @@ Interface BlueprintInitializationContext.IBlueprintInit&lt;T&gt;  <a class="head
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/BlueprintInitializationContext/BlueprintInitializationContext.Initializer.cs/#L116" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Interfaces/IMicroBlueprint.cs/#L58" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class Deferred | MicroWrath ">
       
-      
+      <meta name="description" content="Extensions for  and">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroWrath_Deferred_Deferred" data-uid="MicroWrath.Deferred.Deferred" class="text-break">
-Class Deferred  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L145"><i class="bi bi-code-slash"></i></a>
+Class Deferred  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L237"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,7 +97,8 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <dl><dt>Assembly</dt><dd>MicroWrath.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Extensions for <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> and <a class="xref" href="MicroWrath.Deferred.IDeferredBlueprint-1.html">IDeferredBlueprint&lt;TBlueprint&gt;</a></p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -155,10 +156,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Empty" data-uid="MicroWrath.Deferred.Deferred.Empty">
   Empty
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L90"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>An context returning <span class="xref">UniRx.Unit.Default</span>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -190,10 +192,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Apply2__3_MicroWrath_Deferred_IDeferred_System_Func___0___1___2___MicroWrath_Deferred_IDeferred___0__MicroWrath_Deferred_IDeferred___1__" data-uid="MicroWrath.Deferred.Deferred.Apply2``3(MicroWrath.Deferred.IDeferred{System.Func{``0,``1,``2}},MicroWrath.Deferred.IDeferred{``0},MicroWrath.Deferred.IDeferred{``1})">
   Apply2&lt;A, B, C&gt;(IDeferred&lt;Func&lt;A, B, C&gt;&gt;, IDeferred&lt;A&gt;, IDeferred&lt;B&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L173"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies a context function with 2 arguments. See <a class="xref" href="MicroWrath.Deferred.Deferred.html#MicroWrath_Deferred_Deferred_Apply__2_MicroWrath_Deferred_IDeferred_System_Func___0___1___MicroWrath_Deferred_IDeferred___0__">Apply&lt;A, B&gt;(IDeferred&lt;Func&lt;A, B&gt;&gt;, IDeferred&lt;A&gt;)</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -203,27 +206,34 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>cf</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;A, B, C&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Source function to apply</p>
+</dd>
     <dt><code>ca</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;</dt>
-    <dd></dd>
+    <dd><p>First parameter context</p>
+</dd>
     <dt><code>cb</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;</dt>
-    <dd></dd>
+    <dd><p>Second parameter context</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;C&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">C</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>First parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Second parameter type</p>
+</dd>
     <dt><code>C</code></dt>
-    <dd></dd>
+    <dd><p>Return type</p>
+</dd>
   </dl>
 
 
@@ -239,10 +249,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Apply__2_MicroWrath_Deferred_IDeferred_System_Func___0___1___MicroWrath_Deferred_IDeferred___0__" data-uid="MicroWrath.Deferred.Deferred.Apply``2(MicroWrath.Deferred.IDeferred{System.Func{``0,``1}},MicroWrath.Deferred.IDeferred{``0})">
   Apply&lt;A, B&gt;(IDeferred&lt;Func&lt;A, B&gt;&gt;, IDeferred&lt;A&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L159"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies a function from a context that transforms a value of type <code class="typeparamref">A</code> to a value of type <code class="typeparamref">B</code>
+to a context of type <code class="typeparamref">A</code></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -252,23 +264,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>cf</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;A, B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Source function context to apply</p>
+</dd>
     <dt><code>ca</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;</dt>
-    <dd></dd>
+    <dd><p>Parameter context</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Function parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Function return type</p>
+</dd>
   </dl>
 
 
@@ -284,10 +301,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_BindOption__2_MicroWrath_Deferred_IDeferred_MicroWrath_Util_Option___0___System_Func___0_MicroWrath_Deferred_IDeferred___1___" data-uid="MicroWrath.Deferred.Deferred.BindOption``2(MicroWrath.Deferred.IDeferred{MicroWrath.Util.Option{``0}},System.Func{``0,MicroWrath.Deferred.IDeferred{``1}})">
   BindOption&lt;A, B&gt;(IDeferred&lt;Option&lt;A&gt;&gt;, Func&lt;A, IDeferred&lt;B&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L258"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies a function that transforms a value of type <code class="typeparamref">A</code> to a context of type <code class="typeparamref">B</code>
+to a context of <a class="xref" href="MicroWrath.Util.Option-1.html">Option&lt;T&gt;</a> of type <code class="typeparamref">A</code>, flattening the result.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -297,23 +316,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="MicroWrath.Util.Option-1.html">Option</a>&lt;A&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>f</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;A, <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Function to apply</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="MicroWrath.Util.Option-1.html">Option</a>&lt;B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of <a class="xref" href="MicroWrath.Util.Option-1.html">Option&lt;T&gt;</a> of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Function parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Function context return type</p>
+</dd>
   </dl>
 
 
@@ -329,10 +353,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Bind__2_MicroWrath_Deferred_IDeferred___0__System_Func___0_MicroWrath_Deferred_IDeferred___1___" data-uid="MicroWrath.Deferred.Deferred.Bind``2(MicroWrath.Deferred.IDeferred{``0},System.Func{``0,MicroWrath.Deferred.IDeferred{``1}})">
   Bind&lt;A, B&gt;(IDeferred&lt;A&gt;, Func&lt;A, IDeferred&lt;B&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L122"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies function transforming a value of type <code class="typeparamref">A</code> to a context of <code class="typeparamref">B</code>
+to a context of type <code class="typeparamref">A</code> and flattens the result.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -342,23 +368,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>binder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;A, <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Function transforming a value of type <code class="typeparamref">A</code> to a context of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Function parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Returned context type</p>
+</dd>
   </dl>
 
 
@@ -374,10 +405,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_CloneBlueprint__1_MicroWrath_IMicroBlueprint___0__Kingmaker_Blueprints_BlueprintGuid_System_String_" data-uid="MicroWrath.Deferred.Deferred.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},Kingmaker.Blueprints.BlueprintGuid,System.String)">
   CloneBlueprint&lt;TBlueprint&gt;(IMicroBlueprint&lt;TBlueprint&gt;, BlueprintGuid, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L306"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a context that clones a blueprint.<br>
+See also: <a class="xref" href="MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_CloneBlueprint__1___0_Kingmaker_Blueprints_BlueprintGuid_System_String_System_Boolean_">CloneBlueprint&lt;TBlueprint&gt;(TBlueprint, BlueprintGuid, string?, bool)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -387,23 +420,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Original blueprint</p>
+</dd>
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>New blueprint guid</p>
+</dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -419,10 +457,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_CloneBlueprint__1_MicroWrath_IMicroBlueprint___0__MicroWrath_GeneratedGuid_System_String_" data-uid="MicroWrath.Deferred.Deferred.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},MicroWrath.GeneratedGuid,System.String)">
   CloneBlueprint&lt;TBlueprint&gt;(IMicroBlueprint&lt;TBlueprint&gt;, GeneratedGuid, string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L207"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L347"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a context that clones a blueprint.<br>
+See also: <a class="xref" href="MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_CloneBlueprint__1___0_Kingmaker_Blueprints_BlueprintGuid_System_String_System_Boolean_">CloneBlueprint&lt;TBlueprint&gt;(TBlueprint, BlueprintGuid, string?, bool)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -432,23 +472,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Original blueprint</p>
+</dd>
     <dt><code>generatedGuid</code> <a class="xref" href="MicroWrath.GeneratedGuid.html">GeneratedGuid</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint guid</p>
+</dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -464,10 +509,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_CloneBlueprint__1_MicroWrath_IMicroBlueprint___0__System_String_System_String_" data-uid="MicroWrath.Deferred.Deferred.CloneBlueprint``1(MicroWrath.IMicroBlueprint{``0},System.String,System.String)">
   CloneBlueprint&lt;TBlueprint&gt;(IMicroBlueprint&lt;TBlueprint&gt;, string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L325"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a context that clones a blueprint.<br>
+See also: <a class="xref" href="MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_CloneBlueprint__1___0_Kingmaker_Blueprints_BlueprintGuid_System_String_System_Boolean_">CloneBlueprint&lt;TBlueprint&gt;(TBlueprint, BlueprintGuid, string?, bool)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -477,23 +524,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Original blueprint</p>
+</dd>
     <dt><code>assetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint guid</p>
+</dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -509,10 +561,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_CloneBlueprint__1_MicroWrath_OwlcatBlueprint___0__Kingmaker_Blueprints_BlueprintGuid_System_String_" data-uid="MicroWrath.Deferred.Deferred.CloneBlueprint``1(MicroWrath.OwlcatBlueprint{``0},Kingmaker.Blueprints.BlueprintGuid,System.String)">
   CloneBlueprint&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt;, BlueprintGuid, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L314"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a context that clones a blueprint.<br>
+See also: <a class="xref" href="MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_CloneBlueprint__1___0_Kingmaker_Blueprints_BlueprintGuid_System_String_System_Boolean_">CloneBlueprint&lt;TBlueprint&gt;(TBlueprint, BlueprintGuid, string?, bool)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -522,23 +576,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Original blueprint</p>
+</dd>
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>New blueprint guid</p>
+</dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -554,10 +613,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_CloneBlueprint__1_MicroWrath_OwlcatBlueprint___0__MicroWrath_GeneratedGuid_System_String_" data-uid="MicroWrath.Deferred.Deferred.CloneBlueprint``1(MicroWrath.OwlcatBlueprint{``0},MicroWrath.GeneratedGuid,System.String)">
   CloneBlueprint&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt;, GeneratedGuid, string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L358"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a context that clones a blueprint.<br>
+See also: <a class="xref" href="MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_CloneBlueprint__1___0_Kingmaker_Blueprints_BlueprintGuid_System_String_System_Boolean_">CloneBlueprint&lt;TBlueprint&gt;(TBlueprint, BlueprintGuid, string?, bool)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -567,23 +628,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Original blueprint</p>
+</dd>
     <dt><code>generatedGuid</code> <a class="xref" href="MicroWrath.GeneratedGuid.html">GeneratedGuid</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint guid</p>
+</dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -599,10 +665,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_CloneBlueprint__1_MicroWrath_OwlcatBlueprint___0__System_String_System_String_" data-uid="MicroWrath.Deferred.Deferred.CloneBlueprint``1(MicroWrath.OwlcatBlueprint{``0},System.String,System.String)">
   CloneBlueprint&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt;, string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L336"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a context that clones a blueprint.<br>
+See also: <a class="xref" href="MicroWrath.Util.AssetUtils.html#MicroWrath_Util_AssetUtils_CloneBlueprint__1___0_Kingmaker_Blueprints_BlueprintGuid_System_String_System_Boolean_">CloneBlueprint&lt;TBlueprint&gt;(TBlueprint, BlueprintGuid, string?, bool)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -612,23 +680,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Original blueprint</p>
+</dd>
     <dt><code>assetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint guid</p>
+</dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -644,10 +717,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Collect__1_System_Collections_Generic_IEnumerable_MicroWrath_Deferred_IDeferred___0___" data-uid="MicroWrath.Deferred.Deferred.Collect``1(System.Collections.Generic.IEnumerable{MicroWrath.Deferred.IDeferred{``0}})">
   Collect&lt;A&gt;(IEnumerable&lt;IDeferred&lt;A&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L221"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Combines a collection of <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> contexts into a single context of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -657,19 +731,22 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Source contexts</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;A&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of a collection of type <code class="typeparamref">A</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Source collection context type</p>
+</dd>
   </dl>
 
 
@@ -685,10 +762,13 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Collect__2_System_Collections_Generic_IEnumerable_MicroWrath_Deferred_IDeferred___0___System_Func___0_System_Collections_Generic_IEnumerable___1___" data-uid="MicroWrath.Deferred.Deferred.Collect``2(System.Collections.Generic.IEnumerable{MicroWrath.Deferred.IDeferred{``0}},System.Func{``0,System.Collections.Generic.IEnumerable{``1}})">
   Collect&lt;A, B&gt;(IEnumerable&lt;IDeferred&lt;A&gt;&gt;, Func&lt;A, IEnumerable&lt;B&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L204"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Combines a collection of <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> context into a single context, applying <code class="paramref">binder</code>
+and flattening the results.<br>
+See also: <a class="xref" href="MicroWrath.Deferred.Deferred.html#MicroWrath_Deferred_Deferred_Collect__1_System_Collections_Generic_IEnumerable_MicroWrath_Deferred_IDeferred___0___">Collect&lt;A&gt;(IEnumerable&lt;IDeferred&lt;A&gt;&gt;)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -698,23 +778,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Source contexts</p>
+</dd>
     <dt><code>binder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;A, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Function transforming a value of type <code class="typeparamref">A</code> into a collection of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of a collection of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Source collection context type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Result context collection element type</p>
+</dd>
   </dl>
 
 
@@ -730,10 +815,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Combine__2_MicroWrath_Deferred_IDeferred___0__MicroWrath_Deferred_IDeferred___1__" data-uid="MicroWrath.Deferred.Deferred.Combine``2(MicroWrath.Deferred.IDeferred{``0},MicroWrath.Deferred.IDeferred{``1})">
   Combine&lt;A, B&gt;(IDeferred&lt;A&gt;, IDeferred&lt;B&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L190"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Combines a context of type <code class="typeparamref">A</code> with a context of type <code class="typeparamref">B</code></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -743,23 +829,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;</dt>
-    <dd></dd>
+    <dd><p>First context</p>
+</dd>
     <dt><code>other</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;</dt>
-    <dd></dd>
+    <dd><p>Second context</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;(A, B)&gt;</dt>
-    <dd></dd>
+    <dd><p>Combined context of a tuple of <code class="typeparamref">A</code> and <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>First context type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Second context type</p>
+</dd>
   </dl>
 
 
@@ -775,10 +866,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Combine__2_MicroWrath_Deferred_IDeferred___0__MicroWrath_OwlcatBlueprint___1__" data-uid="MicroWrath.Deferred.Deferred.Combine``2(MicroWrath.Deferred.IDeferred{``0},MicroWrath.OwlcatBlueprint{``1})">
   Combine&lt;TContext, TBlueprint&gt;(IDeferred&lt;TContext&gt;, OwlcatBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L228"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L391"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Combines a context of type <code class="typeparamref">TContext</code> with a <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint&lt;TBlueprint&gt;</a> reference</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -788,23 +880,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TContext&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint&lt;TBlueprint&gt;</a> reference</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;(TContext, TBlueprint)&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of a tuple of <code class="typeparamref">TContext</code> and <code class="typeparamref">TBlueprint</code>.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TContext</code></dt>
-    <dd></dd>
+    <dd><p>Source context type</p>
+</dd>
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -820,10 +917,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Combine__3_MicroWrath_Deferred_IDeferred___0____1_" data-uid="MicroWrath.Deferred.Deferred.Combine``3(MicroWrath.Deferred.IDeferred{``0},``1)">
   Combine&lt;TContext, TMicroBlueprint, TBlueprint&gt;(IDeferred&lt;TContext&gt;, TMicroBlueprint)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L375"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Combines a context of type <code class="typeparamref">TContext</code> with a <code class="typeparamref">TMicroBlueprint</code> reference</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -833,25 +931,32 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TContext&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>blueprint</code> <span class="xref">TMicroBlueprint</span></dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a> reference</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;(TContext, TBlueprint)&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of a tuple of <code class="typeparamref">TContext</code> and <code class="typeparamref">TBlueprint</code>.
+<code class="typeparamref">TBlueprint</code> value is null if the dereference fails</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TContext</code></dt>
-    <dd></dd>
+    <dd><p>Source context type</p>
+</dd>
     <dt><code>TMicroBlueprint</code></dt>
-    <dd></dd>
+    <dd><p><a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a> type</p>
+</dd>
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -867,10 +972,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_GetBlueprint__1_MicroWrath_Deferred_IDeferredBlueprint___0__" data-uid="MicroWrath.Deferred.Deferred.GetBlueprint``1(MicroWrath.Deferred.IDeferredBlueprint{``0})">
   GetBlueprint&lt;TBlueprint&gt;(IDeferredBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L244"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>No-op. Can be used to upcast a blueprint type</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -886,13 +992,15 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p><code class="paramref">context</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -908,10 +1016,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_GetBlueprint__1_MicroWrath_IMicroBlueprint___0__" data-uid="MicroWrath.Deferred.Deferred.GetBlueprint``1(MicroWrath.IMicroBlueprint{``0})">
   GetBlueprint&lt;TBlueprint&gt;(IMicroBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L253"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>See <a class="xref" href="MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprint__1_MicroWrath_IMicroBlueprint___0__">TryGetBlueprint&lt;TBlueprint&gt;(IMicroBlueprint&lt;TBlueprint&gt;)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -921,19 +1030,22 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Blueprint to load</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context containing the a blueprint or null if it is not found</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -949,10 +1061,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_GetBlueprint__1_MicroWrath_OwlcatBlueprint___0__" data-uid="MicroWrath.Deferred.Deferred.GetBlueprint``1(MicroWrath.OwlcatBlueprint{``0})">
   GetBlueprint&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L263"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>See <a class="xref" href="MicroWrath.Deferred.DeferredBlueprint.html#MicroWrath_Deferred_DeferredBlueprint_TryGetBlueprintDirect__1_MicroWrath_OwlcatBlueprint___0__">TryGetBlueprintDirect&lt;TBlueprint&gt;(OwlcatBlueprint&lt;TBlueprint&gt;)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -962,19 +1075,22 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>blueprint</code> <a class="xref" href="MicroWrath.OwlcatBlueprint-1.html">OwlcatBlueprint</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Blueprint to load</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Blueprint</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -990,10 +1106,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Ignore__1_MicroWrath_Deferred_IDeferred___0__" data-uid="MicroWrath.Deferred.Deferred.Ignore``1(MicroWrath.Deferred.IDeferred{``0})">
   Ignore&lt;_&gt;(IDeferred&lt;_&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L231"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a context that evaluates another context and ignores the result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1003,19 +1120,22 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;_&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<span class="xref">Unit</span>&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <span class="xref">UniRx.Unit</span></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>_</code></dt>
-    <dd></dd>
+    <dd><p>Ignored type</p>
+</dd>
   </dl>
 
 
@@ -1031,10 +1151,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Lift2__3_System_Func___0___1___2__" data-uid="MicroWrath.Deferred.Deferred.Lift2``3(System.Func{``0,``1,``2})">
   Lift2&lt;A, B, C&gt;(Func&lt;A, B, C&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L146"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>&quot;Lifst a function <a class="xref" href="MicroWrath.Deferred.Deferred.html#MicroWrath_Deferred_Deferred_Lift__2_System_Func___0___1__">Lift&lt;A, B&gt;(Func&lt;A, B&gt;)</a>. See <a class="xref" href="MicroWrath.Deferred.Deferred.html#MicroWrath_Deferred_Deferred_Lift__2_System_Func___0___1__">Lift&lt;A, B&gt;(Func&lt;A, B&gt;)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1044,23 +1165,29 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>f</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;A, B, C&gt;</dt>
-    <dd></dd>
+    <dd><p>Function to apply</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;, <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;, <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;C&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Function transforming a context of type <code class="typeparamref">A</code> and a context of type <code class="typeparamref">B</code>
+into a context of type <code class="typeparamref">C</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>First function parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Second function parameter type</p>
+</dd>
     <dt><code>C</code></dt>
-    <dd></dd>
+    <dd><p>Function return type</p>
+</dd>
   </dl>
 
 
@@ -1076,10 +1203,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Lift__2_System_Func___0___1__" data-uid="MicroWrath.Deferred.Deferred.Lift``2(System.Func{``0,``1})">
   Lift&lt;A, B&gt;(Func&lt;A, B&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L134"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>&quot;Lifts&quot; a function transforming a value of type <code class="typeparamref">A</code> to a value of type <code class="typeparamref">B</code>,
+returning a function transforming a context of type <code class="typeparamref">A</code> to a context of type <code class="typeparamref">B</code>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1089,21 +1218,25 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>f</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;A, B&gt;</dt>
-    <dd></dd>
+    <dd><p>Function to apply</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;, <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Function transforming a context of type <code class="typeparamref">A</code> to a context of type <code class="typeparamref">B</code>.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Function parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Function return type</p>
+</dd>
   </dl>
 
 
@@ -1119,10 +1252,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_MapOption__2_MicroWrath_Deferred_IDeferred_MicroWrath_Util_Option___0___System_Func___0___1__" data-uid="MicroWrath.Deferred.Deferred.MapOption``2(MicroWrath.Deferred.IDeferred{MicroWrath.Util.Option{``0}},System.Func{``0,``1})">
   MapOption&lt;A, B&gt;(IDeferred&lt;Option&lt;A&gt;&gt;, Func&lt;A, B&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L243"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Maps a function onto a context of an <a class="xref" href="MicroWrath.Util.Option-1.html">Option&lt;T&gt;</a> of type <code class="typeparamref">A</code><br>
+See also: <a class="xref" href="MicroWrath.Util.Option.html#MicroWrath_Util_Option_Map__2_MicroWrath_Util_Option___0__System_Func___0___1__">Map&lt;A, B&gt;(Option&lt;A&gt;, Func&lt;A, B&gt;)</a>, <a class="xref" href="MicroWrath.Deferred.Deferred.html#MicroWrath_Deferred_Deferred_Map__2_MicroWrath_Deferred_IDeferred___0__System_Func___0___1__">Map&lt;A, B&gt;(IDeferred&lt;A&gt;, Func&lt;A, B&gt;)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1132,23 +1267,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="MicroWrath.Util.Option-1.html">Option</a>&lt;A&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>f</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;A, B&gt;</dt>
-    <dd></dd>
+    <dd><p>Function to apply</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;<a class="xref" href="MicroWrath.Util.Option-1.html">Option</a>&lt;B&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of <a class="xref" href="MicroWrath.Util.Option-1.html">Option&lt;T&gt;</a> of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Function parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Function return type</p>
+</dd>
   </dl>
 
 
@@ -1164,10 +1304,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Map__2_MicroWrath_Deferred_IDeferred___0__System_Func___0___1__" data-uid="MicroWrath.Deferred.Deferred.Map``2(MicroWrath.Deferred.IDeferred{``0},System.Func{``0,``1})">
   Map&lt;A, B&gt;(IDeferred&lt;A&gt;, Func&lt;A, B&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L109"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies function to a context of type <code class="typeparamref">B</code></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1177,23 +1318,28 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;A&gt;</dt>
-    <dd></dd>
+    <dd><p>Source context</p>
+</dd>
     <dt><code>map</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;A, B&gt;</dt>
-    <dd></dd>
+    <dd><p>Function to apply</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;B&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">B</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Function parameter type</p>
+</dd>
     <dt><code>B</code></dt>
-    <dd></dd>
+    <dd><p>Function return type</p>
+</dd>
   </dl>
 
 
@@ -1209,10 +1355,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_NewBlueprint__1_Kingmaker_Blueprints_BlueprintGuid_System_String_" data-uid="MicroWrath.Deferred.Deferred.NewBlueprint``1(Kingmaker.Blueprints.BlueprintGuid,System.String)">
   NewBlueprint&lt;TBlueprint&gt;(BlueprintGuid, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L288"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> context that constructs a new blueprint<br>
+See also: <a class="xref" href="MicroWrath.Constructors.Construct.New.html#MicroWrath_Constructors_Construct_New_Blueprint__1_System_String_System_String_">Blueprint&lt;TBlueprint&gt;(string, string)</a>, <a class="xref" href="MicroWrath.Constructors.Construct.New.html#MicroWrath_Constructors_Construct_New_Blueprint__1_MicroWrath_GeneratedGuid_">Blueprint&lt;TBlueprint&gt;(GeneratedGuid)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1222,21 +1370,25 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>guid</code> <span class="xref">BlueprintGuid</span></dt>
-    <dd></dd>
+    <dd><p>New blueprint guid</p>
+</dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>New blueprint type</p>
+</dd>
   </dl>
 
 
@@ -1252,10 +1404,12 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_NewBlueprint__1_MicroWrath_GeneratedGuid_System_String_" data-uid="MicroWrath.Deferred.Deferred.NewBlueprint``1(MicroWrath.GeneratedGuid,System.String)">
   NewBlueprint&lt;TBlueprint&gt;(GeneratedGuid, string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L293"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> context that constructs a new blueprint<br>
+See also: <a class="xref" href="MicroWrath.Constructors.Construct.New.html#MicroWrath_Constructors_Construct_New_Blueprint__1_System_String_System_String_">Blueprint&lt;TBlueprint&gt;(string, string)</a>, <a class="xref" href="MicroWrath.Constructors.Construct.New.html#MicroWrath_Constructors_Construct_New_Blueprint__1_MicroWrath_GeneratedGuid_">Blueprint&lt;TBlueprint&gt;(GeneratedGuid)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1267,19 +1421,22 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
     <dt><code>generatedGuid</code> <a class="xref" href="MicroWrath.GeneratedGuid.html">GeneratedGuid</a></dt>
     <dd></dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>New blueprint name</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred</a>&lt;TBlueprint&gt;</dt>
-    <dd></dd>
+    <dd><p>Context of type <code class="typeparamref">TBlueprint</code></p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>New blueprint type</p>
+</dd>
   </dl>
 
 
@@ -1295,7 +1452,7 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_NewBlueprint__1_System_String_System_String_" data-uid="MicroWrath.Deferred.Deferred.NewBlueprint``1(System.String,System.String)">
   NewBlueprint&lt;TBlueprint&gt;(string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L267"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -1338,10 +1495,11 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="MicroWrath_Deferred_Deferred_Return__1_System_Func___0__" data-uid="MicroWrath.Deferred.Deferred.Return``1(System.Func{``0})">
   Return&lt;A&gt;(Func&lt;A&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/Deferred.cs/#L98"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Constructs a new context of type <code class="typeparamref">A</code> from a parameterless function returning <code class="typeparamref">A</code></p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1351,7 +1509,8 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>get</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;A&gt;</dt>
-    <dd></dd>
+    <dd><p>Function</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
@@ -1363,7 +1522,8 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>A</code></dt>
-    <dd></dd>
+    <dd><p>Function return type</p>
+</dd>
   </dl>
 
 
@@ -1379,7 +1539,7 @@ Class Deferred  <a class="header-action link-secondary" title="View source" href
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L145" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L237" class="edit-link">Edit this page</a>
         </div>
 
 

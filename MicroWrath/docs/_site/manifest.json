@@ -32,106 +32,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.BlueprintInit-1.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer-1.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.ContextInitializer.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit-1.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IBlueprintInit.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.IInitContextBlueprint.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.InitContextBlueprint-1.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContext.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.BlueprintInitializationContextExtension.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.BlueprintInitializationContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.BlueprintInitializationContext.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/MicroWrath.BlueprintsDb.BlueprintsDb.Owlcat.yml",
       "output": {
         ".html": {
@@ -276,26 +176,6 @@
       "output": {
         ".html": {
           "relative_path": "api/MicroWrath.Constructors.ComponentReflectionInitializer-1.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Constructors.Construct.BlueprintConstructor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Constructors.Construct.BlueprintConstructor.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Constructors.Construct.ComponentConstructor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Constructors.Construct.ComponentConstructor.html"
         }
       },
       "version": ""
@@ -592,6 +472,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/MicroWrath.IMicroBlueprintReference-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MicroWrath.IMicroBlueprintReference-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/MicroWrath.InitAttribute.yml",
       "output": {
         ".html": {
@@ -712,26 +602,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Util.AssetUtils.AlphaBlendConfig.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Util.AssetUtils.AlphaBlendConfig.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Util.AssetUtils.DiagonalCutConfig.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/MicroWrath.Util.AssetUtils.Direct.yml",
       "output": {
         ".html": {
@@ -746,46 +616,6 @@
       "output": {
         ".html": {
           "relative_path": "api/MicroWrath.Util.AssetUtils.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Util.Assets.Dynamic.DynamicAssetLink-2.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Util.Assets.Dynamic.DynamicGameObjectLink-1.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Util.Assets.Dynamic.DynamicMonobehaviourLink-2.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/MicroWrath.Util.Assets.Dynamic.IDynamicAssetLink.html"
         }
       },
       "version": ""
@@ -936,56 +766,6 @@
       "output": {
         ".html": {
           "relative_path": "api/MicroWrath.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/System.Runtime.CompilerServices.IsExternalInit.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/System.Runtime.CompilerServices.IsExternalInit.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/System.Runtime.CompilerServices.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/System.Runtime.CompilerServices.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ArrayTraverse.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/TabletopTweaks.Core.Utilities.ObjectDeepCopier.ReferenceEqualityComparer.html"
         }
       },
       "version": ""

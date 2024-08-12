@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Interface IDeferredBlueprint&lt;TBlueprint&gt; | MicroWrath ">
       
-      
+      <meta name="description" content="that also implements .">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="MicroWrath_Deferred_IDeferredBlueprint_1" data-uid="MicroWrath.Deferred.IDeferredBlueprint`1" class="text-break">
-Interface IDeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L25"><i class="bi bi-code-slash"></i></a>
+Interface IDeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,11 +97,12 @@ Interface IDeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-sec
   <dl><dt>Assembly</dt><dd>MicroWrath.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p><a class="xref" href="MicroWrath.Deferred.IDeferred-1.html">IDeferred&lt;A&gt;</a> that also implements <a class="xref" href="MicroWrath.IMicroBlueprint-1.html">IMicroBlueprint&lt;TBlueprint&gt;</a>.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">internal interface IDeferredBlueprint&lt;out TBlueprint&gt; : IDeferred&lt;TBlueprint&gt;, IObserver&lt;Unit&gt;, IMicroBlueprint&lt;TBlueprint&gt; where TBlueprint : SimpleBlueprint</code></pre>
+    <pre><code class="lang-csharp hljs">internal interface IDeferredBlueprint&lt;out TBlueprint&gt; : IDeferred&lt;TBlueprint&gt;, IObserver&lt;Unit&gt;, IMicroBlueprint&lt;TBlueprint&gt;, IMicroBlueprintReference&lt;BlueprintReferenceBase, TBlueprint&gt; where TBlueprint : SimpleBlueprint</code></pre>
   </div>
 
 
@@ -109,7 +110,8 @@ Interface IDeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-sec
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TBlueprint</code></dt>
-    <dd></dd>
+    <dd><p>Blueprint type</p>
+</dd>
   </dl>
 
 
@@ -138,6 +140,9 @@ Interface IDeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-sec
     </div>
     <div>
       <a class="xref" href="MicroWrath.IMicroBlueprint-1.html#MicroWrath_IMicroBlueprint_1_GetBlueprint">IMicroBlueprint&lt;TBlueprint&gt;.GetBlueprint()</a>
+    </div>
+    <div>
+      <a class="xref" href="MicroWrath.IMicroBlueprintReference-2.html#MicroWrath_IMicroBlueprintReference_2_ToReference">IMicroBlueprintReference&lt;BlueprintReferenceBase, TBlueprint&gt;.ToReference()</a>
     </div>
   </dd></dl>
 
@@ -214,7 +219,7 @@ Interface IDeferredBlueprint&lt;TBlueprint&gt;  <a class="header-action link-sec
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L25" class="edit-link">Edit this page</a>
+          <a href="https://github.com/microsoftenator2022/MicroWrath/blob/docs/MicroWrath/Internal/Deferred/DeferredBlueprint.cs/#L29" class="edit-link">Edit this page</a>
         </div>
 
 
