@@ -22,7 +22,9 @@ namespace MicroWrath
         public static TReference ToReference<TBlueprint, TReference>(this IMicroBlueprint<TBlueprint> bpRef)
             where TBlueprint : SimpleBlueprint
             where TReference : BlueprintReference<TBlueprint>, new() =>
-            new() { deserializedGuid = bpRef.BlueprintGuid };
+            new() { deserializedGuid =
+                (bpRef as IMicroBlueprintReference)?.ToReference().deserializedGuid
+                ?? bpRef.BlueprintGuid };
 
         //public static BlueprintReference<TBlueprint> ToReference<TBlueprint>(this IMicroBlueprint<TBlueprint> bpRef)
         //    where TBlueprint : SimpleBlueprint =>
@@ -35,13 +37,32 @@ namespace MicroWrath
     /// <typeparam name="TBlueprint">Blueprint type</typeparam>
     public interface IMicroBlueprint<out TBlueprint> where TBlueprint : SimpleBlueprint
     {
-#pragma warning disable CS1591
+        /// <summary>
+        /// Blueprint's <see cref="BlueprintGuid"/>.<br/>
+        /// <br/>
+        /// See also: <seealso cref="SimpleBlueprint.AssetGuid"/>.
+        /// </summary>
         BlueprintGuid BlueprintGuid { get; }
-#pragma warning restore CS1591
 
         /// <summary>
         /// Retrieves the blueprint (<see cref="ResourcesLibrary.TryGetBlueprint(BlueprintGuid)"/>). Returns <see langword="null"/> if the blueprint is not present.
         /// </summary>
         TBlueprint? GetBlueprint();
+    }
+
+    /// <summary>
+    /// <typeparamref name="TReference"/> constructor for <typeparamref name="TBlueprint"/>
+    /// </summary>
+    /// <typeparam name="TReference">Reference type</typeparam>
+    /// <typeparam name="TBlueprint">Blueprint type</typeparam>
+    public interface IMicroBlueprintReference<out TReference, out TBlueprint>
+        where TBlueprint : SimpleBlueprint
+        where TReference : BlueprintReferenceBase
+    {
+        /// <summary>
+        /// Create a <typeparamref name="TReference"/> from this <see cref="IMicroBlueprintReference{TReference, TBlueprint}"/>.
+        /// </summary>
+        /// <returns><typeparamref name="TReference"/></returns>
+        TReference ToReference();
     }
 }

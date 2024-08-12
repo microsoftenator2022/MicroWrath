@@ -80,18 +80,8 @@ namespace TTT.ReplacementComponents.Analyzer
         public static INamedTypeSymbol? TryGetTTTReplacement(
             INamedTypeSymbol typeSymbol,
             Compilation compilation,
-            CancellationToken? ct = null)
-        {
-            if (TTTComponentNames.Length == 0)
-                TTTComponentNames = GetOwlcatReplacementTypes(compilation, ct).Select(t => t.Name.ToString()).ToArray();
-            
-            var name = TTTComponentNames.FirstOrDefault(tName => tName == $"{typeSymbol.Name}TTT" || tName == $"TT{typeSymbol.Name}");
-
-            if (name is null)
-                return null;
-
-            return GetOwlcatReplacementTypes(compilation, ct).First(t => t.Name == name);
-        }
+            CancellationToken? ct = null) =>
+            TryGetTTTReplacement(typeSymbol.Name, compilation, ct);
 
         public static INamedTypeSymbol? TryGetTTTReplacement(
             string typeName,
