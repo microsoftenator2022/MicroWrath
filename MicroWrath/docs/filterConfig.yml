@@ -5,4 +5,4 @@ apiRules:
         uid: HarmonyLib.HarmonyPatch
     uidRegex: (_|\.)?Patch(es)?$
 - exclude:
-    uidRegex: ^System.Runtime.CompilerServices    
+    uidRegex: ^System.Runtime.CompilerServices
